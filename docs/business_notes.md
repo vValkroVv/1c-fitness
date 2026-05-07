@@ -64,7 +64,7 @@ Business fill rules confirmed from the plan:
 |---|---|
 | `телефон` | all client phones comma-separated |
 | `фио` | client full name |
-| `номер пластиковой карты` | active plastic card from 1C; empty if not found and report separately |
+| `номер пластиковой карты` | all active/unmarked plastic cards from 1C comma-separated; empty if not found and report separately |
 
 Template rows:
 

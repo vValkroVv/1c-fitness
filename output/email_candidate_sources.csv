@@ -1,0 +1,5 @@
+source_table,client_join,email_column,source_rows,email_like_rows,distinct_clients_with_email,active_clients_with_email,interpretation,decision
+dbo._InfoRg5255,dbo._InfoRg5255._Fld5256RRef -> dbo._Reference64._IDRRef,_Fld5257,72427,30,30,11,structured client-linked candidate,use for email when present
+dbo._InfoRg5867,dbo._InfoRg5867._Fld5870_RTRef/_Fld5870_RRRef -> dbo._Reference64,_Fld5869,22400,0,0,0,not email: all @ values are WhatsApp/JID @c.us,do not use as email
+dbo._InfoRg5226,dbo._InfoRg5226._Fld5227_RTRef/_Fld5227_RRRef -> dbo._Reference64,_Fld5231,10601,19,19,,notes/messages with embedded email,do not use as canonical email
+dbo._InfoRg5211,dbo._InfoRg5211._Fld5213_RTRef/_Fld5213_RRRef -> dbo._Reference64,_Fld5222,698,3,3,,notes/tasks with embedded email,do not use as canonical email

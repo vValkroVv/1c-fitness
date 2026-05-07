@@ -1,0 +1,38 @@
+run:
+  cutoff_date: "2026-04-29"
+
+active_clients:
+  include_short_active_products: true
+  duration_source: "end_date - start_date, audit only"
+  active_statuses: []
+
+funnel:
+  name: "Действующие клиенты"
+  allowed_steps:
+    - "Бронь"
+    - "60-31 день до окончания"
+    - "30-8 дней до окончания"
+    - "7-0 день до окончания"
+    - "Действующие клиенты"
+  priority:
+    - "Бронь"
+    - "60-31 день до окончания"
+    - "30-8 дней до окончания"
+    - "7-0 день до окончания"
+    - "Действующие клиенты"
+  boundaries:
+    "60-31 день до окончания":
+      min_days_to_end: 31
+      max_days_to_end: 60
+    "30-8 дней до окончания":
+      min_days_to_end: 8
+      max_days_to_end: 30
+    "7-0 день до окончания":
+      min_days_to_end: 0
+      max_days_to_end: 7
+
+deduplication:
+  automatic_key: "normalized_fio + normalized_phones_set"
+  keep_record: "smallest client_id"
+  report_same_phone_different_fio: true
+  report_same_fio_different_phones: true

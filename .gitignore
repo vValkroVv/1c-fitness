@@ -9,6 +9,7 @@ data/gym_sales.csv
 mssql/
 tmp/
 logs/
+output/staging_*/
 
 # macOS metadata
 .DS_Store

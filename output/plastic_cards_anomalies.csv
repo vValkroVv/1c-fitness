@@ -1,0 +1,4 @@
+client_ref,client_id,client_fio,phones,active_card_count,card_ref,plastic_card_number,card_status,is_unmarked,issue_date,is_included_in_export,issue_date_after_cutoff,risk
+AAB0A4BF01266AD311E95DB737A0FD24,000024090,Шумакова Наталия Александровна,+7 (911) 4322497,5,AAB0A4BF01266AD311E95DB737A0FD25,1150004022016,unmarked,1,2402-04-11,1,1,unmarked card issue_date is after cutoff_date
+AAB0A4BF01266AD311E97C56A99F96F9,000024414,Подопригора Никита Игоревич,"+7 (900) 4611659, +7 (901) 0514215",3,AAB0A4BF01266AD311E97C56A99F96FA,1150004054000,unmarked,1,2405-05-11,1,1,unmarked card issue_date is after cutoff_date
+AABAA4BF01266AD311E9ACC5CA88CF15,000029269,Тимофеева Наталья Сергеевна,+7 (911) 6671194,8,AB5EA4BF01266AD411EBA2AF87CAB354,1046000030318,unmarked,1,2030-04-10,1,1,unmarked card issue_date is after cutoff_date

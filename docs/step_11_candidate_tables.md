@@ -63,13 +63,36 @@ All findings are documented with SQL scripts and logs. No final extraction logic
 | Plastic cards in `_Reference59` linked to clients | 105,524 |
 | Unmarked client-linked cards | 100,816 |
 
+## Post-Step-12 Result
+
+For table discovery, email was unresolved at the end of step 11, but the deep
+search in `docs/step_13_email_discovery.md` found the structured low-coverage
+source.
+
+Known sources:
+
+| Entity | Source status |
+|---|---|
+| Clients, IDs, FIO, phones | known: `dbo._Reference64` |
+| Active memberships / active clients | known: `dbo._InfoRg3060 + dbo._Document163`; see `docs/step_12_active_segment_reconciliation.md` |
+| Products / membership names | known: `dbo._Reference72` |
+| Active date / stage end date candidate | known strongest table/column: `dbo._InfoRg3060._Fld3064` |
+| Booking flag candidate | known structured candidate: `dbo._InfoRg3060._Fld5960RRef -> dbo._Reference5062` |
+| Plastic cards | known table: `dbo._Reference59` |
+| First sale / create date candidates | known candidate documents: `dbo._Document152` plus membership sales in `dbo._Document163` |
+| Email | known low-coverage source: `dbo._InfoRg5255._Fld5257`, joined by `_Fld5256RRef -> dbo._Reference64._IDRRef` |
+
+Important nuance: a few items still need final business rules, but not new table
+search. For example, booking semantics, Fitbase acceptance of comma-separated
+card numbers, and the exact stage-date rule should be confirmed before XLSX
+generation. The physical candidate tables are already identified.
+
 ## Important Decisions Still Needed
 
-1. Decide whether `dbo._InfoRg2878` segment `Активные членства (клиенты)` is authoritative for the final active-client set, or only a validation slice.
-2. Decide whether `dbo._InfoRg3060._Fld3064` is the correct end date for stage calculation. It is much stronger than `_Document163._Fld1450`, but it must be business-verified.
-3. Confirm booking semantics for `dbo._Reference5062._Description = 'Бронь абонемента'`.
-4. Confirm card selection rule when multiple unmarked cards exist for one client.
-5. Confirm whether email should remain empty or be derived from `dbo._InfoRg5255` by phone matching.
+1. Confirm booking semantics for
+   `dbo._Reference5062._Description = 'Бронь абонемента'`.
+2. Confirm that Fitbase accepts multiple card numbers in one cell separated by commas.
+3. Business-verify that `dbo._InfoRg3060._Fld3064` is the final stage end date.
 
 ## Artifacts Produced
 
@@ -80,4 +103,6 @@ All findings are documented with SQL scripts and logs. No final extraction logic
 
 ## Status
 
-Step 11 is complete as discovery work. The next step should reconcile active-client selection before building the final extraction SQL/Python pipeline.
+Step 11 is complete as discovery work. Active-client selection was reconciled in
+step 12. Email source was found in step 13, but coverage is low: only 30 clients
+have structured email, including 11 current active clients.

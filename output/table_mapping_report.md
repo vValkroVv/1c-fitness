@@ -1,7 +1,7 @@
 # Table Mapping Report
 
 Date: 2026-05-07
-Status: draft after step 12, active-client source reconciled for extraction.
+Status: staging sets built; ready for validation reports and XLSX generation.
 
 ## Summary
 
@@ -19,6 +19,21 @@ The strongest mapping is:
 | Сегмент активных | `dbo._InfoRg2878 + dbo._Reference91` | medium |
 | Первая продажа / платеж | candidate `dbo._Document152`, plus `dbo._Document163` | medium |
 | `Дата создания *` | first client sale in database, not CSV visit date | business-confirmed |
+
+Staging result for backup cutoff `2026-04-29`:
+
+- SQL schema: `fitbase_stg`
+- CSV output: `output/staging_2026-04-29/`
+- `mart_active_clients`: `10,796`
+- full details: `docs/step_14_staging_sets.md`
+
+Final Fitbase export result:
+
+- main XLSX: `output/fitbase_active_clients_import_zayavki_20260429.xlsx`
+- plastic cards XLSX: `output/fitbase_active_clients_plastic_cards_20260429.xlsx`
+- rows before/after exact FIO+phone deduplication: `10,796 / 10,796`
+- validation: `output/validation_report.md` = `PASS`
+- full details: `docs/step_15_final_business_rules_dedup_managers_xlsx.md`
 
 ## Key Findings
 
@@ -40,13 +55,21 @@ Evidence: `logs/step11_reference64_text_profile.txt`, `logs/step11_reference64_d
 
 Primary phone source is confirmed as `dbo._Reference64._Fld3832`.
 
-Email is not confirmed as a canonical client field:
+Email source after deep search:
 
 - `dbo._Reference64` has no email-like values in profiled text columns.
-- `dbo._InfoRg5255._Fld5257` has 31 email-like rows and phone values in `_Fld5261`; this is a secondary candidate only.
-- `dbo._InfoRg5843` has many email-like rows, but samples look like chat/social messages and business correspondence, not a clean client email register.
+- `dbo._InfoRg5255._Fld5257` is the structured client-linked email candidate.
+- Join: `dbo._InfoRg5255._Fld5256RRef -> dbo._Reference64._IDRRef`.
+- Coverage is low: 30 clients total have structured email, including 11 current
+  active clients for cutoff `2026-04-29`.
+- `dbo._InfoRg5867._Fld5869` is not email: all `@` values are domain `c.us`,
+  which looks like WhatsApp/JID contact IDs.
+- `dbo._InfoRg5226._Fld5231`, `dbo._InfoRg5211._Fld5222`, and
+  `dbo._InfoRg5843` contain embedded email text in notes/messages, but they are
+  not canonical email fields.
 
-Recommendation for first extraction: leave email empty unless a deterministic client join from `_InfoRg5255` is implemented and reported.
+Recommendation for first extraction: fill email from `dbo._InfoRg5255._Fld5257`
+when present; leave it empty otherwise and report low coverage in validation.
 
 ### Create Date
 
@@ -114,13 +137,16 @@ Initial conflict:
 | Source | Clients |
 |---|---:|
 | Segment `Активные членства (клиенты)` in `dbo._InfoRg2878` | 8,099 |
-| Membership register filter by `_InfoRg3060._Fld3064 >= 4026-04-29`, duration >= 30 and membership-like product | 11,012 |
+| Initial diagnostic register filter from step 12, before final holder-role and short-product rules | 11,012 |
 | Intersection | 4,986 |
 | In segment but not in register filter | 3,113 |
 | In register filter but not in segment | 6,026 |
 
 Resolved interpretation: use `dbo._InfoRg3060 + dbo._Document163` for active
 membership state. Use `dbo._InfoRg2878` only as validation/business labels.
+The final staging extraction includes short active products as well; duration is
+kept for audit and does not exclude 1-day, 7-day, trial-day, or similar active
+clients.
 Full evidence is in `docs/step_12_active_segment_reconciliation.md`.
 
 ### Booking
@@ -151,16 +177,21 @@ Text fallback sources:
 
 - `_Fld3750_RTRef = 0x00000040` and `_Fld3750_RRRef` joins to `dbo._Reference64._IDRRef`.
 - `_Fld3753` and `_Fld3756` are card number candidates; samples match.
-- `_Fld3751` is card date candidate.
+- `_Fld3751` is card issue/created date candidate.
 - `_Marked = 0x00` is the active/not-deleted candidate.
+- No expiration/valid-until date column was found in `_Reference59`; its only
+  date-like business column is `_Fld3751`.
 
 Flag distribution for client-linked cards:
 
-- `100,816` rows unmarked.
+- `100,822` rows unmarked.
 - `4,702` rows marked.
 - `6` rows with `_Fld3752 = 0x01`.
+- Other checked flags `_Fld3757`, `_Fld8852`, `_Fld9523`, `_Fld9524` are all
+  zero for client-linked cards; numeric fields `_Fld3755`, `_Fld8109`, `_Fld346`
+  are also all zero.
 
-Final rule candidate: choose latest unmarked card per client and write multiple-card cases to `multiple_cards_report.csv`.
+Final export rule: write all unmarked card numbers for the client, comma-separated when multiple cards exist, and write multiple-card cases to `multiple_cards_report.csv`. `_Fld3751` and `card_ref` are used only for deterministic ordering inside the comma-separated list.
 
 ### Sales
 
@@ -188,6 +219,9 @@ Step 11 scripts and logs:
 - `sql/04_active_segment_vs_membership_probe.sql` -> `logs/step11_active_segment_vs_membership_probe.txt`
 - `sql/04_booking_candidate_probe.sql` -> `logs/step11_booking_candidate_probe.txt`
 - `sql/04_email_targeted_small_probe.sql` -> `logs/step11_email_targeted_small_probe.txt`
+- `sql/04_email_client_link_probe.sql` -> `logs/step11_email_client_link_probe.txt`
+- `sql/04_email_domain_probe.sql` -> `logs/step11_email_domain_probe.txt`
+- `sql/04_email_final_candidate_probe.sql` -> `logs/step11_email_final_candidate_probe.txt`
 
 Config draft: `config/table_mapping.yml`.
 Candidate CSV: `output/step11_candidate_tables.csv`.

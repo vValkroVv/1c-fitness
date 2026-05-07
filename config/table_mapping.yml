@@ -1,8 +1,36 @@
 source_database: FitnessRestored
-mapping_status: draft_after_step_12_active_segment_reconciled
+mapping_status: draft_after_staging_sets_built
 business_cutoff_date: "2026-04-29"
 sql_cutoff_datetime: "4026-04-29"
 sql_1c_year_offset: 2000
+staging:
+  schema: fitbase_stg
+  output_dir: output/staging_2026-04-29
+  cutoff_date: "2026-04-29"
+  backup_finish_at: "2026-04-29 23:57:02"
+  sql_cutoff_end_at: "4026-04-29 23:57:02"
+  mart_active_clients: 10796
+  include_short_active_products: true
+  note: "CSV staging output is generated data and ignored by git."
+final_exports:
+  output_dir: output
+  main_xlsx: output/fitbase_active_clients_import_zayavki_20260429.xlsx
+  plastic_cards_xlsx: output/fitbase_active_clients_plastic_cards_20260429.xlsx
+  final_active_clients_csv: output/final_active_clients_20260429.csv
+  validation_report: output/validation_report.md
+  validation_verdict: PASS
+  rows_before_dedup: 10796
+  rows_after_dedup: 10796
+  exact_duplicate_groups_merged: 0
+  same_phone_different_fio_groups_reported: 53
+  same_fio_different_phone_groups_reported: 38
+  missing_phone_clients: 11
+  missing_create_date_clients: 0
+  multiple_active_subscription_clients: 471
+  multiple_card_clients: 7570
+  data_quality_risk_summary: output/data_quality_risk_summary.csv
+  split_output_dir: output/splits
+  split_summary: output/splits/split_summary.csv
 
 entities:
   clients:
@@ -21,24 +49,44 @@ entities:
       - logs/step11_reference64_created_date_candidate.txt
 
   contacts:
-    status: partial
+    status: phone_confirmed_email_source_found_low_coverage
     primary_phone:
       table: dbo._Reference64
       column: _Fld3832
       note: "66,544 non-empty rows; 66,100 rows look like +7 phones."
     email:
-      canonical_source: null
+      canonical_source: dbo._InfoRg5255
+      status: confirmed_structured_candidate_low_coverage
+      client_join: dbo._InfoRg5255._Fld5256RRef -> dbo._Reference64._IDRRef
+      email_column: dbo._InfoRg5255._Fld5257
+      source_rows: 72427
+      email_like_rows: 30
+      distinct_clients_with_email: 30
+      active_clients_with_email_2026_04_29: 11
       candidates:
         - table: dbo._InfoRg5255
           email_column: _Fld5257
+          client_ref_column: _Fld5256RRef
           phone_column: _Fld5261
-          evidence: "31 email-like rows; no confirmed direct client ref yet."
+          evidence: "30 email-like rows; _Fld5256RRef directly joins to dbo._Reference64._IDRRef; 11 current active clients have email."
         - table: dbo._InfoRg5843
-          evidence: "28,543 email-like message rows; looks like social/chat messages, not canonical client email."
-      export_rule_until_confirmed: "leave empty, or use only after deterministic phone/client join is implemented and reported"
+          evidence: "Many email-like message rows; looks like social/chat messages and business correspondence, not canonical client email."
+        - table: dbo._InfoRg5867
+          email_column: _Fld5869
+          evidence: "7,562 @ values are all domain c.us; looks like WhatsApp/JID contact IDs, not email."
+        - table: dbo._InfoRg5226
+          email_column: _Fld5231
+          evidence: "19 client-linked note/message rows with embedded email text; not canonical."
+        - table: dbo._InfoRg5211
+          email_column: _Fld5222
+          evidence: "3 client-linked task/note rows with embedded email text; not canonical."
+      export_rule_until_confirmed: "use dbo._InfoRg5255._Fld5257 when present; leave empty otherwise and report missing-email coverage"
     evidence_logs:
       - logs/step11_email_targeted_small_probe.txt
       - logs/step11_reference64_text_profile.txt
+      - logs/step11_email_client_link_probe.txt
+      - logs/step11_email_domain_probe.txt
+      - logs/step11_email_final_candidate_probe.txt
 
   memberships:
     status: confirmed_primary_after_step_12_business_role_confirmation_pending
@@ -164,7 +212,7 @@ entities:
       - _Fld3753
       - _Fld3756
     issue_or_created_at_column: _Fld3751
-    active_candidate_rule: "_Marked = 0x00; choose latest _Fld3751/card ref when multiple cards exist"
+    active_candidate_rule: "_Marked = 0x00; export all active/unmarked card numbers comma-separated; order by _Fld3751/card ref"
     evidence_logs:
       - logs/step11_client_card_links.txt
       - logs/step11_reference59_card_flags.txt

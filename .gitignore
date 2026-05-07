@@ -5,6 +5,9 @@
 *.bak
 *.bin
 .bin/
+mssql/
+tmp/
+logs/
 
 # macOS metadata
 .DS_Store

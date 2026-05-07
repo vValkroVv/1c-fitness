@@ -1,0 +1,163 @@
+source_database: FitnessRestored
+mapping_status: draft_after_step_11
+business_cutoff_date: "2026-04-29"
+sql_cutoff_datetime: "4026-04-29"
+sql_1c_year_offset: 2000
+
+entities:
+  clients:
+    status: confirmed
+    table: dbo._Reference64
+    ref_column: _IDRRef
+    code_column: _Code
+    fio_column: _Description
+    created_at_column: _Fld3822
+    phone_column: _Fld3832
+    note_column: _Fld3818
+    ignored_birthdate_column: _Fld3810
+    evidence_logs:
+      - logs/step11_reference64_text_profile.txt
+      - logs/step11_reference64_date_profile.txt
+      - logs/step11_reference64_created_date_candidate.txt
+
+  contacts:
+    status: partial
+    primary_phone:
+      table: dbo._Reference64
+      column: _Fld3832
+      note: "66,544 non-empty rows; 66,100 rows look like +7 phones."
+    email:
+      canonical_source: null
+      candidates:
+        - table: dbo._InfoRg5255
+          email_column: _Fld5257
+          phone_column: _Fld5261
+          evidence: "31 email-like rows; no confirmed direct client ref yet."
+        - table: dbo._InfoRg5843
+          evidence: "28,543 email-like message rows; looks like social/chat messages, not canonical client email."
+      export_rule_until_confirmed: "leave empty, or use only after deterministic phone/client join is implemented and reported"
+    evidence_logs:
+      - logs/step11_email_targeted_small_probe.txt
+      - logs/step11_reference64_text_profile.txt
+
+  memberships:
+    status: strong_candidate_needs_reconciliation
+    document_table: dbo._Document163
+    register_table: dbo._InfoRg3060
+    register_to_document_join:
+      left: dbo._InfoRg3060._Fld3061RRef
+      right: dbo._Document163._IDRRef
+      evidence: "116,523 of 116,523 register rows match Document163."
+    client_join:
+      rt_column: dbo._Document163._Fld1447_RTRef
+      rr_column: dbo._Document163._Fld1447_RRRef
+      client_rtref: "0x00000040"
+      client_table: dbo._Reference64
+      client_ref_column: _IDRRef
+    product_join:
+      left: dbo._Document163._Fld1446RRef
+      right: dbo._Reference72._IDRRef
+      product_name_column: dbo._Reference72._Description
+    sale_date_candidates:
+      - dbo._Document163._Date_Time
+      - dbo._InfoRg3060._Fld3062
+    document_end_date_candidates:
+      - dbo._Document163._Fld1450
+      - dbo._InfoRg3060._Fld3063
+    stage_end_date_candidate: dbo._InfoRg3060._Fld3064
+    duration_days_candidate: dbo._InfoRg3060._Fld3065
+    booking_status_join:
+      left: dbo._InfoRg3060._Fld5960RRef
+      right: dbo._Reference5062._IDRRef
+      status_name_column: dbo._Reference5062._Description
+    active_filter_candidate:
+      sql: "Document163 posted/not marked, InfoRg3060._Fld3064 >= 4026-04-29, InfoRg3060._Fld3065 >= 30, product name like membership keywords"
+      count_clients: 11012
+    active_segment_validation:
+      segment_table: dbo._InfoRg2878
+      segment_ref_table: dbo._Reference91
+      segment_ref_hex: B071000C29D830FD11F01B610376A948
+      segment_name: "Активные членства (клиенты)"
+      count_clients: 8099
+      intersection_with_active_filter_clients: 4986
+    evidence_logs:
+      - logs/step11_membership_register_probe.txt
+      - logs/step11_document163_active_probe.txt
+      - logs/step11_active_segment_vs_membership_probe.txt
+
+  booking:
+    status: strong_candidate_needs_business_confirmation
+    primary_candidate:
+      table: dbo._InfoRg3060
+      column: _Fld5960RRef
+      reference_table: dbo._Reference5062
+      reference_description: "Бронь абонемента"
+      total_clients: 411
+      active_by_register_clients: 120
+    secondary_text_sources:
+      - table: dbo._Reference64
+        column: _Fld3818
+        rows_with_bron_text: 12
+      - table: dbo._InfoRg5226
+        column: _Fld5231
+        rows_with_bron_text: 551
+        distinct_clients_with_bron_text: 544
+    rejected_or_weak_candidates:
+      - table: dbo._Document9230
+        reason: "client-linked document, but only 2 rows contain 'брон'; samples look more like one-off visits/services."
+    evidence_logs:
+      - logs/step11_membership_register_probe.txt
+      - logs/step11_booking_candidate_probe.txt
+      - logs/step11_booking_notes_probe.txt
+
+  plastic_cards:
+    status: confirmed_candidate_active_flag_pending
+    table: dbo._Reference59
+    ref_column: _IDRRef
+    owner_rt_column: _Fld3750_RTRef
+    owner_rr_column: _Fld3750_RRRef
+    owner_client_rtref: "0x00000040"
+    card_number_columns:
+      - _Fld3753
+      - _Fld3756
+    issue_or_created_at_column: _Fld3751
+    active_candidate_rule: "_Marked = 0x00; choose latest _Fld3751/card ref when multiple cards exist"
+    evidence_logs:
+      - logs/step11_client_card_links.txt
+      - logs/step11_reference59_card_flags.txt
+
+  sales:
+    status: candidate
+    payment_document:
+      table: dbo._Document152
+      client_columns:
+        - _Fld1057_RTRef
+        - _Fld1057_RRRef
+        - _Fld1058RRef
+      date_column: _Date_Time
+      operation_join: dbo._Document152._Fld1072RRef -> dbo._Reference101._IDRRef
+      payment_method_join: dbo._Document152._Fld1074RRef -> dbo._Reference125._IDRRef
+    membership_sale_document:
+      table: dbo._Document163
+      date_column: _Date_Time
+    validation_register:
+      table: dbo._AccumRg3305
+      note: "money/payment movements; useful for validation, not primary membership state"
+    evidence_logs:
+      - logs/step11_client_rtref_hits.txt
+      - logs/step11_reference_column_matches.txt
+      - logs/step11_accumrg3305_probe.txt
+
+  segments:
+    status: confirmed_for_validation_or_business_filter
+    table: dbo._InfoRg2878
+    segment_reference_table: dbo._Reference91
+    client_rt_column: _Fld2880_RTRef
+    client_rr_column: _Fld2880_RRRef
+    segment_rt_column: _Fld2879_RTRef
+    segment_rr_column: _Fld2879_RRRef
+    active_memberships_segment_ref_hex: B071000C29D830FD11F01B610376A948
+    active_memberships_segment_name: "Активные членства (клиенты)"
+    active_memberships_count_clients: 8099
+    evidence_logs:
+      - logs/step11_client_segments_probe.txt

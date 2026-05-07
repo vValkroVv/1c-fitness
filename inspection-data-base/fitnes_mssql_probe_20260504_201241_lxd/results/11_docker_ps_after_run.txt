@@ -1,0 +1,2 @@
+CONTAINER ID   IMAGE                                        COMMAND                  CREATED        STATUS                  PORTS      NAMES
+add040404c9f   mcr.microsoft.com/mssql/server:2022-latest   "/opt/mssql/bin/laun…"   1 second ago   Up Less than a second   1433/tcp   fitnes_mssql_probe_sql

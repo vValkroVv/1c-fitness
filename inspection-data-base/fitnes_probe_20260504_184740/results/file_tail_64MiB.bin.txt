@@ -1,0 +1,1 @@
+/home/linuxadmin/fitnes_probe_20260504_184740/samples/tail_64MiB.bin: DOS executable (COM), maybe with interrupt 22h, start instruction 0xeb31ab0d cb0c9607

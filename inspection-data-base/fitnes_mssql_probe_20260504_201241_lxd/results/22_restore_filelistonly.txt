@@ -1,0 +1,6 @@
+LogicalName|PhysicalName|Type|FileGroupName|Size|MaxSize|FileId|CreateLSN|DropLSN|UniqueId|ReadOnlyLSN|ReadWriteLSN|BackupSizeInBytes|SourceBlockSize|FileGroupId|LogGroupGUID|DifferentialBaseLSN|DifferentialBaseGUID|IsReadOnly|IsPresent|TDEThumbprint|SnapshotUrl
+-----------|------------|----|-------------|----|-------|------|---------|-------|--------|-----------|------------|-----------------|---------------|-----------|------------|-------------------|--------------------|----------|---------|-------------|-----------
+Fitness|D:\SQLDATA\Fitness.mdf|D|PRIMARY|80404807680|35184372080640|1|0|0|18779B6D-3EE2-4FB3-B937-24C6073EFAB6|0|0|55752130560|512|1|NULL|51486000009233600072|EDEB0A1E-40CB-4855-9C1A-E8AE4A3C9954|0|1|NULL|NULL
+Fitness_log|D:\SQLDATA\Fitness_log.ldf|L|NULL|3699376128|2199023255552|2|0|0|CCB627A7-5814-456E-9D92-49288E34EEF4|0|0|0|512|0|NULL|0|00000000-0000-0000-0000-000000000000|0|1|NULL|NULL
+
+(2 rows affected)

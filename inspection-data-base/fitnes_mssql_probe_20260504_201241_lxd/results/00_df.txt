@@ -1,0 +1,4 @@
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv   48G   25G   22G  54% /
+/dev/mapper/ubuntu--vg-ubuntu--lv   48G   25G   22G  54% /
+tmpfs                               16G     0   16G   0% /tmp

@@ -1,0 +1,1 @@
+SQLCMD_KIND=inside18

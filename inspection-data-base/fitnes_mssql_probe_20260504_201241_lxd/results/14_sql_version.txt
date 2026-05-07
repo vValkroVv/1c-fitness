@@ -1,0 +1,8 @@
+SqlServerVersion
+----------------
+Microsoft SQL Server 2022 (RTM-CU24-GDR) (KB5083252) - 16.0.4250.1 (X64) 
+	Mar 13 2026 00:15:17 
+	Copyright (C) 2022 Microsoft Corporation
+	Developer Edition (64-bit) on Linux (Ubuntu 22.04.5 LTS) <X64>
+
+(1 rows affected)

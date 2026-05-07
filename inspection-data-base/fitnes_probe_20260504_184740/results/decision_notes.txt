@@ -1,0 +1,4 @@
+OK: source file was stable during 60 second stat check. size=12770610688 mtime_epoch=1777496222
+Available on /home: 23815640 KiB
+sqlcmd not found; SQL Server metadata commands could not be executed on this server.
+pg_restore not found; PostgreSQL archive listing not executed.

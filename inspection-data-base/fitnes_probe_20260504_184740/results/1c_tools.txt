@@ -1,0 +1,14 @@
+## 1C binaries
+## 1C services
+  apport.service                                                                            loaded    active   exited  automatic crash report generation
+  dracut-cmdline.service                                                                    loaded    inactive dead    dracut cmdline hook
+  dracut-initqueue.service                                                                  loaded    inactive dead    dracut initqueue hook
+  dracut-mount.service                                                                      loaded    inactive dead    dracut mount hook
+  dracut-pre-mount.service                                                                  loaded    inactive dead    dracut pre-mount hook
+  dracut-pre-pivot.service                                                                  loaded    inactive dead    dracut pre-pivot and cleanup hook
+  dracut-pre-trigger.service                                                                loaded    inactive dead    dracut pre-trigger hook
+  dracut-pre-udev.service                                                                   loaded    inactive dead    dracut pre-udev hook
+  dracut-shutdown-onfailure.service                                                         loaded    inactive dead    Service executing upon dracut-shutdown failure to perform cleanup
+  dracut-shutdown.service                                                                   loaded    active   exited  Restore /run/initramfs on shutdown
+  kdump-tools.service                                                                       loaded    active   exited  Kernel crash dump capture service
+  systemd-tmpfiles-setup-dev-early.service                                                  loaded    active   exited  Create Static Device Nodes in /dev gracefully

@@ -1,0 +1,9 @@
+-rw-rw-r-- 1 1000 1000 12G Apr 29 20:57 /var/opt/mssql/backup/Fitnes.bak
+  File: /var/opt/mssql/backup/Fitnes.bak
+  Size: 12770610688	Blocks: 24942608   IO Block: 4096   regular file
+Device: fc00h/64512d	Inode: 1703958     Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/ UNKNOWN)   Gid: ( 1000/ UNKNOWN)
+Access: 2026-05-04 15:29:41.825493961 +0000
+Modify: 2026-04-29 20:57:02.000000000 +0000
+Change: 2026-04-30 19:31:52.218727734 +0000
+ Birth: 2026-04-30 19:06:36.767289409 +0000

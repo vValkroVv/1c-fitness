@@ -1,0 +1,10 @@
+# Local secrets
+.env
+
+# Database backups and binary extracts
+*.bak
+*.bin
+.bin/
+
+# macOS metadata
+.DS_Store

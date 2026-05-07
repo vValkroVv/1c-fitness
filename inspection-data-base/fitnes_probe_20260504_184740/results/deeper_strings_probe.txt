@@ -1,0 +1,271 @@
+# Deeper strings probe
+Mon May  4 18:49:47 UTC 2026
+
+## strings variants available
+Usage: strings [option(s)] [file(s)]
+ Display printable strings in [file(s)] (stdin by default)
+ The options are:
+  -a - --all                Scan the entire file, not just the data section [default]
+  -d --data                 Only scan the data sections in the file
+  -f --print-file-name      Print the name of the file before each string
+  -n <number>               Locate & print any sequence of at least <number>
+    --bytes=<number>         displayable characters.  (The default is 4).
+  -t --radix={o,d,x}        Print the location of the string in base 8, 10 or 16
+  -w --include-all-whitespace Include all whitespace as valid string characters
+  -o                        An alias for --radix=o
+  -T --target=<BFDNAME>     Specify the binary file format
+  -e --encoding={s,S,b,l,B,L} Select character size and endianness:
+                            s = 7-bit, S = 8-bit, {b,l} = 16-bit, {B,L} = 32-bit
+  --unicode={default|locale|invalid|hex|escape|highlight}
+  -U {d|l|i|x|e|h}          Specify how to treat UTF-8 encoded unicode characters
+  -s --output-separator=<string> String used to separate strings in output.
+  @<file>                   Read options from <file>
+  -h --help                 Display this information
+  -v -V --version           Print the program's version number
+strings: supported targets: elf64-x86-64 elf32-i386 elf32-iamcu elf32-x86-64 pei-i386 pe-x86-64 pei-x86-64 elf64-little elf64-big elf32-little elf32-big pe-bigobj-x86-64 pe-i386 pe-bigobj-i386 pdb srec symbolsrec verilog tekhex binary ihex plugin
+Report bugs to <https://sourceware.org/bugzilla/>
+
+## ASCII strings: probable db/file names
+MSSQLBAK
+=1C)
+1c+u	m
+DbO,J
+V5{1c
+DBOu]
+aBb*B)*1C@
+c^1C1
+.71C
+h>1Ce
+>Z1C
+1C**U
+|1C Vq
+*9*>f11c
+1l1]1C
+1C1r9
+p1CR>9a
+Vt1C
+U}1c
+1c.3
+9]:1c
+KQr1c
+~.1c
+f1cV
+xM1C
+IC1c
+C1c:
+M1cJ
+.-1C
+1cR@
+1CPr
+%T1cA
+!a41C
+|K1C
+J@1cD]*F
+1C$E
+1)1c
+1C,X
+isqlC
+g.1C
+1cN^9
+ha1Cg
+<GB)1c
+ t1c
+4As&-1C
+r1cx.
+`=1c
+1cg'
+UB1c
+nv1CP
+LAO31C
+;I;hW::1c3
+G(1c
+DbO	
+1c[<
+1c[p
+ya1cZ
+tF?Af*H1C
+mO1c
+m~1C
+C&(1C
+1CL<
+61CNgy
+p71C,'x]
+\1c{
+1Cqj
+&Q1C"=
+xpP1C
+1CJ~
+/1cr
+1ca+
+1c&c
+F1CY
+,XA1C
+k<91C{
+uj%1Cm
+1cHrtzo
+f1Ci;
+Pl1C	,!T
+FiTo	
+v1cH
+t1CJU
+U1CS
+$)BHL8O1cx
+N1C8
+1Cq|
+%B1C
+n1C{
+\,w1cOK
+1C]Y
+_1Cp
+hDbO
+I;1cn
+4Ncx1c
+1cS^
+ou1cuj-s;
+(1cvh
+B1CF
+1C	z
+M1C.
+L;#1c
+MP1C=:"
+1c%,
+M=1cT
+f1cb
+V1c%)
+1C$Z
+1c,|
+ a$1c
+k1cH
+o1C%
+"1c%
+:1CP
+$h1C
+VdbO
+1cI>
+Qu/x1C
+V/(1c
+U.1C
+1C)2LW&
+1y1`1C1
+SqL]c_
+1C:X
+vSsQl
+V11c
+{)cCFC1C
+1ct)o
+Z`w1c
+mFitJ
+1clu
+1C#am
+(b1C
+1C!fx
+&01C
+;1CxU[8
+1C!Omy
+1C{*
+1C4c
+1C(p
+_Sql
+:\1C
+J@1c
+1c",
+01CN{
+ldmJ1c
+=h1c-
+1crt
+;1Ci
+#1c*p@
+1cIe
+n1cS
+M1cc
+	%1c
+8B1C
+\F1c
+-1CA
+1c3P
+H1Cw0
+}1c,
+loG4
+U}&xR1c6
+1CJ7'YL
+1Cv"
+i-1c
+u1c_
++1C}
+J1c2
+1C+p
+-1Cv
+2-1C~
+W>|Rt1C !
+9j1cD>Km-!
+=Iu1c
+'q0/1C|`
+a	Ym1c
+H1Cq
+1Cr/
+1Ctb
+1CA@p
+{fIt}-&
+'t1cg
+Zh1cH
+J1cIW.?
+>lOg
+1C|3
+1CpP,
+,Q1C-
++(1C
+XWh`1c
+~1c~
+RW1cJV
+]1cr
+!+hJ1C
+R&1Co(
+31CyCWG
+ @1C
+c#1c$I
+1C3b#w
+W91C
+ L1CO
+
+## UTF-16LE strings: probable db/file names
+
+## UTF-16LE strings first 200
+ISNULL
+SUSER_SNAME
+
+## MSSQLBAK offsets in head/tail samples
+0:MSSQLBAK
+
+## first 512 bytes
+00000000: 4d 53 53 51 4c 42 41 4b 02 00 00 00 03 00 00 00  MSSQLBAK........
+00000010: 00 00 00 00 00 00 00 00 30 00 0e 00 18 00 50 00  ........0.....P.
+00000020: 90 00 a8 00 28 00 10 00 e0 24 19 4f ce 01 00 00  ....(....$.O....
+00000030: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00000040: b6 08 00 00 00 00 00 00 00 00 00 00 ff ff ff ff  ................
+00000050: ff ff ff ff ff ff ff ff 49 00 53 00 4e 00 55 00  ........I.S.N.U.
+00000060: 4c 00 4c 00 00 00 00 00 53 00 55 00 53 00 45 00  L.L.....S.U.S.E.
+00000070: 52 00 5f 00 53 00 4e 00 41 00 4d 00 45 00 00 00  R._.S.N.A.M.E...
+00000080: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00000090: 00 00 00 00 00 00 00 00 10 27 19 4f ce 01 00 00  .........'.O....
+000000a0: 05 01 00 00 00 00 00 00 1f 00 00 00 1f 00 00 00  ................
+000000b0: ff ff ff ff ff ff ff ff 00 00 00 00 00 00 00 00  ................
+000000c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+000000d0: 00 00 00 00 00 00 00 00 40 1a 84 6c fe 7f 00 00  ........@..l....
+000000e0: 01 00 00 00 00 00 00 00 60 20 19 4f ce 01 00 00  ........` .O....
+000000f0: e7 02 00 00 e7 00 00 00 ff ff ff ff ff ff ff ff  ................
+00000100: 00 01 00 00 15 d0 00 00 00 00 00 00 00 00 00 00  ................
+00000110: 01 00 00 00 01 05 00 00 30 f1 0b 6d fe 7f 00 00  ........0..m....
+00000120: ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00000130: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+00000140: 88 53 8d 6c fe 7f 00 00 00 00 00 00 01 00 00 00  .S.l............
+00000150: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 f0 bf  ................
+00000160: 00 00 00 00 00 00 f0 3f a8 ec 88 6c fe 7f 00 00  .......?...l....
+00000170: 01 00 00 00 00 00 00 00 80 26 19 4f ce 01 00 00  .........&.O....
+00000180: 01 00 00 00 00 00 00 00 38 27 19 4f ce 01 00 00  ........8'.O....
+00000190: d0 ad a2 8b ce 01 00 00 00 00 00 00 00 00 00 00  ................
+000001a0: 00 00 00 00 00 00 00 00 00 00 00 4f a7 00 00 00  ...........O....
+000001b0: 30 68 30 41 cd 01 00 00 00 00 00 00 00 00 00 00  0h0A............
+000001c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+000001d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+000001e0: 21 02 62 01 10 01 00 00 2c 00 00 00 00 00 00 00  !.b.....,.......
+000001f0: 00 00 00 00 00 00 00 00 14 b3 42 d6 52 77 67 00  ..........B.Rwg.

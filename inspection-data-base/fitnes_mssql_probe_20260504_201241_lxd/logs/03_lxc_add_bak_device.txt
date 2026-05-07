@@ -1,0 +1,1 @@
+Device fitnesbak added to fitnes-mssql-probe

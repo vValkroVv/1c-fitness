@@ -1,0 +1,8 @@
+  File: /home/linuxadmin/Fitnes.bak
+  size: 12770610688	Blocks: 24942608   IO Block: 4096   regular file
+Device: 252,0	Inode: 1703958     Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/linuxadmin)   Gid: ( 1000/linuxadmin)
+Access: 2026-05-04 15:29:41.825493961 +0000
+Modify: 2026-04-29 20:57:02.000000000 +0000
+Change: 2026-04-30 19:31:52.218727734 +0000
+ Birth: 2026-04-30 19:06:36.767289409 +0000

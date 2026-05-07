@@ -1,0 +1,33 @@
+## date
+Mon May  4 18:48:40 UTC 2026
+## uname
+Linux u26 7.0.0-15-generic #15-Ubuntu SMP PREEMPT_DYNAMIC Wed Apr 22 16:06:43 UTC 2026 x86_64 GNU/Linux
+## free
+               total        used        free      shared  buff/cache   available
+Mem:            30Gi       1.1Gi        16Gi       1.7Mi        12Gi        29Gi
+Swap:          8.0Gi          0B       8.0Gi
+## df
+Filesystem                        Type  Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv ext4   48G   23G   23G  51% /
+/dev/mapper/ubuntu--vg-ubuntu--lv ext4   48G   23G   23G  51% /
+## lsblk
+NAME                      FSTYPE      FSVER    LABEL UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
+sda                                                                                                        
+├─sda1                                                                                                     
+├─sda2                    ext4        1.0            cf1fc789-f140-44c8-8a91-fbcdb7ff2a72      1.7G     5% /boot
+└─sda3                    LVM2_member LVM2 001       N2Fl8F-hHcx-8pNc-kkrN-m1Ty-42Y0-OVKaQB                
+  └─ubuntu--vg-ubuntu--lv ext4        1.0            b7db681c-7a19-4747-9bdb-4fa1b934577a     22.7G    47% /
+sr0                                                                                                        
+## source ls
+-rw-rw-r-- 1 linuxadmin linuxadmin 12G Apr 29 20:57 /home/linuxadmin/Fitnes.bak
+## source du
+12G	/home/linuxadmin/Fitnes.bak
+## source stat
+  File: /home/linuxadmin/Fitnes.bak
+  size: 12770610688	Blocks: 24942608   IO Block: 4096   regular file
+Device: 252,0	Inode: 1703958     Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/linuxadmin)   Gid: ( 1000/linuxadmin)
+Access: 2026-05-04 15:29:41.825493961 +0000
+Modify: 2026-04-29 20:57:02.000000000 +0000
+Change: 2026-04-30 19:31:52.218727734 +0000
+ Birth: 2026-04-30 19:06:36.767289409 +0000

@@ -1,0 +1,3 @@
+## sqlcmd
+## mssql services
+## mssql dirs

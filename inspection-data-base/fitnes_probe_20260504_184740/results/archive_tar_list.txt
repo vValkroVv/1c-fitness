@@ -1,0 +1,12 @@
+tar: This does not look like a tar archive
+tar: Skipping to next header
+tar: Archive contains ‘_v\341C\352\224<\334S\2741>’ where numeric off_t value expected
+tar: Archive contains ‘\0\371"\b\336\026\370\371\v"8\342’ where numeric off_t value expected
+tar: Archive contains ‘\024\224\204Ϛ"\244\v\334+m\354’ where numeric off_t value expected
+tar: Archive contains ‘\021Qw\224\341\354X\357\210Žw’ where numeric off_t value expected
+tar: Archive contains ‘\0X*2N\027\377\227TLT\024’ where numeric off_t value expected
+tar: Archive contains ‘r\a|\201\342̜\006\200Ń\331’ where numeric off_t value expected
+tar: Archive contains ‘\320r2\261\177\032s?\254\237|\366’ where numeric off_t value expected
+tar: Archive contains ‘\373\037\316\340\372\320\0D\177h\370Q’ where numeric off_t value expected
+tar: Exiting with failure status due to previous errors
+exit_code=2

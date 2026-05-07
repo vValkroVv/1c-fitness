@@ -1,0 +1,48 @@
+architecture: x86_64
+config:
+  image.architecture: amd64
+  image.description: ubuntu 24.04 LTS amd64 (release) (20260321)
+  image.label: release
+  image.os: ubuntu
+  image.release: noble
+  image.serial: "20260321"
+  image.type: squashfs
+  image.version: "24.04"
+  limits.cpu: "2"
+  limits.memory: 10GiB
+  security.nesting: "true"
+  security.privileged: "true"
+  volatile.base_image: d6c393290422fba3a8378d739a333b27db84f5b0d3a05f951297f46f1d82346f
+  volatile.cloud-init.instance-id: 1eaa4714-6ab9-40f0-ad12-915fe6d06aca
+  volatile.eth0.host_name: vethd2528067
+  volatile.eth0.hwaddr: 00:16:3e:27:e1:4d
+  volatile.idmap.base: "0"
+  volatile.idmap.current: '[]'
+  volatile.idmap.next: '[]'
+  volatile.last_state.idmap: '[]'
+  volatile.last_state.power: RUNNING
+  volatile.uuid: 388c5723-802d-4efe-8c40-f42efd622a93
+  volatile.uuid.generation: 388c5723-802d-4efe-8c40-f42efd622a93
+devices:
+  eth0:
+    name: eth0
+    network: lxdbr0
+    type: nic
+  fitnesbak:
+    path: /var/opt/mssql/backup/Fitnes.bak
+    readonly: "true"
+    source: /home/linuxadmin/Fitnes.bak
+    type: disk
+  probework:
+    path: /probe
+    source: /home/linuxadmin/fitnes_mssql_probe_20260504_201241_lxd
+    type: disk
+  root:
+    path: /
+    pool: default
+    type: disk
+ephemeral: false
+profiles:
+- default
+stateful: false
+description: ""

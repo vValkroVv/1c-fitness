@@ -1,0 +1,1 @@
+inside18:/opt/mssql-tools18/bin/sqlcmd

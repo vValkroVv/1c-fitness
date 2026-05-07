@@ -1,0 +1,231 @@
+WORK=/home/linuxadmin/fitnes_mssql_probe_20260504_201241_lxd
+BAK=/home/linuxadmin/Fitnes.bak
+2026-05-04T20:12:41+00:00
+  File: /home/linuxadmin/Fitnes.bak
+  size: 12770610688	Blocks: 24942608   IO Block: 4096   regular file
+Device: 252,0	Inode: 1703958     Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/linuxadmin)   Gid: ( 1000/linuxadmin)
+Access: 2026-05-04 15:29:41.825493961 +0000
+Modify: 2026-04-29 20:57:02.000000000 +0000
+Change: 2026-04-30 19:31:52.218727734 +0000
+ Birth: 2026-04-30 19:06:36.767289409 +0000
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv   48G   25G   22G  54% /
+/dev/mapper/ubuntu--vg-ubuntu--lv   48G   25G   22G  54% /
+tmpfs                               16G     0   16G   0% /tmp
+               total        used        free      shared  buff/cache   available
+Mem:            30Gi       1.3Gi        14Gi       1.8Mi        14Gi        29Gi
+Swap:          8.0Gi          0B       8.0Gi
+NAME                      FSTYPE      FSVER    LABEL UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
+loop0                     squashfs    4.0                                                         0   100% /snap/snapd/26865
+loop1                     squashfs    4.0                                                         0   100% /snap/core24/1587
+loop2                     squashfs    4.0                                                         0   100% /snap/lxd/38768
+sda                                                                                                        
+├─sda1                                                                                                     
+├─sda2                    ext4        1.0            cf1fc789-f140-44c8-8a91-fbcdb7ff2a72      1.7G     5% /boot
+└─sda3                    LVM2_member LVM2 001       N2Fl8F-hHcx-8pNc-kkrN-m1Ty-42Y0-OVKaQB                
+  └─ubuntu--vg-ubuntu--lv ext4        1.0            b7db681c-7a19-4747-9bdb-4fa1b934577a     21.2G    51% /
+sr0                                                                                                        
+lsof: WARNING: can't stat() nsfs file system /var/snap/lxd/common/ns/shmounts
+      Output information may be incomplete.
+lsof not installed or no open handles
+fuser not installed or no open handles
+12770610688 1777496222
+12770610688 1777496222
+OK: file is stable for 60 seconds
+FREE_GIB_ON_HOME=22
+Client version: 6.7
+Server version: 6.7
+Launching LXD container fitnes-mssql-probe from ubuntu:24.04
+Launching fitnes-mssql-probe
+Retrieving image: metadata: 100% (650.87MB/s)                                              Retrieving image: rootfs: 1% (2.76MB/s)                                              Retrieving image: rootfs: 2% (2.37MB/s)                                              Retrieving image: rootfs: 3% (2.39MB/s)                                              Retrieving image: rootfs: 4% (1.97MB/s)                                              Retrieving image: rootfs: 5% (1.30MB/s)                                              Retrieving image: rootfs: 6% (1.14MB/s)                                              Retrieving image: rootfs: 7% (1.11MB/s)                                              Retrieving image: rootfs: 8% (1.16MB/s)                                              Retrieving image: rootfs: 9% (1.23MB/s)                                              Retrieving image: rootfs: 10% (1.27MB/s)                                              Retrieving image: rootfs: 10% (1.29MB/s)                                              Retrieving image: rootfs: 11% (1.28MB/s)                                              Retrieving image: rootfs: 12% (1.28MB/s)                                              Retrieving image: rootfs: 13% (1.25MB/s)                                              Retrieving image: rootfs: 14% (1.21MB/s)                                              Retrieving image: rootfs: 15% (1.18MB/s)                                              Retrieving image: rootfs: 16% (1.16MB/s)                                              Retrieving image: rootfs: 17% (1.18MB/s)                                              Retrieving image: rootfs: 18% (1.21MB/s)                                              Retrieving image: rootfs: 19% (1.23MB/s)                                              Retrieving image: rootfs: 19% (1.25MB/s)                                              Retrieving image: rootfs: 20% (1.23MB/s)                                              Retrieving image: rootfs: 21% (1.21MB/s)                                              Retrieving image: rootfs: 22% (1.21MB/s)                                              Retrieving image: rootfs: 23% (1.21MB/s)                                              Retrieving image: rootfs: 24% (1.22MB/s)                                              Retrieving image: rootfs: 25% (1.22MB/s)                                              Retrieving image: rootfs: 26% (1.22MB/s)                                              Retrieving image: rootfs: 27% (1.22MB/s)                                              Retrieving image: rootfs: 28% (1.22MB/s)                                              Retrieving image: rootfs: 29% (1.22MB/s)                                              Retrieving image: rootfs: 30% (1.22MB/s)                                              Retrieving image: rootfs: 31% (1.22MB/s)                                              Retrieving image: rootfs: 32% (1.21MB/s)                                              Retrieving image: rootfs: 33% (1.21MB/s)                                              Retrieving image: rootfs: 34% (1.21MB/s)                                              Retrieving image: rootfs: 35% (1.21MB/s)                                              Retrieving image: rootfs: 36% (1.21MB/s)                                              Retrieving image: rootfs: 37% (1.21MB/s)                                              Retrieving image: rootfs: 38% (1.21MB/s)                                              Retrieving image: rootfs: 39% (1.21MB/s)                                              Retrieving image: rootfs: 40% (1.21MB/s)                                              Retrieving image: rootfs: 41% (1.21MB/s)                                              Retrieving image: rootfs: 42% (1.20MB/s)                                              Retrieving image: rootfs: 43% (1.20MB/s)                                              Retrieving image: rootfs: 44% (1.20MB/s)                                              Retrieving image: rootfs: 45% (1.20MB/s)                                              Retrieving image: rootfs: 46% (1.20MB/s)                                              Retrieving image: rootfs: 47% (1.20MB/s)                                              Retrieving image: rootfs: 48% (1.20MB/s)                                              Retrieving image: rootfs: 49% (1.20MB/s)                                              Retrieving image: rootfs: 50% (1.20MB/s)                                              Retrieving image: rootfs: 51% (1.20MB/s)                                              Retrieving image: rootfs: 52% (1.20MB/s)                                              Retrieving image: rootfs: 53% (1.20MB/s)                                              Retrieving image: rootfs: 54% (1.20MB/s)                                              Retrieving image: rootfs: 55% (1.20MB/s)                                              Retrieving image: rootfs: 56% (1.20MB/s)                                              Retrieving image: rootfs: 57% (1.20MB/s)                                              Retrieving image: rootfs: 57% (1.19MB/s)                                              Retrieving image: rootfs: 58% (1.20MB/s)                                              Retrieving image: rootfs: 59% (1.19MB/s)                                              Retrieving image: rootfs: 60% (1.19MB/s)                                              Retrieving image: rootfs: 61% (1.19MB/s)                                              Retrieving image: rootfs: 62% (1.19MB/s)                                              Retrieving image: rootfs: 63% (1.20MB/s)                                              Retrieving image: rootfs: 64% (1.19MB/s)                                              Retrieving image: rootfs: 65% (1.19MB/s)                                              Retrieving image: rootfs: 66% (1.19MB/s)                                              Retrieving image: rootfs: 67% (1.19MB/s)                                              Retrieving image: rootfs: 68% (1.19MB/s)                                              Retrieving image: rootfs: 69% (1.19MB/s)                                              Retrieving image: rootfs: 70% (1.19MB/s)                                              Retrieving image: rootfs: 71% (1.18MB/s)                                              Retrieving image: rootfs: 72% (1.18MB/s)                                              Retrieving image: rootfs: 73% (1.18MB/s)                                              Retrieving image: rootfs: 74% (1.19MB/s)                                              Retrieving image: rootfs: 75% (1.19MB/s)                                              Retrieving image: rootfs: 76% (1.19MB/s)                                              Retrieving image: rootfs: 77% (1.19MB/s)                                              Retrieving image: rootfs: 78% (1.19MB/s)                                              Retrieving image: rootfs: 79% (1.19MB/s)                                              Retrieving image: rootfs: 80% (1.19MB/s)                                              Retrieving image: rootfs: 81% (1.19MB/s)                                              Retrieving image: rootfs: 82% (1.19MB/s)                                              Retrieving image: rootfs: 83% (1.19MB/s)                                              Retrieving image: rootfs: 84% (1.18MB/s)                                              Retrieving image: rootfs: 85% (1.19MB/s)                                              Retrieving image: rootfs: 86% (1.18MB/s)                                              Retrieving image: rootfs: 87% (1.18MB/s)                                              Retrieving image: rootfs: 88% (1.19MB/s)                                              Retrieving image: rootfs: 89% (1.18MB/s)                                              Retrieving image: rootfs: 90% (1.18MB/s)                                              Retrieving image: rootfs: 91% (1.18MB/s)                                              Retrieving image: rootfs: 92% (1.18MB/s)                                              Retrieving image: rootfs: 93% (1.18MB/s)                                              Retrieving image: rootfs: 94% (1.18MB/s)                                              Retrieving image: rootfs: 95% (1.18MB/s)                                              Retrieving image: rootfs: 96% (1.18MB/s)                                              Retrieving image: rootfs: 97% (1.18MB/s)                                              Retrieving image: rootfs: 98% (1.18MB/s)                                              Retrieving image: rootfs: 99% (1.18MB/s)                                              Retrieving image: rootfs: 100% (1.18MB/s)Retrieving image: Unpacking image: 100% (617.69MB/s)                                                     Retrieving image: Unpacking image: 100% (617.69MB/s)                                                     Device fitnesbak added to fitnes-mssql-probe
+Device probework added to fitnes-mssql-probe
+architecture: x86_64
+config:
+  image.architecture: amd64
+  image.description: ubuntu 24.04 LTS amd64 (release) (20260321)
+  image.label: release
+  image.os: ubuntu
+  image.release: noble
+  image.serial: "20260321"
+  image.type: squashfs
+  image.version: "24.04"
+  limits.cpu: "2"
+  limits.memory: 10GiB
+  security.nesting: "true"
+  security.privileged: "true"
+  volatile.base_image: d6c393290422fba3a8378d739a333b27db84f5b0d3a05f951297f46f1d82346f
+  volatile.cloud-init.instance-id: 1eaa4714-6ab9-40f0-ad12-915fe6d06aca
+  volatile.eth0.host_name: vethd2528067
+  volatile.eth0.hwaddr: 00:16:3e:27:e1:4d
+  volatile.idmap.base: "0"
+  volatile.idmap.current: '[]'
+  volatile.idmap.next: '[]'
+  volatile.last_state.idmap: '[]'
+  volatile.last_state.power: RUNNING
+  volatile.uuid: 388c5723-802d-4efe-8c40-f42efd622a93
+  volatile.uuid.generation: 388c5723-802d-4efe-8c40-f42efd622a93
+devices:
+  eth0:
+    name: eth0
+    network: lxdbr0
+    type: nic
+  fitnesbak:
+    path: /var/opt/mssql/backup/Fitnes.bak
+    readonly: "true"
+    source: /home/linuxadmin/Fitnes.bak
+    type: disk
+  probework:
+    path: /probe
+    source: /home/linuxadmin/fitnes_mssql_probe_20260504_201241_lxd
+    type: disk
+  root:
+    path: /
+    pool: default
+    type: disk
+ephemeral: false
+profiles:
+- default
+stateful: false
+description: ""
+Inside LXD: 2026-05-04T20:18:05+00:00
+Linux fitnes-mssql-probe 7.0.0-15-generic #15-Ubuntu SMP PREEMPT_DYNAMIC Wed Apr 22 16:06:43 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+PRETTY_NAME="Ubuntu 24.04.4 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.4 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+-rw-rw-r-- 1 1000 1000 12G Apr 29 20:57 /var/opt/mssql/backup/Fitnes.bak
+  File: /var/opt/mssql/backup/Fitnes.bak
+  Size: 12770610688	Blocks: 24942608   IO Block: 4096   regular file
+Device: 252,0	Inode: 1703958     Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/ UNKNOWN)   Gid: ( 1000/ UNKNOWN)
+Access: 2026-05-04 15:29:41.825493961 +0000
+Modify: 2026-04-29 20:57:02.000000000 +0000
+Change: 2026-04-30 19:31:52.218727734 +0000
+ Birth: 2026-04-30 19:06:36.767289409 +0000
+Client:
+ Version:           29.1.3
+ API version:       1.52
+ Go version:        go1.24.4
+ Git commit:        29.1.3-0ubuntu3~24.04.1
+ Built:             Fri Mar  6 11:35:12 2026
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server:
+ Engine:
+  Version:          29.1.3
+  API version:      1.52 (minimum version 1.44)
+  Go version:       go1.24.4
+  Git commit:       29.1.3-0ubuntu3~24.04.1
+  Built:            Fri Mar  6 11:35:12 2026
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          2.2.1
+  GitCommit:        
+ runc:
+  Version:          1.3.4-0ubuntu1~24.04.1
+  GitCommit:        
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        
+0d3b46e4ab02218c0143b0762e5e339f86e9e76924c3d35ed7b032cac1a6dcd6
+add040404c9fec03a2abadf4ef774a40e4148f5c670355ce0f58d2752c7b96c7
+CONTAINER ID   IMAGE                                        COMMAND                  CREATED        STATUS                  PORTS      NAMES
+add040404c9f   mcr.microsoft.com/mssql/server:2022-latest   "/opt/mssql/bin/laun…"   1 second ago   Up Less than a second   1433/tcp   fitnes_mssql_probe_sql
+SQLCMD_KIND=inside18
+1
+/probe/results/final_report.md
+TOTAL_RESTORE_GIB=78.33
+RECOMMENDED_VOLUME_GIB=97.91
+VERIFY_STATUS=success
+PROBE_WORK=/home/linuxadmin/fitnes_mssql_probe_20260504_201241_lxd
+PROBE_FINAL_REPORT=/home/linuxadmin/fitnes_mssql_probe_20260504_201241_lxd/results/final_report.md
+# Fitness MSSQL no-restore probe result
+
+## Ключевой вывод
+
+SQL Server смог прочитать backup metadata через `RESTORE HEADERONLY`.
+SQL Server смог прочитать список файлов базы через `RESTORE FILELISTONLY`.
+`RESTORE VERIFYONLY`: success.
+
+На текущем этапе восстановление базы НЕ выполнялось.
+Backup проверен только на уровне metadata/readability.
+Список таблиц и данные клиентов без восстановления базы получить нельзя.
+
+## 1. Backup-файл
+
+- путь: `/home/linuxadmin/Fitnes.bak`
+- размер backup-файла: не удалось определить
+- дата изменения файла: 2026-04-29 20:57:02.000000000 +0000
+
+## 2. SQL Server metadata
+
+- SQL Server смог прочитать backup header: да
+- количество backup sets внутри `.bak`: 1
+- выбранный backup set / FILE position: 1
+- DatabaseName: `Fitness`
+- BackupType: `1`
+- BackupTypeDescription: `Database`
+- BackupStartDate: `2026-04-29 23:55:53.000`
+- BackupFinishDate: `2026-04-29 23:57:02.000`
+- DatabaseVersion: `852`
+- SQL Server version, которой был создан backup: `13.0.5108`
+- SQL Server engine для проверки: `Microsoft SQL Server 2022 (RTM-CU24-GDR) (KB5083252) - 16.0.4250.1 (X64)`
+- compressed: да
+- encrypted/TDE: нет
+- checksum в backup: да
+
+## 3. Оценка размера восстановления
+
+| LogicalName | PhysicalName | Type | Size bytes | Size GiB |
+|---|---|---:|---:|---:|
+| Fitness | D:\SQLDATA\Fitness.mdf | D | 80404807680 | 74.88 |
+| Fitness_log | D:\SQLDATA\Fitness_log.ldf | L | 3699376128 | 3.45 |
+
+- сумма data files: 80404807680 bytes (74.88 GiB)
+- сумма log files: 3699376128 bytes (3.45 GiB)
+- общий estimated restore size: 84104183808 bytes (78.33 GiB)
+- минимальный рекомендуемый объем отдельного restore-volume: 97.91 GiB (оценка: restore size * 1.25)
+- свободно на текущем `/home`: 22 GiB
+
+## 4. Проверка читаемости
+
+- RESTORE VERIFYONLY выполнен: да
+- результат: success
+- exit code: `0`
+
+Вывод команды:
+
+```text
+The backup set on file 1 is valid.
+```
+
+## 5. Решение
+
+- можно ли восстанавливать на текущий `/home`: нет
+- можно ли проверять таблицы без restore: нет
+- что нужно для проверки таблиц: отдельный диск/volume + тестовый `RESTORE DATABASE`
+- следующий шаг: подготовить volume нужного размера или запросить у заказчика SQL Server/1C-выгрузку в читаемом формате
+
+## 6. Артефакты
+
+- `results/20_restore_headeronly.txt`
+- `results/22_restore_filelistonly.txt`
+- `results/23_restore_verifyonly.txt`
+- `logs/session.log`
+- `logs/lxd_inner.log`
+
+## 7. Ограничение
+
+`RESTORE DATABASE` не выполнялся. Таблицы, схема 1C и клиентские данные на этом этапе не извлекались.

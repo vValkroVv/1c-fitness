@@ -1,0 +1,1 @@
+OK: file is stable for 60 seconds

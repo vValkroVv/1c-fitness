@@ -1,0 +1,3 @@
+lsof: WARNING: can't stat() nsfs file system /var/snap/lxd/common/ns/shmounts
+      Output information may be incomplete.
+lsof not installed or no open handles

@@ -1,0 +1,1 @@
+-rw-rw-r-- 1 1000 1000 12G Apr 29 20:57 /var/opt/mssql/backup/Fitnes.bak

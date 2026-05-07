@@ -1,0 +1,10 @@
+NAME                      FSTYPE      FSVER    LABEL UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
+loop0                     squashfs    4.0                                                         0   100% /snap/snapd/26865
+loop1                     squashfs    4.0                                                         0   100% /snap/core24/1587
+loop2                     squashfs    4.0                                                         0   100% /snap/lxd/38768
+sda                                                                                                        
+├─sda1                                                                                                     
+├─sda2                    ext4        1.0            cf1fc789-f140-44c8-8a91-fbcdb7ff2a72      1.7G     5% /boot
+└─sda3                    LVM2_member LVM2 001       N2Fl8F-hHcx-8pNc-kkrN-m1Ty-42Y0-OVKaQB                
+  └─ubuntu--vg-ubuntu--lv ext4        1.0            b7db681c-7a19-4747-9bdb-4fa1b934577a     21.2G    51% /
+sr0                                                                                                        

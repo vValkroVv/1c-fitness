@@ -1,7 +1,7 @@
 # Table Mapping Report
 
 Date: 2026-05-07
-Status: draft after step 11, ready for reconciliation before extraction.
+Status: draft after step 12, active-client source reconciled for extraction.
 
 ## Summary
 
@@ -18,6 +18,7 @@ The strongest mapping is:
 | Пластиковая карта | `dbo._Reference59` | high |
 | Сегмент активных | `dbo._InfoRg2878 + dbo._Reference91` | medium |
 | Первая продажа / платеж | candidate `dbo._Document152`, plus `dbo._Document163` | medium |
+| `Дата создания *` | first client sale in database, not CSV visit date | business-confirmed |
 
 ## Key Findings
 
@@ -47,27 +48,68 @@ Email is not confirmed as a canonical client field:
 
 Recommendation for first extraction: leave email empty unless a deterministic client join from `_InfoRg5255` is implemented and reported.
 
+### Create Date
+
+Business-confirmed rule for Fitbase field `Дата создания *` / `create_date`:
+use the first date when the client appeared in the database through any sale,
+including membership, 7-day, 1-day, trial-day, and similar products/services.
+This is not the CSV visit/activity date. Client card creation date
+`dbo._Reference64._Fld3822` is useful for audit, but it must not silently
+replace a missing first sale date; clients without a found sale go to
+`missing_sales_report.csv` and/or `missing_required_fields.csv`.
+
 ### Memberships
 
-`dbo._InfoRg3060` is the strongest membership register candidate:
+`dbo._InfoRg3060` is the primary membership register candidate:
 
 - It has `116,523` rows.
 - `dbo._InfoRg3060._Fld3061RRef` joins to `dbo._Document163._IDRRef` for all `116,523` rows.
-- `dbo._Document163._Fld1447_RTRef/_Fld1447_RRRef` joins the membership document to `dbo._Reference64`.
+- `dbo._Document163._Fld9152RRef` and `_Fld1447_RTRef/_Fld1447_RRRef` both join the membership document to `dbo._Reference64`.
 - `dbo._Document163._Fld1446RRef` joins product/service to `dbo._Reference72`.
 
 Important date candidates:
 
-- `dbo._Document163._Date_Time` and `dbo._InfoRg3060._Fld3062`: sale/start candidates.
-- `dbo._Document163._Fld1450` and `dbo._InfoRg3060._Fld3063`: document end candidates.
-- `dbo._InfoRg3060._Fld3064`: stronger valid-until candidate for active/stage calculations.
-- `dbo._InfoRg3060._Fld3065`: duration days candidate.
+- `dbo._Document163._Date_Time` and `dbo._InfoRg3060._Fld3062`: sale/document date candidates.
+- `dbo._InfoRg3060._Fld3063`: start-date candidate.
+- `dbo._InfoRg3060._Fld3064`: valid-until candidate for active/stage calculations.
+- `dbo._InfoRg3060._Fld3065`: service duration or auxiliary days candidate; for duration buckets, the more comparable value is `_Fld3064 - _Fld3063 + 1`.
 
 Using `_Document163._Fld1450` alone gives only `285` active clients by full cutoff day, so it is not sufficient for final active-client logic.
 
-### Active Segment Conflict
+Client identity rule after step 12:
 
-There are two strong but conflicting active-client sources:
+```text
+Use _Document163._Fld9152RRef when it points to dbo._Reference64.
+Otherwise fall back to _Document163._Fld1447_RRRef where _Fld1447_RTRef = 0x00000040.
+```
+
+This matched the manager CSV control export best: on snapshot `2025-08-31`,
+`data/gym_sales.csv` has `8,885` active unique clients, while SQL with the
+preferred-holder rule has `8,923`.
+
+The same rule was validated across additional historical snapshots:
+
+| Snapshot | CSV active clients | SQL active clients | SQL - CSV |
+|---|---:|---:|---:|
+| 2022-12-31 | 7,773 | 7,929 | 156 |
+| 2023-12-31 | 8,551 | 8,702 | 151 |
+| 2024-12-31 | 7,675 | 7,458 | -217 |
+| 2025-08-31 | 8,885 | 8,923 | 38 |
+| 2025-11-30 | 9,554 | 9,575 | 21 |
+
+Evidence: `output/active_compare_2022_2025_snapshots_summary.csv`.
+
+Using the same preferred-holder rule for current cutoff `2026-04-29` gives
+`10,796` active clients.
+
+### Active Segment Resolution
+
+Step 12 showed that `dbo._InfoRg2878` stores static/report segments, not a
+current active-client state. The segment `Активные членства (клиенты)` is dated
+`2025-04-17` in `_Reference91._Fld4329` and duplicates
+`Сегмент из отчета: Активные членства 16.04.2025`.
+
+Initial conflict:
 
 | Source | Clients |
 |---|---:|
@@ -77,7 +119,9 @@ There are two strong but conflicting active-client sources:
 | In segment but not in register filter | 3,113 |
 | In register filter but not in segment | 6,026 |
 
-This must be reconciled before the final XLSX extraction. The safest current interpretation is: `dbo._InfoRg3060` is the table for membership dates/statuses, while `dbo._InfoRg2878` may be a business-created segment that needs confirmation as authoritative or validation-only.
+Resolved interpretation: use `dbo._InfoRg3060 + dbo._Document163` for active
+membership state. Use `dbo._InfoRg2878` only as validation/business labels.
+Full evidence is in `docs/step_12_active_segment_reconciliation.md`.
 
 ### Booking
 

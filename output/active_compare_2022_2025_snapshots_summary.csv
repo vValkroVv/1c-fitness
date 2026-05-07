@@ -1,0 +1,6 @@
+snapshot_date,csv_active_rows,csv_active_unique_clients,csv_active_unique_phones,sql_active_unique_clients,sql_active_unique_phones,sql_active_duration_30_plus_clients,sql_active_in_target_segment_clients,sql_active_in_chk_kk_segment_clients,csv_clients_with_sql_phone_match,sql_clients_with_csv_phone_match,csv_clients_with_sql_phone_and_name_match,sql_clients_with_csv_phone_and_name_match,sql_minus_csv_unique_clients
+2022-12-31,8073,7773,7725,7929,8740,7919,3015,3326,7585,7584,7538,7538,156
+2023-12-31,9030,8551,8504,8702,9429,8696,3946,4097,8101,8101,8055,8055,151
+2024-12-31,8005,7675,7646,7458,8184,7450,5786,4384,6827,6821,6773,6773,-217
+2025-08-31,9752,8885,8845,8923,9758,8899,6353,7043,8244,8236,8177,8177,38
+2025-11-30,10032,9554,9522,9575,10441,9541,5545,8493,8944,8937,8877,8877,21

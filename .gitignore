@@ -5,6 +5,7 @@
 *.bak
 *.bin
 .bin/
+data/gym_sales.csv
 mssql/
 tmp/
 logs/

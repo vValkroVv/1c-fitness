@@ -1,0 +1,15 @@
+metric,value
+snapshot_date,2024-12-31
+csv_active_rows,8005
+csv_active_unique_clients,7675
+csv_active_unique_phones,7646
+sql_active_unique_clients,7458
+sql_active_unique_phones,8184
+sql_active_duration_30_plus_clients,7450
+sql_active_in_target_segment_clients,5786
+sql_active_in_chk_kk_segment_clients,4384
+csv_clients_with_sql_phone_match,6827
+sql_clients_with_csv_phone_match,6821
+csv_clients_with_sql_phone_and_name_match,6773
+sql_clients_with_csv_phone_and_name_match,6773
+sql_minus_csv_unique_clients,-217

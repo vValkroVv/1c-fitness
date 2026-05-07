@@ -1,5 +1,5 @@
 source_database: FitnessRestored
-mapping_status: draft_after_step_11
+mapping_status: draft_after_step_12_active_segment_reconciled
 business_cutoff_date: "2026-04-29"
 sql_cutoff_datetime: "4026-04-29"
 sql_1c_year_offset: 2000
@@ -41,7 +41,7 @@ entities:
       - logs/step11_reference64_text_profile.txt
 
   memberships:
-    status: strong_candidate_needs_reconciliation
+    status: confirmed_primary_after_step_12_business_role_confirmation_pending
     document_table: dbo._Document163
     register_table: dbo._InfoRg3060
     register_to_document_join:
@@ -49,11 +49,14 @@ entities:
       right: dbo._Document163._IDRRef
       evidence: "116,523 of 116,523 register rows match Document163."
     client_join:
-      rt_column: dbo._Document163._Fld1447_RTRef
-      rr_column: dbo._Document163._Fld1447_RRRef
+      preferred_rule: "Use dbo._Document163._Fld9152RRef when it points to dbo._Reference64; otherwise fall back to dbo._Document163._Fld1447_RRRef where _Fld1447_RTRef = 0x00000040."
+      holder_or_member_column: dbo._Document163._Fld9152RRef
+      payer_or_buyer_rt_column: dbo._Document163._Fld1447_RTRef
+      payer_or_buyer_rr_column: dbo._Document163._Fld1447_RRRef
       client_rtref: "0x00000040"
       client_table: dbo._Reference64
       client_ref_column: _IDRRef
+      evidence: "2025-08-31 CSV cross-check: preferred _Fld9152RRef else _Fld1447 gives 8,923 active SQL clients vs 8,885 active clients in data/gym_sales.csv; union overcounts at 9,515."
     product_join:
       left: dbo._Document163._Fld1446RRef
       right: dbo._Reference72._IDRRef
@@ -61,9 +64,10 @@ entities:
     sale_date_candidates:
       - dbo._Document163._Date_Time
       - dbo._InfoRg3060._Fld3062
-    document_end_date_candidates:
+    start_date_candidate: dbo._InfoRg3060._Fld3063
+    document_date_candidate: dbo._Document163._Date_Time
+    rejected_or_weak_end_date_candidates:
       - dbo._Document163._Fld1450
-      - dbo._InfoRg3060._Fld3063
     stage_end_date_candidate: dbo._InfoRg3060._Fld3064
     duration_days_candidate: dbo._InfoRg3060._Fld3065
     booking_status_join:
@@ -71,19 +75,58 @@ entities:
       right: dbo._Reference5062._IDRRef
       status_name_column: dbo._Reference5062._Description
     active_filter_candidate:
-      sql: "Document163 posted/not marked, InfoRg3060._Fld3064 >= 4026-04-29, InfoRg3060._Fld3065 >= 30, product name like membership keywords"
-      count_clients: 11012
+      sql: "Document163 posted/not marked, preferred holder client, membership-like product, start date <= snapshot date, InfoRg3060._Fld3064 >= snapshot date"
+      current_2026_04_29_preferred_holder_clients: 10796
+      august_2025_validation:
+        snapshot_date: "2025-08-31"
+        csv_active_unique_clients: 8885
+        sql_active_unique_clients_preferred_holder: 8923
+        sql_minus_csv: 38
+        evidence:
+          - output/active_compare_2025-08-31_summary.csv
+          - logs/step12_gym_sales_compare_2025-08-31.txt
+      multi_date_validation:
+        summary_file: output/active_compare_2022_2025_snapshots_summary.csv
+        run_log: logs/step12_gym_sales_compare_2022_2025_snapshots.txt
+        snapshots:
+          - snapshot_date: "2022-12-31"
+            csv_active_unique_clients: 7773
+            sql_active_unique_clients_preferred_holder: 7929
+            sql_minus_csv: 156
+          - snapshot_date: "2023-12-31"
+            csv_active_unique_clients: 8551
+            sql_active_unique_clients_preferred_holder: 8702
+            sql_minus_csv: 151
+          - snapshot_date: "2024-12-31"
+            csv_active_unique_clients: 7675
+            sql_active_unique_clients_preferred_holder: 7458
+            sql_minus_csv: -217
+          - snapshot_date: "2025-08-31"
+            csv_active_unique_clients: 8885
+            sql_active_unique_clients_preferred_holder: 8923
+            sql_minus_csv: 38
+          - snapshot_date: "2025-11-30"
+            csv_active_unique_clients: 9554
+            sql_active_unique_clients_preferred_holder: 9575
+            sql_minus_csv: 21
     active_segment_validation:
       segment_table: dbo._InfoRg2878
       segment_ref_table: dbo._Reference91
       segment_ref_hex: B071000C29D830FD11F01B610376A948
       segment_name: "Активные членства (клиенты)"
       count_clients: 8099
-      intersection_with_active_filter_clients: 4986
+      interpretation_after_step_12: "static/report segment dated 2025-04-17; use for validation/business label only, not as authoritative active-client source"
+      current_cutoff_union_intersection_clients: 5032
     evidence_logs:
       - logs/step11_membership_register_probe.txt
       - logs/step11_document163_active_probe.txt
       - logs/step11_active_segment_vs_membership_probe.txt
+      - logs/step12_active_segment_reconciliation_probe.txt
+      - logs/step12_segment_metadata_probe.txt
+      - logs/step12_segment_mismatch_deep_dive.txt
+      - logs/step12_active_snapshot_role_mode_counts.txt
+      - logs/step12_gym_sales_compare_2025-08-31.txt
+      - logs/step12_gym_sales_compare_2022_2025_snapshots.txt
 
   booking:
     status: strong_candidate_needs_business_confirmation
@@ -128,6 +171,11 @@ entities:
 
   sales:
     status: candidate
+    create_date_business_rule:
+      target_field: create_date
+      definition: "First date when the client appeared in the database through any sale, including membership, 7-day, 1-day, trial-day, and other sale documents/services."
+      not_a_source: "Do not use gym_sales.csv visit/activity timing as create_date."
+      fallback_policy: "Do not treat client card creation date as a normal replacement; clients without a found sale must be reported in missing_sales_report.csv and/or missing_required_fields.csv."
     payment_document:
       table: dbo._Document152
       client_columns:

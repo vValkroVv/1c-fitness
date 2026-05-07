@@ -32,7 +32,7 @@ Business fill rules confirmed from the plan:
 | `funnel` | always `Действующие клиенты` |
 | `funnel_step` | derived by the stage algorithm from the plan |
 | `budget` | always `0` |
-| `create_date` | first sale date; if no sale, use card creation date and report separately |
+| `create_date` | first date when the client appeared in the database through any sale: membership, 7 days, 1 day, trial day, etc.; not a visit date from CSV |
 | `manager` | deterministic even distribution among `A1`, `A2`, `A3` |
 
 Template rows:

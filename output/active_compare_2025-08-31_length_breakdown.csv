@@ -1,0 +1,14 @@
+length_bucket,csv_clients,sql_clients,sql_minus_csv
+00_unknown,0,0,0
+01_up_to_2_weeks,21,23,2
+02_1_month,88,87,-1
+03_2_months,9,9,0
+04_3_months,25,29,4
+05_4_5_months,15,21,6
+06_6_months,17,55,38
+07_9_months,100,129,29
+08_12_months,3611,3926,315
+09_13_15_months,3133,3083,-50
+10_16_18_months,936,751,-185
+11_19_24_months,574,690,116
+12_24_plus_months,356,120,-236

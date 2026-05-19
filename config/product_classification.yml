@@ -1,0 +1,37 @@
+classification_version: 1
+
+full_subscription:
+  include_name_keywords:
+    - "абонемент"
+    - "мульти"
+    - "ультра"
+    - "членств"
+  min_duration_days: 30
+  exclude_name_keywords:
+    - "гост"
+    - "гостевой"
+    - "проб"
+    - "пробный"
+    - "тест"
+    - "разов"
+    - "1 день"
+    - "один день"
+    - "7 дней"
+    - "неделя"
+    - "переоформ"
+    - "перенос"
+
+trial_or_guest:
+  include_name_keywords:
+    - "гост"
+    - "гостевой"
+    - "проб"
+    - "пробный"
+    - "тест"
+    - "разов"
+    - "1 день"
+    - "один день"
+    - "7 дней"
+    - "неделя"
+
+manual_overrides: []

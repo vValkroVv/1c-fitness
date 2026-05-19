@@ -1,0 +1,8 @@
+card_selection:
+  include_only_unmarked: true
+  require_non_empty_card_number: true
+  order:
+    - "issue_date DESC"
+    - "card_ref DESC"
+  output_one_card_only: true
+  future_issue_date_policy: "do_not_exclude_by_default_report_only"

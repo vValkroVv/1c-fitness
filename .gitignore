@@ -10,6 +10,10 @@ mssql/
 tmp/
 logs/
 output/staging_*/
+output/archive_before_part2/
+output/final_delivery_part2_*/
+output/part2_*/
+*.tar.gz
 
 # macOS metadata
 .DS_Store

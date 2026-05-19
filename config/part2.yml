@@ -1,0 +1,58 @@
+run:
+  source_database: FitnessRestored
+  baseline_cutoff_date: "2026-04-29"
+  shift_experiment_friday_cutoff_date: "2026-04-24"
+  shift_experiment_monday_cutoff_date: "2026-04-27"
+  backup_finish_at: "2026-04-29 23:57:02"
+  sql_1c_year_offset: 2000
+  output_root: "output/part2_20260429"
+  shifted_output_root: "output/part2_shift_20260424_to_20260427"
+
+funnels:
+  active:
+    name: "Действующие клиенты"
+    allowed_steps:
+      - "60-31 день до окончания"
+      - "30-8 дней до окончания"
+      - "7-0 день до окончания"
+      - "Действующие клиенты"
+    remove_booking_stage: true
+
+  new_applications:
+    name: "Новые заявки"
+    allowed_steps:
+      - "Неразобранные"
+
+  reactivation:
+    name: "Реактивация"
+    allowed_steps:
+      - "1-6 дней"
+      - "7-29 дней"
+      - "30-59 дней"
+      - "60-89 дней"
+      - "более 90 дней"
+
+selection:
+  active_subscription_order:
+    - "manual_override"
+    - "end_date DESC"
+    - "start_date DESC"
+    - "sale_date DESC"
+    - "subscription_ref DESC"
+  reactivation_subscription_order:
+    - "manual_override"
+    - "end_date DESC"
+    - "start_date DESC"
+    - "sale_date DESC"
+    - "subscription_ref DESC"
+  card_order:
+    - "issue_date DESC"
+    - "card_ref DESC"
+
+validation:
+  require_no_client_overlap_between_funnels: true
+  require_no_booking_stage: true
+  require_no_a_managers: true
+  allow_missing_phone: true
+  allow_missing_card: true
+  allow_missing_club_with_report: true

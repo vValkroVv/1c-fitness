@@ -92,6 +92,31 @@ def normalize_phones(value: str) -> str:
     return ",".join(sorted(phones))
 
 
+def normalize_date_token(value: str) -> str:
+    value = (value or "").strip()
+    if not value:
+        return ""
+    for fmt in ("%Y-%m-%d", "%d.%m.%Y"):
+        try:
+            return datetime.strptime(value, fmt).date().isoformat()
+        except ValueError:
+            continue
+    return ""
+
+
+def extract_date_options(value: str) -> list[str]:
+    raw = (value or "").strip()
+    if not raw:
+        return []
+    tokens = re.findall(r"\d{4}-\d{2}-\d{2}|\d{1,2}\.\d{1,2}\.\d{4}", raw)
+    dates: list[str] = []
+    for token in tokens:
+        normalized = normalize_date_token(token)
+        if normalized and normalized not in dates:
+            dates.append(normalized)
+    return dates
+
+
 def build_card_rule_map(detail_path: Path) -> dict[tuple[str, str], dict[str, str]]:
     rows = read_csv(detail_path)
     grouped: defaultdict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
@@ -124,6 +149,87 @@ def classify_subscription_comment(comment: str) -> str:
     if "одно действующее" in lowered:
         flags.append("single_active_confirmed")
     return ";".join(flags) or "comment_only"
+
+
+def build_subscription_date_match_rows(
+    checked_rows: list[dict[str, str]],
+    final_rows_path: Path,
+    selection_report_path: Path,
+) -> list[dict[str, str]]:
+    if not final_rows_path.exists() or not selection_report_path.exists():
+        return []
+
+    final_by_id = {row["client_id"]: row for row in read_csv(final_rows_path) if row.get("client_id")}
+    active_candidates = [
+        row
+        for row in read_csv(selection_report_path)
+        if row.get("candidate_for_funnel") == "active"
+    ]
+    selected_active_by_id = {
+        row["client_id"]: row
+        for row in active_candidates
+        if row.get("selected") == "1"
+    }
+    candidates_by_id: defaultdict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in active_candidates:
+        candidates_by_id[row.get("client_id", "")].append(row)
+
+    match_rows: list[dict[str, str]] = []
+    for checked in checked_rows:
+        checked_sale = extract_date_options(checked.get("checked_sale_date", ""))
+        checked_start = extract_date_options(checked.get("checked_start_date", ""))
+        checked_end = extract_date_options(checked.get("checked_end_date", ""))
+        if not (checked_sale or checked_start or checked_end):
+            continue
+
+        client_id = checked.get("client_id", "")
+        selected = selected_active_by_id.get(client_id, {})
+        final = final_by_id.get(client_id, {})
+        sale_match = bool(selected.get("sale_date") and selected.get("sale_date") in checked_sale) if checked_sale else True
+        start_match = bool(selected.get("start_date") and selected.get("start_date") in checked_start) if checked_start else True
+        end_match = bool(selected.get("end_date") and selected.get("end_date") in checked_end) if checked_end else True
+        all_match = sale_match and start_match and end_match
+
+        matching_candidate: dict[str, str] = {}
+        for candidate in candidates_by_id.get(client_id, []):
+            candidate_matches = (
+                (not checked_sale or candidate.get("sale_date") in checked_sale)
+                and (not checked_start or candidate.get("start_date") in checked_start)
+                and (not checked_end or candidate.get("end_date") in checked_end)
+            )
+            if candidate_matches:
+                matching_candidate = candidate
+                break
+
+        match_rows.append(
+            {
+                "client_id": client_id,
+                "client_fio": checked.get("client_fio", ""),
+                "checked_sale_date_raw": checked.get("checked_sale_date", ""),
+                "checked_start_date_raw": checked.get("checked_start_date", ""),
+                "checked_end_date_raw": checked.get("checked_end_date", ""),
+                "checked_sale_date_options": "|".join(checked_sale),
+                "checked_start_date_options": "|".join(checked_start),
+                "checked_end_date_options": "|".join(checked_end),
+                "selected_subscription_ref": selected.get("subscription_ref", ""),
+                "selected_subscription_name": selected.get("subscription_name", ""),
+                "selected_sale_date": selected.get("sale_date", ""),
+                "selected_start_date": selected.get("start_date", ""),
+                "selected_end_date": selected.get("end_date", ""),
+                "selected_rank_number": selected.get("rank_number", ""),
+                "active_candidate_count": final.get("active_full_subscription_count", ""),
+                "sale_date_match": "1" if sale_match else "0",
+                "start_date_match": "1" if start_match else "0",
+                "end_date_match": "1" if end_match else "0",
+                "all_checked_dates_match_selected": "1" if all_match else "0",
+                "any_active_candidate_matches_checked_dates": "1" if matching_candidate else "0",
+                "matching_candidate_ref": matching_candidate.get("subscription_ref", ""),
+                "matching_candidate_rank": matching_candidate.get("rank_number", ""),
+                "comment": checked.get("comment", ""),
+                "decision_flags": checked.get("decision_flags", ""),
+            }
+        )
+    return match_rows
 
 
 def review(args: argparse.Namespace) -> None:
@@ -159,6 +265,42 @@ def review(args: argparse.Namespace) -> None:
             "checked_sale_date",
             "checked_start_date",
             "checked_end_date",
+            "comment",
+            "decision_flags",
+        ],
+    )
+
+    subscription_date_match_rows = build_subscription_date_match_rows(
+        subscription_rows,
+        as_abs(args.final_funnel_clients),
+        as_abs(args.subscription_selection_report),
+    )
+    write_csv(
+        reports_dir / "checked_subscription_date_match.csv",
+        subscription_date_match_rows,
+        [
+            "client_id",
+            "client_fio",
+            "checked_sale_date_raw",
+            "checked_start_date_raw",
+            "checked_end_date_raw",
+            "checked_sale_date_options",
+            "checked_start_date_options",
+            "checked_end_date_options",
+            "selected_subscription_ref",
+            "selected_subscription_name",
+            "selected_sale_date",
+            "selected_start_date",
+            "selected_end_date",
+            "selected_rank_number",
+            "active_candidate_count",
+            "sale_date_match",
+            "start_date_match",
+            "end_date_match",
+            "all_checked_dates_match_selected",
+            "any_active_candidate_matches_checked_dates",
+            "matching_candidate_ref",
+            "matching_candidate_rank",
             "comment",
             "decision_flags",
         ],
@@ -234,6 +376,9 @@ def review(args: argparse.Namespace) -> None:
         "## Counts",
         "",
         f"- subscription checked rows: `{len(subscription_rows)}`",
+        f"- subscription checked rows with explicit dates: `{len(subscription_date_match_rows)}`",
+        f"- checked subscription date rows matching selected subscription: `{sum(1 for row in subscription_date_match_rows if row['all_checked_dates_match_selected'] == '1')}`",
+        f"- checked subscription date rows differing from selected subscription: `{sum(1 for row in subscription_date_match_rows if row['all_checked_dates_match_selected'] != '1')}`",
         f"- missing-phone checked rows: `{len(missing_phone_rows)}`",
         f"- card checked rows: `{len(card_decision_rows)}`",
         f"- card rows with checked selected card: `{sum(1 for row in card_decision_rows if row['checked_selected_card'])}`",
@@ -247,6 +392,7 @@ def review(args: argparse.Namespace) -> None:
     ]
     (reports_dir / "checked_review_summary.md").write_text("\n".join(summary_lines), encoding="utf-8")
     print(f"subscription_rows={len(subscription_rows)}")
+    print(f"subscription_date_match_rows={len(subscription_date_match_rows)}")
     print(f"missing_phone_rows={len(missing_phone_rows)}")
     print(f"card_rows={len(card_decision_rows)}")
     print(f"summary={(reports_dir / 'checked_review_summary.md').relative_to(ROOT)}")
@@ -257,6 +403,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--checked-dir", default=str(ROOT / "output" / "splits" / "checked"))
     parser.add_argument("--reports-dir", default=str(ROOT / "output" / "part2_20260429" / "reports"))
     parser.add_argument("--previous-multiple-cards-detail", default=str(ROOT / "output" / "multiple_cards_detail.csv"))
+    parser.add_argument("--final-funnel-clients", default=str(ROOT / "output" / "part2_20260429" / "staging" / "final_funnel_clients.csv"))
+    parser.add_argument("--subscription-selection-report", default=str(ROOT / "output" / "part2_20260429" / "reports" / "subscription_selection_report.csv"))
     return parser.parse_args()
 
 

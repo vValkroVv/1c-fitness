@@ -66,3 +66,35 @@ step 10 schema inventory: success, output/schema_inventory.csv, output/schema_ta
 
 ##github##
 Чтобы пушить в репозиторий используй токен из .env
+
+##текущие финальные воронки part2##
+
+Актуальная финальная сборка на срез `2026-04-29` лежит здесь:
+
+```text
+output/part2_20260429_final/
+```
+
+Отдельные XLSX по 3 воронкам:
+
+```text
+output/part2_20260429_final/fitbase_active_clients_import_zayavki_20260429__deystvuyushchie_klienty.xlsx
+output/part2_20260429_final/fitbase_active_clients_import_zayavki_20260429__novye_zayavki.xlsx
+output/part2_20260429_final/fitbase_active_clients_import_zayavki_20260429__reaktivatsiya.xlsx
+output/part2_20260429_final/fitbase_active_clients_plastic_cards_20260429__deystvuyushchie_klienty.xlsx
+output/part2_20260429_final/fitbase_active_clients_plastic_cards_20260429__novye_zayavki.xlsx
+output/part2_20260429_final/fitbase_active_clients_plastic_cards_20260429__reaktivatsiya.xlsx
+```
+
+Объединенная финальная отдача в 2 XLSX:
+
+```text
+output/part2_20260429_final_combined/fitbase_active_clients_import_zayavki_20260429__all_funnels.xlsx
+output/part2_20260429_final_combined/fitbase_active_clients_plastic_cards_20260429__all_funnels.xlsx
+```
+
+Отчет проверки финальной сборки:
+
+```text
+output/part2_20260429_final/reports/validation_report.md
+```

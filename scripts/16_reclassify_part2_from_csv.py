@@ -18,6 +18,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWED_CLASSES = {"full_subscription", "trial_or_guest", "other_sale", "unknown_review_required"}
+ALLOWED_COUNTING_RULES = {"always", "full_if_no_other_full_subscription"}
 FINAL_FUNNEL_FIELDS = [
     "client_ref",
     "client_id",
@@ -130,6 +131,17 @@ def load_decisions(path: Path) -> dict[str, dict[str, str]]:
                 f"Invalid approved_product_class={approved!r} for product_code={row.get('product_code', '')}. "
                 f"Allowed: {', '.join(sorted(ALLOWED_CLASSES))}"
             )
+        counting_rule = (row.get("counting_rule") or "always").strip() or "always"
+        if counting_rule not in ALLOWED_COUNTING_RULES:
+            raise ValueError(
+                f"Invalid counting_rule={counting_rule!r} for product_code={row.get('product_code', '')}. "
+                f"Allowed: {', '.join(sorted(ALLOWED_COUNTING_RULES))}"
+            )
+        if counting_rule != "always" and approved != "full_subscription":
+            raise ValueError(
+                f"counting_rule={counting_rule!r} requires approved_product_class='full_subscription' "
+                f"for product_code={row.get('product_code', '')}"
+            )
         product_ref = (row.get("product_ref") or "").strip()
         product_code = (row.get("product_code") or "").strip()
         if not product_ref and not product_code:
@@ -137,7 +149,7 @@ def load_decisions(path: Path) -> dict[str, dict[str, str]]:
         key = product_ref or f"code:{product_code}"
         if key in decisions and decisions[key]["approved_product_class"] != approved:
             raise ValueError(f"Conflicting decisions for {key}")
-        decisions[key] = {**row, "approved_product_class": approved}
+        decisions[key] = {**row, "approved_product_class": approved, "counting_rule": counting_rule}
     return decisions
 
 
@@ -180,6 +192,7 @@ def write_decision_template(source_reports_dir: Path, output_path: Path) -> None
                 "decision_bucket": decision_bucket,
                 "approved_product_class": "",
                 "decision_note": "",
+                "counting_rule": "always",
                 "observed_clients": row.get("observed_clients", ""),
                 "observed_sales": row.get("observed_sales", ""),
                 "observed_subscription_rows": row.get("observed_subscription_rows", ""),
@@ -200,6 +213,7 @@ def write_decision_template(source_reports_dir: Path, output_path: Path) -> None
             "decision_bucket",
             "approved_product_class",
             "decision_note",
+            "counting_rule",
             "observed_clients",
             "observed_sales",
             "observed_subscription_rows",
@@ -214,8 +228,9 @@ def write_decision_template(source_reports_dir: Path, output_path: Path) -> None
 def reclassify_products(
     products: list[dict[str, str]],
     decisions: dict[str, dict[str, str]],
-) -> tuple[list[dict[str, str]], dict[str, str], list[dict[str, str]]]:
+) -> tuple[list[dict[str, str]], dict[str, str], set[str], list[dict[str, str]]]:
     product_class_by_ref: dict[str, str] = {}
+    conditional_full_product_refs: set[str] = set()
     applied_rows: list[dict[str, str]] = []
     reclassified: list[dict[str, str]] = []
 
@@ -225,11 +240,14 @@ def reclassify_products(
         decision = decision_for_product(row, decisions)
         new_class = decision["approved_product_class"] if decision else old_class
         note = (decision or {}).get("decision_note", "")
+        counting_rule = (decision or {}).get("counting_rule", "always")
 
         if decision:
             row["product_class"] = new_class
             row["classification_reason"] = f"manual csv decision: {old_class} -> {new_class}" + (f"; {note}" if note else "")
             row["needs_manual_review"] = "1" if new_class == "unknown_review_required" else "0"
+            if counting_rule == "full_if_no_other_full_subscription":
+                conditional_full_product_refs.add(row.get("product_ref", ""))
             applied_rows.append(
                 {
                     "product_ref": row.get("product_ref", ""),
@@ -237,6 +255,7 @@ def reclassify_products(
                     "product_name": row.get("product_name", ""),
                     "old_product_class": old_class,
                     "new_product_class": new_class,
+                    "counting_rule": counting_rule,
                     "decision_note": note,
                 }
             )
@@ -249,18 +268,33 @@ def reclassify_products(
         product_class_by_ref[row.get("product_ref", "")] = row.get("product_class", "")
         reclassified.append(row)
 
-    return reclassified, product_class_by_ref, applied_rows
+    return reclassified, product_class_by_ref, conditional_full_product_refs, applied_rows
 
 
 def reclassify_subscriptions(
     rows: list[dict[str, str]],
     product_class_by_ref: dict[str, str],
+    conditional_full_product_refs: set[str],
     cutoff: date,
 ) -> list[dict[str, str]]:
+    clients_with_base_full: set[str] = set()
+    for row in rows:
+        product_ref = row.get("product_ref", "")
+        product_class = product_class_by_ref.get(product_ref, row.get("product_class", "other_sale"))
+        if (
+            product_class == "full_subscription"
+            and product_ref not in conditional_full_product_refs
+            and date_le(row.get("sale_date"), cutoff)
+        ):
+            clients_with_base_full.add(row.get("client_ref", ""))
+
     output = []
     for row in rows:
         item = dict(row)
-        product_class = product_class_by_ref.get(item.get("product_ref", ""), item.get("product_class", "other_sale"))
+        product_ref = item.get("product_ref", "")
+        product_class = product_class_by_ref.get(product_ref, item.get("product_class", "other_sale"))
+        if product_class == "full_subscription" and product_ref in conditional_full_product_refs and item.get("client_ref", "") in clients_with_base_full:
+            product_class = "other_sale"
         item["product_class"] = product_class
         item["is_full_subscription"] = "1" if product_class == "full_subscription" else "0"
         item["is_trial_or_guest"] = "1" if product_class == "trial_or_guest" else "0"
@@ -274,13 +308,33 @@ def reclassify_subscriptions(
     return output
 
 
-def reclassify_sales(rows: list[dict[str, str]], product_class_by_ref: dict[str, str]) -> list[dict[str, str]]:
+def reclassify_sales(
+    rows: list[dict[str, str]],
+    product_class_by_ref: dict[str, str],
+    conditional_full_product_refs: set[str],
+    subscriptions: list[dict[str, str]],
+    cutoff: date,
+) -> list[dict[str, str]]:
+    clients_with_base_full: set[str] = set()
+    for row in subscriptions:
+        product_ref = row.get("product_ref", "")
+        product_class = product_class_by_ref.get(product_ref, row.get("product_class", "other_sale"))
+        if (
+            product_class == "full_subscription"
+            and product_ref not in conditional_full_product_refs
+            and date_le(row.get("sale_date"), cutoff)
+        ):
+            clients_with_base_full.add(row.get("client_ref", ""))
+
     output = []
     for row in rows:
         item = dict(row)
         product_ref = item.get("product_ref", "")
         if product_ref:
-            item["product_class"] = product_class_by_ref.get(product_ref, item.get("product_class", "other_sale"))
+            product_class = product_class_by_ref.get(product_ref, item.get("product_class", "other_sale"))
+            if product_class == "full_subscription" and product_ref in conditional_full_product_refs and item.get("client_ref", "") in clients_with_base_full:
+                product_class = "other_sale"
+            item["product_class"] = product_class
         else:
             item["product_class"] = item.get("product_class") or "other_sale"
         output.append(item)
@@ -699,7 +753,7 @@ def write_impact_report(
     write_csv(
         reports_dir / "product_reclassification_applied.csv",
         applied_rows,
-        ["product_ref", "product_code", "product_name", "old_product_class", "new_product_class", "decision_note"],
+        ["product_ref", "product_code", "product_name", "old_product_class", "new_product_class", "counting_rule", "decision_note"],
     )
     write_csv(
         reports_dir / "product_reclassification_funnel_impact.csv",
@@ -781,9 +835,9 @@ def reclassify(args: argparse.Namespace) -> None:
     selected_cards = read_csv(source_stage_dir / "selected_cards.csv")
     before_final = read_csv(source_stage_dir / "final_funnel_clients.csv")
 
-    products, product_class_by_ref, applied_rows = reclassify_products(products, decisions)
-    subscriptions = reclassify_subscriptions(subscriptions, product_class_by_ref, cutoff)
-    sales = reclassify_sales(sales, product_class_by_ref)
+    products, product_class_by_ref, conditional_full_product_refs, applied_rows = reclassify_products(products, decisions)
+    subscriptions = reclassify_subscriptions(subscriptions, product_class_by_ref, conditional_full_product_refs, cutoff)
+    sales = reclassify_sales(sales, product_class_by_ref, conditional_full_product_refs, subscriptions, cutoff)
     history = build_client_history(history, sales, subscriptions, cutoff)
     candidates, selected_subscriptions = build_subscription_candidates(subscriptions)
     final_rows = build_final_rows(history, selected_subscriptions, selected_cards, cutoff)

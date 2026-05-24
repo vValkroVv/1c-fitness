@@ -1,6 +1,6 @@
 # Part 2 Gym Sales Mid-November Comparison
 
-Run date: `2026-05-24T15:05:32`
+Run date: `2026-05-24T15:56:23`
 Cutoff date: `2025-11-15`
 Cutoff datetime: `2025-11-15 08:00:00`
 
@@ -10,18 +10,18 @@ The Part 2 side was recalculated with the same SQL-free reclassifier that rebuil
 
 | Funnel | Part 2 algorithm | gym_sales.csv | Delta Part 2 - gym_sales |
 |---|---:|---:|---:|
-| Новые заявки | 36172 | 1324 | 34848 |
-| Реактивация | 27278 | 20617 | 6661 |
-| Действующие клиенты | 9412 | 9365 | 47 |
+| Новые заявки | 35220 | 1324 | 33896 |
+| Реактивация | 28229 | 20617 | 7612 |
+| Действующие клиенты | 9413 | 9365 | 48 |
 | TOTAL | 72862 | 31306 | 41556 |
 
 ## Hard Check: active + reactivation
 
 - verdict: `FAIL`
 - threshold: `<= 3%` delta vs `gym_sales.csv`
-- Part 2 active + reactivation: `36690`
+- Part 2 active + reactivation: `37642`
 - gym_sales active + reactivation: `29982`
-- delta Part 2 - gym_sales: `6708` (`22.37%` of gym_sales)
+- delta Part 2 - gym_sales: `7660` (`25.55%` of gym_sales)
 
 
 ## gym_sales Coverage
@@ -42,7 +42,6 @@ The Part 2 side was recalculated with the same SQL-free reclassifier that rebuil
 ## Written Files
 
 - comparison counts: `output/part2_20251115_0800_compare/funnel_counts_comparison.csv`
-- hard check: `output/part2_20251115_0800_compare/hard_check_active_reactivation.csv`
 - gym product class summary: `output/part2_20251115_0800_compare/gym_sales_product_class_summary.csv`
 - gym product classification: `output/part2_20251115_0800_compare/gym_sales_product_classification.csv`
 - Part 2 recalculated final stage: `output/part2_20251115_0800_compare/our_algorithm/staging/final_funnel_clients.csv`

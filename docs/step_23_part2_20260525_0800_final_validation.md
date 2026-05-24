@@ -55,16 +55,16 @@ quality reports exist and match stage: PASS
 Final single-stage distribution:
 
 ```text
-новые заявки / неразобранные: 34105
-Действующие абонементы / Все действующие абонементы: 10749
-Реактивация(годовые абонементы) / Все закрытые абонементы: 28008
+новые заявки / неразобранные: 33180
+Действующие абонементы / Все действующие абонементы: 10750
+Реактивация(годовые абонементы) / Все закрытые абонементы: 28932
 ```
 
 Warnings are documented, not blocking:
 
 ```text
-product_review_rows: 68
+product_review_rows: 25
 missing_phone: 6054
 missing_card: 22475
-multiple_subscription_clients: 12642
+multiple_subscription_clients: 13263
 ```

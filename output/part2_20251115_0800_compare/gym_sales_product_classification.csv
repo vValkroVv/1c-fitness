@@ -1,0 +1,86 @@
+product_name,product_class,classification_reason,max_duration_days,rows_total,rows_before_cutoff,clients_before_cutoff
+Абонемент УЛЬТРА 12 месяцев,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,2010,20752,20663,14750
+Абонемент МУЛЬТИКАРТА 12 месяцев,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,1856,11517,11462,8912
+Абонемент УЛЬТРА 1 МЕСЯЦ БЕЗЛИМИТ,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,593,7473,7329,4847
+Абонемент УЛЬТРА 12 месяцев ДВОЙНОЕ / СЕМЕЙНЫЙ,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,1069,2101,2101,1984
+Абонемент МУЛЬТИКАРТА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,1335,2099,2098,1955
+Абонемент МУЛЬТИКАРТА 12 месяцев ДВОЙНОЕ / СЕМЕЙНЫЙ,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,1235,1796,1796,1701
+Абонемент УЛЬТРА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,826,1331,1297,1244
+Абонемент МУЛЬТИКАРТА 12 месяцев + 2 месяца заморозки в подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,854,1099,1099,1093
+Абонемент УЛЬТРА 1 МЕСЯЦ 8 посещений,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,720,762,762,561
+Абонемент УЛЬТРА 3 месяца,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,570,749,735,690
+Абонемент УЛЬТРА 1 МЕСЯЦ 12 посещений,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,501,688,688,527
+Абонемент МУЛЬТИКАРТА 15 месяцев (3 месяца заморозки в подарок),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,780,688,685,684
+Абонемент МУЛЬТИКАРТА 12 месяцев + 2 месяца заморозки в подарок (СПЕЦПРЕДЛОЖЕНИЕ),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,663,634,634,627
+Абонемент МУЛЬТИ 24 месяцев,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,1357,628,628,627
+Абонемент МУЛЬТИКАРТА 12 месяцев + 3 месяца заморозки в подарок СПЕЦПРЕДЛОЖЕНИЕ,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,817,445,445,444
+Абонемент МУЛЬТИКАРТА 12 месяцев+2 лета в подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,909,382,382,380
+"Абонемент УЛЬТРА 1 МЕСЯЦ ХОЛОДНЫЕ 990,00",full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,364,419,376,367
+Абонемент УЛЬТРА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ (вип),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,541,466,371,367
+Абонемент УЛЬТРА 24 месяца,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,1284,344,344,343
+Абонемент УЛЬТРА 12 месяцев (акция 3 мес. в подарок),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,911,295,295,294
+Абонемент УЛЬТРА 12 + 2 лета в подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,805,257,257,256
+Абонемент УЛЬТРА 12+2 месяца в подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,564,227,227,225
+"Студенческий абонемент 4 месяца 6 900,00",full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,274,226,226,185
+Абонемент УЛЬТРА 6+6 месяцев,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,549,210,210,210
+Абонемент УЛЬТРА 9 месяцев,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,485,203,203,201
+Абонемент МУЛЬТИКАРТА 12 месяцев + 3 месяца в подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,657,202,198,198
+УЛЬТРА 9 месяцев + 3 месяца в подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,649,190,190,189
+Абонемент МУЛЬТИКАРТА+6 месяцев в подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,941,178,178,175
+Абонемент МУЛЬТИКАРТА 12 месяцев (подарок),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,626,236,176,175
+Абонемент МУЛЬТИКАРТА 12 месяцев (2 месяца в подарок),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,556,174,174,174
+Абонемент УЛЬТРА 12 месяцев (акция 6 мес. в подарок),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,757,150,150,149
+Абонемент МУЛЬТИКАРТА 12 месяцев (3 месяца заморозки в подарок),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,615,139,139,139
+МУЛЬТИКАРТА 9 месяцев + 3 месяца в подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,578,135,135,135
+Абонемент УЛЬТРА 12+6 месяцев,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,698,133,133,133
+Абонемент МУЛЬТИ 6+6 месяцев,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,464,123,123,123
+Абонемент УЛЬТРА 12 месяцев (акция 2 мес. в подарок),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,547,116,116,116
+УЛЬТРА 12 месяцев + 2 месяца заморозки в подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,479,116,116,115
+Абонемент УЛЬТРА 15 месяцев + 3 месяца заморозки в подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,625,75,75,75
+Абонемент УЛЬТРА 12 месяцев + 3 месяца заморозки в подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,665,70,70,70
+Мультикарта на 9 месяцев,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,455,65,65,65
+"Абонемент УЛЬТРА 12 месяцев (акция 3 мес. в подарок) Ровио,3",full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,542,42,42,42
+Студенческий дневной абонемент 9 месяцев (посещение клуба до 17:00),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,330,45,42,42
+"Холодные 9 900,00 МУЛЬТИКАРТА 12 месяцев",full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,550,33,33,33
+"Абонемент УЛЬТРА 12 месяцев (Ровио,3)",full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,650,31,31,31
+Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,445,30,30,30
+"Абонемент УЛЬТРА 12 месяцев (акция 2 мес. в подарок) Ровио,3",full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,457,28,28,28
+"Холодные 9 900,00 УЛЬТРА 12 месяцев",full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,636,28,28,28
+Абонемент УЛЬТРА 9 месяцев СПЕЦПРЕДЛОЖЕНИЕ,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,424,26,26,26
+Абонемент УЛЬТРА 15 месяцев,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,510,26,24,24
+УЛЬТРА 12 месяцев + 2 месяца заморозки в подарок (Ровио),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,418,20,20,20
+Абонемент УЛЬТРА 9 месяцев+3 месяца в подарок (Ровио),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,455,19,19,19
+Абонемент УЛЬТРА 12 месяцев + 3 месяца заморозки в подарок (Ровио),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,450,18,18,18
+Мультикарта на 6 месяцев,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,387,12,12,12
+"Абонемент УЛЬТРА 12 месяцев (акция 6 мес. в подарок) Ровио,3",full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,583,11,11,11
+УЛЬТРА 6 месяцев + 3 месяца в подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,281,11,11,11
+"Холодные 13 900,00 МУЛЬТИ 24 месяца",full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,780,10,10,10
+"Абонемент УЛЬТРА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ (Промышленная,10)",full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,404,8,8,8
+Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок) Ровио,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,396,8,8,8
+Мультикарта на 9 месяцев + 3 месяца заморозки в подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,372,6,6,6
+Студенческий дневной абонемент 9 месяцев,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,391,6,6,6
+Абонемент УЛЬТРА 15 месяцев + 3 месяца заморозки в подарок(Ровио),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,513,3,3,3
+Абонемент УЛЬТРА 12+2 месяца в подарок (Ровио),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,431,2,2,2
+Абонемент УЛЬТРА 6 месяцев СПЕЦПРЕДЛОЖЕНИЕ,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,332,2,2,2
+МУЛЬТИКАРТА 6 месяцев + 3 месяца в подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,273,2,2,2
+Абонемент МУЛЬТИКАРТА 12 месяцев + подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,654,424,0,0
+Абонемент МУЛЬТИКАРТА 12 месяцев + подарок (Спецпредложение),full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,701,169,0,0
+Абонемент МУЛЬТИКАРТА 15 месяцев,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,587,12,0,0
+Абонемент УЛЬТРА 12 месяцев + подарок,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,554,26,0,0
+нет номера,other_sale,not matched by full/trial rules in gym_sales,65,58,58,50
+"Спец. цена Яна 10 900,00",other_sale,not matched by full/trial rules in gym_sales,539,20,20,20
+"Спец. цена Полина 9 900,00",other_sale,not matched by full/trial rules in gym_sales,304,5,5,5
+Ивушкина Д.,other_sale,not matched by full/trial rules in gym_sales,399,4,4,4
+"Спец. цена Яна 11 900,00",other_sale,not matched by full/trial rules in gym_sales,443,2,2,2
+Подарочный сертификат 1 месяц безлимитного фитнеса,other_sale,not matched by full/trial rules in gym_sales,33,1,1,1
+Абонемент НЕДЕЛЯ САЙТ,trial_or_guest,trial/guest/short keyword,941,2217,2217,2199
+Абонемент 2 недели Фитнес,trial_or_guest,trial/guest/short keyword,57,554,527,515
+Абонемент Неделя сайт 2023,trial_or_guest,trial/guest/short keyword,15,212,212,212
+Абонемент Неделя Фитнес,trial_or_guest,trial/guest/short keyword,372,156,147,131
+Абонемент Неделя Фитнес 1 рубль,trial_or_guest,trial/guest/short keyword,14,107,88,88
+Абонемент НЕДЕЛЯ ФИТНЕСА БЕСПЛАТНО,trial_or_guest,trial/guest/short keyword,37,43,43,40
+Абонемент Неделя Фитнес 190 рублей,trial_or_guest,trial/guest/short keyword,16,25,25,25
+Абонемент Неделя Фитнес (НОВЫЕ КЛИЕНТЫ),trial_or_guest,trial/guest/short keyword,7,23,23,23
+"Абонемент МУЛЬТИКАРТА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ(Промышленная,10)",trial_or_guest,short observed duration <= 14 days,4,1,1,1
+Абонемент НЕДЕЛЯ ДРУГ,trial_or_guest,trial/guest/short keyword,8,1,1,1
+Абонемент НЕДЕЛЯ ХОЛОДНЫЕ,trial_or_guest,trial/guest/short keyword,8,1,1,1

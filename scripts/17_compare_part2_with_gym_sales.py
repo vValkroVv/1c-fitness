@@ -9,7 +9,7 @@ import re
 import subprocess
 import sys
 from collections import Counter, defaultdict
-from datetime import date, datetime
+from datetime import date, datetime, time
 from pathlib import Path
 
 
@@ -49,6 +49,28 @@ def parse_date(value: str) -> date | None:
         return datetime.fromisoformat(value).date()
     except ValueError:
         return None
+
+
+def parse_datetime(value: str) -> datetime | None:
+    value = (value or "").strip()
+    if not value:
+        return None
+    value = value.replace("T", " ")
+    if "." in value:
+        left, right = value.split(".", 1)
+        digits = "".join(ch for ch in right if ch.isdigit())
+        value = f"{left}.{digits[:6]}" if digits else left
+    for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d", "%d.%m.%Y %H:%M:%S", "%d.%m.%Y"):
+        try:
+            parsed = datetime.strptime(value[:19], fmt)
+            return parsed
+        except ValueError:
+            pass
+    try:
+        return datetime.fromisoformat(value)
+    except ValueError:
+        parsed_date = parse_date(value)
+        return datetime.combine(parsed_date, time.min) if parsed_date else None
 
 
 def normalize_text(value: str) -> str:
@@ -117,6 +139,8 @@ def run_our_algorithm(args: argparse.Namespace, output_dir: Path) -> Path:
         str(RECLASSIFIER),
         "--cutoff-date",
         args.cutoff_date,
+        "--cutoff-at",
+        args.cutoff_at,
         "--source-stage-dir",
         str(as_abs(args.source_stage_dir)),
         "--source-reports-dir",
@@ -137,13 +161,15 @@ def count_our_algorithm(final_csv: Path) -> Counter[str]:
     return Counter(row.get("funnel", "") for row in rows)
 
 
-def build_gym_sales_counts(gym_sales_csv: Path, cutoff: date, output_dir: Path) -> tuple[Counter[str], dict[str, object]]:
+def build_gym_sales_counts(gym_sales_csv: Path, cutoff_at: datetime, output_dir: Path) -> tuple[Counter[str], dict[str, object]]:
+    cutoff = cutoff_at.date()
     rows = read_csv(gym_sales_csv)
     product_durations: defaultdict[str, list[int]] = defaultdict(list)
     sale_dates: list[date] = []
 
     for row in rows:
-        sale_date = parse_date(row.get("sale_datetime", ""))
+        sale_dt = parse_datetime(row.get("sale_datetime", ""))
+        sale_date = sale_dt.date() if sale_dt else None
         valid_to = parse_date(row.get("valid_to", ""))
         row["_sale_date"] = sale_date.isoformat() if sale_date else ""
         row["_valid_to"] = valid_to.isoformat() if valid_to else ""
@@ -177,12 +203,13 @@ def build_gym_sales_counts(gym_sales_csv: Path, cutoff: date, output_dir: Path) 
     for row in rows:
         product_name = row.get("product_name", "")
         product_meta[product_name]["rows_total"] = int(product_meta[product_name]["rows_total"]) + 1
-        sale_date = parse_date(row.get("sale_datetime", ""))
+        sale_dt = parse_datetime(row.get("sale_datetime", ""))
+        sale_date = sale_dt.date() if sale_dt else None
         valid_to = parse_date(row.get("valid_to", ""))
         if sale_date is None:
             missing_sale_date_rows += 1
             continue
-        if sale_date > cutoff:
+        if sale_dt and sale_dt > cutoff_at:
             future_rows += 1
             continue
         key = client_key(row)
@@ -273,17 +300,24 @@ def build_gym_sales_counts(gym_sales_csv: Path, cutoff: date, output_dir: Path) 
 def write_report(
     report_path: Path,
     cutoff: str,
+    cutoff_at: str,
     output_dir: Path,
     our_counts: Counter[str],
     gym_counts: Counter[str],
     gym_metadata: dict[str, object],
 ) -> None:
     comparison_rows = build_comparison_rows(our_counts, gym_counts)
+    part2_active_reactivation = our_counts["Действующие клиенты"] + our_counts["Реактивация"]
+    gym_active_reactivation = gym_counts["Действующие клиенты"] + gym_counts["Реактивация"]
+    hard_delta = part2_active_reactivation - gym_active_reactivation
+    hard_delta_pct = (abs(hard_delta) / gym_active_reactivation * 100) if gym_active_reactivation else 0
+    hard_verdict = "PASS" if hard_delta_pct <= 3 else "FAIL"
     lines = [
         "# Part 2 Gym Sales Mid-November Comparison",
         "",
         f"Run date: `{datetime.now().isoformat(timespec='seconds')}`",
         f"Cutoff date: `{cutoff}`",
+        f"Cutoff datetime: `{cutoff_at}`",
         "",
         "The Part 2 side was recalculated with the same SQL-free reclassifier that rebuilds the three funnels from exported 1C staging CSVs. The gym_sales side uses only `data/gym_sales.csv`: client identity is `phone + normalized name`, product class is derived from product name and the product-level max duration, and only counts are compared.",
         "",
@@ -298,6 +332,15 @@ def write_report(
         )
     lines.extend(
         [
+            "",
+            "## Hard Check: active + reactivation",
+            "",
+            f"- verdict: `{hard_verdict}`",
+            f"- threshold: `<= 3%` delta vs `gym_sales.csv`",
+            f"- Part 2 active + reactivation: `{part2_active_reactivation}`",
+            f"- gym_sales active + reactivation: `{gym_active_reactivation}`",
+            f"- delta Part 2 - gym_sales: `{hard_delta}` (`{hard_delta_pct:.2f}%` of gym_sales)",
+            "",
             "",
             "## gym_sales Coverage",
             "",
@@ -350,11 +393,12 @@ def build_comparison_rows(our_counts: Counter[str], gym_counts: Counter[str]) ->
 
 def compare(args: argparse.Namespace) -> None:
     cutoff = date.fromisoformat(args.cutoff_date)
+    cutoff_at = parse_datetime(args.cutoff_at) or datetime.combine(cutoff, time.max.replace(microsecond=0))
     output_dir = as_abs(args.output_dir)
     report_path = as_abs(args.report)
     final_csv = run_our_algorithm(args, output_dir)
     our_counts = count_our_algorithm(final_csv)
-    gym_counts, gym_metadata = build_gym_sales_counts(as_abs(args.gym_sales_csv), cutoff, output_dir)
+    gym_counts, gym_metadata = build_gym_sales_counts(as_abs(args.gym_sales_csv), cutoff_at, output_dir)
     comparison_rows = build_comparison_rows(our_counts, gym_counts)
 
     write_csv(
@@ -372,9 +416,37 @@ def compare(args: argparse.Namespace) -> None:
         [{"funnel": funnel, "count": gym_counts[funnel]} for funnel in FUNNEL_ORDER],
         ["funnel", "count"],
     )
-    write_report(report_path, args.cutoff_date, output_dir, our_counts, gym_counts, gym_metadata)
+    part2_active_reactivation = our_counts["Действующие клиенты"] + our_counts["Реактивация"]
+    gym_active_reactivation = gym_counts["Действующие клиенты"] + gym_counts["Реактивация"]
+    hard_delta = part2_active_reactivation - gym_active_reactivation
+    hard_delta_pct = (abs(hard_delta) / gym_active_reactivation * 100) if gym_active_reactivation else 0
+    write_csv(
+        output_dir / "hard_check_active_reactivation.csv",
+        [
+            {
+                "metric": "active_plus_reactivation",
+                "part2_algorithm_count": part2_active_reactivation,
+                "gym_sales_count": gym_active_reactivation,
+                "delta_part2_minus_gym_sales": hard_delta,
+                "abs_delta_pct_of_gym_sales": f"{hard_delta_pct:.4f}",
+                "threshold_pct": "3.0000",
+                "verdict": "PASS" if hard_delta_pct <= 3 else "FAIL",
+            }
+        ],
+        [
+            "metric",
+            "part2_algorithm_count",
+            "gym_sales_count",
+            "delta_part2_minus_gym_sales",
+            "abs_delta_pct_of_gym_sales",
+            "threshold_pct",
+            "verdict",
+        ],
+    )
+    write_report(report_path, args.cutoff_date, args.cutoff_at, output_dir, our_counts, gym_counts, gym_metadata)
 
     print(f"cutoff_date={args.cutoff_date}")
+    print(f"cutoff_at={args.cutoff_at}")
     for row in comparison_rows:
         print(
             f"{row['funnel']}: part2={row['part2_algorithm_count']} "
@@ -388,6 +460,7 @@ def compare(args: argparse.Namespace) -> None:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cutoff-date", default="2025-11-15")
+    parser.add_argument("--cutoff-at", default="2025-11-15 23:59:59")
     parser.add_argument("--gym-sales-csv", default="data/gym_sales.csv")
     parser.add_argument("--source-stage-dir", default="output/part2_20260429/staging")
     parser.add_argument("--source-reports-dir", default="output/part2_20260429/reports")

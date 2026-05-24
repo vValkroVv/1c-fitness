@@ -12,7 +12,7 @@ import argparse
 import csv
 import shutil
 from collections import Counter, defaultdict
-from datetime import date, datetime
+from datetime import date, datetime, time
 from pathlib import Path
 
 
@@ -86,6 +86,22 @@ def parse_date(value: str | None) -> date | None:
     return datetime.strptime(value[:10], "%Y-%m-%d").date()
 
 
+def parse_datetime(value: str | None) -> datetime | None:
+    value = (value or "").strip()
+    if not value:
+        return None
+    value = value.replace("T", " ")
+    if "." in value:
+        left, right = value.split(".", 1)
+        digits = "".join(ch for ch in right if ch.isdigit())
+        value = f"{left}.{digits[:6]}" if digits else left
+    try:
+        return datetime.fromisoformat(value)
+    except ValueError:
+        parsed_date = parse_date(value)
+        return datetime.combine(parsed_date, time.min) if parsed_date else None
+
+
 def date_key(value: str | None) -> date:
     return parse_date(value) or date.min
 
@@ -103,6 +119,14 @@ def date_ge(left: str | None, right: date) -> bool:
 def date_lt(left: str | None, right: date) -> bool:
     parsed = parse_date(left)
     return bool(parsed and parsed < right)
+
+
+def sale_on_or_before(row: dict[str, str], cutoff_at: datetime) -> bool:
+    sale_dt = parse_datetime(row.get("sale_datetime"))
+    if sale_dt:
+        return sale_dt <= cutoff_at
+    parsed = parse_date(row.get("sale_date"))
+    return bool(parsed and parsed <= cutoff_at.date())
 
 
 def days_between(left: str | None, right: date) -> str:
@@ -275,8 +299,9 @@ def reclassify_subscriptions(
     rows: list[dict[str, str]],
     product_class_by_ref: dict[str, str],
     conditional_full_product_refs: set[str],
-    cutoff: date,
+    cutoff_at: datetime,
 ) -> list[dict[str, str]]:
+    cutoff = cutoff_at.date()
     clients_with_base_full: set[str] = set()
     for row in rows:
         product_ref = row.get("product_ref", "")
@@ -284,7 +309,7 @@ def reclassify_subscriptions(
         if (
             product_class == "full_subscription"
             and product_ref not in conditional_full_product_refs
-            and date_le(row.get("sale_date"), cutoff)
+            and sale_on_or_before(row, cutoff_at)
         ):
             clients_with_base_full.add(row.get("client_ref", ""))
 
@@ -299,8 +324,8 @@ def reclassify_subscriptions(
         item["is_full_subscription"] = "1" if product_class == "full_subscription" else "0"
         item["is_trial_or_guest"] = "1" if product_class == "trial_or_guest" else "0"
         is_full = product_class == "full_subscription"
-        item["is_active_on_cutoff"] = "1" if is_full and date_le(item.get("sale_date"), cutoff) and date_ge(item.get("end_date"), cutoff) else "0"
-        item["is_finished_before_cutoff"] = "1" if is_full and date_le(item.get("sale_date"), cutoff) and date_lt(item.get("end_date"), cutoff) else "0"
+        item["is_active_on_cutoff"] = "1" if is_full and sale_on_or_before(item, cutoff_at) and date_ge(item.get("end_date"), cutoff) else "0"
+        item["is_finished_before_cutoff"] = "1" if is_full and sale_on_or_before(item, cutoff_at) and date_lt(item.get("end_date"), cutoff) else "0"
         item["days_to_end"] = days_between(item.get("end_date"), cutoff)
         end = parse_date(item.get("end_date"))
         item["days_since_end"] = str((cutoff - end).days) if end else ""
@@ -313,7 +338,7 @@ def reclassify_sales(
     product_class_by_ref: dict[str, str],
     conditional_full_product_refs: set[str],
     subscriptions: list[dict[str, str]],
-    cutoff: date,
+    cutoff_at: datetime,
 ) -> list[dict[str, str]]:
     clients_with_base_full: set[str] = set()
     for row in subscriptions:
@@ -322,7 +347,7 @@ def reclassify_sales(
         if (
             product_class == "full_subscription"
             and product_ref not in conditional_full_product_refs
-            and date_le(row.get("sale_date"), cutoff)
+            and sale_on_or_before(row, cutoff_at)
         ):
             clients_with_base_full.add(row.get("client_ref", ""))
 
@@ -345,16 +370,17 @@ def build_client_history(
     old_history_rows: list[dict[str, str]],
     sales: list[dict[str, str]],
     subscriptions: list[dict[str, str]],
-    cutoff: date,
+    cutoff_at: datetime,
 ) -> list[dict[str, str]]:
+    cutoff = cutoff_at.date()
     sales_by_client: defaultdict[str, list[dict[str, str]]] = defaultdict(list)
     for sale in sales:
-        if date_le(sale.get("sale_date"), cutoff):
+        if sale_on_or_before(sale, cutoff_at):
             sales_by_client[sale.get("client_ref", "")].append(sale)
 
     subs_by_client: defaultdict[str, list[dict[str, str]]] = defaultdict(list)
     for sub in subscriptions:
-        if date_le(sub.get("sale_date"), cutoff):
+        if sale_on_or_before(sub, cutoff_at):
             subs_by_client[sub.get("client_ref", "")].append(sub)
 
     output = []
@@ -817,6 +843,7 @@ def reclassify(args: argparse.Namespace) -> None:
     cutoff = parse_date(args.cutoff_date)
     if cutoff is None:
         raise ValueError("--cutoff-date is required")
+    cutoff_at = parse_datetime(args.cutoff_at) if args.cutoff_at else datetime.combine(cutoff, time.max.replace(microsecond=0))
 
     source_stage_dir = as_abs(args.source_stage_dir)
     source_reports_dir = as_abs(args.source_reports_dir)
@@ -836,9 +863,9 @@ def reclassify(args: argparse.Namespace) -> None:
     before_final = read_csv(source_stage_dir / "final_funnel_clients.csv")
 
     products, product_class_by_ref, conditional_full_product_refs, applied_rows = reclassify_products(products, decisions)
-    subscriptions = reclassify_subscriptions(subscriptions, product_class_by_ref, conditional_full_product_refs, cutoff)
-    sales = reclassify_sales(sales, product_class_by_ref, conditional_full_product_refs, subscriptions, cutoff)
-    history = build_client_history(history, sales, subscriptions, cutoff)
+    subscriptions = reclassify_subscriptions(subscriptions, product_class_by_ref, conditional_full_product_refs, cutoff_at)
+    sales = reclassify_sales(sales, product_class_by_ref, conditional_full_product_refs, subscriptions, cutoff_at)
+    history = build_client_history(history, sales, subscriptions, cutoff_at)
     candidates, selected_subscriptions = build_subscription_candidates(subscriptions)
     final_rows = build_final_rows(history, selected_subscriptions, selected_cards, cutoff)
 
@@ -890,6 +917,7 @@ def reclassify(args: argparse.Namespace) -> None:
         raise SystemExit(f"Unresolved product review rows remain: {len(unresolved)}")
 
     print(f"applied_product_decisions={len(applied_rows)}")
+    print(f"cutoff_at={cutoff_at.isoformat(sep=' ')}")
     print(f"unresolved_product_review_rows={len(unresolved)}")
     print(f"stage_dir={output_stage_dir.relative_to(ROOT)}")
     print(f"reports_dir={output_reports_dir.relative_to(ROOT)}")
@@ -898,6 +926,7 @@ def reclassify(args: argparse.Namespace) -> None:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cutoff-date", default="2026-04-29")
+    parser.add_argument("--cutoff-at", default="")
     parser.add_argument("--source-stage-dir", default=str(ROOT / "output" / "part2_20260429" / "staging"))
     parser.add_argument("--source-reports-dir", default=str(ROOT / "output" / "part2_20260429" / "reports"))
     parser.add_argument("--output-stage-dir", default=str(ROOT / "output" / "part2_20260429_reclassified" / "staging"))

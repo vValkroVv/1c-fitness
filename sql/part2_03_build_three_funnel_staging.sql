@@ -1,11 +1,13 @@
-USE [FitnessRestored];
+USE [$(database_name)];
 GO
 
 SET NOCOUNT ON;
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
-DECLARE @cutoff_date date = '$(cutoff_date)';
+DECLARE @cutoff_at datetime2 = '$(cutoff_at)';
+DECLARE @cutoff_date date = CONVERT(date, @cutoff_at);
 DECLARE @cutoff_sql_date date = DATEADD(year, 2000, @cutoff_date);
+DECLARE @cutoff_sql_at datetime2 = DATEADD(year, 2000, @cutoff_at);
 DECLARE @backup_finish_at datetime2 = '$(backup_finish_at)';
 DECLARE @backup_finish_sql_at datetime2 = DATEADD(year, 2000, @backup_finish_at);
 DECLARE @output_run_label nvarchar(100) = N'$(output_run_label)';
@@ -30,16 +32,20 @@ DROP TABLE IF EXISTS #document163_docs;
 DROP TABLE IF EXISTS #subscription_raw;
 GO
 
-DECLARE @cutoff_date date = '$(cutoff_date)';
+DECLARE @cutoff_at datetime2 = '$(cutoff_at)';
+DECLARE @cutoff_date date = CONVERT(date, @cutoff_at);
 DECLARE @cutoff_sql_date date = DATEADD(year, 2000, @cutoff_date);
+DECLARE @cutoff_sql_at datetime2 = DATEADD(year, 2000, @cutoff_at);
 DECLARE @backup_finish_at datetime2 = '$(backup_finish_at)';
 DECLARE @backup_finish_sql_at datetime2 = DATEADD(year, 2000, @backup_finish_at);
 DECLARE @output_run_label nvarchar(100) = N'$(output_run_label)';
 
 CREATE TABLE fitbase_part2.staging_run_metadata (
     cutoff_date date NOT NULL,
+    cutoff_at datetime2 NOT NULL,
     backup_finish_at datetime2 NOT NULL,
     cutoff_sql_date date NOT NULL,
+    cutoff_sql_at datetime2 NOT NULL,
     backup_finish_sql_at datetime2 NOT NULL,
     output_run_label nvarchar(100) NOT NULL,
     built_at datetime2 NOT NULL,
@@ -48,8 +54,10 @@ CREATE TABLE fitbase_part2.staging_run_metadata (
 
 INSERT INTO fitbase_part2.staging_run_metadata (
     cutoff_date,
+    cutoff_at,
     backup_finish_at,
     cutoff_sql_date,
+    cutoff_sql_at,
     backup_finish_sql_at,
     output_run_label,
     built_at,
@@ -57,8 +65,10 @@ INSERT INTO fitbase_part2.staging_run_metadata (
 )
 VALUES (
     @cutoff_date,
+    @cutoff_at,
     @backup_finish_at,
     @cutoff_sql_date,
+    @cutoff_sql_at,
     @backup_finish_sql_at,
     @output_run_label,
     SYSDATETIME(),
@@ -166,6 +176,10 @@ SELECT
         WHEN d._Date_Time > '3000-01-01' THEN CONVERT(date, DATEADD(year, -2000, d._Date_Time))
         ELSE CONVERT(date, d._Date_Time)
     END AS sale_date,
+    CASE
+        WHEN d._Date_Time > '3000-01-01' THEN DATEADD(year, -2000, d._Date_Time)
+        ELSE d._Date_Time
+    END AS sale_datetime,
     d._Posted AS doc_posted,
     d._Marked AS doc_marked,
     CASE WHEN d._Posted = 0x01 THEN 1 ELSE 0 END AS is_posted,
@@ -229,6 +243,7 @@ SELECT
     d.product_code,
     d.product_name AS subscription_name,
     d.sale_date,
+    d.sale_datetime,
     CASE
         WHEN r._Fld3063 > '3000-01-01' THEN CONVERT(date, DATEADD(year, -2000, r._Fld3063))
         ELSE CONVERT(date, r._Fld3063)
@@ -409,6 +424,7 @@ SELECT
     CASE WHEN sp.product_class = N'full_subscription' THEN 1 ELSE 0 END AS is_full_subscription,
     CASE WHEN sp.product_class = N'trial_or_guest' THEN 1 ELSE 0 END AS is_trial_or_guest,
     sr.sale_date,
+    sr.sale_datetime,
     sr.start_date,
     sr.end_date,
     DATEDIFF(day, sr.start_date, sr.end_date) + 1 AS duration_days,
@@ -420,13 +436,13 @@ SELECT
     sr.register_duration_days,
     CASE
         WHEN sp.product_class = N'full_subscription'
-         AND sr.sale_date <= @cutoff_date
+         AND sr.sale_datetime <= @cutoff_at
          AND sr.end_date >= @cutoff_date THEN 1
         ELSE 0
     END AS is_active_on_cutoff,
     CASE
         WHEN sp.product_class = N'full_subscription'
-         AND sr.sale_date <= @cutoff_date
+         AND sr.sale_datetime <= @cutoff_at
          AND sr.end_date < @cutoff_date THEN 1
         ELSE 0
     END AS is_finished_before_cutoff,
@@ -455,9 +471,13 @@ WITH payment_sales AS (
         END AS client_ref_bin,
         d._IDRRef AS sale_ref_bin,
         CASE
-            WHEN d._Date_Time > '3000-01-01' THEN CONVERT(date, DATEADD(year, -2000, d._Date_Time))
-            ELSE CONVERT(date, d._Date_Time)
-        END AS sale_date,
+        WHEN d._Date_Time > '3000-01-01' THEN CONVERT(date, DATEADD(year, -2000, d._Date_Time))
+        ELSE CONVERT(date, d._Date_Time)
+    END AS sale_date,
+        CASE
+            WHEN d._Date_Time > '3000-01-01' THEN DATEADD(year, -2000, d._Date_Time)
+            ELSE d._Date_Time
+        END AS sale_datetime,
         CAST(NULL AS binary(16)) AS product_ref_bin,
         CAST(NULL AS nvarchar(200)) AS product_name,
         N'other_sale' AS product_class,
@@ -507,6 +527,7 @@ product_sales AS (
         d.client_ref_bin,
         d.sale_ref_bin,
         d.sale_date,
+        d.sale_datetime,
         d.product_ref_bin,
         d.product_name,
         COALESCE(sp.product_class, N'other_sale') AS product_class,
@@ -528,6 +549,7 @@ SELECT
     CONVERT(varchar(32), client_ref_bin, 2) AS client_ref,
     CONVERT(varchar(32), sale_ref_bin, 2) AS sale_ref,
     sale_date,
+    sale_datetime,
     CONVERT(varchar(32), product_ref_bin, 2) AS product_ref,
     product_name,
     product_class,
@@ -602,12 +624,12 @@ emails AS (
 sale_stats AS (
     SELECT
         client_ref,
-        MIN(CASE WHEN sale_date <= @cutoff_date THEN sale_date END) AS first_sale_date,
-        MIN(CASE WHEN sale_date <= @cutoff_date AND product_class = N'trial_or_guest' THEN sale_date END) AS first_trial_or_guest_product_date,
-        MIN(CASE WHEN sale_date <= @cutoff_date AND product_class <> N'full_subscription' THEN sale_date END) AS first_non_full_sale_date,
-        MAX(CASE WHEN sale_date <= @cutoff_date THEN sale_date END) AS last_sale_date,
-        COUNT(CASE WHEN sale_date <= @cutoff_date THEN 1 END) AS sale_count,
-        COUNT(CASE WHEN sale_date <= @cutoff_date AND product_class = N'trial_or_guest' THEN 1 END) AS trial_or_guest_sale_count
+        MIN(CASE WHEN sale_datetime <= @cutoff_at THEN sale_date END) AS first_sale_date,
+        MIN(CASE WHEN sale_datetime <= @cutoff_at AND product_class = N'trial_or_guest' THEN sale_date END) AS first_trial_or_guest_product_date,
+        MIN(CASE WHEN sale_datetime <= @cutoff_at AND product_class <> N'full_subscription' THEN sale_date END) AS first_non_full_sale_date,
+        MAX(CASE WHEN sale_datetime <= @cutoff_at THEN sale_date END) AS last_sale_date,
+        COUNT(CASE WHEN sale_datetime <= @cutoff_at THEN 1 END) AS sale_count,
+        COUNT(CASE WHEN sale_datetime <= @cutoff_at AND product_class = N'trial_or_guest' THEN 1 END) AS trial_or_guest_sale_count
     FROM fitbase_part2.stg_sales_all
     GROUP BY client_ref
 ),
@@ -618,20 +640,20 @@ last_sale AS (
             s.*,
             ROW_NUMBER() OVER (
                 PARTITION BY s.client_ref
-                ORDER BY s.sale_date DESC, s.sale_ref DESC
+                ORDER BY s.sale_datetime DESC, s.sale_ref DESC
             ) AS rn
         FROM fitbase_part2.stg_sales_all AS s
-        WHERE s.sale_date <= @cutoff_date
+        WHERE s.sale_datetime <= @cutoff_at
     ) AS ranked
     WHERE rn = 1
 ),
 full_stats AS (
     SELECT
         client_ref,
-        COUNT(CASE WHEN is_full_subscription = 1 AND sale_date <= @cutoff_date THEN 1 END) AS full_subscription_count,
+        COUNT(CASE WHEN is_full_subscription = 1 AND sale_datetime <= @cutoff_at THEN 1 END) AS full_subscription_count,
         COUNT(CASE WHEN is_full_subscription = 1 AND is_active_on_cutoff = 1 THEN 1 END) AS active_full_subscription_count,
         COUNT(CASE WHEN is_full_subscription = 1 AND is_finished_before_cutoff = 1 THEN 1 END) AS finished_full_subscription_count,
-        MAX(CASE WHEN is_full_subscription = 1 AND sale_date <= @cutoff_date THEN 1 ELSE 0 END) AS has_any_full_subscription,
+        MAX(CASE WHEN is_full_subscription = 1 AND sale_datetime <= @cutoff_at THEN 1 ELSE 0 END) AS has_any_full_subscription,
         MAX(CASE WHEN is_full_subscription = 1 AND is_active_on_cutoff = 1 THEN 1 ELSE 0 END) AS has_active_full_subscription,
         MAX(CASE WHEN is_full_subscription = 1 AND is_finished_before_cutoff = 1 THEN 1 ELSE 0 END) AS has_finished_full_subscription
     FROM fitbase_part2.stg_subscriptions_all
@@ -693,6 +715,7 @@ WITH candidates AS (
     FROM fitbase_part2.stg_subscriptions_all AS s
     WHERE s.is_full_subscription = 1
       AND s.sale_date <= @cutoff_date
+      AND s.sale_datetime <= @cutoff_at
       AND (s.is_active_on_cutoff = 1 OR s.is_finished_before_cutoff = 1)
 ),
 ranked AS (

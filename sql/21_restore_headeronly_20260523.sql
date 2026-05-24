@@ -1,0 +1,3 @@
+RESTORE HEADERONLY
+FROM DISK = N'/backup/Fitnes-23-05-26.bak';
+GO

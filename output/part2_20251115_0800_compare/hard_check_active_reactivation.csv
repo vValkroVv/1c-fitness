@@ -1,0 +1,2 @@
+metric,part2_algorithm_count,gym_sales_count,delta_part2_minus_gym_sales,abs_delta_pct_of_gym_sales,threshold_pct,verdict
+active_plus_reactivation,36690,29982,6708,22.3734,3.0000,FAIL

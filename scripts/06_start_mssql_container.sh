@@ -8,6 +8,9 @@ MSSQL_DIR="$ROOT_DIR/mssql"
 BACKUP_DIR="$ROOT_DIR/data"
 ENV_FILE="$TMP_DIR/mssql-fitness.env"
 CONTAINER_NAME="${MSSQL_CONTAINER_NAME:-mssql-fitness}"
+BACKUP_FILE="${MSSQL_BACKUP_FILE:-Fitnes.bak}"
+CONTAINER_MEMORY="${MSSQL_CONTAINER_MEMORY:-34g}"
+SQL_MEMORY_LIMIT_MB="${MSSQL_MEMORY_LIMIT_MB:-28672}"
 ARCH="$(uname -m)"
 
 if [[ -n "${MSSQL_IMAGE:-}" ]]; then
@@ -63,8 +66,8 @@ under CPU emulation is not recommended.
 MSG
 fi
 
-if [[ ! -f "$BACKUP_DIR/Fitnes.bak" ]]; then
-  echo "Backup file not found: $BACKUP_DIR/Fitnes.bak" >&2
+if [[ ! -f "$BACKUP_DIR/$BACKUP_FILE" ]]; then
+  echo "Backup file not found: $BACKUP_DIR/$BACKUP_FILE" >&2
   exit 2
 fi
 
@@ -86,7 +89,7 @@ path.write_text("\\n".join([
     "ACCEPT_EULA=Y",
     f"MSSQL_SA_PASSWORD={password}",
     "MSSQL_PID=Developer",
-    "MSSQL_MEMORY_LIMIT_MB=28672",
+    "MSSQL_MEMORY_LIMIT_MB=$SQL_MEMORY_LIMIT_MB",
 ]) + "\\n")
 path.chmod(0o600)
 PY
@@ -99,7 +102,7 @@ docker run -d \
   "${PLATFORM_ARGS[@]}" \
   --name "$CONTAINER_NAME" \
   --hostname "$CONTAINER_NAME" \
-  --memory=34g \
+  --memory="$CONTAINER_MEMORY" \
   --cpus=6 \
   "${ULIMIT_ARGS[@]}" \
   --env-file "$ENV_FILE" \

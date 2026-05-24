@@ -70,20 +70,33 @@ def clean_sqlcmd_lines(text: str) -> list[str]:
     return lines
 
 
-def render_build_sql(cutoff_date: str, backup_finish_at: str, output_run_label: str) -> Path:
+def safe_label(value: str) -> str:
+    return "".join(ch if ch.isalnum() or ch in {"_", "-"} else "_" for ch in value)
+
+
+def render_build_sql(
+    *,
+    database: str,
+    cutoff_date: str,
+    cutoff_at: str,
+    backup_finish_at: str,
+    output_run_label: str,
+) -> Path:
     rendered = (
         BUILD_SQL.read_text(encoding="utf-8")
+        .replace("$(database_name)", database)
         .replace("$(cutoff_date)", cutoff_date)
+        .replace("$(cutoff_at)", cutoff_at)
         .replace("$(backup_finish_at)", backup_finish_at)
         .replace("$(output_run_label)", output_run_label)
     )
-    path = SQL_DIR / f".tmp_part2_build_{os.getpid()}_{cutoff_date.replace('-', '')}.sql"
+    path = SQL_DIR / f".tmp_part2_build_{os.getpid()}_{safe_label(output_run_label or cutoff_date)}.sql"
     path.write_text(rendered, encoding="utf-8")
     return path
 
 
-def run_sql_file(sql_path: Path, log_path: Path) -> None:
-    cmd = [str(SQLCMD), "-d", "FitnessRestored", "-i", f"/sql/{sql_path.name}"]
+def run_sql_file(sql_path: Path, log_path: Path, database: str) -> None:
+    cmd = [str(SQLCMD), "-d", database, "-i", f"/sql/{sql_path.name}"]
     proc = subprocess.run(cmd, cwd=ROOT, text=True, capture_output=True, check=False)
     log_path.parent.mkdir(parents=True, exist_ok=True)
     output = proc.stdout + proc.stderr
@@ -92,12 +105,12 @@ def run_sql_file(sql_path: Path, log_path: Path) -> None:
         raise RuntimeError(f"SQL command failed with exit code {proc.returncode}; see {log_path}")
 
 
-def object_exists(table: str) -> bool:
+def object_exists(table: str, database: str) -> bool:
     query = (
         "SET NOCOUNT ON; "
         f"SELECT CASE WHEN OBJECT_ID(N'fitbase_part2.{table}') IS NULL THEN 0 ELSE 1 END;"
     )
-    cmd = [str(SQLCMD), "-d", "FitnessRestored", "-h", "-1", "-W", "-Q", query]
+    cmd = [str(SQLCMD), "-d", database, "-h", "-1", "-W", "-Q", query]
     proc = subprocess.run(cmd, cwd=ROOT, text=True, capture_output=True, check=False)
     if proc.returncode != 0:
         return False
@@ -105,7 +118,7 @@ def object_exists(table: str) -> bool:
     return bool(lines and lines[-1] == "1")
 
 
-def get_columns(table: str) -> list[str]:
+def get_columns(table: str, database: str) -> list[str]:
     query = (
         "SET NOCOUNT ON; "
         "SELECT c.name "
@@ -113,7 +126,7 @@ def get_columns(table: str) -> list[str]:
         f"WHERE c.object_id = OBJECT_ID(N'fitbase_part2.{table}') "
         "ORDER BY c.column_id;"
     )
-    cmd = [str(SQLCMD), "-d", "FitnessRestored", "-h", "-1", "-W", "-s", "|", "-Q", query]
+    cmd = [str(SQLCMD), "-d", database, "-h", "-1", "-W", "-s", "|", "-Q", query]
     proc = subprocess.run(cmd, cwd=ROOT, text=True, capture_output=True, check=False)
     if proc.returncode != 0:
         raise RuntimeError(f"Could not read columns for {table}: {proc.stdout}{proc.stderr}")
@@ -142,14 +155,14 @@ def render_export_sql(table: str, columns: list[str]) -> Path:
     return path
 
 
-def export_table(table: str, output_path: Path, log_handle) -> int:
-    columns = get_columns(table)
+def export_table(table: str, output_path: Path, log_handle, database: str) -> int:
+    columns = get_columns(table, database)
     sql_path = render_export_sql(table, columns)
     row_count = 0
     cmd = [
         str(SQLCMD),
         "-d",
-        "FitnessRestored",
+        database,
         "-h",
         "-1",
         "-W",
@@ -329,14 +342,18 @@ def write_product_reports(staging_dir: Path, reports_dir: Path) -> None:
 def write_summary_doc(
     reports_dir: Path,
     row_counts: dict[str, int],
+    database: str,
     cutoff_date: str,
+    cutoff_at: str,
     backup_finish_at: str,
     output_run_label: str,
 ) -> None:
     lines = [
         "# Part 2 stage export",
         "",
+        f"database: `{database}`",
         f"cutoff_date: `{cutoff_date}`",
+        f"cutoff_at: `{cutoff_at}`",
         f"backup_finish_at: `{backup_finish_at}`",
         f"output_run_label: `{output_run_label}`",
         "",
@@ -351,6 +368,7 @@ def write_summary_doc(
 
 def build_and_export(args: argparse.Namespace) -> None:
     cutoff_date = args.cutoff_date
+    cutoff_at = args.cutoff_at or f"{cutoff_date} 23:59:59"
     output_dir = Path(args.output_dir)
     if not output_dir.is_absolute():
         output_dir = ROOT / output_dir
@@ -361,32 +379,41 @@ def build_and_export(args: argparse.Namespace) -> None:
     if not logs_dir.is_absolute():
         logs_dir = ROOT / logs_dir
     output_run_label = args.output_run_label or f"part2_{cutoff_date.replace('-', '')}"
+    run_label = safe_label(output_run_label)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     reports_dir.mkdir(parents=True, exist_ok=True)
     logs_dir.mkdir(parents=True, exist_ok=True)
 
-    build_log = logs_dir / f"part2_03_build_three_funnel_staging_{cutoff_date.replace('-', '')}.txt"
-    export_log = logs_dir / f"part2_03_export_stage_{cutoff_date.replace('-', '')}.txt"
+    build_log = logs_dir / f"{run_label}_build_three_funnel_staging.txt"
+    export_log = logs_dir / f"{run_label}_export_stage.txt"
 
     if not args.skip_build:
-        rendered = render_build_sql(cutoff_date, args.backup_finish_at, output_run_label)
+        rendered = render_build_sql(
+            database=args.database,
+            cutoff_date=cutoff_date,
+            cutoff_at=cutoff_at,
+            backup_finish_at=args.backup_finish_at,
+            output_run_label=output_run_label,
+        )
         try:
-            run_sql_file(rendered, build_log)
+            run_sql_file(rendered, build_log, args.database)
         finally:
             rendered.unlink(missing_ok=True)
 
     row_counts: dict[str, int] = {}
     with export_log.open("w", encoding="utf-8") as log_handle:
         for table in STAGE_TABLES:
-            row_counts[table] = export_table(table, output_dir / f"{table}.csv", log_handle)
+            row_counts[table] = export_table(table, output_dir / f"{table}.csv", log_handle, args.database)
         for table in DISCOVERY_TABLES:
-            if object_exists(table):
-                row_counts[table] = export_table(table, reports_dir / f"{table}.csv", log_handle)
+            if object_exists(table, args.database):
+                row_counts[table] = export_table(table, reports_dir / f"{table}.csv", log_handle, args.database)
 
     write_product_reports(output_dir, reports_dir)
-    write_summary_doc(reports_dir, row_counts, cutoff_date, args.backup_finish_at, output_run_label)
+    write_summary_doc(reports_dir, row_counts, args.database, cutoff_date, cutoff_at, args.backup_finish_at, output_run_label)
 
+    print(f"database={args.database}")
+    print(f"cutoff_at={cutoff_at}")
     for table, count in row_counts.items():
         print(f"{table}_rows={count}")
     print(f"staging_dir={output_dir.relative_to(ROOT)}")
@@ -395,7 +422,9 @@ def build_and_export(args: argparse.Namespace) -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--database", default="FitnessRestored")
     parser.add_argument("--cutoff-date", default="2026-04-29")
+    parser.add_argument("--cutoff-at", default="")
     parser.add_argument("--backup-finish-at", default="2026-04-29 23:57:02")
     parser.add_argument("--output-run-label", default="")
     parser.add_argument("--output-dir", default=str(ROOT / "output" / "part2_20260429" / "staging"))

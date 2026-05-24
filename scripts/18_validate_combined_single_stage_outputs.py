@@ -5,8 +5,9 @@ from __future__ import annotations
 
 import argparse
 import csv
-from collections import Counter
-from datetime import datetime
+import re
+from collections import Counter, defaultdict
+from datetime import date, datetime
 from pathlib import Path
 
 from openpyxl import load_workbook
@@ -41,6 +42,11 @@ ALLOWED_FINAL_PAIRS = {
     ("Действующие абонементы", "Все действующие абонементы"),
     ("Реактивация(годовые абонементы)", "Все закрытые абонементы"),
 }
+FITBASE_LABELS = {
+    "Новые заявки": ("новые заявки", "неразобранные"),
+    "Действующие клиенты": ("Действующие абонементы", "Все действующие абонементы"),
+    "Реактивация": ("Реактивация(годовые абонементы)", "Все закрытые абонементы"),
+}
 OLD_STEPS = {
     "60-31 день до окончания",
     "30-8 дней до окончания",
@@ -73,7 +79,13 @@ REQUIRED_REPORTS = [
     "product_reclassification_impact.md",
     "product_reclassification_applied.csv",
     "product_reclassification_funnel_impact.csv",
+    "export_filter_summary.csv",
+    "export_filter_funnel_distribution.csv",
+    "export_filter_rules.md",
+    "phone_deduplication_removed_clients.csv",
+    "phone_deduplication_summary.csv",
 ]
+PHONE_SPLIT_RE = re.compile(r"[,;]\s*")
 
 
 def as_abs(path: str | Path) -> Path:
@@ -116,6 +128,154 @@ def int_value(value: object, default: int = 0) -> int:
         return default
 
 
+def has_phone(row: dict[str, str]) -> bool:
+    return bool((row.get("phones") or "").strip())
+
+
+def parse_date(value: str | None) -> date:
+    if not value:
+        return date.min
+    try:
+        return datetime.strptime(str(value)[:10], "%Y-%m-%d").date()
+    except ValueError:
+        return date.min
+
+
+def int_client_id(value: str | None) -> int:
+    digits = re.sub(r"\D+", "", value or "")
+    return int(digits) if digits else 0
+
+
+def normalize_phone_token(value: str) -> str:
+    digits = re.sub(r"\D+", "", value or "")
+    if len(digits) == 11 and digits[0] in {"7", "8"}:
+        return "7" + digits[1:]
+    if len(digits) == 10:
+        return "7" + digits
+    return ""
+
+
+def normalize_phones(value: str) -> list[str]:
+    phones: list[str] = []
+    for part in PHONE_SPLIT_RE.split(value or ""):
+        phone = normalize_phone_token(part)
+        if phone and phone not in phones:
+            phones.append(phone)
+    return phones
+
+
+def phone_dedupe_score(row: dict[str, str]) -> tuple[object, ...]:
+    subscription_sale_date = parse_date(row.get("selected_subscription_sale_date"))
+    subscription_end_date = parse_date(row.get("selected_subscription_end_date"))
+    subscription_start_date = parse_date(row.get("selected_subscription_start_date"))
+    create_date = parse_date(row.get("create_date"))
+    has_subscription = int(
+        bool(row.get("selected_subscription_ref"))
+        or subscription_sale_date != date.min
+        or subscription_end_date != date.min
+    )
+    funnel_priority = {
+        "Действующие клиенты": 2,
+        "Реактивация": 1,
+        "Новые заявки": 0,
+    }.get(row.get("funnel", ""), 0)
+    has_card = int(bool((row.get("selected_card_number") or "").strip()))
+    return (
+        has_subscription,
+        subscription_sale_date,
+        subscription_end_date,
+        subscription_start_date,
+        funnel_priority,
+        has_card,
+        create_date,
+        int_client_id(row.get("client_id")),
+    )
+
+
+def phone_component_key(row: dict[str, str]) -> tuple[object, ...]:
+    phones = normalize_phones(row.get("phones", ""))
+    return (min(phones) if phones else "", row.get("client_id", ""), row.get("client_ref", ""))
+
+
+def dedupe_by_phone_keep_latest_subscription(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    phone_to_indexes: dict[str, list[int]] = defaultdict(list)
+    for index, row in enumerate(rows):
+        for phone in normalize_phones(row.get("phones", "")):
+            phone_to_indexes[phone].append(index)
+
+    parent = list(range(len(rows)))
+
+    def find(index: int) -> int:
+        while parent[index] != index:
+            parent[index] = parent[parent[index]]
+            index = parent[index]
+        return index
+
+    def union(left: int, right: int) -> None:
+        left_root = find(left)
+        right_root = find(right)
+        if left_root != right_root:
+            parent[right_root] = left_root
+
+    for indexes in phone_to_indexes.values():
+        if len(indexes) < 2:
+            continue
+        first = indexes[0]
+        for index in indexes[1:]:
+            union(first, index)
+
+    components: dict[int, list[int]] = defaultdict(list)
+    for index in range(len(rows)):
+        components[find(index)].append(index)
+
+    kept_indexes: set[int] = set()
+    for component_indexes in components.values():
+        kept_indexes.add(max(component_indexes, key=lambda index: phone_dedupe_score(rows[index])))
+    return sorted((dict(row) for index, row in enumerate(rows) if index in kept_indexes), key=phone_component_key)
+
+
+def duplicate_normalized_phone_count_from_stage_rows(rows: list[dict[str, str]]) -> int:
+    phone_rows: Counter[str] = Counter()
+    for row in rows:
+        for phone in normalize_phones(row.get("phones", "")):
+            phone_rows[phone] += 1
+    return sum(1 for count in phone_rows.values() if count > 1)
+
+
+def duplicate_normalized_phone_count_from_xlsx_rows(rows: list[tuple[object, ...]], phone_col: int) -> int:
+    phone_rows: Counter[str] = Counter()
+    for row in rows:
+        for phone in normalize_phones(str(row[phone_col] or "")):
+            phone_rows[phone] += 1
+    return sum(1 for count in phone_rows.values() if count > 1)
+
+
+def filter_expected_main_rows(
+    rows: list[dict[str, str]],
+    require_phone_for_new_applications: bool,
+) -> list[dict[str, str]]:
+    if not require_phone_for_new_applications:
+        return rows
+    return [
+        row
+        for row in rows
+        if row.get("funnel") != "Новые заявки" or has_phone(row)
+    ]
+
+
+def filter_expected_card_rows(rows: list[dict[str, str]], funnel_filter: str) -> list[dict[str, str]]:
+    if not funnel_filter:
+        return rows
+    return [row for row in rows if row.get("funnel") == funnel_filter]
+
+
+def expected_fitbase_pair(row: dict[str, str]) -> tuple[str, str]:
+    try:
+        return FITBASE_LABELS[row.get("funnel", "")]
+    except KeyError as exc:
+        raise ValueError(f"Unknown internal funnel: {row.get('funnel', '')!r}") from exc
+
+
 def validate(args: argparse.Namespace) -> int:
     stage_dir = as_abs(args.stage_dir)
     output_dir = as_abs(args.output_dir)
@@ -128,6 +288,12 @@ def validate(args: argparse.Namespace) -> int:
     rows = read_csv(stage_path) if stage_path.exists() else []
     if not rows:
         errors.append(f"missing or empty final stage CSV: {stage_path.relative_to(ROOT)}")
+    expected_main_rows = filter_expected_main_rows(rows, args.main_require_phone_for_new_applications)
+    if args.dedupe_by_phone_keep_latest_subscription:
+        expected_main_rows = dedupe_by_phone_keep_latest_subscription(expected_main_rows)
+    expected_card_rows = filter_expected_card_rows(rows, args.cards_funnel_filter)
+    if args.dedupe_by_phone_keep_latest_subscription:
+        expected_card_rows = filter_expected_card_rows(expected_main_rows, args.cards_funnel_filter)
 
     main_path = output_dir / f"fitbase_active_clients_import_zayavki_{date_stamp}__all_funnels.xlsx"
     cards_path = output_dir / f"fitbase_active_clients_plastic_cards_{date_stamp}__all_funnels.xlsx"
@@ -157,12 +323,16 @@ def validate(args: argparse.Namespace) -> int:
     else:
         errors.append(f"missing cards XLSX: {cards_path.relative_to(ROOT)}")
 
-    if len(main_rows) != len(rows):
-        errors.append(f"main row count mismatch: xlsx={len(main_rows)}, final_funnel_clients.csv={len(rows)}")
-    if len(card_rows) != len(rows):
-        errors.append(f"cards row count mismatch: xlsx={len(card_rows)}, final_funnel_clients.csv={len(rows)}")
+    if len(main_rows) != len(expected_main_rows):
+        errors.append(f"main row count mismatch: xlsx={len(main_rows)}, expected_after_filters={len(expected_main_rows)}")
+    if len(card_rows) != len(expected_card_rows):
+        errors.append(f"cards row count mismatch: xlsx={len(card_rows)}, expected_after_filters={len(expected_card_rows)}")
 
     final_pairs = Counter((str(row[4] or ""), str(row[5] or "")) for row in main_rows)
+    expected_final_pairs = Counter(expected_fitbase_pair(row) for row in expected_main_rows)
+    if final_pairs != expected_final_pairs:
+        errors.append("main XLSX funnel/stage distribution does not match expected filtered stage rows")
+
     invalid_pairs = sorted(set(final_pairs) - ALLOWED_FINAL_PAIRS)
     if invalid_pairs:
         errors.append(f"invalid final funnel/funnel_step pairs: {invalid_pairs}")
@@ -186,10 +356,50 @@ def validate(args: argparse.Namespace) -> int:
     duplicate_xlsx_ids = [key for key, count in Counter(xlsx_client_ids).items() if count > 1]
     if duplicate_xlsx_ids:
         errors.append(f"duplicate client_id rows in final XLSX: {len(duplicate_xlsx_ids)}")
+    expected_main_ids = Counter(row.get("client_id", "") for row in expected_main_rows if row.get("client_id"))
+    if Counter(xlsx_client_ids) != expected_main_ids:
+        errors.append("main XLSX client_id set does not match expected filtered stage rows")
 
     comma_cards = sum(1 for row in card_rows if len(row) >= 3 and isinstance(row[2], str) and "," in row[2])
     if comma_cards:
         errors.append(f"card XLSX contains comma-separated card values: {comma_cards}")
+    expected_card_values = Counter(
+        (
+            row.get("phones", ""),
+            row.get("client_fio", ""),
+            row.get("selected_card_number", ""),
+        )
+        for row in expected_card_rows
+    )
+    actual_card_values = Counter(
+        (
+            str(row[0] or ""),
+            str(row[1] or ""),
+            str(row[2] or ""),
+        )
+        for row in card_rows
+    )
+    if actual_card_values != expected_card_values:
+        errors.append("card XLSX rows do not match expected filtered stage rows")
+    card_numbers = [str(row[2] or "").strip() for row in card_rows if len(row) >= 3 and str(row[2] or "").strip()]
+    duplicate_card_numbers = [key for key, count in Counter(card_numbers).items() if count > 1]
+    if duplicate_card_numbers:
+        errors.append(f"duplicate non-empty plastic card numbers in card XLSX: {len(duplicate_card_numbers)}")
+    new_application_rows_without_phone = [
+        row for row in main_rows if str(row[4] or "") == "новые заявки" and not str(row[1] or "").strip()
+    ]
+    if args.main_require_phone_for_new_applications and new_application_rows_without_phone:
+        errors.append(f"new application rows without phone still exported: {len(new_application_rows_without_phone)}")
+    if args.dedupe_by_phone_keep_latest_subscription:
+        main_duplicate_phones = duplicate_normalized_phone_count_from_xlsx_rows(main_rows, 1)
+        card_duplicate_phones = duplicate_normalized_phone_count_from_xlsx_rows(card_rows, 0)
+        expected_duplicate_phones = duplicate_normalized_phone_count_from_stage_rows(expected_main_rows)
+        if main_duplicate_phones:
+            errors.append(f"main XLSX still contains duplicate normalized phone groups: {main_duplicate_phones}")
+        if card_duplicate_phones:
+            errors.append(f"card XLSX still contains duplicate normalized phone groups: {card_duplicate_phones}")
+        if expected_duplicate_phones:
+            errors.append(f"expected deduplicated stage rows still contain duplicate phone groups: {expected_duplicate_phones}")
 
     for report in REQUIRED_REPORTS:
         if not (reports_dir / report).exists():
@@ -201,6 +411,11 @@ def validate(args: argparse.Namespace) -> int:
     multiple_subs = read_csv(reports_dir / "multiple_subscriptions_report.csv") if (reports_dir / "multiple_subscriptions_report.csv").exists() else []
     card_selection = read_csv(reports_dir / "card_selection_report.csv") if (reports_dir / "card_selection_report.csv").exists() else []
     single_stage = read_csv(reports_dir / "single_stage_distribution.csv") if (reports_dir / "single_stage_distribution.csv").exists() else []
+    phone_dedupe_removed = (
+        read_csv(reports_dir / "phone_deduplication_removed_clients.csv")
+        if (reports_dir / "phone_deduplication_removed_clients.csv").exists()
+        else []
+    )
 
     if len(missing_phone) != sum(1 for row in rows if not (row.get("phones") or "").strip()):
         errors.append("missing_phone_report.csv count mismatch")
@@ -232,10 +447,20 @@ def validate(args: argparse.Namespace) -> int:
     review_rows = read_csv(reports_dir / "product_classification_review_report.csv") if (reports_dir / "product_classification_review_report.csv").exists() else []
     if review_rows:
         warnings.append(f"product classification rows needing business review: {len(review_rows)}")
-    if missing_phone:
-        warnings.append(f"clients without phone exported and reported: {len(missing_phone)}")
+    excluded_new_without_phone = sum(
+        1
+        for row in rows
+        if row.get("funnel") == "Новые заявки" and not has_phone(row)
+    )
+    exported_main_missing_phone = sum(1 for row in main_rows if len(row) >= 2 and not str(row[1] or "").strip())
+    if args.main_require_phone_for_new_applications and excluded_new_without_phone:
+        warnings.append(f"new application rows without phone excluded from main XLSX: {excluded_new_without_phone}")
+    if args.dedupe_by_phone_keep_latest_subscription and phone_dedupe_removed:
+        warnings.append(f"same-phone duplicate clients excluded from main XLSX: {len(phone_dedupe_removed)}")
+    if exported_main_missing_phone:
+        warnings.append(f"clients without phone still present outside new applications in main XLSX: {exported_main_missing_phone}")
     if missing_card:
-        warnings.append(f"clients without selected card exported and reported: {len(missing_card)}")
+        warnings.append(f"clients without selected card in full stage and reported: {len(missing_card)}")
     if multiple_subs:
         warnings.append(f"clients with multiple subscription candidates reported: {len(multiple_subs)}")
 
@@ -247,8 +472,11 @@ def validate(args: argparse.Namespace) -> int:
         f"cutoff_date: `{args.cutoff_date}`",
         f"date_stamp: `{date_stamp}`",
         f"stage_rows: `{len(rows)}`",
+        f"main_expected_rows_after_filters: `{len(expected_main_rows)}`",
+        f"cards_expected_rows_after_filters: `{len(expected_card_rows)}`",
         f"main_xlsx_rows: `{len(main_rows)}`",
         f"cards_xlsx_rows: `{len(card_rows)}`",
+        f"same_phone_deduplication_removed: `{len(phone_dedupe_removed)}`",
         "",
         "## Verdict",
         "",
@@ -263,6 +491,9 @@ def validate(args: argparse.Namespace) -> int:
     lines.extend(
         [
             f"- missing_phone: `{len(missing_phone)}`",
+            f"- exported_main_missing_phone: `{exported_main_missing_phone}`",
+            f"- excluded_new_applications_without_phone: `{excluded_new_without_phone}`",
+            f"- same_phone_deduplication_removed: `{len(phone_dedupe_removed)}`",
             f"- missing_card: `{len(missing_card)}`",
             f"- missing_club: `{len(missing_club)}`",
             f"- multiple_subscription_clients: `{len(multiple_subs)}`",
@@ -294,6 +525,21 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--reports-dir", default="output/part2_20260525_0800_final/reports")
     parser.add_argument("--main-template", default="task-desc/Копия Импорт_заявки.xlsx")
     parser.add_argument("--cards-template", default="task-desc/Пластиковая карта.xlsx")
+    parser.add_argument(
+        "--main-require-phone-for-new-applications",
+        action="store_true",
+        help="Validate that internal `Новые заявки` rows without phone are excluded from the main XLSX.",
+    )
+    parser.add_argument(
+        "--cards-funnel-filter",
+        default="",
+        help="Validate that the plastic-card XLSX contains only this internal funnel.",
+    )
+    parser.add_argument(
+        "--dedupe-by-phone-keep-latest-subscription",
+        action="store_true",
+        help="Validate that final XLSX outputs keep one client per normalized phone component.",
+    )
     return parser.parse_args()
 
 

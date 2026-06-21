@@ -22,6 +22,7 @@ python3 scripts/18_validate_combined_single_stage_outputs.py \
   --reports-dir output/part2_20260525_0800_final/reports \
   --main-template "task-desc/Копия Импорт_заявки.xlsx" \
   --cards-template "task-desc/Пластиковая карта.xlsx" \
+  --branches-config config/branches_by_club.yml \
   --main-require-phone-for-new-applications \
   --cards-funnel-filter "Действующие клиенты" \
   --dedupe-by-phone-keep-latest-subscription
@@ -56,7 +57,19 @@ new application rows without phone absent from main XLSX: PASS
 duplicate normalized phone groups absent from main XLSX: PASS
 duplicate normalized phone groups absent from card XLSX: PASS
 duplicate non-empty plastic card numbers absent from card XLSX: PASS
+branch column `филиал` present in import_заявки: PASS
+branch values match allowed Fitbase branch list: PASS
+Карельский (закрыт) maps to Фитнес Империя (Ровио): PASS
 quality reports exist and match stage: PASS
+```
+
+Branch distribution:
+
+```text
+Фитнес Империя (Гоголевский): 40449
+Фитнес Империя (Столица): 8492
+Фитнес Империя (Ровио): 8260
+Фитнес Империя (Промышленная): 7790
 ```
 
 Final single-stage distribution:
@@ -91,5 +104,6 @@ details are documented in:
 ```text
 docs/step_25_part2_20260525_export_filters.md
 docs/step_26_part2_20260525_phone_deduplication.md
+docs/step_27_part2_20260525_branch_column.md
 output/part2_20260525_0800_final/reports/export_filter_rules.md
 ```

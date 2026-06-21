@@ -38,6 +38,7 @@ EXPECTED_HEADERS = [
     "budget",
     "create_date",
     "manager",
+    "филиал",
 ]
 PHONE_SPLIT_RE = re.compile(r"[,;]\s*")
 TRAILING_DUPLICATE_SUFFIX_RE = re.compile(r"(?:\s*\{\d+\})+\s*$")
@@ -53,6 +54,7 @@ class ImportRow:
     funnel: str
     funnel_step: str
     create_date: str
+    branch: str
 
 
 def as_abs(path: str | Path) -> Path:
@@ -111,6 +113,7 @@ def read_import_rows(path: Path) -> list[ImportRow]:
                 funnel=str(values[4] or ""),
                 funnel_step=str(values[5] or ""),
                 create_date=str(values[7] or ""),
+                branch=str(values[9] or ""),
             )
         )
     wb.close()
@@ -172,8 +175,9 @@ def find_implicit_duplicates(rows: list[ImportRow]) -> list[dict[str, str]]:
                     "has_trailing_duplicate_suffix": "1" if has_duplicate_suffix(row.client_fio) else "0",
                     "funnel": row.funnel,
                     "funnel_step": row.funnel_step,
-                    "create_date": row.create_date,
-                    "group_row_numbers": row_numbers,
+                        "create_date": row.create_date,
+                        "branch": row.branch,
+                        "group_row_numbers": row_numbers,
                     "group_client_ids": client_ids,
                     "group_raw_names": raw_names_joined,
                     "group_normalized_base_names": base_names_joined,
@@ -200,6 +204,7 @@ def write_report(path: Path, rows: list[dict[str, str]]) -> None:
         "funnel",
         "funnel_step",
         "create_date",
+        "branch",
         "group_row_numbers",
         "group_client_ids",
         "group_raw_names",

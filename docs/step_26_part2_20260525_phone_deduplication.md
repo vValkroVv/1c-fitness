@@ -43,6 +43,7 @@ python3 scripts/17_build_part2_combined_xlsx.py \
   --main-template "task-desc/Копия Импорт_заявки.xlsx" \
   --cards-template "task-desc/Пластиковая карта.xlsx" \
   --managers-config config/managers_by_club.yml \
+  --branches-config config/branches_by_club.yml \
   --fitbase-label-mode customer_20260520_single_stage \
   --main-require-phone-for-new-applications \
   --cards-funnel-filter "Действующие клиенты" \
@@ -94,6 +95,7 @@ python3 scripts/18_validate_combined_single_stage_outputs.py \
   --reports-dir output/part2_20260525_0800_final/reports \
   --main-template "task-desc/Копия Импорт_заявки.xlsx" \
   --cards-template "task-desc/Пластиковая карта.xlsx" \
+  --branches-config config/branches_by_club.yml \
   --main-require-phone-for-new-applications \
   --cards-funnel-filter "Действующие клиенты" \
   --dedupe-by-phone-keep-latest-subscription
@@ -142,4 +144,10 @@ Final files:
 ```text
 output/part2_20260525_0800_final_combined/fitbase_active_clients_import_zayavki_20260525_0800__all_funnels.xlsx
 output/part2_20260525_0800_final_combined/fitbase_active_clients_plastic_cards_20260525_0800__all_funnels.xlsx
+```
+
+The later `филиал` column addition is documented in:
+
+```text
+docs/step_27_part2_20260525_branch_column.md
 ```

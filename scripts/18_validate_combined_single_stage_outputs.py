@@ -10,6 +10,7 @@ from collections import Counter, defaultdict
 from datetime import date, datetime
 from pathlib import Path
 
+import yaml
 from openpyxl import load_workbook
 
 
@@ -24,6 +25,7 @@ MAIN_HEADERS = [
     "budget",
     "create_date",
     "manager",
+    "филиал",
 ]
 MAIN_RUS_HEADERS = [
     "Внутренний номер клиента ",
@@ -35,6 +37,7 @@ MAIN_RUS_HEADERS = [
     "Бюджет ",
     "Дата создания *",
     "Менеджер ",
+    "филиал",
 ]
 CARD_HEADERS = ["телефон", "фио", "номер пластиковой карты"]
 ALLOWED_FINAL_PAIRS = {
@@ -47,6 +50,13 @@ FITBASE_LABELS = {
     "Действующие клиенты": ("Действующие абонементы", "Все действующие абонементы"),
     "Реактивация": ("Реактивация(годовые абонементы)", "Все закрытые абонементы"),
 }
+ALLOWED_BRANCHES = {
+    "Фитнес Империя (Гоголевский)",
+    "Фитнес Империя (Промышленная)",
+    "Фитнес Империя (Ровио)",
+    "Фитнес Империя (Столица)",
+}
+DEFAULT_BRANCHES_CONFIG = ROOT / "config" / "branches_by_club.yml"
 OLD_STEPS = {
     "60-31 день до окончания",
     "30-8 дней до окончания",
@@ -84,6 +94,8 @@ REQUIRED_REPORTS = [
     "export_filter_rules.md",
     "phone_deduplication_removed_clients.csv",
     "phone_deduplication_summary.csv",
+    "branch_distribution.csv",
+    "branch_distribution_by_club.csv",
 ]
 PHONE_SPLIT_RE = re.compile(r"[,;]\s*")
 
@@ -96,6 +108,14 @@ def as_abs(path: str | Path) -> Path:
 def read_csv(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
         return list(csv.DictReader(handle))
+
+
+def load_branches(path: Path) -> dict[str, str]:
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    branches = data.get("branches", {})
+    if not isinstance(branches, dict) or not branches:
+        raise ValueError(f"No branches found in {path}")
+    return {str(club): str(branch) for club, branch in branches.items()}
 
 
 def workbook_rows(path: Path, first_data_row: int, width: int) -> tuple[list[object], list[tuple[object, ...]]]:
@@ -276,10 +296,15 @@ def expected_fitbase_pair(row: dict[str, str]) -> tuple[str, str]:
         raise ValueError(f"Unknown internal funnel: {row.get('funnel', '')!r}") from exc
 
 
+def expected_branch(row: dict[str, str], branches_by_club: dict[str, str]) -> str:
+    return branches_by_club.get(row.get("normalized_club", ""), "")
+
+
 def validate(args: argparse.Namespace) -> int:
     stage_dir = as_abs(args.stage_dir)
     output_dir = as_abs(args.output_dir)
     reports_dir = as_abs(args.reports_dir)
+    branches_by_club = load_branches(as_abs(args.branches_config))
     date_stamp = args.date_stamp or args.cutoff_date.replace("-", "")
 
     errors: list[str] = []
@@ -359,6 +384,16 @@ def validate(args: argparse.Namespace) -> int:
     expected_main_ids = Counter(row.get("client_id", "") for row in expected_main_rows if row.get("client_id"))
     if Counter(xlsx_client_ids) != expected_main_ids:
         errors.append("main XLSX client_id set does not match expected filtered stage rows")
+    actual_branch_counts = Counter(str(row[9] or "") for row in main_rows if len(row) >= 10)
+    expected_branch_counts = Counter(expected_branch(row, branches_by_club) for row in expected_main_rows)
+    if actual_branch_counts != expected_branch_counts:
+        errors.append("main XLSX branch distribution does not match expected normalized_club mapping")
+    invalid_branches = sorted(branch for branch in actual_branch_counts if branch not in ALLOWED_BRANCHES)
+    if invalid_branches:
+        errors.append(f"invalid branch values in main XLSX: {invalid_branches}")
+    blank_branch_rows = sum(1 for row in main_rows if len(row) >= 10 and not str(row[9] or "").strip())
+    if blank_branch_rows:
+        errors.append(f"blank branch values in main XLSX: {blank_branch_rows}")
 
     comma_cards = sum(1 for row in card_rows if len(row) >= 3 and isinstance(row[2], str) and "," in row[2])
     if comma_cards:
@@ -411,6 +446,7 @@ def validate(args: argparse.Namespace) -> int:
     multiple_subs = read_csv(reports_dir / "multiple_subscriptions_report.csv") if (reports_dir / "multiple_subscriptions_report.csv").exists() else []
     card_selection = read_csv(reports_dir / "card_selection_report.csv") if (reports_dir / "card_selection_report.csv").exists() else []
     single_stage = read_csv(reports_dir / "single_stage_distribution.csv") if (reports_dir / "single_stage_distribution.csv").exists() else []
+    branch_distribution = read_csv(reports_dir / "branch_distribution.csv") if (reports_dir / "branch_distribution.csv").exists() else []
     phone_dedupe_removed = (
         read_csv(reports_dir / "phone_deduplication_removed_clients.csv")
         if (reports_dir / "phone_deduplication_removed_clients.csv").exists()
@@ -443,6 +479,9 @@ def validate(args: argparse.Namespace) -> int:
     }
     if reported_pairs != dict(final_pairs):
         errors.append("single_stage_distribution.csv does not match final XLSX distribution")
+    reported_branches = {row.get("branch", ""): int_value(row.get("clients")) for row in branch_distribution}
+    if reported_branches and reported_branches != dict(actual_branch_counts):
+        errors.append("branch_distribution.csv does not match final XLSX branch distribution")
 
     review_rows = read_csv(reports_dir / "product_classification_review_report.csv") if (reports_dir / "product_classification_review_report.csv").exists() else []
     if review_rows:
@@ -487,6 +526,9 @@ def validate(args: argparse.Namespace) -> int:
     ]
     for (funnel, step), count in final_pairs.most_common():
         lines.append(f"- `{funnel}` / `{step}`: `{count}`")
+    lines.extend(["", "## Branch Distribution", ""])
+    for branch, count in actual_branch_counts.most_common():
+        lines.append(f"- `{branch}`: `{count}`")
     lines.extend(["", "## Data Quality Counts", ""])
     lines.extend(
         [
@@ -525,6 +567,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--reports-dir", default="output/part2_20260525_0800_final/reports")
     parser.add_argument("--main-template", default="task-desc/Копия Импорт_заявки.xlsx")
     parser.add_argument("--cards-template", default="task-desc/Пластиковая карта.xlsx")
+    parser.add_argument("--branches-config", default=str(DEFAULT_BRANCHES_CONFIG))
     parser.add_argument(
         "--main-require-phone-for-new-applications",
         action="store_true",

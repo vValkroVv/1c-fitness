@@ -256,6 +256,8 @@ def filter_cards_export_rows(rows: list[dict[str, str]], funnel_filter: str) -> 
 def write_single_stage_reports(reports_dir: Path, rows: list[dict[str, str]]) -> None:
     funnel_counts = Counter(row.get("funnel", "") for row in rows)
     stage_counts = Counter((row.get("funnel", ""), row.get("funnel_step", "")) for row in rows)
+    branch_counts = Counter(row.get("branch", "") for row in rows)
+    branch_by_club_counts = Counter((row.get("normalized_club", ""), row.get("branch", "")) for row in rows)
     write_csv(
         reports_dir / "fitbase_funnel_distribution.csv",
         [{"funnel": funnel, "clients": count} for funnel, count in funnel_counts.most_common()],
@@ -268,6 +270,19 @@ def write_single_stage_reports(reports_dir: Path, rows: list[dict[str, str]]) ->
             for (funnel, step), count in stage_counts.most_common()
         ],
         ["funnel", "funnel_step", "clients"],
+    )
+    write_csv(
+        reports_dir / "branch_distribution.csv",
+        [{"branch": branch, "clients": count} for branch, count in branch_counts.most_common()],
+        ["branch", "clients"],
+    )
+    write_csv(
+        reports_dir / "branch_distribution_by_club.csv",
+        [
+            {"normalized_club": club, "branch": branch, "clients": count}
+            for (club, branch), count in branch_by_club_counts.most_common()
+        ],
+        ["normalized_club", "branch", "clients"],
     )
 
 
@@ -442,6 +457,7 @@ def build_combined(args: argparse.Namespace) -> None:
     main_template = as_abs(args.main_template)
     cards_template = as_abs(args.cards_template)
     managers_config = as_abs(args.managers_config)
+    branches_config = as_abs(args.branches_config)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     reports_dir.mkdir(parents=True, exist_ok=True)
@@ -449,7 +465,9 @@ def build_combined(args: argparse.Namespace) -> None:
 
     rows = builder.read_csv(stage_dir / "final_funnel_clients.csv")
     managers_by_club = builder.load_managers(managers_config)
+    branches_by_club = builder.load_branches(branches_config)
     builder.assign_managers(rows, managers_by_club)
+    builder.assign_branches(rows, branches_by_club)
     rows = builder.sort_rows(rows)
     builder.write_csv(stage_dir / "final_funnel_clients.csv", rows, builder.FINAL_FUNNEL_FIELDS)
     builder.write_reports(rows=rows, stage_dir=stage_dir, output_dir=output_dir, reports_dir=reports_dir, csv_dir=csv_dir)
@@ -505,6 +523,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--main-template", default=str(ROOT / "task-desc" / "Копия Импорт_заявки.xlsx"))
     parser.add_argument("--cards-template", default=str(ROOT / "task-desc" / "Пластиковая карта.xlsx"))
     parser.add_argument("--managers-config", default=str(ROOT / "config" / "managers_by_club.yml"))
+    parser.add_argument("--branches-config", default=str(ROOT / "config" / "branches_by_club.yml"))
     parser.add_argument("--fitbase-label-mode", default="internal")
     parser.add_argument(
         "--main-require-phone-for-new-applications",

@@ -33,6 +33,7 @@ python3 scripts/17_build_part2_combined_xlsx.py \
   --main-template "task-desc/Копия Импорт_заявки.xlsx" \
   --cards-template "task-desc/Пластиковая карта.xlsx" \
   --managers-config config/managers_by_club.yml \
+  --branches-config config/branches_by_club.yml \
   --fitbase-label-mode customer_20260520_single_stage \
   --main-require-phone-for-new-applications \
   --cards-funnel-filter "Действующие клиенты" \
@@ -71,6 +72,7 @@ Same-phone deduplication is documented separately:
 
 ```text
 docs/step_26_part2_20260525_phone_deduplication.md
+docs/step_27_part2_20260525_branch_column.md
 ```
 
 Detailed filter reports:
@@ -92,6 +94,7 @@ python3 scripts/18_validate_combined_single_stage_outputs.py \
   --reports-dir output/part2_20260525_0800_final/reports \
   --main-template "task-desc/Копия Импорт_заявки.xlsx" \
   --cards-template "task-desc/Пластиковая карта.xlsx" \
+  --branches-config config/branches_by_club.yml \
   --main-require-phone-for-new-applications \
   --cards-funnel-filter "Действующие клиенты" \
   --dedupe-by-phone-keep-latest-subscription
@@ -112,6 +115,7 @@ plastic-card XLSX rows: 10691
 new application rows without phone in main XLSX: 0
 duplicate normalized phone groups in main XLSX: 0
 duplicate normalized phone groups in plastic-card XLSX: 0
+branch column филиал in main XLSX: PASS
 duplicate client_id rows in main XLSX: 0
 duplicate non-empty plastic card numbers in card XLSX: 0
 only customer single-stage funnel/stage names in main XLSX: PASS

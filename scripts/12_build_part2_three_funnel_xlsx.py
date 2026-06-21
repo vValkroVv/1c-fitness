@@ -17,7 +17,7 @@ from openpyxl import load_workbook
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MAIN_HEADERS = [
+BASE_MAIN_HEADERS = [
     "client_id",
     "phone",
     "client_fio",
@@ -28,7 +28,8 @@ MAIN_HEADERS = [
     "create_date",
     "manager",
 ]
-MAIN_RUS_HEADERS = [
+MAIN_HEADERS = [*BASE_MAIN_HEADERS, "филиал"]
+BASE_MAIN_RUS_HEADERS = [
     "Внутренний номер клиента ",
     "Телефон *",
     "ФИО клиента *",
@@ -39,6 +40,7 @@ MAIN_RUS_HEADERS = [
     "Дата создания *",
     "Менеджер ",
 ]
+MAIN_RUS_HEADERS = [*BASE_MAIN_RUS_HEADERS, "филиал"]
 CARD_HEADERS = ["телефон", "фио", "номер пластиковой карты"]
 
 FUNNEL_SLUGS = {
@@ -118,6 +120,17 @@ def copy_row_styles(ws, row_number: int, width: int) -> list[object]:
     return [copy.copy(ws.cell(row_number, col)._style) for col in range(1, width + 1)]
 
 
+def copy_cell_style(source, target) -> None:
+    target._style = copy.copy(source._style)
+    if source.has_style:
+        target.font = copy.copy(source.font)
+        target.fill = copy.copy(source.fill)
+        target.border = copy.copy(source.border)
+        target.alignment = copy.copy(source.alignment)
+        target.number_format = source.number_format
+        target.protection = copy.copy(source.protection)
+
+
 def clear_data_rows(ws, first_data_row: int) -> None:
     if ws.max_row >= first_data_row:
         ws.delete_rows(first_data_row, ws.max_row - first_data_row + 1)
@@ -140,12 +153,17 @@ def assert_headers(ws, expected: list[str], row: int, label: str) -> None:
 def write_main_xlsx(template_path: Path, output_path: Path, rows: list[dict[str, str]]) -> None:
     wb = load_workbook(template_path)
     ws = wb.active
-    assert_headers(ws, MAIN_HEADERS, 1, "main template")
-    actual_ru = [ws.cell(2, col).value for col in range(1, len(MAIN_RUS_HEADERS) + 1)]
-    if actual_ru != MAIN_RUS_HEADERS:
-        raise ValueError(f"main template Russian headers mismatch: expected {MAIN_RUS_HEADERS}, got {actual_ru}")
-    styles = copy_row_styles(ws, 3, len(MAIN_HEADERS))
+    assert_headers(ws, BASE_MAIN_HEADERS, 1, "main template")
+    actual_ru = [ws.cell(2, col).value for col in range(1, len(BASE_MAIN_RUS_HEADERS) + 1)]
+    if actual_ru != BASE_MAIN_RUS_HEADERS:
+        raise ValueError(f"main template Russian headers mismatch: expected {BASE_MAIN_RUS_HEADERS}, got {actual_ru}")
+    styles = copy_row_styles(ws, 3, len(BASE_MAIN_HEADERS))
+    branch_style = copy.copy(styles[-1])
     trim_to_columns(ws, len(MAIN_HEADERS))
+    for row_number, header in [(1, MAIN_HEADERS[-1]), (2, MAIN_RUS_HEADERS[-1])]:
+        source = ws.cell(row_number, len(BASE_MAIN_HEADERS))
+        target = ws.cell(row_number, len(MAIN_HEADERS), header)
+        copy_cell_style(source, target)
     clear_data_rows(ws, 3)
 
     for index, row in enumerate(rows, start=3):
@@ -159,11 +177,12 @@ def write_main_xlsx(template_path: Path, output_path: Path, rows: list[dict[str,
             0,
             parse_date(row.get("create_date")),
             row.get("manager", ""),
+            row.get("branch", ""),
         ]
         for col, value in enumerate(values, start=1):
             cell = ws.cell(index, col, value)
-            cell._style = copy.copy(styles[col - 1])
-            if col in {1, 2, 3, 4, 5, 6, 9}:
+            cell._style = copy.copy(styles[col - 1] if col <= len(styles) else branch_style)
+            if col in {1, 2, 3, 4, 5, 6, 9, 10}:
                 cell.number_format = "@"
             elif col == 7:
                 cell.number_format = "0"
@@ -201,6 +220,14 @@ def load_managers(path: Path) -> dict[str, list[str]]:
     return {str(club): [str(manager) for manager in managers] for club, managers in clubs.items()}
 
 
+def load_branches(path: Path) -> dict[str, str]:
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    branches = data.get("branches", {})
+    if not isinstance(branches, dict) or not branches:
+        raise ValueError(f"No branches found in {path}")
+    return {str(club): str(branch) for club, branch in branches.items()}
+
+
 def stable_manager(client_id: str, managers: list[str]) -> str:
     digest = hashlib.sha256((client_id or "").encode("utf-8")).hexdigest()
     return managers[int(digest, 16) % len(managers)]
@@ -211,6 +238,11 @@ def assign_managers(rows: list[dict[str, str]], managers_by_club: dict[str, list
         club = row.get("normalized_club", "")
         managers = managers_by_club.get(club)
         row["manager"] = stable_manager(row.get("client_id", ""), managers) if managers else ""
+
+
+def assign_branches(rows: list[dict[str, str]], branches_by_club: dict[str, str]) -> None:
+    for row in rows:
+        row["branch"] = branches_by_club.get(row.get("normalized_club", ""), "")
 
 
 def sort_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
@@ -671,6 +703,7 @@ def build_outputs(args: argparse.Namespace) -> None:
     main_template = as_abs(args.main_template)
     cards_template = as_abs(args.cards_template)
     managers_config = as_abs(args.managers_config)
+    branches_config = as_abs(args.branches_config)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     reports_dir.mkdir(parents=True, exist_ok=True)
@@ -678,7 +711,9 @@ def build_outputs(args: argparse.Namespace) -> None:
 
     rows = read_csv(stage_dir / "final_funnel_clients.csv")
     managers_by_club = load_managers(managers_config)
+    branches_by_club = load_branches(branches_config)
     assign_managers(rows, managers_by_club)
+    assign_branches(rows, branches_by_club)
     rows = sort_rows(rows)
 
     write_csv(stage_dir / "final_funnel_clients.csv", rows, FINAL_FUNNEL_FIELDS)
@@ -702,6 +737,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--main-template", default=str(ROOT / "task-desc" / "Копия Импорт_заявки.xlsx"))
     parser.add_argument("--cards-template", default=str(ROOT / "task-desc" / "Пластиковая карта.xlsx"))
     parser.add_argument("--managers-config", default=str(ROOT / "config" / "managers_by_club.yml"))
+    parser.add_argument("--branches-config", default=str(ROOT / "config" / "branches_by_club.yml"))
     parser.add_argument("--doc-suffix", default="")
     return parser.parse_args()
 

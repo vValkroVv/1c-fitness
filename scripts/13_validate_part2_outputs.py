@@ -24,6 +24,7 @@ MAIN_HEADERS = [
     "budget",
     "create_date",
     "manager",
+    "филиал",
 ]
 MAIN_RUS_HEADERS = [
     "Внутренний номер клиента ",
@@ -35,6 +36,7 @@ MAIN_RUS_HEADERS = [
     "Бюджет ",
     "Дата создания *",
     "Менеджер ",
+    "филиал",
 ]
 CARD_HEADERS = ["телефон", "фио", "номер пластиковой карты"]
 FUNNEL_SLUGS = {

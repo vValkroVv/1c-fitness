@@ -80,9 +80,9 @@
 - `docs/step_26_part2_20260525_phone_deduplication.md`
 - `docs/step_27_part2_20260525_branch_column.md`
 - `docs/step_28_blamberus_owner_change_investigation.md`
-- `docs/new_changes_01_owner_change_plan.md`
-- `docs/new_changes_02_membership_import_plan.md`
-- `docs/new_changes_03_services_import_plan.md`
+- `docs/new-changes/01_owner_change_plan.md`
+- `docs/new-changes/02_membership_import_plan.md`
+- `docs/new-changes/03_services_import_plan.md`
 
 Ключевые места реализации:
 

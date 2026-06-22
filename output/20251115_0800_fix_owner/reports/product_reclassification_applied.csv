@@ -1,0 +1,46 @@
+product_ref,product_code,product_name,old_product_class,new_product_class,counting_rule,decision_note
+AECB000C29D830FD11EEDC85C5FB57D9,00000001324,Пробное посещение АКВА ,trial_or_guest,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AECB000C29D830FD11EEDC83652ADBBA,00000001323,Разовое посещение АКВА ,trial_or_guest,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AA9EA4BF01266AD311E8D82589232D73,00000000093,Пакет 8,unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+AE39000C29D830FD11EE6F542E78B80A,00000001218,АКВА 26 посещений,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+ACE7A4BF01266AD411ED7ABA1F8B9722,00000000895,АКВА 38 посещений,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AAB5A4BF01266AD311E990DC16190F1E,00000000180,АКВА 40 посещений,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AC3EA4BF01266AD411EC56A05231DDA0,00000000648,СУБАРЕНДА 10 посещений,unknown_review_required,other_sale,always,Customer confirmed SUBARENDA should not be counted as subscription in any case.
+ABFFA4BF01266AD411EC1AB45199F07D,00000000409,СУБАРЕНДА безлимит,unknown_review_required,other_sale,always,Customer confirmed SUBARENDA should not be counted as subscription in any case.
+AFB8000C29D830FD11EF8D377302B83E,00000001466,"Спец. цена Полина 9 900,00",unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+AB34A4BF01266AD411EB816DD2AE44CE,00000000362,АКВА 35 посещений,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+ADD1000C29D830FD11EE20895D03FE2D,00000001144,АКВА 48 посещений,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+ABFFA4BF01266AD411EC1AB433F8DB37,00000000408,СУБАРЕНДА 15 посещений,unknown_review_required,other_sale,always,Customer confirmed SUBARENDA should not be counted as subscription in any case.
+AADDA4BF01266AD411EAA7E8B7F4DA15,00000000306,АКВА 40 посещений САЙТ,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AC5FA4BF01266AD411ECA429A81300FB,00000000735,СУБАРЕНДА 12 посещений,unknown_review_required,other_sale,always,Customer confirmed SUBARENDA should not be counted as subscription in any case.
+AFE1000C29D830FD11EFAD7D54FAD4B6,00000001496,Танцевальная тренировка (не использовать!!!),unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+AB34A4BF01266AD411EB816FA5002150,00000000363,АКВА 22 посещения,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AAB5A4BF01266AD311E990DD47D43461,00000000183,АКВА 24 посещения,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+ABFFA4BF01266AD411EC1AB2987E8962,00000000407,СУБАРЕНДА 8 посещений,unknown_review_required,other_sale,always,Customer confirmed SUBARENDA should not be counted as subscription in any case.
+AFA3000C29D830FD11EF7EFEFCDDFD1F,00000001464,Подарочный сертификат 1 месяц безлимитного фитнеса,unknown_review_required,full_subscription,always,"Customer confirmed gift certificate counts as subscription; if not active on cutoff, client goes to reactivation."
+AB34A4BF01266AD411EB816D9D2E0EA1,00000000361,АКВА 10 посещений,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AAB5A4BF01266AD311E990DD2427CA1C,00000000182,АКВА 36 посещений,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AAB5A4BF01266AD311E990DCFB01527D,00000000181,АКВА 46 посещений,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AC8FA4BF01266AD411ED282FA9B6A57B,00000000811,АКВА 30 посещений,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AA9EA4BF01266AD311E8D82589232D74,00000000094,Пакет 12 (персональные тренировки),unknown_review_required,full_subscription,full_if_no_other_full_subscription,Customer confirmed Package 12 PT counts as main subscription only when client has no other main subscription; otherwise ignored.
+AE21000C29D830FD11EE5DCC477B6971,00000001208,АКВА 6 посещений,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+B152000C29D830FD11F0BFCCB5A5C951,00000001684,Медленный класс (10 посещений) двойное предложение,unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+AE97000C29D830FD11EEB5E224D01D09,00000001279,Наталья триггер2,unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+AD33A4BF01266AD411EDBF1F314FA67E,00000000959,"Спец. цена Яна 11 900,00",unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+ACD9A4BF01266AD411ED6F1D348DCEFB,00000000876,СУБАРЕНДА 20 посещений,unknown_review_required,other_sale,always,Customer confirmed SUBARENDA should not be counted as subscription in any case.
+AFC7000C29D830FD11EF99133B51EC93,00000001480,Фитнес-марафон 2024,unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+AD33A4BF01266AD411EDBF1F314FA67F,00000000960,"Спец. цена Яна 10 900,00",unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+AAB5A4BF01266AD311E9941AF979FC72,00000000202,АКВА 8 посещений,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AA9EA4BF01266AD311E8D82589232D76,00000000096,Пакет 12 ВИП (персональные тренировки),unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+AC8FA4BF01266AD411ED282F1D85E118,00000000810,АКВА 18 посещений,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AAB5A4BF01266AD311E9941B0CECB303,00000000203,АКВА 18 посещений,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AA9EA4BF01266AD311E8D82589232D77,00000000097,Пакет 8 ВИП ,unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+AAB5A4BF01266AD311E9941AEB16049A,00000000201,АКВА 4 посещения,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AE9B000C29D830FD11EEB904C34CBB28,00000001286,АКВА 32 посещения,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AAE3A4BF01266AD411EB03B098E57A4D,00000000345,АКВА 46 посещений САЙТ,unknown_review_required,full_subscription,always,Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.
+AD39A4BF01266AD411EDC401EDA97FE7,00000000965,Карта розыгрыш(Мосеева Екатерина Олеговна),unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+AEFF000C29D830FD11EF03AA884BB8DE,00000001374,Катя проверка триггер,unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+AE95000C29D830FD11EEB44107BAD405,00000001278,Наталья триггер,unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+ABF0A4BF01266AD411EC0EF77639C4AA,00000000404,Пакет 10 (персональные тренировки),unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+B02E000C29D830FD11EFE922AA99F790,00000001553,Пакет 6,unknown_review_required,other_sale,always,Customer confirmed all other disputed products should not be counted as subscriptions.
+B091000C29D830FD11F0348FE0F505B9,00000001610,СУБАРЕНДА безлимит Савостьянова Ксения,unknown_review_required,other_sale,always,Customer confirmed SUBARENDA should not be counted as subscription in any case.

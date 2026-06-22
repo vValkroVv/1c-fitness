@@ -180,6 +180,110 @@ user_columns: 19421
    Do not run another full restore without either deleting `mssql-macos/` or
    freeing additional disk.
 
+## Later SQL runtime issue and working recovery path
+
+Update date: `2026-06-22`, during owner-change fix work.
+
+The restored data in `mssql-macos/data/` remained usable, but the original
+Azure SQL Edge ARM64 container became unstable during SQL discovery. A broad
+metadata scan over many `_Document*` tables caused `sqlservr` to abort. After
+that, recreating/starting `mssql-fitness-macos` repeatedly crashed before the
+SQL listener opened.
+
+Observed failure:
+
+```text
+container: mssql-fitness-macos
+image: mcr.microsoft.com/azure-sql-edge:latest
+symptom: container exits with code 1 before SQL port is available
+dump signal: SIGABRT
+stack marker: S_SbtUnimplementedInstruction
+stage: startup of master, before restored database access
+OOMKilled: false
+```
+
+This is a runtime/container problem, not evidence that the restored
+`FitnessRestored_20260523_macos.mdf/.ldf` files are unusable.
+
+The working path was to run full SQL Server 2022 under amd64 emulation and
+attach the already-restored MDF/LDF files:
+
+```text
+container: mssql-fitness-2022
+image: mcr.microsoft.com/mssql/server:2022-latest
+platform: linux/amd64
+host port: 127.0.0.1:11434
+system SQL data: Docker volume fitness_mssql_2022_system
+attached database files: mssql-macos/data/FitnessRestored_20260523_macos.mdf/.ldf
+database: FitnessRestored_20260523_macos
+state after attach: ONLINE
+compatibility_level: 130
+```
+
+Use this helper for future heavy SQL work on macOS:
+
+```bash
+scripts/29_start_mssql_2022_attach_macos.sh
+```
+
+It starts `mssql-fitness-2022`, joins it to the existing
+`fitness-macos-sql` Docker network, waits for SQL readiness, and runs:
+
+```sql
+CREATE DATABASE [FitnessRestored_20260523_macos]
+ON (FILENAME = N'/restoredata/FitnessRestored_20260523_macos.mdf'),
+   (FILENAME = N'/restoredata/FitnessRestored_20260523_macos_log.ldf')
+FOR ATTACH;
+```
+
+Check the attached database through the tools container:
+
+```bash
+SQLCMD_SERVER=mssql-fitness-2022,1433 \
+scripts/macos_backup_sqlcmd.sh -Q "
+SELECT name, state_desc, compatibility_level
+FROM sys.databases
+WHERE name = N'FitnessRestored_20260523_macos';
+"
+```
+
+For pipeline commands that use `scripts/11_export_part2_stage.py`, point the
+exporter to the macOS tools wrapper and the SQL Server 2022 container:
+
+```bash
+PART2_SQLCMD=scripts/macos_backup_sqlcmd.sh \
+SQLCMD_SERVER=mssql-fitness-2022,1433 \
+scripts/11_export_part2_stage.py \
+  --database FitnessRestored_20260523_macos \
+  --cutoff-date 2026-05-25 \
+  --cutoff-at "2026-05-25 08:00:00" \
+  --backup-finish-at "2026-05-23 23:17:17" \
+  --output-run-label <run_label> \
+  --output-dir <output_dir>/staging \
+  --reports-dir <output_dir>/reports \
+  --logs-dir logs
+```
+
+For the owner-change fixed build, the complete wrapper is:
+
+```bash
+scripts/30_build_owner_change_fix_outputs.sh
+```
+
+Operational notes:
+
+- Do not delete `mssql-macos/data/*.mdf` or `mssql-macos/data/*.ldf`; these are
+  the restored database files reused by SQL Server 2022.
+- It is safe to delete Azure SQL Edge crash dump directories like
+  `mssql-macos/log/core.sqlservr.*.d` if disk space is needed. Do not delete
+  normal database files.
+- Avoid broad exploratory scans against `mssql-fitness-macos` / Azure SQL Edge
+  ARM64. For schema discovery, staging builds, and large joins, use
+  `mssql-fitness-2022`.
+- `scripts/macos_backup_sqlcmd.sh` runs `mssql-tools` in a separate container.
+  When using SQL Server 2022, set `SQLCMD_SERVER=mssql-fitness-2022,1433`;
+  do not rely on the old `mssql-fitness-macos` default.
+
 ## Reuse commands
 
 Check container:
@@ -201,4 +305,10 @@ MSSQL_CONTAINER_NAME=mssql-fitness-macos \
 MSSQL_CPUS=2 \
 MSSQL_CONTAINER_MEMORY=6g \
 scripts/macos_backup_start_mssql_container.sh
+```
+
+Preferred check for the stable SQL Server 2022 attached runtime:
+
+```bash
+scripts/29_start_mssql_2022_attach_macos.sh
 ```

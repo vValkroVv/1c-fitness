@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS fitbase_part2.client_history_summary;
 DROP TABLE IF EXISTS fitbase_part2.stg_plastic_cards;
 DROP TABLE IF EXISTS fitbase_part2.stg_sales_all;
 DROP TABLE IF EXISTS fitbase_part2.stg_subscriptions_all;
+DROP TABLE IF EXISTS fitbase_part2.stg_membership_owner_changes;
 DROP TABLE IF EXISTS fitbase_part2.stg_products;
 DROP TABLE IF EXISTS fitbase_part2.stg_client_contacts;
 DROP TABLE IF EXISTS fitbase_part2.stg_clients;
@@ -30,6 +31,7 @@ DROP TABLE IF EXISTS fitbase_part2.staging_run_metadata;
 
 DROP TABLE IF EXISTS #document163_docs;
 DROP TABLE IF EXISTS #subscription_raw;
+DROP TABLE IF EXISTS #latest_membership_owner_changes;
 GO
 
 DECLARE @cutoff_at datetime2 = '$(cutoff_at)';
@@ -410,9 +412,157 @@ FROM product_flags;
 
 CREATE INDEX IX_part2_stg_products_ref ON fitbase_part2.stg_products(product_ref);
 
+WITH owner_change_base AS (
+    SELECT
+        d._IDRRef AS owner_change_ref_bin,
+        d._Number AS owner_change_number,
+        CASE
+            WHEN d._Date_Time > '3000-01-01' THEN DATEADD(year, -2000, d._Date_Time)
+            ELSE d._Date_Time
+        END AS owner_change_datetime,
+        d._Fld763RRef AS membership_ref_bin,
+        d._Fld762RRef AS old_client_ref_bin,
+        d._Fld767RRef AS new_client_ref_bin,
+        d._Fld764RRef AS modifier_ref_bin,
+        mod._Description AS modifier_name,
+        d._Fld761RRef AS operation_ref_bin,
+        sale._Number AS membership_number,
+        CASE
+            WHEN sale._Date_Time > '3000-01-01' THEN DATEADD(year, -2000, sale._Date_Time)
+            ELSE sale._Date_Time
+        END AS membership_datetime,
+        prod._Description AS membership_name,
+        d._Posted AS doc_posted,
+        d._Marked AS doc_marked,
+        CASE WHEN d._Posted = 0x01 THEN 1 ELSE 0 END AS is_posted,
+        CASE WHEN d._Marked = 0x00 THEN 0 ELSE 1 END AS is_marked,
+        ROW_NUMBER() OVER (
+            PARTITION BY d._Fld763RRef
+            ORDER BY d._Date_Time DESC, d._IDRRef DESC
+        ) AS owner_change_rank,
+        COUNT(*) OVER (PARTITION BY d._Fld763RRef) AS owner_change_count_for_membership
+    FROM dbo._Document138 AS d
+    JOIN dbo._Reference72 AS mod
+      ON mod._IDRRef = d._Fld764RRef
+    LEFT JOIN dbo._Document163 AS sale
+      ON sale._IDRRef = d._Fld763RRef
+    LEFT JOIN dbo._Reference72 AS prod
+      ON prod._IDRRef = sale._Fld1446RRef
+    WHERE d._Posted = 0x01
+      AND d._Marked = 0x00
+      AND d._Date_Time <= @cutoff_sql_at
+      AND d._Date_Time <= @backup_finish_sql_at
+      AND LTRIM(RTRIM(mod._Description)) = N'Смена владельца'
+      AND d._Fld762RRef <> 0x00000000000000000000000000000000
+      AND d._Fld767RRef <> 0x00000000000000000000000000000000
+      AND d._Fld763RRef <> 0x00000000000000000000000000000000
+      AND sale._IDRRef IS NOT NULL
+)
 SELECT
-    CONVERT(varchar(32), sr.client_ref_bin, 2) AS client_ref,
+    CONVERT(varchar(32), oc.owner_change_ref_bin, 2) AS owner_change_ref,
+    oc.owner_change_number,
+    oc.owner_change_datetime,
+    CONVERT(varchar(32), oc.membership_ref_bin, 2) AS membership_ref,
+    oc.membership_number,
+    oc.membership_datetime,
+    oc.membership_name,
+    CONVERT(varchar(32), oc.old_client_ref_bin, 2) AS old_client_ref,
+    old_client._Code AS old_client_id,
+    old_client._Description AS old_client_fio,
+    CONVERT(varchar(32), oc.new_client_ref_bin, 2) AS new_client_ref,
+    new_client._Code AS new_client_id,
+    new_client._Description AS new_client_fio,
+    CONVERT(varchar(32), oc.modifier_ref_bin, 2) AS modifier_ref,
+    oc.modifier_name,
+    CONVERT(varchar(32), oc.operation_ref_bin, 2) AS operation_ref,
+    oc.doc_posted,
+    oc.doc_marked,
+    oc.is_posted,
+    oc.is_marked,
+    oc.owner_change_rank,
+    oc.owner_change_count_for_membership,
+    CASE WHEN oc.owner_change_rank = 1 THEN 1 ELSE 0 END AS is_effective_owner_change_on_cutoff,
+    N'dbo._Document138' AS raw_source
+INTO fitbase_part2.stg_membership_owner_changes
+FROM owner_change_base AS oc
+LEFT JOIN dbo._Reference64 AS old_client
+  ON old_client._IDRRef = oc.old_client_ref_bin
+LEFT JOIN dbo._Reference64 AS new_client
+  ON new_client._IDRRef = oc.new_client_ref_bin;
+
+CREATE INDEX IX_part2_owner_changes_membership ON fitbase_part2.stg_membership_owner_changes(membership_ref, owner_change_rank);
+CREATE INDEX IX_part2_owner_changes_new_client ON fitbase_part2.stg_membership_owner_changes(new_client_ref);
+CREATE INDEX IX_part2_owner_changes_old_client ON fitbase_part2.stg_membership_owner_changes(old_client_ref);
+
+WITH owner_change_base AS (
+    SELECT
+        d._IDRRef AS owner_change_ref_bin,
+        d._Number AS owner_change_number,
+        CASE
+            WHEN d._Date_Time > '3000-01-01' THEN DATEADD(year, -2000, d._Date_Time)
+            ELSE d._Date_Time
+        END AS owner_change_datetime,
+        d._Fld763RRef AS membership_ref_bin,
+        d._Fld762RRef AS old_client_ref_bin,
+        d._Fld767RRef AS new_client_ref_bin,
+        mod._Description AS modifier_name,
+        sale._Number AS membership_number,
+        prod._Description AS membership_name,
+        ROW_NUMBER() OVER (
+            PARTITION BY d._Fld763RRef
+            ORDER BY d._Date_Time DESC, d._IDRRef DESC
+        ) AS owner_change_rank,
+        COUNT(*) OVER (PARTITION BY d._Fld763RRef) AS owner_change_count_for_membership
+    FROM dbo._Document138 AS d
+    JOIN dbo._Reference72 AS mod
+      ON mod._IDRRef = d._Fld764RRef
+    LEFT JOIN dbo._Document163 AS sale
+      ON sale._IDRRef = d._Fld763RRef
+    LEFT JOIN dbo._Reference72 AS prod
+      ON prod._IDRRef = sale._Fld1446RRef
+    WHERE d._Posted = 0x01
+      AND d._Marked = 0x00
+      AND d._Date_Time <= @cutoff_sql_at
+      AND d._Date_Time <= @backup_finish_sql_at
+      AND LTRIM(RTRIM(mod._Description)) = N'Смена владельца'
+      AND d._Fld762RRef <> 0x00000000000000000000000000000000
+      AND d._Fld767RRef <> 0x00000000000000000000000000000000
+      AND d._Fld763RRef <> 0x00000000000000000000000000000000
+      AND sale._IDRRef IS NOT NULL
+)
+SELECT
+    oc.owner_change_ref_bin,
+    oc.owner_change_number,
+    oc.owner_change_datetime,
+    oc.membership_ref_bin,
+    oc.old_client_ref_bin,
+    oc.new_client_ref_bin,
+    oc.modifier_name,
+    oc.membership_number,
+    oc.membership_name,
+    oc.owner_change_count_for_membership
+INTO #latest_membership_owner_changes
+FROM owner_change_base AS oc
+WHERE oc.owner_change_rank = 1;
+
+CREATE INDEX IX_latest_owner_changes_membership ON #latest_membership_owner_changes(membership_ref_bin);
+
+SELECT
+    CONVERT(varchar(32), COALESCE(oc.new_client_ref_bin, sr.client_ref_bin), 2) AS client_ref,
     c.client_id,
+    CONVERT(varchar(32), sr.client_ref_bin, 2) AS original_client_ref,
+    original_client.client_id AS original_client_id,
+    original_client.client_fio AS original_client_fio,
+    CONVERT(varchar(32), COALESCE(oc.new_client_ref_bin, sr.client_ref_bin), 2) AS effective_client_ref,
+    c.client_id AS effective_client_id,
+    c.client_fio AS effective_client_fio,
+    CONVERT(varchar(32), oc.owner_change_ref_bin, 2) AS owner_change_ref,
+    oc.owner_change_number,
+    oc.owner_change_datetime,
+    CONVERT(varchar(32), oc.old_client_ref_bin, 2) AS owner_change_old_client_ref,
+    CONVERT(varchar(32), oc.new_client_ref_bin, 2) AS owner_change_new_client_ref,
+    oc.modifier_name AS owner_change_modifier_name,
+    COALESCE(oc.owner_change_count_for_membership, 0) AS owner_change_count_for_membership,
     CONVERT(varchar(32), sr.subscription_ref_bin, 2) AS subscription_ref,
     CONVERT(varchar(32), sr.holder_client_ref_bin, 2) AS holder_client_ref,
     CONVERT(varchar(32), sr.payer_client_ref_bin, 2) AS payer_client_ref,
@@ -451,16 +601,24 @@ SELECT
     sr.raw_club,
     sr.normalized_club,
     sr.club_source,
-    N'dbo._InfoRg3060 + dbo._Document163' AS raw_source
+    CASE
+        WHEN oc.owner_change_ref_bin IS NOT NULL THEN N'dbo._InfoRg3060 + dbo._Document163 + dbo._Document138 owner change'
+        ELSE N'dbo._InfoRg3060 + dbo._Document163'
+    END AS raw_source
 INTO fitbase_part2.stg_subscriptions_all
 FROM #subscription_raw AS sr
+LEFT JOIN #latest_membership_owner_changes AS oc
+  ON oc.membership_ref_bin = sr.subscription_ref_bin
 JOIN fitbase_part2.stg_clients AS c
-  ON c.client_ref = CONVERT(varchar(32), sr.client_ref_bin, 2)
+  ON c.client_ref = CONVERT(varchar(32), COALESCE(oc.new_client_ref_bin, sr.client_ref_bin), 2)
+LEFT JOIN fitbase_part2.stg_clients AS original_client
+  ON original_client.client_ref = CONVERT(varchar(32), sr.client_ref_bin, 2)
 LEFT JOIN fitbase_part2.stg_products AS sp
   ON sp.product_ref = CONVERT(varchar(32), sr.product_ref_bin, 2);
 
 CREATE INDEX IX_part2_stg_subscriptions_client_ref ON fitbase_part2.stg_subscriptions_all(client_ref);
 CREATE INDEX IX_part2_stg_subscriptions_full_active ON fitbase_part2.stg_subscriptions_all(is_full_subscription, is_active_on_cutoff, client_ref);
+CREATE INDEX IX_part2_stg_subscriptions_subscription_ref ON fitbase_part2.stg_subscriptions_all(subscription_ref);
 
 WITH payment_sales AS (
     SELECT
@@ -524,7 +682,7 @@ WITH payment_sales AS (
 ),
 product_sales AS (
     SELECT
-        d.client_ref_bin,
+        COALESCE(oc.new_client_ref_bin, d.client_ref_bin) AS client_ref_bin,
         d.sale_ref_bin,
         d.sale_date,
         d.sale_datetime,
@@ -537,8 +695,13 @@ product_sales AS (
         d.direct_org_name AS raw_club,
         d.normalized_club,
         d.club_source,
-        N'dbo._Document163' AS sale_source
+        CASE
+            WHEN oc.owner_change_ref_bin IS NOT NULL THEN N'dbo._Document163 + dbo._Document138 owner change'
+            ELSE N'dbo._Document163'
+        END AS sale_source
     FROM #document163_docs AS d
+    LEFT JOIN #latest_membership_owner_changes AS oc
+      ON oc.membership_ref_bin = d.sale_ref_bin
     LEFT JOIN fitbase_part2.stg_products AS sp
       ON sp.product_ref = CONVERT(varchar(32), d.product_ref_bin, 2)
     WHERE d.is_posted = 1

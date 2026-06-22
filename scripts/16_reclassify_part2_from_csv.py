@@ -823,6 +823,7 @@ def copy_static_stage_files(source_stage_dir: Path, output_stage_dir: Path) -> N
     for name in [
         "stg_clients.csv",
         "stg_client_contacts.csv",
+        "stg_membership_owner_changes.csv",
         "stg_plastic_cards.csv",
         "selected_cards.csv",
         "staging_run_metadata.csv",

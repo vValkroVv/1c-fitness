@@ -1,0 +1,11 @@
+metric,value
+source_stage_clients,72862
+main_xlsx_clients,64934
+cards_xlsx_clients,10890
+main_excluded_total,7928
+main_rule_new_applications_require_phone,1
+main_excluded_new_applications_without_phone,5538
+cards_funnel_filter,Действующие клиенты
+cards_excluded_not_matching_filter,61972
+phone_deduplication_applied,1
+phone_deduplication_removed_clients,2390

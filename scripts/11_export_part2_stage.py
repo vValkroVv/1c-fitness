@@ -12,7 +12,7 @@ from typing import Iterable
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SQLCMD = ROOT / "scripts" / "sqlcmd.sh"
+SQLCMD = Path(os.environ.get("PART2_SQLCMD", str(ROOT / "scripts" / "sqlcmd.sh")))
 SQL_DIR = ROOT / "sql"
 BUILD_SQL = SQL_DIR / "part2_03_build_three_funnel_staging.sql"
 
@@ -21,6 +21,7 @@ STAGE_TABLES = [
     "stg_clients",
     "stg_client_contacts",
     "stg_products",
+    "stg_membership_owner_changes",
     "stg_subscriptions_all",
     "stg_sales_all",
     "stg_plastic_cards",
@@ -41,6 +42,7 @@ ORDER_BY = {
     "stg_clients": "client_ref",
     "stg_client_contacts": "client_ref, contact_type, raw_value",
     "stg_products": "product_class, needs_manual_review DESC, observed_clients DESC, product_name",
+    "stg_membership_owner_changes": "membership_ref, owner_change_rank, owner_change_datetime, owner_change_ref",
     "stg_subscriptions_all": "client_ref, is_full_subscription DESC, end_date DESC, start_date DESC, subscription_ref",
     "stg_sales_all": "client_ref, sale_date, sale_ref",
     "stg_plastic_cards": "client_ref, is_unmarked DESC, issue_date DESC, card_ref",

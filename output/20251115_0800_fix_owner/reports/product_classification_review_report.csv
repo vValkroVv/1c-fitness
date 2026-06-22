@@ -1,0 +1,26 @@
+product_ref,product_code,product_name,observed_clients,observed_sales,observed_subscription_rows,min_duration_days,max_duration_days,auto_classification,review_reason,recommended_action
+B086000C29D830FD11F02BCC8AA8ED67,00000001606,Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок) Ровио,8,8,8,273,366,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,keep_full_subscription_unless_customer_says_otherwise
+B07D000C29D830FD11F024EBAFD0BD0A,00000001597,Абонемент УЛЬТРА 12 месяцев + 3 месяца заморозки в подарок,73,73,73,48,547,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,keep_full_subscription_unless_customer_says_otherwise
+B0E5000C29D830FD11F06EC78AD2D6CB,00000001648,Абонемент МУЛЬТИКАРТА 12 месяцев + 2 месяца заморозки в подарок (СПЕЦПРЕДЛОЖЕНИЕ),621,638,638,1,592,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,keep_full_subscription_unless_customer_says_otherwise
+B08A000C29D830FD11F02F0F91882165,00000001607,Мультикарта на 9 месяцев + 3 месяца заморозки в подарок,6,6,6,273,395,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,keep_full_subscription_unless_customer_says_otherwise
+B0BE000C29D830FD11F0519A15B1F35E,00000001619,Абонемент МУЛЬТИКАРТА 12 месяцев + 3 месяца заморозки в подарок СПЕЦПРЕДЛОЖЕНИЕ,433,447,447,1,8996,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,keep_full_subscription_unless_customer_says_otherwise
+B086000C29D830FD11F02BCC649B1DE5,00000001605,Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок),30,30,30,18,365,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,keep_full_subscription_unless_customer_says_otherwise
+B07F000C29D830FD11F026949FF4A862,00000001603,Абонемент УЛЬТРА 15 месяцев + 3 месяца заморозки в подарок(Ровио),3,3,3,473,505,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,keep_full_subscription_unless_customer_says_otherwise
+B0E5000C29D830FD11F06EA754E9EEA1,00000001647,УЛЬТРА 12 месяцев + 2 месяца заморозки в подарок (Ровио),20,20,20,365,456,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,keep_full_subscription_unless_customer_says_otherwise
+B07D000C29D830FD11F024EC5F69C3D5,00000001598,Абонемент УЛЬТРА 12 месяцев + 3 месяца заморозки в подарок (Ровио),17,17,17,164,455,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,keep_full_subscription_unless_customer_says_otherwise
+B07D000C29D830FD11F024ECA950807E,00000001599,Абонемент МУЛЬТИКАРТА 12 месяцев (3 месяца заморозки в подарок),140,144,144,88,487,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,keep_full_subscription_unless_customer_says_otherwise
+B0D9000C29D830FD11F066CA213D0981,00000001642,Абонемент МУЛЬТИКАРТА 12 месяцев + 2 месяца заморозки в подарок,1103,1124,1124,1,9034,full_subscription,full keyword + duration >= 30 + no trial/exclude keyword,keep_full_subscription_unless_customer_says_otherwise
+B07E000C29D830FD11F0259878589A01,00000001600,"Абонемент МУЛЬТИ 12 месяцев (Акция "" + 3 мес. в подарок + 3 мес. заморозки) 10 900,00 ",0,0,0,,,other_sale,not observed as subscription product,manual_review
+AEEE000C29D830FD11EEF66534B0B728,00000001333,Заморозка абонемента,0,0,0,,,other_sale,not observed as subscription product,manual_review
+AC30A4BF01266AD411EC40906F8E09EC,00000000415,Заморозка абонемента ,0,0,0,,,other_sale,not observed as subscription product,manual_review
+AF09000C29D830FD11EF0BA34D0F0C25,00000001377,Заморозка абонемента 1 месяц,0,0,0,,,other_sale,not observed as subscription product,manual_review
+AD25A4BF01266AD411EDAB7A95107425,00000000925,Заморозка абонемента 10 дней,0,0,0,,,other_sale,not observed as subscription product,manual_review
+AA9BA4BF01266AD311E8AABCC0ED0D91,00000000053,Заморозка абонемента 12 месяцев,0,0,0,,,other_sale,not observed as subscription product,manual_review
+AF05000C29D830FD11EF0876E1FAF586,00000001375,Заморозка абонемента 14 дней,0,0,0,,,other_sale,not observed as subscription product,manual_review
+AD18A4BF01266AD411EDA16336698EFF,00000000920,Заморозка абонемента 15 дней,0,0,0,,,other_sale,not observed as subscription product,manual_review
+AD0CA4BF01266AD411ED97F5CEB6AD30,00000000913,Заморозка абонемента 2 месяца,0,0,0,,,other_sale,not observed as subscription product,manual_review
+AF09000C29D830FD11EF0BA35C6F4680,00000001378,Заморозка абонемента 2 месяца,0,0,0,,,other_sale,not observed as subscription product,manual_review
+AF07000C29D830FD11EF09ED87114051,00000001376,Заморозка абонемента 3 месяца,0,0,0,,,other_sale,not observed as subscription product,manual_review
+AA9BA4BF01266AD311E8AABCC0ED0D8E,00000000050,Заморозка абонемента 30 дней,0,0,0,,,other_sale,not observed as subscription product,manual_review
+AA9BA4BF01266AD311E8AABCC0ED0D90,00000000052,Заморозка абонемента 6 месяцев,0,0,0,,,other_sale,not observed as subscription product,manual_review
+AA9BA4BF01266AD311E8AABCC0ED0D8F,00000000051,Заморозка абонемента 90 дней,0,0,0,,,other_sale,not observed as subscription product,manual_review

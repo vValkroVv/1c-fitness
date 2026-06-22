@@ -14,6 +14,9 @@ output/staging_*/
 output/archive_before_part2/
 output/final_delivery_part2_*/
 output/part2_*/
+output/20251115_0800_fix_owner/raw/
+output/20251115_0800_fix_owner/staging/
+output/20251115_0800_fix_owner/csv/
 *.tar.gz
 
 # macOS metadata

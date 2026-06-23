@@ -17,9 +17,20 @@
 Текущий рабочий срез для реализации: `2026-05-25 08:00`.
 
 Источник клиентов: финальный `import_заявки` после всех фильтров и phone-dedup,
-зафиксированный в корне репозитория:
+из актуальной сборки с исправлением смены владельца. Старую папку не менять,
+использовать ее только как вход:
 
-- `fitbase_active_clients_import_zayavki_20260525_0800_all_funnels.xlsx`
+- `output/20251115_0800_fix_owner/fitbase_active_clients_import_zayavki_20260525_0800_all_funnels.xlsx`
+
+Важно: `output/20251115_0800_fix_owner/staging/final_funnel_clients.csv`
+содержит полный stage до финальных XLSX-фильтров и phone-dedup. Для состава
+клиентов нового импорта он не является источником истины. Его можно использовать
+только как вспомогательный источник полей, например выбранной карты, для клиентов,
+которые уже есть в финальном XLSX.
+
+Итоговая папка новой сборки:
+
+- `output/20251115_0800_fix_owner_new_import/`
 
 ## Новые файлы, которые относятся к задаче
 
@@ -339,15 +350,33 @@ Python:
 
 Output:
 
-- `output/membership_import_YYYYMMDD/fitbase_import_abonementy_clientov_YYYYMMDD.xlsx`
-- `output/membership_import_YYYYMMDD/fitbase_import_shablony_abonementov_YYYYMMDD.xlsx`
-- `output/membership_import_YYYYMMDD/reports/validation_report.md`
-- `output/membership_import_YYYYMMDD/reports/rassrochka_validation.md`
+- `output/20251115_0800_fix_owner_new_import/fitbase_import_abonementy_clientov_20260525_0800.xlsx`
+- `output/20251115_0800_fix_owner_new_import/fitbase_import_shablony_abonementov_20260525_0800.xlsx`
+- `output/20251115_0800_fix_owner_new_import/reports/validation_report.md`
+- `output/20251115_0800_fix_owner_new_import/reports/validation_recheck.md`
+- `output/20251115_0800_fix_owner_new_import/reports/rassrochka_validation.md`
+- `output/20251115_0800_fix_owner_new_import/reports/membership_import_uncertainties.csv`
+- `output/20251115_0800_fix_owner_new_import/reports/zero_price_report.csv`
 
 Docs:
 
-- `docs/step_30_membership_import_discovery.md`
-- `docs/step_31_membership_import_build.md`
+- `docs/new-changes/prolem_2/00_execution_log.md`
+- `docs/new-changes/prolem_2/01_sql_discovery_membership.md`
+- `docs/new-changes/prolem_2/02_implementation_and_validation.md`
+
+Фактический воспроизводимый запуск:
+
+```bash
+scripts/31_build_membership_import_outputs.sh
+```
+
+Скрипт:
+
+1. запускает/проверяет `mssql-fitness-2022`;
+2. пересобирает SQL staging `fitbase_part2.membership_import_facts`;
+3. выгружает staging TSV через `scripts/macos_backup_bcp.sh`;
+4. собирает два XLSX через `scripts/19_build_membership_import_xlsx.py`;
+5. проверяет готовые XLSX через `scripts/20_validate_membership_import_xlsx.py`.
 
 ## Валидация
 
@@ -371,10 +400,39 @@ Docs:
 - Значения `duration_type`, `first_visit_activation`, `archive`, `branches_access` должны совпасть с тем, что реально принимает Fitbase.
 - Если в клиентский файл попадут все исторические абонементы, объем файла может быть значительно больше текущей выгрузки заявок.
 
-## Оставшиеся технические проверки
+## Статус технических проверок после реализации
 
-1. Найти источники `contract_id`, оплат, долга, типа оплаты, заморозки и
-   остатков посещений.
-2. Проверить рассрочки по трем DOCX-примерам.
-3. Проверить, что `duration_type=месяц` и пустые `visits_left` для безлимитных
-   проходят локальную валидацию шаблона.
+Выполнено:
+
+1. `contract_id` выбран как номер документа членства `dbo._Document163._Number`.
+   Проверка уникальности на итоговом XLSX: дублей `0`.
+2. Цена берется из `dbo._InfoRg3060._Fld3070`.
+3. Оплачено берется из `dbo._InfoRg3060._Fld3072`, если поле положительное.
+   Остаток к оплате считается как `price - amount_of_payments`.
+4. Для рассрочек, где `_Fld3072 = 0`, используется fallback на ближайший
+   платежный документ `dbo._Document152`. Строка помечается в
+   `rassrochka_validation.md` только если не найден ни `_Fld3072`, ни платежный
+   документ.
+5. Заморозка берется из `dbo._InfoRg3060._Fld3068`.
+6. Тип оплаты ищется по ближайшему платежному документу
+   `fitbase_part2.stg_sales_all` / `dbo._Document152` для эффективного,
+   исходного, держателя или плательщика членства.
+7. `duration_type` в клиентском XLSX и шаблонах всегда `месяц`.
+8. Короткие/недельные абонементы получают `duration=0`.
+9. Субаренда включена в импорт абонементов, хотя в старой классификации она
+   лежит в `other_sale`/`unknown_review_required`.
+10. Готовые XLSX прошли независимую проверку
+    `scripts/20_validate_membership_import_xlsx.py`: `PASS`.
+
+Осталось как бизнес/данные, не как ошибка скрипта:
+
+1. `payment_type` пустой в части строк, когда рядом с продажей не найден
+   платежный документ с маппируемым способом оплаты. Сводка лежит в
+   `validation_recheck.md`, построчно - в `membership_import_uncertainties.csv`.
+2. Для части старых членств цена в SQL-источнике равна `0`. Сводка по названиям
+   лежит в `zero_price_report.csv`; это особенно заметно на старых строках
+   `2018-01-01`.
+3. `visits_left` для ограниченной субаренды закрыт в текущей сборке:
+   активные `12` строк считаются по балансу `_AccumRg3336` на размерности
+   `_Fld3338_TYPE = 0x01`, просроченные `916` строк получают `0`,
+   безлимитная субаренда остается пустой.

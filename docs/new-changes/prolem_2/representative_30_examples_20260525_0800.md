@@ -11,6 +11,19 @@ XLSX содержит только те же `20` колонок, что осн�
 
 Файл: `/Users/valerii.kropotin/Папа-работа/1c-preprocess/output/20251115_0800_fix_owner_new_import/membership_import_representative_30_examples_20260525_0800.xlsx`
 
+## Correction 2026-06-23
+
+Строка `#12` / `contract_id=00000100483` больше не считается валидным
+репрезентативным примером. Дополнительная проверка 1С показала пропущенную
+последующую смену владельца `Тарасенко -> Коновалов` с модификатором
+`Смена владельца подарочной карты`.
+
+Подробный разбор:
+`docs/new-changes/prolem_2/05_tarasenko_00000100483_owner_change.md`.
+
+До пересборки representative sample этот XLSX нужно считать устаревшим в части
+owner-change-примера.
+
 ## Состав 30 строк
 
 | # | category | contract_id | client_id | contract_name | payment_date | price | type_of_payment | зачем включено |

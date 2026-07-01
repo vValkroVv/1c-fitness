@@ -241,7 +241,7 @@ blank_activation_or_end_date,00000144194,000071532,Молодкин Илья А�
 blank_activation_or_end_date,00000150458,000073933,Новичкова Людмила Евгеньевна,Абонемент 10 ДНЕЙ,activation_date=2001-01-01; end_date=2001-01-01
 template_variants_collapsed_to_latest_sale,,,,Абонемент УЛЬТРА 12 месяцев,400 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент УЛЬТРА 12 месяцев ДВОЙНОЕ / СЕМЕЙНЫЙ,109 price/duration/freeze/access variants found for one template name; latest sale variant used.
-template_variants_collapsed_to_latest_sale,,,,Абонемент МУЛЬТИКАРТА 12 месяцев,325 price/duration/freeze/access variants found for one template name; latest sale variant used.
+template_variants_collapsed_to_latest_sale,,,,Абонемент МУЛЬТИКАРТА 12 месяцев,324 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент НЕДЕЛЯ САЙТ,7 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент УЛЬТРА 1 МЕСЯЦ БЕСПЛАТНО,2 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент Ультра 15 месяцев (подарок),167 price/duration/freeze/access variants found for one template name; latest sale variant used.
@@ -258,7 +258,6 @@ template_variants_collapsed_to_latest_sale,,,,Абонемент УЛЬТРА 3 
 template_variants_collapsed_to_latest_sale,,,,Абонемент МУЛЬТИКАРТА 12 месяцев + подарок,16 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,УЛЬТРА 12 месяцев + подарок,31 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент МУЛЬТИКАРТА 12 месяцев + 2 месяца заморозки в подарок (СПЕЦПРЕДЛОЖЕНИЕ),63 price/duration/freeze/access variants found for one template name; latest sale variant used.
-template_variants_collapsed_to_latest_sale,,,,Абонемент УЛЬТРА 9 месяцев,30 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент УЛЬТРА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ (вип),13 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент МУЛЬТИКАРТА+6 месяцев в подарок,25 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент в солярий на 100+50 минут,6 price/duration/freeze/access variants found for one template name; latest sale variant used.
@@ -282,6 +281,7 @@ template_variants_collapsed_to_latest_sale,,,,Абонемент МУЛЬТИК�
 template_variants_collapsed_to_latest_sale,,,,Абонемент УЛЬТРА 12 месяцев (акция 3 мес. в подарок),32 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент УЛЬТРА 12 + 2 лета в подарок,21 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,"Абонемент УЛЬТРА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ (Промышленная,10)",2 price/duration/freeze/access variants found for one template name; latest sale variant used.
+template_variants_collapsed_to_latest_sale,,,,Абонемент УЛЬТРА 9 месяцев,30 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,"Абонемент УЛЬТРА 12 месяцев (акция 3 мес. в подарок) Ровио,3",6 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент в солярий на 100 минут,12 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент УЛЬТРА 12 месяцев + 3 месяца заморозки в подарок (Ровио),7 price/duration/freeze/access variants found for one template name; latest sale variant used.
@@ -292,8 +292,8 @@ template_variants_collapsed_to_latest_sale,,,,Абонемент МУЛЬТИК�
 template_variants_collapsed_to_latest_sale,,,,Абонемент МУЛЬТИКАРТА 12 месяцев + 3 месяца в подарок,16 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент УЛЬТРА 6+6 месяцев,11 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент в солярий на 50 + 50 минут,2 price/duration/freeze/access variants found for one template name; latest sale variant used.
-template_variants_collapsed_to_latest_sale,,,,Абонемент УЛЬТРА 1 МЕСЯЦ 12 посещений,20 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,"Абонемент УЛЬТРА 12 месяцев (акция 6 мес. в подарок) Ровио,3",3 price/duration/freeze/access variants found for one template name; latest sale variant used.
+template_variants_collapsed_to_latest_sale,,,,Абонемент УЛЬТРА 1 МЕСЯЦ 12 посещений,20 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,СУБАРЕНДА безлимит,29 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент УЛЬТРА 15 месяцев,6 price/duration/freeze/access variants found for one template name; latest sale variant used.
 template_variants_collapsed_to_latest_sale,,,,Абонемент Неделя Фитнес,6 price/duration/freeze/access variants found for one template name; latest sale variant used.

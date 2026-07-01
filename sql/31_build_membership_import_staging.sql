@@ -9,6 +9,12 @@ IF OBJECT_ID(N'fitbase_part2.membership_import_facts', N'U') IS NOT NULL
 
 IF OBJECT_ID('tempdb..#direct_membership_payments') IS NOT NULL
     DROP TABLE #direct_membership_payments;
+IF OBJECT_ID('tempdb..#membership_sale_docs') IS NOT NULL
+    DROP TABLE #membership_sale_docs;
+IF OBJECT_ID('tempdb..#membership_sale_line_context') IS NOT NULL
+    DROP TABLE #membership_sale_line_context;
+IF OBJECT_ID('tempdb..#membership_document131_context') IS NOT NULL
+    DROP TABLE #membership_document131_context;
 
 SELECT DISTINCT
     CONVERT(varchar(32), membership_doc._IDRRef, 2) AS subscription_ref,
@@ -51,6 +57,68 @@ WHERE p._Posted = 0x01
 
 CREATE INDEX IX_direct_membership_payments_subscription_ref
     ON #direct_membership_payments(subscription_ref);
+
+SELECT
+    s.subscription_ref,
+    sale_doc._IDRRef AS sale_doc_ref,
+    SUM(CAST(sale_line._Fld1160 AS decimal(15, 2))) AS membership_sale_line_amount,
+    COUNT_BIG(*) AS membership_sale_line_count
+INTO #membership_sale_docs
+FROM fitbase_part2.stg_subscriptions_all AS s
+JOIN dbo._Document154_VT1137 AS sale_line
+  ON sale_line._Fld1148_RTRef = 0x000000A3
+ AND sale_line._Fld1148_RRRef = CONVERT(binary(16), s.subscription_ref, 2)
+JOIN dbo._Document154 AS sale_doc
+  ON sale_doc._IDRRef = sale_line._Document154_IDRRef
+ AND sale_doc._Posted = 0x01
+ AND sale_doc._Marked = 0x00
+WHERE s.sale_datetime <= @cutoff_at
+  AND (
+      s.product_class IN (N'full_subscription', N'trial_or_guest')
+      OR LOWER(s.subscription_name) LIKE N'%субаренд%'
+  )
+GROUP BY
+    s.subscription_ref,
+    sale_doc._IDRRef;
+
+CREATE INDEX IX_membership_sale_docs_subscription_ref
+    ON #membership_sale_docs(subscription_ref);
+
+CREATE INDEX IX_membership_sale_docs_sale_doc_ref
+    ON #membership_sale_docs(sale_doc_ref);
+
+SELECT
+    subscription_ref,
+    SUM(membership_sale_line_amount) AS membership_sale_line_amount,
+    SUM(membership_sale_line_count) AS membership_sale_line_count
+INTO #membership_sale_line_context
+FROM #membership_sale_docs
+GROUP BY subscription_ref;
+
+CREATE UNIQUE INDEX IX_membership_sale_line_context_subscription_ref
+    ON #membership_sale_line_context(subscription_ref);
+
+SELECT
+    subscription_ref,
+    COUNT(DISTINCT refund_ref) AS document131_refund_count,
+    COUNT(DISTINCT CASE WHEN refund_posted = 0x01 AND refund_marked = 0x00 THEN refund_ref END)
+        AS document131_posted_unmarked_refund_count
+INTO #membership_document131_context
+FROM (
+    SELECT
+        msd.subscription_ref,
+        d131._IDRRef AS refund_ref,
+        d131._Posted AS refund_posted,
+        d131._Marked AS refund_marked
+    FROM #membership_sale_docs AS msd
+    JOIN dbo._Document131 AS d131
+      ON d131._Fld545_RRRef = msd.sale_doc_ref
+      OR d131._Fld547_RRRef = msd.sale_doc_ref
+) AS refunds
+GROUP BY subscription_ref;
+
+CREATE UNIQUE INDEX IX_membership_document131_context_subscription_ref
+    ON #membership_document131_context(subscription_ref);
 
 WITH membership_source AS (
     SELECT
@@ -157,6 +225,19 @@ with_payment AS (
             candidates.sale_datetime DESC
     ) AS pay
 ),
+with_sale_doc_context AS (
+    SELECT
+        wp.*,
+        COALESCE(line_context.membership_sale_line_amount, 0) AS membership_sale_line_amount,
+        COALESCE(line_context.membership_sale_line_count, 0) AS membership_sale_line_count,
+        COALESCE(refund_context.document131_refund_count, 0) AS document131_refund_count,
+        COALESCE(refund_context.document131_posted_unmarked_refund_count, 0) AS document131_posted_unmarked_refund_count
+    FROM with_payment AS wp
+    LEFT JOIN #membership_sale_line_context AS line_context
+      ON line_context.subscription_ref = wp.subscription_ref
+    LEFT JOIN #membership_document131_context AS refund_context
+      ON refund_context.subscription_ref = wp.subscription_ref
+),
 with_subrent_visits AS (
     SELECT
         wp.*,
@@ -199,7 +280,7 @@ with_subrent_visits AS (
             THEN N'balance_above_name_limit'
             ELSE N'other'
         END AS subrent_rg3336_case_group
-    FROM with_payment AS wp
+    FROM with_sale_doc_context AS wp
     CROSS APPLY (
         SELECT CASE
             WHEN wp.is_limited_subrent = 1 AND LOWER(wp.subscription_name) LIKE N'%20 посещ%' THEN 20
@@ -311,6 +392,10 @@ SELECT
     matched_payment_method,
     matched_payment_operation,
     matched_payment_match_source,
+    CAST(COALESCE(membership_sale_line_amount, 0) AS decimal(15, 2)) AS membership_sale_line_amount,
+    membership_sale_line_count,
+    document131_refund_count,
+    document131_posted_unmarked_refund_count,
     @cutoff_at AS cutoff_at
 INTO fitbase_part2.membership_import_facts
 FROM with_subrent_visits;

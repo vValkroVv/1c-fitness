@@ -101,6 +101,10 @@ SELECT
     REPLACE(REPLACE(REPLACE(matched_payment_method, CHAR(9), N' '), CHAR(10), N' '), CHAR(13), N' ') AS matched_payment_method,
     REPLACE(REPLACE(REPLACE(matched_payment_operation, CHAR(9), N' '), CHAR(10), N' '), CHAR(13), N' ') AS matched_payment_operation,
     matched_payment_match_source,
+    membership_sale_line_amount,
+    membership_sale_line_count,
+    document131_refund_count,
+    document131_posted_unmarked_refund_count,
     CONVERT(varchar(19), cutoff_at, 120) AS cutoff_at
 FROM fitbase_part2.membership_import_facts
 ORDER BY client_id, sale_datetime, subscription_ref

@@ -46,5 +46,8 @@ WHERE d._Posted = 0x01
   AND d._Marked = 0x00
   AND d._Date_Time <= @cutoff_sql_at
   AND d._Date_Time <= @backup_finish_sql_at
-  AND LTRIM(RTRIM(modifier._Description)) = N'Смена владельца'
+  AND LTRIM(RTRIM(modifier._Description)) IN (
+      N'Смена владельца',
+      N'Смена владельца подарочной карты'
+  )
 ORDER BY d._Fld763RRef, owner_change_rank;

@@ -145,6 +145,10 @@ FACT_FIELDS = [
     "matched_payment_method",
     "matched_payment_operation",
     "matched_payment_match_source",
+    "membership_sale_line_amount",
+    "membership_sale_line_count",
+    "document131_refund_count",
+    "document131_posted_unmarked_refund_count",
     "cutoff_at",
 ]
 
@@ -236,6 +240,12 @@ ZERO_PRICE_CONFIRMED_FREE_TRIAL_NAMES = {
         "Абонемент НЕДЕЛЯ ФИТНЕСА БЕСПЛАТНО",
     ]
 }
+ZERO_PRICE_DIRECT_SALE_LINE_FREE_TRIAL_NAMES = {
+    normalize_key(name)
+    for name in [
+        "Абонемент НЕДЕЛЯ САЙТ",
+    ]
+}
 
 
 def business_zero_override_reason(fact: dict[str, str]) -> str:
@@ -248,6 +258,11 @@ def business_zero_override_reason(fact: dict[str, str]) -> str:
     matched_payment_ref = (fact.get("matched_payment_ref") or "").strip()
     matched_payment_source = (fact.get("matched_payment_match_source") or "").strip()
     matched_payment_method = (fact.get("matched_payment_method") or "").strip()
+    membership_sale_line_amount = decimal_value(fact.get("membership_sale_line_amount"))
+    membership_sale_line_count = decimal_value(fact.get("membership_sale_line_count"))
+    document131_posted_unmarked_refund_count = decimal_value(
+        fact.get("document131_posted_unmarked_refund_count")
+    )
 
     if sale_date.startswith("2018") and product_class == "full_subscription":
         return "business_legacy_2018_full_subscription_zero_price_blank_payment"
@@ -259,6 +274,23 @@ def business_zero_override_reason(fact: dict[str, str]) -> str:
         and not matched_payment_source.startswith("direct")
     ):
         return "business_confirmed_free_trial_zero_price_blank_payment"
+    if (
+        price <= 0
+        and name in ZERO_PRICE_DIRECT_SALE_LINE_FREE_TRIAL_NAMES
+        and matched_payment_ref
+        and matched_payment_source.startswith("direct")
+        and membership_sale_line_count > 0
+        and membership_sale_line_amount <= 0
+    ):
+        return "business_direct_free_site_week_sale_line_zero_blank_payment"
+    if (
+        price <= 0
+        and matched_payment_ref
+        and matched_payment_source.startswith("direct")
+        and document131_posted_unmarked_refund_count > 0
+        and fact.get("is_active_on_cutoff") != "1"
+    ):
+        return "business_historical_document131_refund_zero_direct_blank_payment"
     if price <= 0 and product_class == "full_subscription" and not matched_payment_ref:
         return "business_full_zero_no_payment_initial_balance_corporate_or_modifier"
     if price <= 0 and not matched_payment_ref:
@@ -476,18 +508,119 @@ def compute_money(fact: dict[str, str]) -> tuple[Decimal, Decimal, Decimal, str]
     return price, price, Decimal("0"), "assume_paid_full_when_no_installment_marker"
 
 
+def is_full_subscription_fact(fact: dict[str, str]) -> bool:
+    return fact.get("is_full_subscription") == "1"
+
+
+def is_active_on_cutoff_fact(fact: dict[str, str]) -> bool:
+    return fact.get("is_active_on_cutoff") == "1"
+
+
+def normalized_status(fact: dict[str, str]) -> str:
+    return (fact.get("status") or "").strip()
+
+
+def find_contact_next_exclusions(facts: list[dict[str, str]]) -> tuple[set[str], list[dict[str, str]]]:
+    """Find active/later full rows in status Contact that should not be imported.
+
+    Business rule from the Popova case: if a client already has a full
+    membership active on the cutoff, and a later full membership for the same
+    client is in status "Контакт с клиентом", the later row is a hanging sale
+    candidate and is excluded from membership import.
+    """
+
+    cutoff_date = parse_date(next((fact.get("cutoff_at") for fact in facts if fact.get("cutoff_at")), ""))
+    if cutoff_date is None:
+        return set(), []
+
+    full_facts_by_client: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for fact in facts:
+        if is_full_subscription_fact(fact):
+            full_facts_by_client[(fact.get("client_id") or "").strip()].append(fact)
+
+    excluded_refs: set[str] = set()
+    excluded_rows: dict[str, dict[str, str]] = {}
+    for client_id, client_facts in full_facts_by_client.items():
+        if not client_id:
+            continue
+        current_active = [fact for fact in client_facts if is_active_on_cutoff_fact(fact)]
+        contact_candidates = [
+            fact
+            for fact in client_facts
+            if normalized_status(fact) == "Контакт с клиентом" and parse_date(fact.get("end_date"))
+        ]
+        for candidate in contact_candidates:
+            candidate_ref = (candidate.get("subscription_ref") or "").strip()
+            candidate_doc = (candidate.get("document_number") or "").strip()
+            candidate_start = parse_date(candidate.get("start_date"))
+            candidate_end = parse_date(candidate.get("end_date"))
+            candidate_sale = (candidate.get("sale_datetime") or "").strip()
+            if not candidate_ref or not candidate_start or not candidate_end:
+                continue
+            best_current: dict[str, str] | None = None
+            for current in current_active:
+                current_ref = (current.get("subscription_ref") or "").strip()
+                if current_ref == candidate_ref:
+                    continue
+                current_start = parse_date(current.get("start_date"))
+                current_end = parse_date(current.get("end_date"))
+                current_sale = (current.get("sale_datetime") or "").strip()
+                if not current_start or not current_end:
+                    continue
+                if candidate_sale < current_sale:
+                    continue
+                if candidate_start < current_start:
+                    continue
+                if candidate_end < cutoff_date:
+                    continue
+                if best_current is None or str(current.get("end_date", "")) > str(best_current.get("end_date", "")):
+                    best_current = current
+            if best_current is None:
+                continue
+            excluded_refs.add(candidate_ref)
+            excluded_rows[candidate_ref] = {
+                "rule": "exclude_active_later_contact_full",
+                "contract_id": candidate_doc,
+                "client_id": client_id,
+                "client_fio": candidate.get("effective_client_fio", ""),
+                "contract_name": candidate.get("subscription_name", ""),
+                "sale_datetime": candidate.get("sale_datetime", ""),
+                "start_date": candidate.get("start_date", ""),
+                "end_date": candidate.get("end_date", ""),
+                "status": candidate.get("status", ""),
+                "price_candidate": candidate.get("rg_price", ""),
+                "paid_candidate": candidate.get("rg_paid_candidate", ""),
+                "matched_payment_ref": candidate.get("matched_payment_ref", ""),
+                "matched_payment_amount": candidate.get("matched_payment_amount", ""),
+                "matched_payment_method": candidate.get("matched_payment_method", ""),
+                "current_contract_id": best_current.get("document_number", ""),
+                "current_contract_name": best_current.get("subscription_name", ""),
+                "current_start_date": best_current.get("start_date", ""),
+                "current_end_date": best_current.get("end_date", ""),
+                "current_status": best_current.get("status", ""),
+                "current_matched_payment_ref": best_current.get("matched_payment_ref", ""),
+                "current_matched_payment_amount": best_current.get("matched_payment_amount", ""),
+                "current_matched_payment_method": best_current.get("matched_payment_method", ""),
+            }
+    return excluded_refs, sorted(excluded_rows.values(), key=lambda row: (row["client_id"], row["contract_id"]))
+
+
 def build_rows(
     source_clients: dict[str, SourceClient],
     cards: dict[str, str],
     facts: list[dict[str, str]],
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, str]], dict[str, Counter]]:
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, str]], list[dict[str, str]], dict[str, Counter]]:
     client_rows: list[dict[str, Any]] = []
     uncertainties: list[dict[str, str]] = []
     counters: dict[str, Counter] = defaultdict(Counter)
     template_by_name: dict[str, dict[str, Any]] = {}
     template_variants: dict[str, set[tuple[Any, ...]]] = defaultdict(set)
+    excluded_refs, excluded_rows = find_contact_next_exclusions(facts)
+    counters["exclusions"]["exclude_active_later_contact_full"] = len(excluded_rows)
 
     for fact in facts:
+        if (fact.get("subscription_ref") or "").strip() in excluded_refs:
+            continue
         client_id = (fact.get("client_id") or "").strip()
         source = source_clients.get(client_id)
         if not source:
@@ -554,6 +687,12 @@ def build_rows(
             "_payment_method_raw": fact.get("matched_payment_method", ""),
             "_payment_match_source": fact.get("matched_payment_match_source", ""),
             "_business_override": business_override,
+            "_membership_sale_line_amount": fact.get("membership_sale_line_amount", ""),
+            "_membership_sale_line_count": fact.get("membership_sale_line_count", ""),
+            "_document131_refund_count": fact.get("document131_refund_count", ""),
+            "_document131_posted_unmarked_refund_count": fact.get(
+                "document131_posted_unmarked_refund_count", ""
+            ),
             "_owner_change_ref": fact.get("owner_change_ref", ""),
             "_visits_left_source": visits_left_source,
             "_subrent_rg3336_case_group": fact.get("subrent_rg3336_case_group", ""),
@@ -671,7 +810,7 @@ def build_rows(
         key=lambda item: normalize_key(str(item.get("name", ""))),
     )
     client_rows.sort(key=lambda item: (str(item["client_id"]), str(item["payment_date"] or ""), str(item["contract_id"])))
-    return client_rows, template_rows, uncertainties, counters
+    return client_rows, template_rows, uncertainties, excluded_rows, counters
 
 
 def write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) -> None:
@@ -809,6 +948,12 @@ def build_validation(
             lines.append(f"- {key}: {value}")
     else:
         lines.append("- none")
+    lines.extend(["", "## Exclusions", ""])
+    if counters["exclusions"]:
+        for key, value in counters["exclusions"].most_common():
+            lines.append(f"- {key}: {value}")
+    else:
+        lines.append("- none")
     lines.extend(["", "## Payment Types", ""])
     for key, value in counters["payment_type"].most_common():
         lines.append(f"- {key}: {value}")
@@ -880,7 +1025,7 @@ def main() -> int:
     source_clients = read_source_clients(source_clients_xlsx)
     cards = read_cards(source_output_dir / "staging")
     facts = read_facts(facts_tsv)
-    client_rows, template_rows, uncertainties, counters = build_rows(source_clients, cards, facts)
+    client_rows, template_rows, uncertainties, excluded_rows, counters = build_rows(source_clients, cards, facts)
 
     client_xlsx = output_dir / f"fitbase_import_abonementy_clientov_{args.date_stamp}.xlsx"
     template_xlsx = output_dir / f"fitbase_import_shablony_abonementov_{args.date_stamp}.xlsx"
@@ -898,11 +1043,39 @@ def main() -> int:
         "_payment_method_raw",
         "_payment_match_source",
         "_business_override",
+        "_membership_sale_line_amount",
+        "_membership_sale_line_count",
+        "_document131_refund_count",
+        "_document131_posted_unmarked_refund_count",
         "_owner_change_ref",
         "_visits_left_source",
         "_subrent_rg3336_case_group",
     ])
     write_csv(staging_dir / "membership_template_rows.csv", template_rows, TEMPLATE_HEADERS)
+    write_csv(staging_dir / "membership_import_excluded_rows.csv", excluded_rows, [
+        "rule",
+        "contract_id",
+        "client_id",
+        "client_fio",
+        "contract_name",
+        "sale_datetime",
+        "start_date",
+        "end_date",
+        "status",
+        "price_candidate",
+        "paid_candidate",
+        "matched_payment_ref",
+        "matched_payment_amount",
+        "matched_payment_method",
+        "current_contract_id",
+        "current_contract_name",
+        "current_start_date",
+        "current_end_date",
+        "current_status",
+        "current_matched_payment_ref",
+        "current_matched_payment_amount",
+        "current_matched_payment_method",
+    ])
     write_csv(
         reports_dir / "membership_import_uncertainties.csv",
         uncertainties,

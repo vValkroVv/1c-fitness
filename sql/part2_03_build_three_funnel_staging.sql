@@ -452,7 +452,10 @@ WITH owner_change_base AS (
       AND d._Marked = 0x00
       AND d._Date_Time <= @cutoff_sql_at
       AND d._Date_Time <= @backup_finish_sql_at
-      AND LTRIM(RTRIM(mod._Description)) = N'Смена владельца'
+      AND LTRIM(RTRIM(mod._Description)) IN (
+          N'Смена владельца',
+          N'Смена владельца подарочной карты'
+      )
       AND d._Fld762RRef <> 0x00000000000000000000000000000000
       AND d._Fld767RRef <> 0x00000000000000000000000000000000
       AND d._Fld763RRef <> 0x00000000000000000000000000000000
@@ -524,7 +527,10 @@ WITH owner_change_base AS (
       AND d._Marked = 0x00
       AND d._Date_Time <= @cutoff_sql_at
       AND d._Date_Time <= @backup_finish_sql_at
-      AND LTRIM(RTRIM(mod._Description)) = N'Смена владельца'
+      AND LTRIM(RTRIM(mod._Description)) IN (
+          N'Смена владельца',
+          N'Смена владельца подарочной карты'
+      )
       AND d._Fld762RRef <> 0x00000000000000000000000000000000
       AND d._Fld767RRef <> 0x00000000000000000000000000000000
       AND d._Fld763RRef <> 0x00000000000000000000000000000000

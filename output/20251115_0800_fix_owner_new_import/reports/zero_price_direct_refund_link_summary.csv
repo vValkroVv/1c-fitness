@@ -1,0 +1,4 @@
+﻿risk_group,is_active_on_cutoff,has_document131_refund,rows_count,posted_unmarked_refund_rows
+full_active_zero_direct,1,0,44,0
+full_finished_normal_dates_zero_direct,0,0,15,0
+trial_week_direct_zero,0,0,2,0

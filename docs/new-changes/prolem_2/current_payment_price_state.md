@@ -24,9 +24,31 @@ scripts/31_build_membership_import_outputs.sh
 
 Проверка после последней перегенерации: `PASS`.
 
-Последнее событие по `payment_type/price`: дополнительные бизнес-решения по
-остаточным группам внедрены в пайплайн, XLSX перегенерированы, создана новая
-выборка `30` контрольных кейсов для ручной проверки.
+Последнее событие по `payment_type/price`: получены ручные ответы по
+`membership_import_representative_30_examples_20260525_0800-with-answers.xlsx`.
+Owner-change по `Смена владельца подарочной карты` уже исправлен в основной
+выгрузке. После разбора Поповой добавлено strict-исключение
+`active full сейчас + следующий/later Контакт с клиентом`: `4` строки удалены
+из основного XLSX.
+
+Ручные ответы оставили два контрольных слоя:
+
+- было `327` строк `price>0`, платеж не найден,
+  `type_of_payment=наличные`; после strict-исключения осталось `325`;
+- исходные `207` строк `price=0`, direct-платеж найден,
+  `type_of_payment` оставлен, сокращены до `61`: внедрены правила для `4`
+  direct-строк `Абонемент НЕДЕЛЯ САЙТ` и `176` historical direct-refund строк
+  со связанным `Document131`. Открытыми остались `44` active full, `15`
+  historical full без refund и `2` строки `Абонемент Неделя Фитнес` с payment
+  на строке `Доплата`.
+
+Детальный разбор:
+
+```text
+docs/new-changes/prolem_2/07_representative_30_manual_answers_followup.md
+docs/new-changes/prolem_2/09_no_payment_cash_active_overlap_deep_dive.md
+docs/new-changes/prolem_2/10_zero_price_direct_payment_deep_dive.md
+```
 
 ## Верхняя сводка
 
@@ -34,16 +56,17 @@ scripts/31_build_membership_import_outputs.sh
 
 | метрика | rows |
 |---|---:|
-| всего строк абонементов | 99 399 |
+| всего строк абонементов | 99 383 |
 | строк шаблонов | 114 |
 | дублей `contract_id` | 0 |
 | отсутствующих шаблонов по `contract_name` | 0 |
-| `payment_type = безналичные` | 65 539 |
-| `payment_type = наличные` | 3 268 |
-| `payment_type = сбп` | 1 453 |
-| `payment_type` пустой | 29 139 |
+| исключено по `exclude_active_later_contact_full` | 4 |
+| `payment_type = безналичные` | 65 383 |
+| `payment_type = наличные` | 3 266 |
+| `payment_type = сбп` | 1 449 |
+| `payment_type` пустой | 29 285 |
 | `price=0` | 29 346 |
-| `price>0` | 70 053 |
+| `price>0` | 70 037 |
 
 Принятые бизнес-исключения:
 
@@ -55,18 +78,19 @@ scripts/31_build_membership_import_outputs.sh
 | `price=0` + fallback-платеж | 1 792 | `type_of_payment` очищен, цена/оплата остаются `0` |
 | full `price=0` без платежа | 1 312 | ввод начальных остатков/корпоративный клиент/модификатор, цену не восстанавливаем автоматически |
 | `price=0` + платеж не найден, остаточные короткие/субаренда | 288 | `type_of_payment` пустой, цену не восстанавливаем |
-| `price=0` + direct-платеж с пустым raw method | 34 | `type_of_payment` пустой |
-| всего бизнес-исключений | 29 139 | больше не считаем ошибками |
+| historical `price=0` + direct + `Document131` refund | 176 | `type_of_payment` очищен; строка не считается обычной оплаченной продажей |
+| direct `Абонемент НЕДЕЛЯ САЙТ` с нулевой строкой продажи | 4 | `type_of_payment` очищен; payment относится к другой строке sale doc |
+| всего бизнес-исключений | 29 285 | больше не считаем ошибками |
 
 Остаток без бизнес-исключений:
 
 | остаточная проблема | rows |
 |---|---:|
-| строк без бизнес-исключений всего | 70 260 |
+| строк без бизнес-исключений всего | 70 244 |
 | `payment_type` пустой | 0 |
-| `price=0` | 207 |
+| `price=0` | 61 |
 | одновременно `payment_type` пустой и `price=0` | 0 |
-| контрольный слой `price=0` + direct-платеж + `payment_type` оставлен как есть | 207 |
+| открытый контрольный слой `price=0` + direct-платеж + `payment_type` заполнен | 61 |
 
 ## Новое правило по техническим raw method
 
@@ -108,8 +132,8 @@ scripts/31_build_membership_import_outputs.sh
 | `price>0` + пустой `payment_type` + raw method технический | 0 | закрыт правилом `-> безналичные` |
 | `price>0` + пустой `payment_type` + direct-платеж найден, raw method пустой | 0 | закрыт правилом `-> наличные` |
 | `price=0` + `payment_type` уже замаплен через fallback | 1 741 | закрыт: очистить `type_of_payment` |
-| `price=0` + `payment_type` уже замаплен через direct | 207 | закрыт: оставить как есть |
-| `price>0` + пустой `payment_type` + платеж не найден | 327 | закрыт: поставить `наличные` |
+| `price=0` + `payment_type` уже замаплен через direct | 61 | открыт после safe-правок: `44` active full, `15` historical full без refund, `2` `Неделя Фитнес`/`Доплата` |
+| `price>0` + пустой `payment_type` + платеж не найден | 325 | закрыт: поставить `наличные`; strict active/later `Контакт с клиентом` исключен |
 | `price=0` + пустой `payment_type` + платеж найден, raw method пустой | 85 | закрыт: оставить пустым |
 
 ## Ручные примеры
@@ -238,9 +262,12 @@ output/20251115_0800_fix_owner_new_import/payment_price_manual_review_examples_2
 | full `price=0` без платежа, non-business | `1 312` |
 | full `price=0` с заполненным `type_of_payment`, non-business | `1 645` |
 
-Ограничение: `НЕДЕЛЯ САЙТ price=0` с direct-платежом (`4` строки) не покрыт
-ручными примерами. Его нужно проверять отдельно, потому что по `НЕДЕЛЯ САЙТ`
-уже известно, что бывают и бесплатные, и платные строки.
+Обновление `2026-06-24`: `НЕДЕЛЯ САЙТ price=0` с direct-платежом (`4` строки)
+проверен отдельно в `10_zero_price_direct_payment_deep_dive.md`. У всех `4`
+целевая строка абонемента в `Document154_VT1137` равна `0`, а payment относится
+к другой строке того же sale doc (`Перчатки`, годовой абонемент или подарок).
+Это подтверждает бесплатность именно этих direct-строк; платные
+`НЕДЕЛЯ САЙТ` с `price>0` этим правилом не затрагиваются.
 
 ## Финальные решения по остаткам
 
@@ -251,17 +278,26 @@ output/20251115_0800_fix_owner_new_import/payment_price_manual_review_examples_2
   `type_of_payment` пустой;
 - `1 741` строк `price=0` с заполненным `payment_type` через fallback:
   очищаем `type_of_payment`;
-- `207` строк `price=0` с direct-платежом и заполненным `payment_type`:
-  оставляем как есть;
-- `327` строк `price>0`, `payment_type` пустой, платеж не найден:
+- исходные `207` строк `price=0` с direct-платежом и заполненным
+  `payment_type`: после deep-dive внедрены два safe-правила, открытый остаток
+  уменьшен до `61`;
+- `4` direct-строки `Абонемент НЕДЕЛЯ САЙТ` с нулевой целевой строкой продажи:
+  очищаем `type_of_payment`;
+- `176` historical zero-direct строк со связанным posted/unmarked
+  `Document131` refund: очищаем `type_of_payment`; из них `142` раньше держали
+  заполненный `payment_type`, `34` уже были blank из-за пустого raw method;
+- было `327` строк `price>0`, `payment_type` пустой, платеж не найден:
   ставим `type_of_payment = наличные`;
+- после strict-исключения active/later `Контакт с клиентом` в основном XLSX
+  осталось `325` таких строк;
 - `85` строк `price=0`, платеж найден, raw method пустой:
   оставляем `type_of_payment` пустым.
 
 Техническая деталь по группе `85`: `51` строка из нее имеет
 `matched_payment_match_source = client_date_14_days`, поэтому попала в общее
-правило `business_zero_fallback_payment_type_blank`. Еще `34` direct-строки
-получили отдельное правило `business_zero_raw_blank_payment_type_blank`.
+правило `business_zero_fallback_payment_type_blank`. Прежние `34` direct-строки
+с пустым raw method оказались historical `Document131` refund-строками и теперь
+помечаются как `business_historical_document131_refund_zero_direct_blank_payment`.
 
 Итоговая проверка по взаимоисключающим группам:
 
@@ -269,14 +305,22 @@ output/20251115_0800_fix_owner_new_import/payment_price_manual_review_examples_2
 |---|---:|---|
 | `A_zero_no_payment_blank_type_288` | 288 | blank `type_of_payment` |
 | `B_zero_fallback_payment_type_blank_1792` | 1 792 | blank `type_of_payment` |
-| `C_zero_direct_payment_type_kept_207` | 207 | `безналичные`/`сбп` оставлены |
-| `D_positive_no_payment_cash_327` | 327 | `type_of_payment = наличные` |
-| `E_zero_direct_raw_blank_payment_type_blank_34` | 34 | blank `type_of_payment` |
+| `C_zero_direct_payment_type_kept_61` | 61 | после safe-правок остались `44` active full, `15` historical full без refund, `2` `Неделя Фитнес`/`Доплата` |
+| `D_positive_no_payment_cash_325` | 325 | `type_of_payment = наличные`; `2` no-payment строки удалены strict-исключением |
+| `E_zero_direct_document131_refund_blank_176` | 176 | blank `type_of_payment`, источник `Document131` |
 
 Детальный построчный отчет по финальным правилам:
 
 ```text
 output/20251115_0800_fix_owner_new_import/reports/payment_price_final_rule_check.csv
+```
+
+Важно: этот CSV был сформирован до strict-исключения active/later
+`Контакт с клиентом`. Актуальные счетчики после удаления `4` строк находятся в:
+
+```text
+output/20251115_0800_fix_owner_new_import/reports/validation_report.md
+output/20251115_0800_fix_owner_new_import/staging/membership_import_excluded_rows.csv
 ```
 
 Репрезентативная ручная выборка `30` разных кейсов из всей финальной выгрузки:
@@ -306,9 +350,23 @@ docs/new-changes/prolem_2/representative_30_examples_20260525_0800.md
 | субаренда active/expired/unlimited | 4 |
 | нестандартный продукт/короткий платный trial | 2 |
 
-После этих правил нерешенных строк именно по пяти остаточным группам нет.
-Остается контрольный слой `207` direct-строк с `price=0`, которые по текущему
-бизнес-решению оставлены как есть и включены в выборку для отдельной проверки.
+После этих правил нерешенных строк по группам с пустым `payment_type` нет.
+Исходный контрольный слой `207` direct-строк с `price=0` после deep-dive и
+safe-правок уменьшен до `61`: `44` active full, `15` historical full без
+`Document131` refund и `2` строки `Неделя Фитнес` с payment на строке
+`Доплата`.
+
+Построчный отчет по активным `44` full-строкам:
+
+```text
+output/20251115_0800_fix_owner_new_import/reports/zero_price_direct_active_full_44_detail.csv
+output/20251115_0800_fix_owner_new_import/reports/zero_price_direct_refund_link_audit.csv
+output/20251115_0800_fix_owner_new_import/reports/zero_price_direct_refund_link_summary.csv
+output/20251115_0800_fix_owner_new_import/reports/zero_price_direct_applied_overrides.csv
+output/20251115_0800_fix_owner_new_import/reports/zero_price_direct_applied_overrides_summary.csv
+output/20251115_0800_fix_owner_new_import/reports/zero_price_direct_trial_sale_context_audit.csv
+output/20251115_0800_fix_owner_new_import/reports/zero_price_direct_trial_sale_context_summary.csv
+```
 
 ## Историческое разложение до внедрения ответов бизнеса
 
@@ -451,13 +509,13 @@ fallback-логикой от соседнего платежа клиента. �
 Нужно найти альтернативный источник способа оплаты для старых direct-платежей
 или получить бизнес-default для таких случаев.
 
-## Приоритет после ручной проверки
+## Текущий приоритет после deep-dive
 
-1. Разобрать 25 примеров из
-   `payment_price_manual_review_examples_20260525_0800.xlsx`.
-2. Если для нулевых `НЕДЕЛЯ САЙТ` подтвердят бесплатность, сделать отдельное
-   условие только для `price=0` и без direct-платежа.
-3. Если для full-абонементов `МУЛЬТИКАРТА/УЛЬТРА` с `price=0` подтвердят, что
-   это ошибка, искать восстановление цены из SQL или direct/fallback платежей.
-4. По direct-платежам с пустым raw method решить, какой `payment_type` ставить
-   или где брать альтернативный способ оплаты.
+1. Получить бизнес-ответ по `2` строкам `Абонемент Неделя Фитнес`: целевая
+   строка абонемента `0`, но payment относится к строке `Доплата`.
+2. Отдельно решить `15` historical full-строк без `Document131` refund:
+   у них `price=0`, direct-платеж и заполненный `type_of_payment`, но источник
+   служебности/возврата не найден.
+3. Отдельно решить активные `44` full-строки: они не похожи на бесплатные или
+   возвратные операции, у всех есть положительная строка продажи/direct payment;
+   вероятно, там нужно восстанавливать `price`, а не очищать способ оплаты.

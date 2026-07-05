@@ -1,0 +1,3 @@
+RESTORE FILELISTONLY
+FROM DISK = N'/backup/Fitnes-30-06-26.bak';
+GO

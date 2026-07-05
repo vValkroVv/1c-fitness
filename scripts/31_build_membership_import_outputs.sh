@@ -12,7 +12,10 @@ DATE_STAMP="${MEMBERSHIP_DATE_STAMP:-20260525_0800}"
 
 mkdir -p "$OUTPUT_ROOT/staging" "$OUTPUT_ROOT/reports" "logs/new-changes/prolem_2"
 
-"$ROOT_DIR/scripts/29_start_mssql_2022_attach_macos.sh"
+MSSQL_2022_DATABASE_NAME="$DATABASE_NAME" \
+MSSQL_2022_MDF_PATH="/restoredata/${DATABASE_NAME}.mdf" \
+MSSQL_2022_LDF_PATH="/restoredata/${DATABASE_NAME}_log.ldf" \
+  "$ROOT_DIR/scripts/29_start_mssql_2022_attach_macos.sh"
 
 SQLCMD_SERVER="$SQLCMD_SERVER_NAME" \
   "$ROOT_DIR/scripts/macos_backup_sqlcmd.sh" \

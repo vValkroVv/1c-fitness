@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 from pathlib import Path
+import os
 import pymssql
 
 
 ROOT = Path(__file__).resolve().parents[1]
 ENV_FILE = ROOT / "tmp" / "macos-backup" / "mssql-fitness-macos.env"
-DB_NAME = "FitnessRestored_20260523_macos"
+DB_NAME = os.environ.get("MACOS_BACKUP_DB_NAME", "FitnessRestored_20260523_macos")
+SERVER = os.environ.get("MACOS_BACKUP_SQL_HOST", "127.0.0.1")
+PORT = int(os.environ.get("MACOS_BACKUP_SQL_PORT", "11433"))
 
 
 def read_password() -> str:
@@ -24,8 +27,8 @@ def scalar(cursor, sql: str):
 def main() -> None:
     password = read_password()
     with pymssql.connect(
-        server="127.0.0.1",
-        port=11433,
+        server=SERVER,
+        port=PORT,
         user="sa",
         password=password,
         database="master",

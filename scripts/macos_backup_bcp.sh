@@ -12,6 +12,40 @@ if [[ ! -f "$ENV_FILE" ]]; then
   exit 2
 fi
 
+TARGET_CONTAINER="${SQLCMD_SERVER%%,*}"
+if docker ps --format '{{.Names}}' | grep -Fxq "$TARGET_CONTAINER" \
+  && docker exec "$TARGET_CONTAINER" test -x /opt/mssql-tools18/bin/bcp >/dev/null 2>&1; then
+  ARGS=("$@")
+  OUTPUT_FILE=""
+  CONTAINER_OUTPUT_FILE=""
+
+  for idx in "${!ARGS[@]}"; do
+    if [[ "${ARGS[$idx]}" == "queryout" ]]; then
+      next_idx=$((idx + 1))
+      if [[ "${ARGS[$next_idx]:-}" == /output/* ]]; then
+        OUTPUT_FILE="$ROOT_DIR/output/${ARGS[$next_idx]#/output/}"
+        CONTAINER_OUTPUT_FILE="/tmp/bcp_${TARGET_CONTAINER}_$$_${next_idx}.out"
+        ARGS[$next_idx]="$CONTAINER_OUTPUT_FILE"
+      fi
+      break
+    fi
+  done
+
+  if [[ -n "$OUTPUT_FILE" ]]; then
+    mkdir -p "$(dirname "$OUTPUT_FILE")"
+  fi
+
+  docker exec "$TARGET_CONTAINER" /bin/bash -lc \
+    'exec /opt/mssql-tools18/bin/bcp "$@" -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -u' \
+    bcp "${ARGS[@]}"
+
+  if [[ -n "$OUTPUT_FILE" ]]; then
+    docker cp "$TARGET_CONTAINER:$CONTAINER_OUTPUT_FILE" "$OUTPUT_FILE"
+    docker exec "$TARGET_CONTAINER" rm -f "$CONTAINER_OUTPUT_FILE" >/dev/null 2>&1 || true
+  fi
+  exit 0
+fi
+
 docker run --rm \
   --platform linux/amd64 \
   --network "$NETWORK_NAME" \

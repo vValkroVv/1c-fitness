@@ -1,0 +1,2 @@
+key,client_id,changed_columns,reason_flags,suspicious,old_values,new_values
+Пакет 8,,duration,template_business_values_changed,0,"{""duration"": ""36""}","{""duration"": ""45""}"

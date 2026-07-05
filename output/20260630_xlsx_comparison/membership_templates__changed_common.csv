@@ -1,0 +1,8 @@
+key,client_id,changed_columns,reason_flags,suspicious,old_values,new_values
+Абонемент УЛЬТРА 12 месяцев + 3 месяца заморозки в подарок,,freeze,template_business_values_changed,0,"{""freeze"": ""90""}","{""freeze"": """"}"
+Абонемент УЛЬТРА 12 месяцев ДВОЙНОЕ / СЕМЕЙНЫЙ,,price,template_business_values_changed,0,"{""price"": ""11500""}","{""price"": ""4035""}"
+Абонемент УЛЬТРА 6 месяцев СПЕЦПРЕДЛОЖЕНИЕ,,freeze,template_business_values_changed,0,"{""freeze"": ""60""}","{""freeze"": ""27""}"
+Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок),,freeze,template_business_values_changed,0,"{""freeze"": ""70""}","{""freeze"": ""30""}"
+Абонемент в солярий на 50 минут,,duration,template_business_values_changed,0,"{""duration"": ""1""}","{""duration"": ""0""}"
+УЛЬТРА 12 месяцев + 2 месяца заморозки в подарок (Ровио),,freeze,template_business_values_changed,0,"{""freeze"": ""60""}","{""freeze"": """"}"
+УЛЬТРА 12 месяцев + подарок,,duration,template_business_values_changed,0,"{""duration"": ""15""}","{""duration"": ""12""}"

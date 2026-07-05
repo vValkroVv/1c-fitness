@@ -4,14 +4,14 @@ date_stamp: `20260630`.
 
 Назначение: это не файл для правки правил `price/payment_type`, а
 репрезентативная выборка из всей финальной выгрузки абонементов.
-XLSX содержит только те же `20` колонок, что основной файл импорта
+XLSX содержит только те же `21` колонку, что основной файл импорта
 `fitbase_import_abonementy_clientov_20260630.xlsx`: без
 `question_for_manual_check`, `correct_price`, `correct_payment_type`,
 `comment` и без технических staging-полей.
 
 Файл: `/Users/valerii.kropotin/Папа-работа/1c-preprocess/output/20260630_fix_owner_new_import/membership_import_representative_28_examples_20260630.xlsx`
 
-## Состав 30 строк
+## Состав 28 строк
 
 | # | category | contract_id | client_id | contract_name | payment_date | price | type_of_payment | зачем включено |
 |---:|---|---|---|---|---|---:|---|---|

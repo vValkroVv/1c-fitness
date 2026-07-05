@@ -138,11 +138,16 @@ def read_xlsx(spec: WorkbookSpec, path: Path) -> tuple[list[str], list[dict[str,
     duplicate_keys: Counter[str] = Counter()
     seen: set[str] = set()
 
-    for values in ws.iter_rows(min_row=spec.first_data_row, max_col=len(headers), values_only=True):
+    for row_number, values in enumerate(
+        ws.iter_rows(min_row=spec.first_data_row, max_col=len(headers), values_only=True),
+        start=spec.first_data_row,
+    ):
         if not any(value not in (None, "") for value in values):
             continue
         row = {headers[idx]: cell_text(value) for idx, value in enumerate(values)}
         key = make_key(spec, row)
+        if not key.replace("|", "").strip():
+            key = f"__blank_key_row_{row_number}"
         if key in seen:
             duplicate_keys[key] += 1
         seen.add(key)
@@ -168,6 +173,16 @@ def read_csv_by_key(path: Path, key_field: str) -> dict[str, dict[str, str]]:
         return {}
     with path.open(encoding="utf-8-sig", newline="") as handle:
         return {row.get(key_field, ""): row for row in csv.DictReader(handle)}
+
+
+def count_csv_rows(path: Path, field: str | None = None, value: str | None = None) -> int:
+    if not path.exists():
+        return 0
+    with path.open(encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        if field is None:
+            return sum(1 for _ in reader)
+        return sum(1 for row in reader if (row.get(field) or "") == (value or ""))
 
 
 def read_owner_change_clients(path: Path) -> set[str]:
@@ -389,24 +404,35 @@ def build_interpretation(summary_by_key: dict[str, dict[str, Any]]) -> list[str]
     membership_templates = summary_by_key["membership_templates"]
     services = summary_by_key["service_clients"]
     service_templates = summary_by_key["service_templates"]
+    refuser_clients = count_csv_rows(ROOT / "output/20260630_fix_owner/csv/new_application_refusers.csv")
+    refuser_placeholders = count_csv_rows(
+        ROOT / "output/20260630_fix_owner_new_import/staging/membership_import_rows.csv",
+        "_refuser_placeholder",
+        "1",
+    )
 
     return [
         "",
         "## Interpretation",
         "",
-        "Main count changes are consistent with the newer backup, the later",
-        "cutoff, and the explicit `Карельский -> Ровио` remap:",
+        "Main count changes are consistent with the newer backup, the later cutoff,",
+        "the explicit `Карельский -> Ровио` remap, and the customer-requested",
+        "`Новые заявки / Неразобранные -> tag=отказники` transfer:",
         "",
         f"- `import_заявки`: `{signed(import_rows['row_delta'])}` rows/clients. There are "
         f"`{import_rows['added_keys']}` new exported client ids and "
-        f"`{import_rows['removed_keys']}` old exported client ids no longer exported.",
+        f"`{import_rows['removed_keys']}` old exported client ids no longer exported. "
+        f"The current rebuild also moves `{refuser_clients}` final new-application "
+        "clients out of this XLSX into the membership import.",
         f"- `plastic_cards`: `{signed(cards['row_delta'])}` rows. Since this XLSX has no "
         "`client_id`, rows are compared by normalized phone + FIO.",
         f"- `абонементы клиентов`: `{signed(memberships['row_delta'])}` rows and "
         f"`{signed(memberships['client_delta'])}` row clients. Common contract rows are "
         f"mostly stable: `{memberships['unchanged_common_keys']}` of "
         f"`{memberships['common_keys']}` common `contract_id` rows are byte-level identical "
-        "at exported-field level.",
+        "at exported-field level. The row increase includes tagged refuser rows; "
+        f"`{refuser_placeholders}` of them are client-only placeholder rows for refusers "
+        "without any membership facts.",
         f"- `шаблоны абонементов`: total stayed `{membership_templates['new_rows']}`; "
         f"`{membership_templates['changed_common_keys']}` shared template rows changed "
         "business values.",

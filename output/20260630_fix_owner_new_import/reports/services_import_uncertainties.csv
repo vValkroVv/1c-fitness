@@ -12,7 +12,7 @@ service_has_no_active_rows_for_final_clients,,,,Йога в гамаках(пр�
 service_has_no_active_rows_for_final_clients,,,,Сайкл для начинающих без клубной карты,Active rows for final clients: 0; historical fallback rows selected: 0.
 service_has_no_rows_for_final_clients,,,,Сайкл для начинающих без клубной карты,No active or historical sale rows were found for clients from final import_zayavki.
 service_has_no_active_rows_for_final_clients,,,,Сайкл для начинающих при наличии клубной карты,Active rows for final clients: 0; historical fallback rows selected: 5.
-service_has_no_active_rows_for_final_clients,,,,Сайкл разовое без клубной карты,Active rows for final clients: 0; historical fallback rows selected: 4.
+service_has_no_active_rows_for_final_clients,,,,Сайкл разовое без клубной карты,Active rows for final clients: 0; historical fallback rows selected: 2.
 service_has_no_active_rows_for_final_clients,,,,Сайкл разовое при наличии клубной карты,Active rows for final clients: 0; historical fallback rows selected: 5.
 service_has_no_active_rows_for_final_clients,,,,Стрип-пластика,Active rows for final clients: 0; historical fallback rows selected: 5.
 service_has_no_active_rows_for_final_clients,,,,Восстановление пластиковой карты,Active rows for final clients: 0; historical fallback rows selected: 5.
@@ -32,7 +32,7 @@ service_has_no_active_rows_for_final_clients,,,,Пакет 8 ВИП,Active rows 
 service_has_no_active_rows_for_final_clients,,,,Пробная П/Т,Active rows for final clients: 0; historical fallback rows selected: 5.
 service_has_no_active_rows_for_final_clients,,,,Разовая,Active rows for final clients: 0; historical fallback rows selected: 5.
 service_has_no_active_rows_for_final_clients,,,,Разовая ВИП,Active rows for final clients: 0; historical fallback rows selected: 5.
-service_has_no_active_rows_for_final_clients,,,,Субаренда 1 посещение,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Субаренда 1 посещение,Active rows for final clients: 0; historical fallback rows selected: 1.
 service_has_no_active_rows_for_final_clients,,,,Подарочный сертификат на сумму 1000,Active rows for final clients: 0; historical fallback rows selected: 5.
 service_has_no_active_rows_for_final_clients,,,,Подарочный сертификат на сумму 1500,Active rows for final clients: 0; historical fallback rows selected: 5.
 service_has_no_active_rows_for_final_clients,,,,Подарочный сертификат на сумму 2000,Active rows for final clients: 0; historical fallback rows selected: 5.

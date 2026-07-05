@@ -28,6 +28,30 @@ FITBASE_LABELS = {
     "Реактивация": ("Реактивация(годовые абонементы)", "Все закрытые абонементы"),
 }
 PHONE_SPLIT_RE = re.compile(r"[,;]\s*")
+NEW_APPLICATION_REFUSER_FIELDS = [
+    "client_ref",
+    "client_id",
+    "phone",
+    "client_fio",
+    "email",
+    "funnel",
+    "funnel_step",
+    "budget",
+    "create_date",
+    "manager",
+    "branch",
+    "normalized_club",
+    "club_source",
+    "selected_card_number",
+    "selected_card_ref",
+    "selected_subscription_ref",
+    "selected_subscription_name",
+    "selected_subscription_start_date",
+    "selected_subscription_end_date",
+    "selected_subscription_sale_date",
+    "selection_reason",
+    "cutoff_date",
+]
 
 
 def load_three_funnel_builder():
@@ -244,6 +268,61 @@ def filter_main_export_rows(
     ]
 
 
+def is_new_application_refuser(row: dict[str, str]) -> bool:
+    return row.get("funnel") == "Новые заявки" and row.get("funnel_step") == "Неразобранные"
+
+
+def split_new_application_refusers(
+    rows: list[dict[str, str]],
+    transfer_new_applications_to_memberships: bool,
+) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+    if not transfer_new_applications_to_memberships:
+        return [dict(row) for row in rows], []
+    kept_rows: list[dict[str, str]] = []
+    refuser_rows: list[dict[str, str]] = []
+    for row in rows:
+        if is_new_application_refuser(row):
+            refuser_rows.append(dict(row))
+        else:
+            kept_rows.append(dict(row))
+    return kept_rows, refuser_rows
+
+
+def refuser_export_row(row: dict[str, str]) -> dict[str, str]:
+    return {
+        "client_ref": row.get("client_ref", ""),
+        "client_id": row.get("client_id", ""),
+        "phone": row.get("phones", ""),
+        "client_fio": row.get("client_fio", ""),
+        "email": row.get("email", ""),
+        "funnel": row.get("funnel", ""),
+        "funnel_step": row.get("funnel_step", ""),
+        "budget": row.get("budget", ""),
+        "create_date": row.get("create_date", ""),
+        "manager": row.get("manager", ""),
+        "branch": row.get("branch", ""),
+        "normalized_club": row.get("normalized_club", ""),
+        "club_source": row.get("club_source", ""),
+        "selected_card_number": row.get("selected_card_number", ""),
+        "selected_card_ref": row.get("selected_card_ref", ""),
+        "selected_subscription_ref": row.get("selected_subscription_ref", ""),
+        "selected_subscription_name": row.get("selected_subscription_name", ""),
+        "selected_subscription_start_date": row.get("selected_subscription_start_date", ""),
+        "selected_subscription_end_date": row.get("selected_subscription_end_date", ""),
+        "selected_subscription_sale_date": row.get("selected_subscription_sale_date", ""),
+        "selection_reason": row.get("selection_reason", ""),
+        "cutoff_date": row.get("cutoff_date", ""),
+    }
+
+
+def write_new_application_refusers(csv_dir: Path, rows: list[dict[str, str]]) -> None:
+    write_csv(
+        csv_dir / "new_application_refusers.csv",
+        [refuser_export_row(row) for row in rows],
+        NEW_APPLICATION_REFUSER_FIELDS,
+    )
+
+
 def filter_cards_export_rows(rows: list[dict[str, str]], funnel_filter: str) -> list[dict[str, str]]:
     if not funnel_filter:
         return [dict(row) for row in rows]
@@ -292,6 +371,8 @@ def write_export_filter_reports(
     main_rows: list[dict[str, str]],
     cards_rows: list[dict[str, str]],
     require_phone_for_new_applications: bool,
+    transfer_new_applications_to_memberships: bool,
+    transferred_new_application_rows: list[dict[str, str]],
     cards_funnel_filter: str,
     phone_deduplication_applied: bool,
     phone_deduplication_removed_rows: list[dict[str, object]],
@@ -322,8 +403,16 @@ def write_export_filter_reports(
             "value": "1" if require_phone_for_new_applications else "0",
         },
         {
+            "metric": "main_rule_new_applications_to_memberships",
+            "value": "1" if transfer_new_applications_to_memberships else "0",
+        },
+        {
             "metric": "main_excluded_new_applications_without_phone",
             "value": new_applications_without_phone_count,
+        },
+        {
+            "metric": "main_transferred_new_applications_to_memberships",
+            "value": len(transferred_new_application_rows),
         },
         {"metric": "cards_funnel_filter", "value": cards_funnel_filter or "all"},
         {"metric": "cards_excluded_not_matching_filter", "value": len(cards_excluded_refs)},
@@ -368,6 +457,12 @@ def write_export_filter_reports(
             else "- Main `import_заявки` XLSX: no phone-based new-application filter."
         ),
         (
+            "- Main `import_заявки` XLSX: final `Новые заявки / Неразобранные` rows "
+            "are moved to the membership import with tag `отказники`."
+            if transfer_new_applications_to_memberships
+            else "- Main `import_заявки` XLSX: final `Новые заявки / Неразобранные` rows stay in requests."
+        ),
+        (
             f"- Plastic-card XLSX: only internal funnel `{cards_funnel_filter}` is exported."
             if cards_funnel_filter
             else "- Plastic-card XLSX: all funnels are exported."
@@ -380,6 +475,7 @@ def write_export_filter_reports(
         f"- cards_xlsx_clients: `{len(cards_rows)}`",
         f"- main_excluded_total: `{len(main_excluded_refs)}`",
         f"- main_excluded_new_applications_without_phone: `{new_applications_without_phone_count}`",
+        f"- main_transferred_new_applications_to_memberships: `{len(transferred_new_application_rows)}`",
         f"- cards_excluded_not_matching_filter: `{len(cards_excluded_refs)}`",
         f"- phone_deduplication_removed_clients: `{len(phone_deduplication_removed_rows)}`",
         "",
@@ -475,8 +571,13 @@ def build_combined(args: argparse.Namespace) -> None:
     phone_deduplication_removed_rows: list[dict[str, object]] = []
     if args.dedupe_by_phone_keep_latest_subscription:
         main_rows, phone_deduplication_removed_rows = dedupe_by_phone_keep_latest_subscription(main_rows)
+    main_rows, new_application_refuser_rows = split_new_application_refusers(
+        main_rows,
+        args.main_transfer_new_applications_to_memberships,
+    )
+    write_new_application_refusers(csv_dir, new_application_refuser_rows)
     cards_rows = filter_cards_export_rows(
-        main_rows if args.dedupe_by_phone_keep_latest_subscription else rows,
+        main_rows if args.dedupe_by_phone_keep_latest_subscription or args.main_transfer_new_applications_to_memberships else rows,
         args.cards_funnel_filter,
     )
     write_export_filter_reports(
@@ -485,6 +586,8 @@ def build_combined(args: argparse.Namespace) -> None:
         main_rows=main_rows,
         cards_rows=cards_rows,
         require_phone_for_new_applications=args.main_require_phone_for_new_applications,
+        transfer_new_applications_to_memberships=args.main_transfer_new_applications_to_memberships,
+        transferred_new_application_rows=new_application_refuser_rows,
         cards_funnel_filter=args.cards_funnel_filter,
         phone_deduplication_applied=args.dedupe_by_phone_keep_latest_subscription,
         phone_deduplication_removed_rows=phone_deduplication_removed_rows,
@@ -506,6 +609,7 @@ def build_combined(args: argparse.Namespace) -> None:
     print(f"main_xlsx_rows={len(fitbase_main_rows)}")
     print(f"cards_xlsx_rows={len(fitbase_card_rows)}")
     print(f"phone_deduplication_removed_rows={len(phone_deduplication_removed_rows)}")
+    print(f"new_application_refuser_rows={len(new_application_refuser_rows)}")
     print(f"combined_main={main_xlsx.relative_to(ROOT)}")
     print(f"combined_cards={cards_xlsx.relative_to(ROOT)}")
     print(f"reports_dir={reports_dir.relative_to(ROOT)}")
@@ -529,6 +633,11 @@ def parse_args() -> argparse.Namespace:
         "--main-require-phone-for-new-applications",
         action="store_true",
         help="Exclude internal `Новые заявки` rows without phone from the main import XLSX.",
+    )
+    parser.add_argument(
+        "--main-transfer-new-applications-to-memberships",
+        action="store_true",
+        help="Move final internal `Новые заявки / Неразобранные` rows out of requests into the membership tag import.",
     )
     parser.add_argument(
         "--cards-funnel-filter",

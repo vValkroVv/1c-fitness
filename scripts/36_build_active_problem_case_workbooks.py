@@ -132,7 +132,7 @@ def read_main_rows() -> tuple[list[str], dict[str, list[Any]]]:
     contract_idx = headers.index("contract_id")
 
     rows: dict[str, list[Any]] = {}
-    for values in ws.iter_rows(min_row=2, values_only=True):
+    for values in ws.iter_rows(min_row=3, values_only=True):
         contract_id = str(values[contract_idx] or "")
         rows[contract_id] = list(values)
 

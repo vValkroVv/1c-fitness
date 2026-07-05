@@ -39,9 +39,10 @@ output/20260630_fix_owner/fitbase_active_clients_plastic_cards_20260630_all_funn
 
 ```text
 stage final_funnel_clients: 73292
-import_zayavki rows: 65231
+import_zayavki rows: 39524
 plastic_cards rows: 10907
 same-phone dedup removed: 2388
+new_application_refusers moved to membership: 25707
 validation: PASS
 ```
 
@@ -50,6 +51,7 @@ validation: PASS
 ```text
 output/20260630_fix_owner/reports/validation_report.md
 output/20260630_fix_owner/reports/owner_change_validation.md
+output/20260630_fix_owner/csv/new_application_refusers.csv
 ```
 
 ## Импорт абонементов
@@ -70,12 +72,15 @@ output/20260630_fix_owner_new_import/fitbase_import_shablony_abonementov_2026063
 Счетчики:
 
 ```text
-client membership rows: 98944
+client membership rows: 120040
 membership template rows: 114
 source final clients: 65231
-row clients: 43080
+row clients: 64176
 duplicate contract_id values: 0
 missing template names: 0
+refuser source clients: 25707
+refuser tagged rows: 26950
+refuser placeholder rows: 21096
 validation: PASS
 ```
 
@@ -100,7 +105,7 @@ output/20260630_fix_owner_new_import/fitbase_import_shablony_uslug_20260630.xlsx
 Счетчики:
 
 ```text
-client service rows: 528
+client service rows: 522
 service template rows: 51
 services represented in client rows: 44
 template-only services: 7
@@ -130,7 +135,7 @@ output/20260630_fix_owner_new_import/active_problem_3_non_named_payment_left_179
 Проверка:
 
 ```text
-all files have 20 import-abonement columns
+all files have 21 import-abonement columns
 duplicate contract_id inside each file: 0
 contract_id intersections between active-problem files: 0
 validation: PASS

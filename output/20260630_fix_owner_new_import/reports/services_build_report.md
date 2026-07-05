@@ -1,15 +1,15 @@
 # Services import build report
 
-- source final clients: 65231
+- source final clients: 39524
 - raw service facts: 50215
-- client rows selected: 528
+- client rows selected: 522
 - active client rows selected: 352
-- historical fallback rows selected: 175
+- historical fallback rows selected: 169
 - outside import_zayavki fallback rows selected: 1
 - template rows: 51
 - services with selected rows: 44
 - services template-only/no final-client rows: 7
-- payment type counts: {'безналичные': 503, 'сбп': 10, 'default_cash_no_payment_method': 9, 'blank': 6}
+- payment type counts: {'безналичные': 499, 'сбп': 8, 'default_cash_no_payment_method': 9, 'blank': 6}
 
 ## Output
 

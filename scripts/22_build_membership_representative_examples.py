@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATE_STAMP = "20260525_0800"
 
 CLIENT_HEADERS = [
+    "tag",
     "contract_id",
     "client_id",
     "phone",
@@ -352,9 +353,10 @@ def read_main_rows(path: Path) -> tuple[list[Any], list[Any], dict[str, list[Any
             }
         )
     data_by_contract_id: dict[str, list[Any]] = {}
+    contract_idx = header_row.index("contract_id")
     for row_idx in range(3, ws.max_row + 1):
         values = [ws.cell(row_idx, col).value for col in range(1, len(CLIENT_HEADERS) + 1)]
-        contract_id = str(values[0] or "").strip()
+        contract_id = str(values[contract_idx] or "").strip()
         if contract_id:
             data_by_contract_id[contract_id] = values
     wb.close()

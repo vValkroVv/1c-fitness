@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 DATE_STAMP = "20260525_0800"
 CLIENT_HEADERS = [
+    "tag",
     "contract_id",
     "client_id",
     "phone",
@@ -42,6 +43,29 @@ CLIENT_HEADERS = [
     "payment_left",
     "type_of_payment",
     "manager",
+]
+CLIENT_RUS_HEADERS = [
+    "Тег",
+    "Внутренний номер абонемента",
+    "Внутренний номер клиента",
+    "Телефон клиента",
+    "ФИО клиента  *",
+    "Название абонемента *",
+    "Номер карты",
+    "Продолжительность",
+    "Тип продолжительности",
+    "Дата  добавления *",
+    "Дата оплаты *",
+    "Дата активации ",
+    "Дата окончания",
+    "Осталось дней для заморозки",
+    "Осталось гостевых визитов",
+    "Осталось посещений *",
+    "Стоимость *",
+    "Оплачено *",
+    "Осталось оплатить *",
+    "Тип оплаты",
+    "Менеджер ",
 ]
 TEMPLATE_HEADERS = [
     "branches_access",
@@ -161,6 +185,7 @@ class SourceClient:
     create_date: date | None
     manager: str
     branch: str
+    tag: str = ""
 
 
 def as_abs(path: str | Path) -> Path:
@@ -302,7 +327,7 @@ def business_zero_override_reason(fact: dict[str, str]) -> str:
     return ""
 
 
-def read_source_clients(path: Path) -> dict[str, SourceClient]:
+def read_source_clients(path: Path, default_tag: str = "") -> dict[str, SourceClient]:
     wb = load_workbook(path, read_only=True, data_only=True)
     ws = wb.active
     header_row = next(ws.iter_rows(min_row=1, max_row=1, values_only=True))
@@ -326,8 +351,35 @@ def read_source_clients(path: Path) -> dict[str, SourceClient]:
             create_date=parse_date(values[zero_based["create_date"]]),
             manager=str(values[zero_based["manager"]] or "").strip(),
             branch=str(values[zero_based["филиал"]] or "").strip(),
+            tag=default_tag,
         )
     wb.close()
+    return clients
+
+
+def read_refuser_clients(path: Path) -> dict[str, SourceClient]:
+    if not path.exists():
+        return {}
+    clients: dict[str, SourceClient] = {}
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        required = {"client_id", "phone", "client_fio", "create_date", "manager", "branch"}
+        missing = sorted(required - set(reader.fieldnames or []))
+        if missing:
+            raise ValueError(f"Missing required columns in {path}: {missing}")
+        for row in reader:
+            client_id = (row.get("client_id") or "").strip()
+            if not client_id:
+                continue
+            clients[client_id] = SourceClient(
+                client_id=client_id,
+                phone=(row.get("phone") or "").strip(),
+                client_fio=(row.get("client_fio") or "").strip(),
+                create_date=parse_date(row.get("create_date")),
+                manager=(row.get("manager") or "").strip(),
+                branch=(row.get("branch") or "").strip(),
+                tag="отказники",
+            )
     return clients
 
 
@@ -657,6 +709,7 @@ def build_rows(
         visits_left, visits_left_source, visits_left_issue = compute_visits_left(fact, contract_name)
 
         row = {
+            "tag": source.tag,
             "contract_id": contract_id,
             "client_id": client_id,
             "phone": source.phone,
@@ -696,10 +749,13 @@ def build_rows(
             "_owner_change_ref": fact.get("owner_change_ref", ""),
             "_visits_left_source": visits_left_source,
             "_subrent_rg3336_case_group": fact.get("subrent_rg3336_case_group", ""),
+            "_refuser_placeholder": "0",
         }
         client_rows.append(row)
 
         counters["rows_by_product_class"][fact.get("product_class", "")] += 1
+        if source.tag == "отказники":
+            counters["refusers"]["real_membership_rows"] += 1
         counters["duration_source"][duration_source] += 1
         counters["money_source"][money_source] += 1
         counters["payment_type"][payment_type or "blank"] += 1
@@ -784,6 +840,60 @@ def build_rows(
         current = template_by_name.get(template_key)
         if current is None or str(template_row["_last_sale_datetime"]) >= str(current.get("_last_sale_datetime", "")):
             template_by_name[template_key] = template_row
+
+    row_client_ids = {str(row.get("client_id", "")) for row in client_rows}
+    for source in source_clients.values():
+        if source.tag != "отказники" or source.client_id in row_client_ids:
+            continue
+        client_rows.append(
+            {
+                "tag": "отказники",
+                "contract_id": "",
+                "client_id": source.client_id,
+                "phone": source.phone,
+                "client_fio": source.client_fio,
+                "contract_name": "",
+                "card": cards.get(source.client_id, ""),
+                "duration": None,
+                "duration_type": None,
+                "create_date": source.create_date,
+                "payment_date": None,
+                "activation_date": None,
+                "end_date": None,
+                "freeze": None,
+                "guests": None,
+                "visits_left": None,
+                "price": None,
+                "amount_of_payments": None,
+                "payment_left": None,
+                "type_of_payment": "",
+                "manager": source.manager,
+                "_subscription_ref": "",
+                "_product_ref": "",
+                "_product_class": "refuser_without_membership",
+                "_is_subrent": "0",
+                "_is_limited_subrent": "0",
+                "_duration_source": "refuser_without_membership",
+                "_money_source": "refuser_without_membership",
+                "_payment_method_raw": "",
+                "_payment_match_source": "",
+                "_business_override": "",
+                "_membership_sale_line_amount": "",
+                "_membership_sale_line_count": "",
+                "_document131_refund_count": "",
+                "_document131_posted_unmarked_refund_count": "",
+                "_owner_change_ref": "",
+                "_visits_left_source": "refuser_without_membership",
+                "_subrent_rg3336_case_group": "",
+                "_refuser_placeholder": "1",
+            }
+        )
+        counters["rows_by_product_class"]["refuser_without_membership"] += 1
+        counters["duration_source"]["refuser_without_membership"] += 1
+        counters["money_source"]["refuser_without_membership"] += 1
+        counters["payment_type"]["blank"] += 1
+        counters["visits_left_source"]["refuser_without_membership"] += 1
+        counters["refusers"]["placeholder_rows"] += 1
 
     for template_key, variants in template_variants.items():
         if len(variants) > 1:
@@ -911,16 +1021,39 @@ def build_validation(
     uncertainties: list[dict[str, str]],
     counters: dict[str, Counter],
 ) -> str:
-    contract_ids = [str(row["contract_id"]) for row in client_rows]
+    contract_ids = [str(row["contract_id"]) for row in client_rows if str(row.get("contract_id") or "").strip()]
     duplicate_contract_ids = [item for item, count in Counter(contract_ids).items() if count > 1]
     row_client_ids = {str(row["client_id"]) for row in client_rows}
     template_names = {str(row["name"]) for row in template_rows}
-    missing_template_names = sorted({str(row["contract_name"]) for row in client_rows} - template_names)
+    missing_template_names = sorted(
+        {str(row["contract_name"]) for row in client_rows if str(row.get("contract_name") or "").strip()}
+        - template_names
+    )
     required_blank_counts = Counter()
     for row in client_rows:
-        for field in ["contract_id", "client_id", "client_fio", "contract_name", "create_date", "payment_date", "price"]:
+        required_fields = ["tag", "client_id", "client_fio", "create_date", "manager"]
+        if row.get("_refuser_placeholder") != "1":
+            required_fields = [
+                "contract_id",
+                "client_id",
+                "client_fio",
+                "contract_name",
+                "create_date",
+                "payment_date",
+                "price",
+                "manager",
+            ]
+        for field in required_fields:
             if row.get(field) in (None, ""):
                 required_blank_counts[field] += 1
+    refuser_client_ids = {client.client_id for client in source_clients.values() if client.tag == "отказники"}
+    tagged_refuser_client_ids = {str(row["client_id"]) for row in client_rows if row.get("tag") == "отказники"}
+    refuser_placeholder_rows = sum(1 for row in client_rows if row.get("_refuser_placeholder") == "1")
+    refuser_real_rows = sum(
+        1
+        for row in client_rows
+        if row.get("tag") == "отказники" and row.get("_refuser_placeholder") != "1"
+    )
 
     lines = [
         "# Membership import validation",
@@ -933,6 +1066,10 @@ def build_validation(
         f"- duplicate contract_id count: {len(duplicate_contract_ids)}",
         f"- contract names missing in template file: {len(missing_template_names)}",
         f"- uncertainty rows: {len(uncertainties)}",
+        f"- refuser source clients: {len(refuser_client_ids)}",
+        f"- refuser clients present in membership rows: {len(tagged_refuser_client_ids)}",
+        f"- refuser real membership rows: {refuser_real_rows}",
+        f"- refuser placeholder rows: {refuser_placeholder_rows}",
         "",
         "## Row Classes",
         "",
@@ -966,6 +1103,12 @@ def build_validation(
             lines.append(f"- {key}: {value}")
     else:
         lines.append("- none")
+    lines.extend(["", "## Refusers", ""])
+    if counters["refusers"]:
+        for key, value in counters["refusers"].most_common():
+            lines.append(f"- {key}: {value}")
+    else:
+        lines.append("- none")
     lines.extend(["", "## Required Blank Counts", ""])
     if required_blank_counts:
         for key, value in required_blank_counts.items():
@@ -976,6 +1119,7 @@ def build_validation(
     lines.append(f"- all row clients are from source final XLSX: {'yes' if row_client_ids <= set(source_clients) else 'no'}")
     lines.append(f"- contract_id unique: {'yes' if not duplicate_contract_ids else 'no'}")
     lines.append(f"- every contract_name exists in templates: {'yes' if not missing_template_names else 'no'}")
+    lines.append(f"- every refuser client has a tagged row: {'yes' if refuser_client_ids <= tagged_refuser_client_ids else 'no'}")
     return "\n".join(lines) + "\n"
 
 
@@ -1020,16 +1164,18 @@ def main() -> int:
     reports_dir = output_dir / "reports"
     staging_dir = output_dir / "staging"
     source_clients_xlsx = source_output_dir / f"fitbase_active_clients_import_zayavki_{args.date_stamp}_all_funnels.xlsx"
+    refuser_clients_csv = source_output_dir / "csv" / "new_application_refusers.csv"
     facts_tsv = as_abs(args.facts_tsv) if args.facts_tsv else staging_dir / "membership_import_facts.tsv"
 
     source_clients = read_source_clients(source_clients_xlsx)
+    source_clients.update(read_refuser_clients(refuser_clients_csv))
     cards = read_cards(source_output_dir / "staging")
     facts = read_facts(facts_tsv)
     client_rows, template_rows, uncertainties, excluded_rows, counters = build_rows(source_clients, cards, facts)
 
     client_xlsx = output_dir / f"fitbase_import_abonementy_clientov_{args.date_stamp}.xlsx"
     template_xlsx = output_dir / f"fitbase_import_shablony_abonementov_{args.date_stamp}.xlsx"
-    write_workbook(as_abs(args.client_template), client_xlsx, CLIENT_HEADERS, client_rows)
+    write_workbook(as_abs(args.client_template), client_xlsx, CLIENT_HEADERS, client_rows, CLIENT_RUS_HEADERS)
     write_workbook(as_abs(args.membership_template), template_xlsx, TEMPLATE_HEADERS, template_rows, TEMPLATE_RUS_HEADERS)
 
     write_csv(staging_dir / "membership_import_rows.csv", client_rows, CLIENT_HEADERS + [
@@ -1050,6 +1196,7 @@ def main() -> int:
         "_owner_change_ref",
         "_visits_left_source",
         "_subrent_rg3336_case_group",
+        "_refuser_placeholder",
     ])
     write_csv(staging_dir / "membership_template_rows.csv", template_rows, TEMPLATE_HEADERS)
     write_csv(staging_dir / "membership_import_excluded_rows.csv", excluded_rows, [

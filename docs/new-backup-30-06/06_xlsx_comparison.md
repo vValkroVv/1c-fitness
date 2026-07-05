@@ -28,23 +28,24 @@ window `2026-05-23` to `2026-06-30`, because the new file is
 
 | File | Old rows | New rows | Delta | Old clients | New clients | Client delta | Common | Added | Removed | Changed common | Unchanged common | Suspicious changed |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Импорт заявок | 64934 | 65231 | 297 | 64934 | 65231 | 297 | 64773 | 458 | 161 | 7480 | 57293 | 0 |
+| Импорт заявок | 64934 | 39524 | -25410 | 64934 | 39524 | -25410 | 39263 | 261 | 25671 | 5097 | 34166 | 0 |
 | Пластиковые карты | 10890 | 10907 | 17 |  |  |  | 10099 | 808 | 791 | 285 | 9814 | 0 |
-| Абонементы клиентов | 99383 | 98944 | -439 | 43137 | 43080 | -57 | 98875 | 69 | 508 | 11154 | 87721 | 0 |
+| Абонементы клиентов | 99383 | 120040 | 20657 | 43137 | 64176 | 21039 | 98875 | 70 | 508 | 11154 | 87721 | 0 |
 | Шаблоны абонементов | 114 | 114 | 0 |  |  |  | 112 | 2 | 2 | 7 | 105 | 0 |
-| Услуги клиентов | 529 | 528 | -1 | 472 | 472 | 0 | 510 | 18 | 19 | 59 | 451 | 0 |
+| Услуги клиентов | 529 | 522 | -7 | 472 | 469 | -3 | 499 | 23 | 30 | 59 | 440 | 0 |
 | Шаблоны услуг | 51 | 51 | 0 |  |  |  | 51 | 0 | 0 | 1 | 50 | 0 |
 
 ## Interpretation
 
-Main count changes are consistent with the newer backup, the later
-cutoff, and the explicit `Карельский -> Ровио` remap:
+Main count changes are consistent with the newer backup, the later cutoff,
+the explicit `Карельский -> Ровио` remap, and the customer-requested
+`Новые заявки / Неразобранные -> tag=отказники` transfer:
 
-- `import_заявки`: `+297` rows/clients. There are `458` new exported client ids and `161` old exported client ids no longer exported.
+- `import_заявки`: `-25410` rows/clients. There are `261` new exported client ids and `25671` old exported client ids no longer exported. The current rebuild also moves `25707` final new-application clients out of this XLSX into the membership import.
 - `plastic_cards`: `+17` rows. Since this XLSX has no `client_id`, rows are compared by normalized phone + FIO.
-- `абонементы клиентов`: `-439` rows and `-57` row clients. Common contract rows are mostly stable: `87721` of `98875` common `contract_id` rows are byte-level identical at exported-field level.
+- `абонементы клиентов`: `+20657` rows and `+21039` row clients. Common contract rows are mostly stable: `87721` of `98875` common `contract_id` rows are byte-level identical at exported-field level. The row increase includes tagged refuser rows; `21096` of them are client-only placeholder rows for refusers without any membership facts.
 - `шаблоны абонементов`: total stayed `114`; `7` shared template rows changed business values.
-- `услуги клиентов`: `-1` row; unique client count stayed `472`.
+- `услуги клиентов`: `-7` row; unique client count stayed `469`.
 - `шаблоны услуг`: total stayed `51`; `1` shared template changed business values.
 
 The higher `changed_common` count versus the pre-Karelsky check is expected:
@@ -53,7 +54,7 @@ receive Rovio managers instead of the former fallback manager.
 
 Top changed fields confirm that this is primarily a manager remap:
 
-- `import_заявки`: `manager:6042, funnel:1570, funnel_step:1570, филиал:529, create_date:363, phone:90, client_fio:85`
+- `import_заявки`: `manager:3863, funnel:1334, funnel_step:1334, филиал:478, create_date:305, phone:84, client_fio:66`
 - `абонементы клиентов`: `manager:7749, card:2351, freeze:550, end_date:508, create_date:479, contract_name:331, phone:273, amount_of_payments:168`
 - `услуги клиентов`: `manager:58, phone:1`
 
@@ -79,8 +80,8 @@ stayed the same did not change; the additional manager deltas are the intended
 
 ### Импорт заявок
 
-- top changed fields: `manager:6042, funnel:1570, funnel_step:1570, филиал:529, create_date:363, phone:90, client_fio:85`
-- reason flags: `stage_export_source_changed:7480, selected_subscription_changed:1354, owner_change_client:1234, selected_subscription_sale_after_2026-05-23:646, same_subscription_crossed_cutoff_window:484, export_date_field_changed:363, client_created_after_2026-05-23:59, new_export_date_after_2026-05-23:59`
+- top changed fields: `manager:3863, funnel:1334, funnel_step:1334, филиал:478, create_date:305, phone:84, client_fio:66`
+- reason flags: `stage_export_source_changed:5097, selected_subscription_changed:1118, owner_change_client:1050, selected_subscription_sale_after_2026-05-23:646, same_subscription_crossed_cutoff_window:484, export_date_field_changed:305, client_created_after_2026-05-23:44, new_export_date_after_2026-05-23:44`
 - details: `output/20260630_xlsx_comparison/import_zayavki__changed_common.csv`, `output/20260630_xlsx_comparison/import_zayavki__added.csv`, `output/20260630_xlsx_comparison/import_zayavki__removed.csv`
 
 ### Пластиковые карты

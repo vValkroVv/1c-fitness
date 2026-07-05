@@ -1,15 +1,30 @@
 service_name,changed_fields,old_total_sale_rows,new_total_sale_rows,old_final_client_sale_rows,new_final_client_sale_rows,old_active_final_client_rows,new_active_final_client_rows,old_selected_rows,new_selected_rows,old_selected_kind,new_selected_kind,old_selected_outside_import_zayavki,new_selected_outside_import_zayavki,old_latest_sale_datetime,new_latest_sale_datetime
-Аренда рекламного места,final_client_sale_rows,27,27,27,25,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-04-14 10:18:22,2026-04-14 10:18:22
-Восстановление пластиковой карты,total_sale_rows; final_client_sale_rows; latest_sale_datetime,2063,2064,2044,2045,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-23 18:17:46,2026-05-24 14:26:41
-Доплата,final_client_sale_rows,2751,2751,2686,2667,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-04-17 12:28:40,2026-04-17 12:28:40
-Пакет 12 (персональные тренировки),total_sale_rows; final_client_sale_rows; latest_sale_datetime,8775,8776,8670,8677,270,270,270,270,active,active,0,0,2026-05-22 18:06:33,2026-05-24 10:22:51
-Перевод из клуба в клуб,final_client_sale_rows,356,356,354,355,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-17 13:08:21,2026-05-17 13:08:21
-Переоформление платное абонемента на фитнес,total_sale_rows; final_client_sale_rows,588,578,548,546,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-19 19:30:04,2026-05-19 19:30:04
-Подарочный сертификат на сумму 5000,total_sale_rows; final_client_sale_rows; latest_sale_datetime,25,24,23,22,0,0,5,5,historical_fallback,historical_fallback,0,0,2025-10-30 20:15:06,2025-06-05 18:53:06
-Разовое посещение,total_sale_rows; final_client_sale_rows; latest_sale_datetime,6848,6854,6667,6673,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-22 20:02:08,2026-05-24 18:04:00
-Сайкл разовое без клубной карты,total_sale_rows; final_client_sale_rows; selected_rows,5,4,5,4,0,0,5,4,historical_fallback,historical_fallback,0,0,2026-04-16 13:38:36,2026-04-16 13:38:36
-Сайкл разовое при наличии клубной карты,total_sale_rows; final_client_sale_rows,5861,5858,5745,5742,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-04-24 00:00:00,2026-04-24 00:00:00
-Солярий 1 минута,total_sale_rows; final_client_sale_rows,11050,11049,10868,10859,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-20 12:11:21,2026-05-20 12:11:21
-Солярий 5 минут,total_sale_rows; final_client_sale_rows; latest_sale_datetime,2002,2006,1967,1969,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-23 18:08:31,2026-05-24 18:19:57
+Step-1 разовое посещение при наличии клубной карты,final_client_sale_rows,798,798,775,774,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-23 11:59:59,2026-05-23 11:59:59
+Аренда рекламного места,final_client_sale_rows,27,27,27,16,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-04-14 10:18:22,2026-04-14 10:18:22
+Восстановление пластиковой карты,total_sale_rows; final_client_sale_rows; latest_sale_datetime,2063,2064,2044,2037,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-23 18:17:46,2026-05-24 14:26:41
+Доплата,final_client_sale_rows,2751,2751,2686,2601,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-04-17 12:28:40,2026-04-17 12:28:40
+Заморозка абонемента 1 месяц,final_client_sale_rows,178,178,178,175,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-22 18:49:54,2026-05-22 18:49:54
+Заморозка абонемента 14 дней,final_client_sale_rows,66,66,65,64,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-08 18:51:06,2026-05-08 18:51:06
+Заморозка абонемента 90 дней,final_client_sale_rows,770,770,763,761,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-21 15:31:51,2026-05-21 15:31:51
+Йога в гамаках(при наличии клубной карты),final_client_sale_rows,920,920,895,869,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-04-12 16:43:15,2026-04-12 16:43:15
+Пакет 12 (персональные тренировки),total_sale_rows; final_client_sale_rows; latest_sale_datetime,8775,8776,8670,8676,270,270,270,270,active,active,0,0,2026-05-22 18:06:33,2026-05-24 10:22:51
+Пакет 8,final_client_sale_rows,2403,2403,2369,2366,80,80,80,80,active,active,0,0,2026-05-04 16:01:02,2026-05-04 16:01:02
+Перевод из клуба в клуб,final_client_sale_rows,356,356,354,353,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-17 13:08:21,2026-05-17 13:08:21
+Переоформление платное абонемента на фитнес,total_sale_rows; final_client_sale_rows,588,578,548,450,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-19 19:30:04,2026-05-19 19:30:04
+Подарочный сертификат на сумму 1000,final_client_sale_rows,18,18,15,14,0,0,5,5,historical_fallback,historical_fallback,0,0,2024-11-11 12:49:54,2024-11-11 12:49:54
+Подарочный сертификат на сумму 1500,final_client_sale_rows,17,17,15,11,0,0,5,5,historical_fallback,historical_fallback,0,0,2023-07-20 18:31:29,2023-07-20 18:31:29
+Подарочный сертификат на сумму 2000,final_client_sale_rows,31,31,30,27,0,0,5,5,historical_fallback,historical_fallback,0,0,2025-12-27 14:20:53,2025-12-27 14:20:53
+Подарочный сертификат на сумму 3000,final_client_sale_rows,27,27,24,21,0,0,5,5,historical_fallback,historical_fallback,0,0,2025-12-16 18:18:31,2025-12-16 18:18:31
+Подарочный сертификат на сумму 5000,total_sale_rows; final_client_sale_rows; latest_sale_datetime,25,24,23,17,0,0,5,5,historical_fallback,historical_fallback,0,0,2025-10-30 20:15:06,2025-06-05 18:53:06
+Пробная П/Т,final_client_sale_rows,125,125,124,119,0,0,5,5,historical_fallback,historical_fallback,0,0,2019-11-13 11:05:31,2019-11-13 11:05:31
+Разовая,final_client_sale_rows,3716,3716,3635,3562,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-03-13 16:37:31,2026-03-13 16:37:31
+Разовое посещение,total_sale_rows; final_client_sale_rows; latest_sale_datetime,6848,6854,6667,3772,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-22 20:02:08,2026-05-24 18:04:00
+Сайкл разовое без клубной карты,total_sale_rows; final_client_sale_rows; selected_rows,5,4,5,2,0,0,5,2,historical_fallback,historical_fallback,0,0,2026-04-16 13:38:36,2026-04-16 13:38:36
+Сайкл разовое при наличии клубной карты,total_sale_rows; final_client_sale_rows,5861,5858,5745,5701,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-04-24 00:00:00,2026-04-24 00:00:00
+Солярий 1 минута,total_sale_rows; final_client_sale_rows,11050,11049,10868,10715,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-20 12:11:21,2026-05-20 12:11:21
+Солярий 5 минут,total_sale_rows; final_client_sale_rows; latest_sale_datetime,2002,2006,1967,1948,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-05-23 18:08:31,2026-05-24 18:19:57
+Стрип-пластика,final_client_sale_rows,21,21,21,19,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-01-24 13:10:35,2026-01-24 13:10:35
+Субаренда 1 посещение,final_client_sale_rows; selected_rows,37,37,37,1,0,0,5,1,historical_fallback,historical_fallback,0,0,2026-02-14 09:47:22,2026-02-14 09:47:22
 Утеря ключа от шкафчика,total_sale_rows; final_client_sale_rows; latest_sale_datetime,26,25,26,25,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-04-25 18:55:31,2026-04-03 18:00:43
 Утеря магнитного ключа-метки,total_sale_rows; final_client_sale_rows; latest_sale_datetime,19,18,18,17,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-04-25 18:55:31,2026-04-03 18:00:43
+Утеря номерка от гардероба,final_client_sale_rows,131,131,130,129,0,0,5,5,historical_fallback,historical_fallback,0,0,2026-04-21 19:25:41,2026-04-21 19:25:41

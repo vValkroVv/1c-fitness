@@ -15,6 +15,7 @@ from openpyxl import load_workbook
 ROOT = Path(__file__).resolve().parents[1]
 DATE_STAMP = "20260525_0800"
 CLIENT_HEADERS = [
+    "tag",
     "contract_id",
     "client_id",
     "phone",
@@ -82,6 +83,19 @@ def read_source_client_ids(path: Path) -> set[str]:
     return ids
 
 
+def read_refuser_client_ids(path: Path) -> set[str]:
+    if not path.exists():
+        return set()
+    import csv
+
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        return {
+            str(row.get("client_id") or "").strip()
+            for row in csv.DictReader(handle)
+            if str(row.get("client_id") or "").strip()
+        }
+
+
 def blank(value: Any) -> bool:
     return value is None or value == ""
 
@@ -101,10 +115,14 @@ def main() -> int:
     source_clients_xlsx = source_output_dir / f"fitbase_active_clients_import_zayavki_{args.date_stamp}_all_funnels.xlsx"
     client_xlsx = output_dir / f"fitbase_import_abonementy_clientov_{args.date_stamp}.xlsx"
     template_xlsx = output_dir / f"fitbase_import_shablony_abonementov_{args.date_stamp}.xlsx"
+    refuser_clients_csv = source_output_dir / "csv" / "new_application_refusers.csv"
 
     client_headers, client_rows = iter_data_rows(client_xlsx, len(CLIENT_HEADERS))
     template_headers, template_rows = iter_data_rows(template_xlsx, len(TEMPLATE_HEADERS))
-    source_client_ids = read_source_client_ids(source_clients_xlsx)
+    refuser_client_ids = read_refuser_client_ids(refuser_clients_csv)
+    source_client_ids = read_source_client_ids(source_clients_xlsx) | refuser_client_ids
+    client_idx = {header: index for index, header in enumerate(CLIENT_HEADERS)}
+    template_idx = {header: index for index, header in enumerate(TEMPLATE_HEADERS)}
 
     errors: list[str] = []
     warnings: list[str] = []
@@ -113,42 +131,67 @@ def main() -> int:
     if template_headers != TEMPLATE_HEADERS:
         errors.append(f"template headers mismatch: {template_headers}")
 
-    contract_ids = [str(row[0]).strip() for row in client_rows]
+    contract_ids = [str(row[client_idx["contract_id"]]).strip() for row in client_rows if not blank(row[client_idx["contract_id"]])]
     duplicated_contracts = [item for item, count in Counter(contract_ids).items() if count > 1]
     if duplicated_contracts:
         errors.append(f"duplicate contract_id values: {len(duplicated_contracts)}")
 
-    client_ids = {str(row[1]).strip() for row in client_rows}
+    client_ids = {str(row[client_idx["client_id"]]).strip() for row in client_rows}
     unknown_clients = client_ids - source_client_ids
     if unknown_clients:
         errors.append(f"client rows outside source final XLSX: {len(unknown_clients)}")
 
-    template_names = {str(row[1]).strip() for row in template_rows}
-    missing_templates = {str(row[4]).strip() for row in client_rows} - template_names
+    template_names = {str(row[template_idx["name"]]).strip() for row in template_rows}
+    missing_templates = {
+        str(row[client_idx["contract_name"]]).strip()
+        for row in client_rows
+        if not blank(row[client_idx["contract_name"]])
+    } - template_names
     if missing_templates:
         errors.append(f"client contract_name missing in templates: {len(missing_templates)}")
 
-    required_indexes = {
-        "contract_id": 0,
-        "client_id": 1,
-        "client_fio": 3,
-        "contract_name": 4,
-        "create_date": 8,
-        "payment_date": 9,
-        "price": 15,
-        "amount_of_payments": 16,
-        "payment_left": 17,
-        "manager": 19,
-    }
     blanks = Counter()
+    refuser_rows = [row for row in client_rows if str(row[client_idx["tag"]] or "").strip() == "отказники"]
+    refuser_row_client_ids = {str(row[client_idx["client_id"]]).strip() for row in refuser_rows}
+    placeholder_refuser_rows = [
+        row
+        for row in refuser_rows
+        if blank(row[client_idx["contract_id"]]) and blank(row[client_idx["contract_name"]])
+    ]
     for row in client_rows:
-        for field, idx in required_indexes.items():
-            if blank(row[idx]):
+        is_refuser_placeholder = (
+            str(row[client_idx["tag"]] or "").strip() == "отказники"
+            and blank(row[client_idx["contract_id"]])
+            and blank(row[client_idx["contract_name"]])
+        )
+        required_fields = ["tag", "client_id", "client_fio", "create_date", "manager"] if is_refuser_placeholder else [
+            "contract_id",
+            "client_id",
+            "client_fio",
+            "contract_name",
+            "create_date",
+            "payment_date",
+            "price",
+            "amount_of_payments",
+            "payment_left",
+            "manager",
+        ]
+        for field in required_fields:
+            if blank(row[client_idx[field]]):
                 blanks[field] += 1
     if blanks:
         errors.append(f"required blanks: {dict(blanks)}")
+    if refuser_client_ids and not (refuser_client_ids <= refuser_row_client_ids):
+        errors.append(f"refuser clients missing tagged membership rows: {len(refuser_client_ids - refuser_row_client_ids)}")
+    untagged_blank_contract_rows = [
+        row
+        for row in client_rows
+        if blank(row[client_idx["contract_id"]]) and str(row[client_idx["tag"]] or "").strip() != "отказники"
+    ]
+    if untagged_blank_contract_rows:
+        errors.append(f"blank contract_id rows without tag=отказники: {len(untagged_blank_contract_rows)}")
 
-    payment_type_counts = Counter(str(row[18] or "blank") for row in client_rows)
+    payment_type_counts = Counter(str(row[client_idx["type_of_payment"]] or "blank") for row in client_rows)
     if payment_type_counts.get("blank", 0):
         warnings.append(f"blank payment type rows: {payment_type_counts['blank']}")
 
@@ -158,6 +201,9 @@ def main() -> int:
         f"- client rows: {len(client_rows)}",
         f"- template rows: {len(template_rows)}",
         f"- source final clients: {len(source_client_ids)}",
+        f"- refuser source clients: {len(refuser_client_ids)}",
+        f"- refuser tagged rows: {len(refuser_rows)}",
+        f"- refuser placeholder rows: {len(placeholder_refuser_rows)}",
         f"- row clients: {len(client_ids)}",
         f"- duplicate contract_id values: {len(duplicated_contracts)}",
         f"- missing template names: {len(missing_templates)}",

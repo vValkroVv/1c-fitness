@@ -283,6 +283,22 @@ def filter_expected_main_rows(
     ]
 
 
+def is_new_application_refuser(row: dict[str, str]) -> bool:
+    return row.get("funnel") == "Новые заявки" and row.get("funnel_step") == "Неразобранные"
+
+
+def split_new_application_refusers(
+    rows: list[dict[str, str]],
+    transfer_new_applications_to_memberships: bool,
+) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+    if not transfer_new_applications_to_memberships:
+        return rows, []
+    return (
+        [row for row in rows if not is_new_application_refuser(row)],
+        [row for row in rows if is_new_application_refuser(row)],
+    )
+
+
 def filter_expected_card_rows(rows: list[dict[str, str]], funnel_filter: str) -> list[dict[str, str]]:
     if not funnel_filter:
         return rows
@@ -316,9 +332,16 @@ def validate(args: argparse.Namespace) -> int:
     expected_main_rows = filter_expected_main_rows(rows, args.main_require_phone_for_new_applications)
     if args.dedupe_by_phone_keep_latest_subscription:
         expected_main_rows = dedupe_by_phone_keep_latest_subscription(expected_main_rows)
-    expected_card_rows = filter_expected_card_rows(rows, args.cards_funnel_filter)
-    if args.dedupe_by_phone_keep_latest_subscription:
-        expected_card_rows = filter_expected_card_rows(expected_main_rows, args.cards_funnel_filter)
+    expected_main_rows, expected_refuser_rows = split_new_application_refusers(
+        expected_main_rows,
+        args.main_transfer_new_applications_to_memberships,
+    )
+    card_source_rows = (
+        expected_main_rows
+        if args.dedupe_by_phone_keep_latest_subscription or args.main_transfer_new_applications_to_memberships
+        else rows
+    )
+    expected_card_rows = filter_expected_card_rows(card_source_rows, args.cards_funnel_filter)
 
     main_path = output_dir / f"fitbase_active_clients_import_zayavki_{date_stamp}__all_funnels.xlsx"
     cards_path = output_dir / f"fitbase_active_clients_plastic_cards_{date_stamp}__all_funnels.xlsx"
@@ -362,12 +385,15 @@ def validate(args: argparse.Namespace) -> int:
     if invalid_pairs:
         errors.append(f"invalid final funnel/funnel_step pairs: {invalid_pairs}")
 
+    allowed_final_pairs = set(ALLOWED_FINAL_PAIRS)
+    if args.main_transfer_new_applications_to_memberships:
+        allowed_final_pairs.discard(FITBASE_LABELS["Новые заявки"])
     final_funnels = {pair[0] for pair in final_pairs}
     final_steps = {pair[1] for pair in final_pairs}
-    if final_funnels != {pair[0] for pair in ALLOWED_FINAL_PAIRS}:
-        errors.append(f"final XLSX funnels are not exactly the expected three values: {sorted(final_funnels)}")
-    if final_steps != {pair[1] for pair in ALLOWED_FINAL_PAIRS}:
-        errors.append(f"final XLSX steps are not exactly the expected three values: {sorted(final_steps)}")
+    if final_funnels != {pair[0] for pair in allowed_final_pairs}:
+        errors.append(f"final XLSX funnels are not exactly the expected values: {sorted(final_funnels)}")
+    if final_steps != {pair[1] for pair in allowed_final_pairs}:
+        errors.append(f"final XLSX steps are not exactly the expected values: {sorted(final_steps)}")
     old_steps_found = sorted(step for step in final_steps if step in OLD_STEPS)
     if old_steps_found:
         errors.append(f"old multi-stage names found in final XLSX: {old_steps_found}")
@@ -425,6 +451,17 @@ def validate(args: argparse.Namespace) -> int:
     ]
     if args.main_require_phone_for_new_applications and new_application_rows_without_phone:
         errors.append(f"new application rows without phone still exported: {len(new_application_rows_without_phone)}")
+    if args.main_transfer_new_applications_to_memberships:
+        remaining_new_application_rows = [
+            row
+            for row in main_rows
+            if (str(row[4] or ""), str(row[5] or "")) == FITBASE_LABELS["Новые заявки"]
+        ]
+        if remaining_new_application_rows:
+            errors.append(
+                "new application/refuser rows still exported to main XLSX: "
+                f"{len(remaining_new_application_rows)}"
+            )
     if args.dedupe_by_phone_keep_latest_subscription:
         main_duplicate_phones = duplicate_normalized_phone_count_from_xlsx_rows(main_rows, 1)
         card_duplicate_phones = duplicate_normalized_phone_count_from_xlsx_rows(card_rows, 0)
@@ -452,6 +489,17 @@ def validate(args: argparse.Namespace) -> int:
         if (reports_dir / "phone_deduplication_removed_clients.csv").exists()
         else []
     )
+    refuser_csv_path = output_dir / "csv" / "new_application_refusers.csv"
+    refuser_rows = read_csv(refuser_csv_path) if refuser_csv_path.exists() else []
+    if args.main_transfer_new_applications_to_memberships:
+        if not refuser_csv_path.exists():
+            errors.append(f"missing new application refusers CSV: {refuser_csv_path.relative_to(ROOT)}")
+        expected_refuser_ids = Counter(row.get("client_id", "") for row in expected_refuser_rows)
+        actual_refuser_ids = Counter(row.get("client_id", "") for row in refuser_rows)
+        if actual_refuser_ids != expected_refuser_ids:
+            errors.append(
+                "new_application_refusers.csv client_id set does not match final transferred new applications"
+            )
 
     if len(missing_phone) != sum(1 for row in rows if not (row.get("phones") or "").strip()):
         errors.append("missing_phone_report.csv count mismatch")
@@ -494,6 +542,8 @@ def validate(args: argparse.Namespace) -> int:
     exported_main_missing_phone = sum(1 for row in main_rows if len(row) >= 2 and not str(row[1] or "").strip())
     if args.main_require_phone_for_new_applications and excluded_new_without_phone:
         warnings.append(f"new application rows without phone excluded from main XLSX: {excluded_new_without_phone}")
+    if args.main_transfer_new_applications_to_memberships and expected_refuser_rows:
+        warnings.append(f"new application/refuser rows moved to membership import: {len(expected_refuser_rows)}")
     if args.dedupe_by_phone_keep_latest_subscription and phone_dedupe_removed:
         warnings.append(f"same-phone duplicate clients excluded from main XLSX: {len(phone_dedupe_removed)}")
     if exported_main_missing_phone:
@@ -516,6 +566,7 @@ def validate(args: argparse.Namespace) -> int:
         f"main_xlsx_rows: `{len(main_rows)}`",
         f"cards_xlsx_rows: `{len(card_rows)}`",
         f"same_phone_deduplication_removed: `{len(phone_dedupe_removed)}`",
+        f"new_application_refusers_to_membership: `{len(expected_refuser_rows)}`",
         "",
         "## Verdict",
         "",
@@ -535,6 +586,7 @@ def validate(args: argparse.Namespace) -> int:
             f"- missing_phone: `{len(missing_phone)}`",
             f"- exported_main_missing_phone: `{exported_main_missing_phone}`",
             f"- excluded_new_applications_without_phone: `{excluded_new_without_phone}`",
+            f"- new_application_refusers_to_membership: `{len(expected_refuser_rows)}`",
             f"- same_phone_deduplication_removed: `{len(phone_dedupe_removed)}`",
             f"- missing_card: `{len(missing_card)}`",
             f"- missing_club: `{len(missing_club)}`",
@@ -572,6 +624,11 @@ def parse_args() -> argparse.Namespace:
         "--main-require-phone-for-new-applications",
         action="store_true",
         help="Validate that internal `Новые заявки` rows without phone are excluded from the main XLSX.",
+    )
+    parser.add_argument(
+        "--main-transfer-new-applications-to-memberships",
+        action="store_true",
+        help="Validate that final `Новые заявки / Неразобранные` rows are moved to membership tag import.",
     )
     parser.add_argument(
         "--cards-funnel-filter",

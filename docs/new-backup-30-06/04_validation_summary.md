@@ -23,17 +23,17 @@ output/20260630_fix_owner_new_import/reports/services_validation_report.md: PASS
 
 | Файл | Data rows | Cols | Status |
 |---|---:|---:|---|
-| `fitbase_active_clients_import_zayavki_20260630_all_funnels.xlsx` | 65231 | 10 | PASS |
+| `fitbase_active_clients_import_zayavki_20260630_all_funnels.xlsx` | 39524 | 10 | PASS |
 | `fitbase_active_clients_plastic_cards_20260630_all_funnels.xlsx` | 10907 | 3 | PASS |
-| `fitbase_import_abonementy_clientov_20260630.xlsx` | 98944 | 20 | PASS |
+| `fitbase_import_abonementy_clientov_20260630.xlsx` | 120040 | 21 | PASS |
 | `fitbase_import_shablony_abonementov_20260630.xlsx` | 114 | 12 | PASS |
-| `fitbase_import_uslugi_clientov_20260630.xlsx` | 528 | 16 | PASS |
+| `fitbase_import_uslugi_clientov_20260630.xlsx` | 522 | 16 | PASS |
 | `fitbase_import_shablony_uslug_20260630.xlsx` | 51 | 9 | PASS |
-| `active_problem_1_no_payment_cash_3_cases_20260630.xlsx` | 3 | 20 | PASS |
-| `active_problem_2_zero_price_direct_full_41_cases_20260630.xlsx` | 41 | 20 | PASS |
-| `active_problem_3_non_named_payment_left_179_cases_20260630.xlsx` | 179 | 20 | PASS |
-| `payment_price_manual_review_examples_25_after_rules_20260630.xlsx` | 25 | 24 | PASS |
-| `membership_import_representative_28_examples_20260630.xlsx` | 28 | 20 | PASS |
+| `active_problem_1_no_payment_cash_3_cases_20260630.xlsx` | 3 | 21 | PASS |
+| `active_problem_2_zero_price_direct_full_41_cases_20260630.xlsx` | 41 | 21 | PASS |
+| `active_problem_3_non_named_payment_left_179_cases_20260630.xlsx` | 179 | 21 | PASS |
+| `payment_price_manual_review_examples_25_after_rules_20260630.xlsx` | 25 | 25 | PASS |
+| `membership_import_representative_28_examples_20260630.xlsx` | 28 | 21 | PASS |
 
 ## Warnings
 
@@ -41,8 +41,11 @@ Warnings остались бизнесово ожидаемыми и не бло
 
 - `product_review_rows`: 25;
 - новые заявки без телефона исключены из `import_заявки`: 5673;
+- финальные `Новые заявки / Неразобранные` перенесены в абонементы как
+  `отказники`: 25707;
 - same-phone duplicate clients исключены из `import_заявки`: 2388;
-- blank `type_of_payment` в импорте абонементов: 29287;
+- blank `type_of_payment` в импорте абонементов: 50383, включая строки-заглушки
+  отказников без абонементов;
 - услуги вне финального `import_заявки`: 1 historical fallback;
 - услуги только в шаблонах: 7.
 - representative examples missing categories on fresh cutoff: 2
@@ -55,7 +58,7 @@ Warnings остались бизнесово ожидаемыми и не бло
 | `Успенский Леонид Владимирович` | `Действующие клиенты`, `Абонемент Ультра 15 месяцев (подарок)` |
 | `Василевская Вера Михайловна` | `Действующие клиенты`, `Абонемент МУЛЬТИКАРТА 12 месяцев (подарок)` |
 | `Россиева София Сергеевна` | `Действующие клиенты`, `Абонемент МУЛЬТИКАРТА 15 месяцев (подарок) спецпредложение` |
-| `Бламберус Михаил Александрович` | remains `Новые заявки`, no selected subscription |
+| `Бламберус Михаил Александрович` | full stage remains `Новые заявки`, no selected subscription; final new-app rows are moved out of `import_заявки` by the refuser rule |
 
 ## Karelsky -> Rovio check
 

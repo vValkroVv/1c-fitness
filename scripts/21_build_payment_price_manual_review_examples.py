@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATE_STAMP = "20260525_0800"
 
 CLIENT_HEADERS = [
+    "tag",
     "contract_id",
     "client_id",
     "phone",

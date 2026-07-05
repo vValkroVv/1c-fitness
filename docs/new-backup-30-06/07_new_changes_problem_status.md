@@ -103,8 +103,8 @@ owner, а named cases не откатились. Но две старые опе
 
 | метрика | старый backup | новый backup | дельта |
 | --- | --- | --- | --- |
-| client membership rows | 99383 | 98944 | -439 |
-| clients with membership rows | 43137 | 43080 | -57 |
+| client membership rows | 99383 | 120040 | 20657 |
+| clients with membership rows | 43137 | 64176 | 21039 |
 | membership templates | 114 | 114 | 0 |
 | exclude_active_later_contact_full | 4 | 1 | -3 |
 | limited subrent rows | 928 | 929 | 1 |
@@ -114,17 +114,17 @@ owner, а named cases не откатились. Но две старые опе
 Row classes:
 
 - старый backup: `full_subscription`=85253, `trial_or_guest`=12425, `unknown_review_required`=1705.
-- новый backup: `full_subscription`=84832, `trial_or_guest`=12406, `unknown_review_required`=1706.
+- новый backup: `full_subscription`=84832, `refuser_without_membership`=21096, `trial_or_guest`=12406, `unknown_review_required`=1706.
 
 Payment types:
 
 - старый backup: `безналичные`=65383, `blank`=29285, `наличные`=3266, `сбп`=1449.
-- новый backup: `безналичные`=65247, `blank`=29287, `наличные`=2966, `сбп`=1444.
+- новый backup: `безналичные`=65247, `blank`=50383, `наличные`=2966, `сбп`=1444.
 
 Visits-left источники:
 
 - старый backup: `not_limited_subrent`=98455, `business_expired_limited_subrent_zero_visits_left`=916, `rg3336_correct_dimension_balance`=12.
-- новый backup: `not_limited_subrent`=98015, `business_expired_limited_subrent_zero_visits_left`=916, `rg3336_correct_dimension_balance`=13.
+- новый backup: `not_limited_subrent`=98015, `refuser_without_membership`=21096, `business_expired_limited_subrent_zero_visits_left`=916, `rg3336_correct_dimension_balance`=13.
 
 Ограниченная субаренда осталась закрытым правилом для текущих файлов: строк
 ограниченной субаренды стало `928 -> 929`,
@@ -168,9 +168,9 @@ Visits-left источники:
 
 | метрика | старый backup | новый backup | дельта |
 | --- | --- | --- | --- |
-| client service rows | 529 | 528 | -1 |
+| client service rows | 529 | 522 | -7 |
 | active service rows | 352 | 352 | 0 |
-| historical fallback rows | 176 | 175 | -1 |
+| historical fallback rows | 176 | 169 | -7 |
 | outside import_zayavki fallback rows | 1 | 1 | 0 |
 | represented services | 44 | 44 | 0 |
 | template-only services | 7 | 7 | 0 |
@@ -198,7 +198,8 @@ Template-only список не изменился:
 
 | услуга | старый selected_rows | новый selected_rows | старый kind | новый kind |
 | --- | --- | --- | --- | --- |
-| Сайкл разовое без клубной карты | 5 | 4 | historical_fallback | historical_fallback |
+| Сайкл разовое без клубной карты | 5 | 2 | historical_fallback | historical_fallback |
+| Субаренда 1 посещение | 5 | 1 | historical_fallback | historical_fallback |
 
 Вывод: проблема 3 не деградировала на новом backup. Активная часть полностью
 стабильна, coverage по `51` услугам сохраняется, а единственная потеря строки

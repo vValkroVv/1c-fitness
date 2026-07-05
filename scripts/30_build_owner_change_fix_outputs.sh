@@ -59,6 +59,7 @@ python3 scripts/17_build_part2_combined_xlsx.py \
   --branches-config config/branches_by_club.yml \
   --fitbase-label-mode customer_20260520_single_stage \
   --main-require-phone-for-new-applications \
+  --main-transfer-new-applications-to-memberships \
   --cards-funnel-filter "Действующие клиенты" \
   --dedupe-by-phone-keep-latest-subscription
 
@@ -72,6 +73,7 @@ python3 scripts/18_validate_combined_single_stage_outputs.py \
   --cards-template "task-desc/Пластиковая карта.xlsx" \
   --branches-config config/branches_by_club.yml \
   --main-require-phone-for-new-applications \
+  --main-transfer-new-applications-to-memberships \
   --cards-funnel-filter "Действующие клиенты" \
   --dedupe-by-phone-keep-latest-subscription
 

@@ -1,0 +1,62 @@
+﻿issue_type,service_id,client_id,client_fio,service_name,details
+service_has_no_active_rows_for_final_clients,,,,Step-1 разовое посещение без клубной карты,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Йога (персональная тренировка) 12 пос. (группа до 4 человек),Active rows for final clients: 0; historical fallback rows selected: 0.
+service_has_no_rows_for_final_clients,,,,Йога (персональная тренировка) 12 пос. (группа до 4 человек),No active or historical sale rows were found for clients from final import_zayavki.
+service_has_no_active_rows_for_final_clients,,,,Йога (персональная тренировка) 12 пос. VIP (1 человек),Active rows for final clients: 0; historical fallback rows selected: 0.
+service_has_no_rows_for_final_clients,,,,Йога (персональная тренировка) 12 пос. VIP (1 человек),No active or historical sale rows were found for clients from final import_zayavki.
+service_has_no_active_rows_for_final_clients,,,,Йога (персональная тренировка) 8 пос. (группа до 4 человек),Active rows for final clients: 0; historical fallback rows selected: 0.
+service_has_no_rows_for_final_clients,,,,Йога (персональная тренировка) 8 пос. (группа до 4 человек),No active or historical sale rows were found for clients from final import_zayavki.
+service_has_no_active_rows_for_final_clients,,,,Йога (персональная тренировка) 8 пос. VIP (1 человек),Active rows for final clients: 0; historical fallback rows selected: 0.
+service_has_no_rows_for_final_clients,,,,Йога (персональная тренировка) 8 пос. VIP (1 человек),No active or historical sale rows were found for clients from final import_zayavki.
+service_has_no_active_rows_for_final_clients,,,,Йога в гамаках(при наличии клубной карты),Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Сайкл для начинающих без клубной карты,Active rows for final clients: 0; historical fallback rows selected: 0.
+service_has_no_rows_for_final_clients,,,,Сайкл для начинающих без клубной карты,No active or historical sale rows were found for clients from final import_zayavki.
+service_has_no_active_rows_for_final_clients,,,,Сайкл для начинающих при наличии клубной карты,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Сайкл разовое без клубной карты,Active rows for final clients: 0; historical fallback rows selected: 4.
+service_has_no_active_rows_for_final_clients,,,,Сайкл разовое при наличии клубной карты,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Стрип-пластика,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Восстановление пластиковой карты,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Доплата,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Доплата до года,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Заморозка абонемента 1 месяц,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Заморозка абонемента 14 дней,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Заморозка абонемента 90 дней,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Перевод из клуба в клуб,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Переоформление платное абонемента на фитнес,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Пакет 10 (персональные тренировки),Active rows for final clients: 0; historical fallback rows selected: 1.
+service_has_no_active_rows_for_final_clients,,,,Пакет 10 ВИП (персональные тренировки),Active rows for final clients: 0; historical fallback rows selected: 0.
+service_has_no_rows_for_final_clients,,,,Пакет 10 ВИП (персональные тренировки),No active or historical sale rows were found for clients from final import_zayavki.
+service_has_no_active_rows_for_final_clients,,,,Пакет 4 (персональные тренировки),Active rows for final clients: 0; historical fallback rows selected: 0.
+service_has_no_rows_for_final_clients,,,,Пакет 4 (персональные тренировки),No active or historical sale rows were found for clients from final import_zayavki.
+service_has_no_active_rows_for_final_clients,,,,Пакет 8 ВИП,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Пробная П/Т,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Разовая,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Разовая ВИП,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Субаренда 1 посещение,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Подарочный сертификат на сумму 1000,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Подарочный сертификат на сумму 1500,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Подарочный сертификат на сумму 2000,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Подарочный сертификат на сумму 3000,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Подарочный сертификат на сумму 5000,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Разовое посещение,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Пакет 6,Active rows for final clients: 0; historical fallback rows selected: 1.
+service_has_no_active_rows_for_final_clients,,,,Солярий 1 минута,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Утеря номерка от гардероба,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Аренда рекламного места,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Солярий 5 минут,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Утеря магнитного ключа-метки,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Медленный класс (персональные тренировки),Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Утеря ключа от шкафчика,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Step-1 разовое посещение при наличии клубной карты,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Йога (персональная тренировка) VIP,Active rows for final clients: 0; historical fallback rows selected: 2.
+service_has_no_active_rows_for_final_clients,,,,Утеря манжеты,Active rows for final clients: 0; historical fallback rows selected: 1.
+service_fallback_taken_outside_import_zayavki,,,,Утеря валика,No active or historical rows were found for final import_zayavki clients; selected historical rows outside import_zayavki: 1.
+service_has_no_active_rows_for_final_clients,,,,Персональная тренировка VIP,Active rows for final clients: 0; historical fallback rows selected: 5.
+service_has_no_active_rows_for_final_clients,,,,Аренда рекламного места А2,Active rows for final clients: 0; historical fallback rows selected: 1.
+template_service_has_no_sales,,,,Йога (персональная тренировка) 12 пос. (группа до 4 человек),Service exists in required list but no sale rows were found in Document154_VT1137 before cutoff.
+template_service_has_no_sales,,,,Йога (персональная тренировка) 12 пос. VIP (1 человек),Service exists in required list but no sale rows were found in Document154_VT1137 before cutoff.
+template_service_has_no_sales,,,,Йога (персональная тренировка) 8 пос. (группа до 4 человек),Service exists in required list but no sale rows were found in Document154_VT1137 before cutoff.
+template_service_has_no_sales,,,,Йога (персональная тренировка) 8 пос. VIP (1 человек),Service exists in required list but no sale rows were found in Document154_VT1137 before cutoff.
+template_service_has_no_sales,,,,Сайкл для начинающих без клубной карты,Service exists in required list but no sale rows were found in Document154_VT1137 before cutoff.
+template_service_has_no_sales,,,,Пакет 10 ВИП (персональные тренировки),Service exists in required list but no sale rows were found in Document154_VT1137 before cutoff.
+template_service_has_no_sales,,,,Пакет 4 (персональные тренировки),Service exists in required list but no sale rows were found in Document154_VT1137 before cutoff.

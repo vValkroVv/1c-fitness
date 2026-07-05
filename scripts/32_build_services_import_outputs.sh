@@ -9,8 +9,9 @@ OUTPUT_ROOT="${SERVICES_OUTPUT_ROOT:-output/20251115_0800_fix_owner_new_import}"
 DATABASE_NAME="${SERVICES_DATABASE_NAME:-FitnessRestored_20260523_macos}"
 SQLCMD_SERVER_NAME="${SERVICES_SQLCMD_SERVER:-mssql-fitness-2022,1433}"
 DATE_STAMP="${SERVICES_DATE_STAMP:-20260525_0800}"
+LOG_ROOT="${SERVICES_LOG_ROOT:-logs/new-changes/prolem_3}"
 
-mkdir -p "$OUTPUT_ROOT/staging" "$OUTPUT_ROOT/reports" "logs/new-changes/prolem_3"
+mkdir -p "$OUTPUT_ROOT/staging" "$OUTPUT_ROOT/reports" "$LOG_ROOT"
 
 MSSQL_2022_DATABASE_NAME="$DATABASE_NAME" \
 MSSQL_2022_MDF_PATH="/restoredata/${DATABASE_NAME}.mdf" \
@@ -23,11 +24,11 @@ SQLCMD_SERVER="$SQLCMD_SERVER_NAME" \
   -i /sql/54_build_services_import_staging.sql \
   -W \
   -s "|" \
-  -o /logs/new-changes/prolem_3/54_build_services_import_staging.txt
+  -o "/${LOG_ROOT}/54_build_services_import_staging.txt"
 
 tr -d '\000' \
-  < logs/new-changes/prolem_3/54_build_services_import_staging.txt \
-  > logs/new-changes/prolem_3/54_build_services_import_staging.clean.txt
+  < "$LOG_ROOT/54_build_services_import_staging.txt" \
+  > "$LOG_ROOT/54_build_services_import_staging.clean.txt"
 
 read -r -d '' BCP_QUERY <<'SQL' || true
 SELECT

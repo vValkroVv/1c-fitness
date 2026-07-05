@@ -12,6 +12,7 @@ CUTOFF_AT="${OWNER_FIX_CUTOFF_AT:-2026-05-25 08:00:00}"
 BACKUP_FINISH_AT="${OWNER_FIX_BACKUP_FINISH_AT:-2026-05-23 23:17:17}"
 DATE_STAMP="${OWNER_FIX_DATE_STAMP:-20260525_0800}"
 RUN_LABEL="${OWNER_FIX_RUN_LABEL:-20251115_0800_fix_owner_raw}"
+LOGS_DIR="${OWNER_FIX_LOGS_DIR:-logs}"
 
 MSSQL_2022_DATABASE_NAME="$DATABASE_NAME" \
 MSSQL_2022_MDF_PATH="/restoredata/${DATABASE_NAME}.mdf" \
@@ -28,7 +29,7 @@ scripts/11_export_part2_stage.py \
   --output-run-label "$RUN_LABEL" \
   --output-dir "$OUTPUT_ROOT/raw/staging" \
   --reports-dir "$OUTPUT_ROOT/raw/reports" \
-  --logs-dir logs
+  --logs-dir "$LOGS_DIR"
 
 scripts/16_reclassify_part2_from_csv.py \
   --cutoff-date "$CUTOFF_DATE" \

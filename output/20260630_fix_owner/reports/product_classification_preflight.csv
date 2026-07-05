@@ -1,0 +1,209 @@
+product_ref,product_code,product_name,auto_classification,is_full_subscription_candidate,is_trial_or_guest_candidate,is_unknown,observed_clients,observed_sales,observed_subscription_rows,min_duration_days,max_duration_days,classification_reason,needs_manual_review
+B086000C29D830FD11F02BCC8AA8ED67,00000001606,Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок) Ровио,full_subscription,1,0,0,8,8,8,273,366,full keyword + duration >= 30 + no trial/exclude keyword,1
+B07D000C29D830FD11F024EBAFD0BD0A,00000001597,Абонемент УЛЬТРА 12 месяцев + 3 месяца заморозки в подарок,full_subscription,1,0,0,73,73,73,48,547,full keyword + duration >= 30 + no trial/exclude keyword,1
+B0E5000C29D830FD11F06EC78AD2D6CB,00000001648,Абонемент МУЛЬТИКАРТА 12 месяцев + 2 месяца заморозки в подарок (СПЕЦПРЕДЛОЖЕНИЕ),full_subscription,1,0,0,608,617,617,48,608,full keyword + duration >= 30 + no trial/exclude keyword,1
+B08A000C29D830FD11F02F0F91882165,00000001607,Мультикарта на 9 месяцев + 3 месяца заморозки в подарок,full_subscription,1,0,0,6,6,6,273,395,full keyword + duration >= 30 + no trial/exclude keyword,1
+B0BE000C29D830FD11F0519A15B1F35E,00000001619,Абонемент МУЛЬТИКАРТА 12 месяцев + 3 месяца заморозки в подарок СПЕЦПРЕДЛОЖЕНИЕ,full_subscription,1,0,0,433,446,446,1,8996,full keyword + duration >= 30 + no trial/exclude keyword,1
+B07F000C29D830FD11F026949FF4A862,00000001603,Абонемент УЛЬТРА 15 месяцев + 3 месяца заморозки в подарок(Ровио),full_subscription,1,0,0,3,3,3,473,505,full keyword + duration >= 30 + no trial/exclude keyword,1
+B086000C29D830FD11F02BCC649B1DE5,00000001605,Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок),full_subscription,1,0,0,29,29,29,18,365,full keyword + duration >= 30 + no trial/exclude keyword,1
+B0E5000C29D830FD11F06EA754E9EEA1,00000001647,УЛЬТРА 12 месяцев + 2 месяца заморозки в подарок (Ровио),full_subscription,1,0,0,20,20,20,365,456,full keyword + duration >= 30 + no trial/exclude keyword,1
+B07D000C29D830FD11F024EC5F69C3D5,00000001598,Абонемент УЛЬТРА 12 месяцев + 3 месяца заморозки в подарок (Ровио),full_subscription,1,0,0,17,17,17,164,455,full keyword + duration >= 30 + no trial/exclude keyword,1
+B07D000C29D830FD11F024ECA950807E,00000001599,Абонемент МУЛЬТИКАРТА 12 месяцев (3 месяца заморозки в подарок),full_subscription,1,0,0,140,144,144,88,487,full keyword + duration >= 30 + no trial/exclude keyword,1
+B0D9000C29D830FD11F066CA213D0981,00000001642,Абонемент МУЛЬТИКАРТА 12 месяцев + 2 месяца заморозки в подарок,full_subscription,1,0,0,1075,1091,1091,1,9034,full keyword + duration >= 30 + no trial/exclude keyword,1
+B07F000C29D830FD11F0264A4786DE5E,00000001602,Абонемент УЛЬТРА 15 месяцев (подарок),full_subscription,1,0,0,95,96,96,2,8943,full keyword + duration >= 30 + no trial/exclude keyword,0
+B07F000C29D830FD11F026491FFD750E,00000001601,Абонемент Ультра 15 месяцев (подарок),full_subscription,1,0,0,911,929,929,1,9026,full keyword + duration >= 30 + no trial/exclude keyword,0
+AEAA000C29D830FD11EEC4E4326F1D21,00000001294,"Абонемент УЛЬТРА 1 МЕСЯЦ 990,00",full_subscription,1,0,0,818,844,844,1,364,full keyword + duration >= 30 + no trial/exclude keyword,0
+AFDF000C29D830FD11EFABF387F9A251,00000001493,"Абонемент УЛЬТРА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ (Промышленная,10)",full_subscription,1,0,0,8,8,8,172,396,full keyword + duration >= 30 + no trial/exclude keyword,0
+B21C000C29D830FD11F156769717F181,00000001743,УЛЬТРА 12 месяцев (рассрочка),full_subscription,1,0,0,8,8,8,365,365,full keyword + duration >= 30 + no trial/exclude keyword,0
+AAACA4BF01266AD311E939A6E7B818CF,00000000135,Абонемент УЛЬТРА 3 месяца,full_subscription,1,0,0,771,834,834,2,570,full keyword + duration >= 30 + no trial/exclude keyword,0
+AAACA4BF01266AD311E94A15A0C70726,00000000139,Абонемент в солярий на 100+50 минут,full_subscription,1,0,0,77,92,92,1,182,full keyword + duration >= 30 + no trial/exclude keyword,0
+AFC5000C29D830FD11EF975CDE34AF39,00000001474,Студенческий дневной абонемент 9 месяцев,full_subscription,1,0,0,7,7,7,4,363,full keyword + duration >= 30 + no trial/exclude keyword,0
+AC82A4BF01266AD411ECF6D9EFBC2966,00000000794,Абонемент МУЛЬТИ 24 месяцев,full_subscription,1,0,0,665,667,667,3,976,full keyword + duration >= 30 + no trial/exclude keyword,0
+ADE5000C29D830FD11EE2FAA51E27B3F,00000001156,Мультикарта на 9 месяцев,full_subscription,1,0,0,66,66,66,8,456,full keyword + duration >= 30 + no trial/exclude keyword,0
+B011000C29D830FD11EFD3395B37CB5B,00000001548,Абонемент МУЛЬТИКАРТА 12 месяцев,full_subscription,1,0,0,65,65,65,13,513,full keyword + duration >= 30 + no trial/exclude keyword,0
+AAE1A4BF01266AD411EAD260BBD73CB8,00000000318,АБОНЕМЕНТ ДЖАМПИНГ 12 пос,full_subscription,1,0,0,6,6,6,43,61,full keyword + duration >= 30 + no trial/exclude keyword,0
+AA9EA4BF01266AD311E8D82589232D86,00000000110,Абонемент УЛЬТРА 12+2 месяца в подарок,full_subscription,1,0,0,590,665,665,1,6843,full keyword + duration >= 30 + no trial/exclude keyword,0
+B1B2000C29D830FD11F109745F404A62,00000001714,Абонемент МУЛЬТИКАРТА 12 месяцев + подарок (СПЕЦПРЕДЛОЖЕНИЕ),full_subscription,1,0,0,584,599,599,1,457,full keyword + duration >= 30 + no trial/exclude keyword,0
+AA9EA4BF01266AD311E8D82589232D6C,00000000089,Абонемент УЛЬТРА 1 МЕСЯЦ 8 посещений,full_subscription,1,0,0,568,771,771,2,6843,full keyword + duration >= 30 + no trial/exclude keyword,0
+AA9EA4BF01266AD311E8D82589232D6D,00000000090,Абонемент УЛЬТРА 1 МЕСЯЦ БЕЗЛИМИТ,full_subscription,1,0,0,5480,8363,8363,1,8795,full keyword + duration >= 30 + no trial/exclude keyword,0
+B069000C29D830FD11F0152F03951542,00000001594,Абонемент МУЛЬТИКАРТА 12 месяцев (подарок),full_subscription,1,0,0,534,542,542,1,8916,full keyword + duration >= 30 + no trial/exclude keyword,0
+AA9EA4BF01266AD311E8D82589232D6B,00000000088,Абонемент УЛЬТРА 1 МЕСЯЦ 12 посещений,full_subscription,1,0,0,533,693,693,7,501,full keyword + duration >= 30 + no trial/exclude keyword,0
+B105000C29D830FD11F087275A01BCD1,00000001653,Студенческий дневной абонемент 9 месяцев (посещение клуба до 17:00),full_subscription,1,0,0,50,50,50,17,363,full keyword + duration >= 30 + no trial/exclude keyword,0
+AFA0000C29D830FD11EF7CC5E212F861,00000001456,АБОНЕМЕНТ САЙКЛ 12 пос без клубной карты,full_subscription,1,0,0,5,21,21,57,365,full keyword + duration >= 30 + no trial/exclude keyword,0
+B15C000C29D830FD11F0C76FC84AC76D,00000001685,Абонемент МУЛЬТИКАРТА 12 месяцев + подарок,full_subscription,1,0,0,462,469,469,1,9152,full keyword + duration >= 30 + no trial/exclude keyword,0
+B146000C29D830FD11F0B65F43E97E57,00000001679,Абонемент УЛЬТРА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ (вип),full_subscription,1,0,0,443,450,450,1,455,full keyword + duration >= 30 + no trial/exclude keyword,0
+AD36A4BF01266AD411EDC1A048E41F15,00000000963,Мультикарта на 6 месяцев,full_subscription,1,0,0,43,52,52,149,752,full keyword + duration >= 30 + no trial/exclude keyword,0
+B0E5000C29D830FD11F06EA6F8544521,00000001646,УЛЬТРА 12 месяцев + подарок,full_subscription,1,0,0,424,426,426,1,547,full keyword + duration >= 30 + no trial/exclude keyword,0
+B069000C29D830FD11F0152F48EC1111,00000001595,"Абонемент УЛЬТРА 12 месяцев (акция 3 мес. в подарок) Ровио,3",full_subscription,1,0,0,40,41,41,79,9006,full keyword + duration >= 30 + no trial/exclude keyword,0
+AD48A4BF01266AD411EDCFC483BF75AC,00000000992,Мультикарта на 1 месяц,full_subscription,1,0,0,4,4,4,30,31,full keyword + duration >= 30 + no trial/exclude keyword,0
+AD93000C29D830FD11EDF56118F6B1C6,00000001110,Абонемент МУЛЬТИКАРТА 12 месяцев+2 лета в подарок,full_subscription,1,0,0,391,393,393,1,665,full keyword + duration >= 30 + no trial/exclude keyword,0
+AC82A4BF01266AD411ECF6D998D2B3FC,00000000793,Абонемент УЛЬТРА 24 месяца,full_subscription,1,0,0,354,357,357,1,8023,full keyword + duration >= 30 + no trial/exclude keyword,0
+AF9A000C29D830FD11EF7A78EEE69185,00000001452,"АБОНЕМЕНТ лимфодренажная тренировка (10 посещений),1 мес.",full_subscription,1,0,0,35,55,55,1,30,full keyword + duration >= 30 + no trial/exclude keyword,0
+AFC6000C29D830FD11EF98257AD3CBC0,00000001479,"Абонемент УЛЬТРА 12 месяцев (Ровио,3)",full_subscription,1,0,0,34,34,34,2,8763,full keyword + duration >= 30 + no trial/exclude keyword,0
+AE53000C29D830FD11EE83B9E96410DE,00000001233,"Холодные 9 900,00 МУЛЬТИКАРТА 12 месяцев",full_subscription,1,0,0,33,33,33,247,543,full keyword + duration >= 30 + no trial/exclude keyword,0
+AA9BA4BF01266AD311E8AABCC0ED0D93,00000000055,Абонемент в солярий на 50 минут,full_subscription,1,0,0,323,480,480,1,325,full keyword + duration >= 30 + no trial/exclude keyword,0
+AE53000C29D830FD11EE83B9F6FF81EB,00000001234,"Холодные 9 900,00 УЛЬТРА 12 месяцев",full_subscription,1,0,0,30,30,30,2,424,full keyword + duration >= 30 + no trial/exclude keyword,0
+AFDF000C29D830FD11EFABF3C8720575,00000001494,"Абонемент МУЛЬТИКАРТА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ(Промышленная,10)",full_subscription,1,0,0,3,3,3,2,364,full keyword + duration >= 30 + no trial/exclude keyword,0
+B069000C29D830FD11F0152EE144CBEF,00000001593,Абонемент МУЛЬТИКАРТА+6 месяцев в подарок,full_subscription,1,0,0,3,3,3,545,551,full keyword + duration >= 30 + no trial/exclude keyword,0
+AFA0000C29D830FD11EF7CC3BB16B910,00000001455,АБОНЕМЕНТ САЙКЛ 8 пос без клубной карты,full_subscription,1,0,0,3,3,3,43,365,full keyword + duration >= 30 + no trial/exclude keyword,0
+B20C000C29D830FD11F14B7D841F6EB2,00000001740,Абонемент УЛЬТРА 15 месяцев (рассрочка),full_subscription,1,0,0,3,3,3,457,457,full keyword + duration >= 30 + no trial/exclude keyword,0
+AFC6000C29D830FD11EF98242CB87B33,00000001476,МУЛЬТИКАРТА 6 месяцев + 3 месяца в подарок,full_subscription,1,0,0,3,3,3,196,273,full keyword + duration >= 30 + no trial/exclude keyword,0
+B069000C29D830FD11F0152ECB3799C8,00000001592,Абонемент УЛЬТРА 12 месяцев (акция 3 мес. в подарок),full_subscription,1,0,0,297,298,298,2,8944,full keyword + duration >= 30 + no trial/exclude keyword,0
+B221000C29D830FD11F159CE2EB72D63,00000001746,Абонемент МУЛЬТИКАРТА 15 месяцев спецпредложение (рассрочка),full_subscription,1,0,0,28,28,28,1,457,full keyword + duration >= 30 + no trial/exclude keyword,0
+B05D000C29D830FD11F00BFE1769EF12,00000001589,"Абонемент УЛЬТРА 12 месяцев (акция 2 мес. в подарок) Ровио,3",full_subscription,1,0,0,28,28,28,2,551,full keyword + duration >= 30 + no trial/exclude keyword,0
+AA9BA4BF01266AD311E8AABCC0ED0D94,00000000056,Абонемент в солярий на 100 минут,full_subscription,1,0,0,274,546,546,1,259,full keyword + duration >= 30 + no trial/exclude keyword,0
+B011000C29D830FD11EFD3392E0437FE,00000001547,Абонемент УЛЬТРА 15 месяцев,full_subscription,1,0,0,27,27,27,454,457,full keyword + duration >= 30 + no trial/exclude keyword,0
+AC0CA4BF01266AD411EC2517A486C8B0,00000000412,Абонемент УЛЬТРА 9 месяцев СПЕЦПРЕДЛОЖЕНИЕ,full_subscription,1,0,0,27,27,27,260,422,full keyword + duration >= 30 + no trial/exclude keyword,0
+AD93000C29D830FD11EDF560C6769CF4,00000001109,Абонемент УЛЬТРА 12 + 2 лета в подарок,full_subscription,1,0,0,263,264,264,2,2283,full keyword + duration >= 30 + no trial/exclude keyword,0
+AAA5A4BF01266AD311E92073C42F4D72,00000000123,Абонемент УЛЬТРА 9 месяцев,full_subscription,1,0,0,243,251,251,1,8818,full keyword + duration >= 30 + no trial/exclude keyword,0
+AA9EA4BF01266AD311E8D82589232D67,00000000085,Абонемент УЛЬТРА 12 месяцев,full_subscription,1,0,0,22211,36354,36354,-7008,9070,full keyword + duration >= 30 + no trial/exclude keyword,0
+B059000C29D830FD11F0095C4A7DDB10,00000001580,Абонемент МУЛЬТИКАРТА 12 месяцев (2 месяца в подарок),full_subscription,1,0,0,218,222,222,2,9060,full keyword + duration >= 30 + no trial/exclude keyword,0
+ABFFA4BF01266AD411EC1ADA324C7F0C,00000000411,Абонемент МУЛЬТИКАРТА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ,full_subscription,1,0,0,2132,2292,2292,1,9115,full keyword + duration >= 30 + no trial/exclude keyword,0
+AEC5000C29D830FD11EED7EE75D6ECA8,00000001319,Абонемент УЛЬТРА 6+6 месяцев,full_subscription,1,0,0,212,214,214,3,546,full keyword + duration >= 30 + no trial/exclude keyword,0
+B23B000C29D830FD11F16AF5D14C6538,00000001753,Абонемент МУЛЬТИКАРТА 12 месяцев + подарок (Спецпредложение) рассрочка,full_subscription,1,0,0,21,21,21,365,365,full keyword + duration >= 30 + no trial/exclude keyword,0
+B07A000C29D830FD11F0225ED693B798,00000001596,Абонемент МУЛЬТИКАРТА 12 месяцев + 3 месяца в подарок,full_subscription,1,0,0,207,210,210,30,547,full keyword + duration >= 30 + no trial/exclude keyword,0
+AFC6000C29D830FD11EF9824DEDCBC71,00000001478,УЛЬТРА 9 месяцев (подарок),full_subscription,1,0,0,204,207,207,2,9060,full keyword + duration >= 30 + no trial/exclude keyword,0
+AADDA4BF01266AD411EAA56531B2D34A,00000000303,Абонемент УЛЬТРА 12 месяцев ДВОЙНОЕ / СЕМЕЙНЫЙ,full_subscription,1,0,0,2039,2175,2175,2,7725,full keyword + duration >= 30 + no trial/exclude keyword,0
+B19B000C29D830FD11F0F7641633DDE0,00000001706,Абонемент УЛЬТРА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ+подарок,full_subscription,1,0,0,203,204,204,1,547,full keyword + duration >= 30 + no trial/exclude keyword,0
+B0A0000C29D830FD11F03EA6D5DF677E,00000001615,Абонемент УЛЬТРА 9 месяцев+3 месяца в подарок (Ровио),full_subscription,1,0,0,20,20,20,363,517,full keyword + duration >= 30 + no trial/exclude keyword,0
+AAE1A4BF01266AD411EAD2609EC7CA97,00000000316,АБОНЕМЕНТ ДЖАМПИНГ 8 пос,full_subscription,1,0,0,2,2,2,28,45,full keyword + duration >= 30 + no trial/exclude keyword,0
+B0C7000C29D830FD11F058D15C96A16E,00000001626,Абонемент УЛЬТРА 12+2 месяца в подарок (Ровио),full_subscription,1,0,0,2,2,2,426,427,full keyword + duration >= 30 + no trial/exclude keyword,0
+B226000C29D830FD11F15D911C8DB0C7,00000001747,УЛЬТРА 9 месяцев (рассрочка),full_subscription,1,0,0,2,2,2,273,273,full keyword + duration >= 30 + no trial/exclude keyword,0
+AF92000C29D830FD11EF74E575A715DC,00000001443,Членство детская йога,full_subscription,1,0,0,2,2,2,365,365,full keyword + duration >= 30 + no trial/exclude keyword,0
+AD44A4BF01266AD411EDCC6575DFF0DB,00000000979,Абонемент МУЛЬТИКАРТА+6 месяцев в подарок,full_subscription,1,0,0,190,194,194,2,8886,full keyword + duration >= 30 + no trial/exclude keyword,0
+B166000C29D830FD11F0CF53AD7DF259,00000001689,Абонемент МУЛЬТИКАРТА 15 месяцев ,full_subscription,1,0,0,19,19,19,454,456,full keyword + duration >= 30 + no trial/exclude keyword,0
+B20C000C29D830FD11F14B7D8E36311A,00000001741,Абонемент МУЛЬТИКАРТА 15 месяцев (рассрочка),full_subscription,1,0,0,19,19,19,42,457,full keyword + duration >= 30 + no trial/exclude keyword,0
+AAA5A4BF01266AD311E91A3D4FBC50D7,00000000120,АБОНЕМЕНТ САЙКЛ 12 пос при наличии клубной карты,full_subscription,1,0,0,19,32,32,35,365,full keyword + duration >= 30 + no trial/exclude keyword,0
+AEA6000C29D830FD11EEC1CA5BF358FB,00000001293,Абонемент УЛЬТРА 1 МЕСЯЦ БЕСПЛАТНО,full_subscription,1,0,0,186,190,190,28,211,full keyword + duration >= 30 + no trial/exclude keyword,0
+AEAF000C29D830FD11EEC7329602C0B7,00000001296,"Студенческий абонемент 4 месяца 6 900,00",full_subscription,1,0,0,186,227,227,5,8782,full keyword + duration >= 30 + no trial/exclude keyword,0
+AADDA4BF01266AD411EAA565276341F5,00000000302,Абонемент МУЛЬТИКАРТА 12 месяцев ДВОЙНОЕ / СЕМЕЙНЫЙ,full_subscription,1,0,0,1721,1863,1863,1,8562,full keyword + duration >= 30 + no trial/exclude keyword,0
+B21C000C29D830FD11F156779FB32F41,00000001745,Абонемент МУЛЬТИКАРТА 15 месяцев (подарок),full_subscription,1,0,0,15,15,15,450,457,full keyword + duration >= 30 + no trial/exclude keyword,0
+B051000C29D830FD11F003F365FABD18,00000001563,Абонемент УЛЬТРА 12 месяцев (акция 6 мес. в подарок),full_subscription,1,0,0,148,149,149,44,610,full keyword + duration >= 30 + no trial/exclude keyword,0
+ABFFA4BF01266AD411EC1ADA0CBC08F3,00000000410,Абонемент УЛЬТРА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ,full_subscription,1,0,0,1476,1549,1549,1,8761,full keyword + duration >= 30 + no trial/exclude keyword,0
+AFC6000C29D830FD11EF982422461983,00000001475,МУЛЬТИКАРТА 9 месяцев (подарок),full_subscription,1,0,0,134,136,136,5,458,full keyword + duration >= 30 + no trial/exclude keyword,0
+AD44A4BF01266AD411EDCC66079ACFF1,00000000980,Абонемент УЛЬТРА 12+6 месяцев,full_subscription,1,0,0,133,135,135,2,790,full keyword + duration >= 30 + no trial/exclude keyword,0
+AAA5A4BF01266AD311E91A3D4FBC50D6,00000000119,АБОНЕМЕНТ САЙКЛ 8 пос при наличии клубной карты,full_subscription,1,0,0,13,17,17,28,365,full keyword + duration >= 30 + no trial/exclude keyword,0
+B19B000C29D830FD11F0F7664E441C56,00000001707,Абонемент МУЛЬТИКАРТА 15 месяцев (подарок) спецпредложение,full_subscription,1,0,0,1299,1313,1313,1,627,full keyword + duration >= 30 + no trial/exclude keyword,0
+AEC5000C29D830FD11EED7EE8F0A5876,00000001320,Абонемент МУЛЬТИ 6+6 месяцев,full_subscription,1,0,0,125,125,125,2,455,full keyword + duration >= 30 + no trial/exclude keyword,0
+B055000C29D830FD11F006D674DB642B,00000001577,Абонемент УЛЬТРА 12 месяцев (акция 2 мес. в подарок),full_subscription,1,0,0,119,122,122,2,8864,full keyword + duration >= 30 + no trial/exclude keyword,0
+B16E000C29D830FD11F0D5A9A2A8137B,00000001693,Абонемент МУЛЬТИКАРТА 12 месяцев + подарок (Спецпредложение),full_subscription,1,0,0,1153,1195,1195,1,9175,full keyword + duration >= 30 + no trial/exclude keyword,0
+AAACA4BF01266AD311E94A15A0C70727,00000000140,Абонемент в солярий на 50 + 50 минут,full_subscription,1,0,0,110,114,114,25,123,full keyword + duration >= 30 + no trial/exclude keyword,0
+B05D000C29D830FD11F00BFE1D62EE40,00000001590,"Абонемент УЛЬТРА 12 месяцев (акция 6 мес. в подарок) Ровио,3",full_subscription,1,0,0,11,11,11,228,551,full keyword + duration >= 30 + no trial/exclude keyword,0
+AC0CA4BF01266AD411EC2517AEDD80BB,00000000413,Абонемент УЛЬТРА 6 месяцев СПЕЦПРЕДЛОЖЕНИЕ,full_subscription,1,0,0,11,11,11,180,332,full keyword + duration >= 30 + no trial/exclude keyword,0
+AFC6000C29D830FD11EF9824D2374455,00000001477,УЛЬТРА 6 месяцев + 3 месяца в подарок,full_subscription,1,0,0,11,11,11,78,273,full keyword + duration >= 30 + no trial/exclude keyword,0
+AA9EA4BF01266AD311E8D82589232D62,00000000082,Абонемент МУЛЬТИКАРТА 12 месяцев,full_subscription,1,0,0,10807,15398,15398,-6765,8845,full keyword + duration >= 30 + no trial/exclude keyword,0
+B171000C29D830FD11F0D728F244887F,00000001694,Абонемент УЛЬТРА 12 месяцев ,full_subscription,1,0,0,104,105,105,1,486,full keyword + duration >= 30 + no trial/exclude keyword,0
+ACDFA4BF01266AD411ED74A521E19145,00000000884,Мультикарта на 3 месяца,full_subscription,1,0,0,10,10,10,90,92,full keyword + duration >= 30 + no trial/exclude keyword,0
+AE53000C29D830FD11EE83BA08AF427A,00000001235,"Холодные 13 900,00 МУЛЬТИ 24 месяца",full_subscription,1,0,0,10,10,10,731,780,full keyword + duration >= 30 + no trial/exclude keyword,0
+ADBD000C29D830FD11EE1101B895B72F,00000001128,Абонемент в солярий на 80 минут,full_subscription,1,0,0,1,2,2,28,62,full keyword + duration >= 30 + no trial/exclude keyword,0
+B21C000C29D830FD11F15676DA7A3787,00000001744,Абонемент МУЛЬТИКАРТА 12 месяцев (рассрочка),full_subscription,1,0,0,1,1,1,365,365,full keyword + duration >= 30 + no trial/exclude keyword,0
+B0E3000C29D830FD11F06D394CE51670,00000001644,Абонемент УЛЬТРА 9 месяцев (6 месяцев в подарок),full_subscription,1,0,0,1,1,1,462,462,full keyword + duration >= 30 + no trial/exclude keyword,0
+B0E3000C29D830FD11F06D3AF7D17F2B,00000001645,Мультикарта 9 месяцев (6 месяцев в подарок),full_subscription,1,0,0,1,1,1,457,457,full keyword + duration >= 30 + no trial/exclude keyword,0
+B07E000C29D830FD11F0259878589A01,00000001600,"Абонемент МУЛЬТИ 12 месяцев (Акция "" + 3 мес. в подарок + 3 мес. заморозки) 10 900,00 ",other_sale,0,0,0,0,0,0,,,not observed as subscription product,1
+AEEE000C29D830FD11EEF66534B0B728,00000001333,Заморозка абонемента,other_sale,0,0,0,0,0,0,,,not observed as subscription product,1
+AC30A4BF01266AD411EC40906F8E09EC,00000000415,Заморозка абонемента ,other_sale,0,0,0,0,0,0,,,not observed as subscription product,1
+AF09000C29D830FD11EF0BA34D0F0C25,00000001377,Заморозка абонемента 1 месяц,other_sale,0,0,0,0,0,0,,,not observed as subscription product,1
+AD25A4BF01266AD411EDAB7A95107425,00000000925,Заморозка абонемента 10 дней,other_sale,0,0,0,0,0,0,,,not observed as subscription product,1
+AA9BA4BF01266AD311E8AABCC0ED0D91,00000000053,Заморозка абонемента 12 месяцев,other_sale,0,0,0,0,0,0,,,not observed as subscription product,1
+AF05000C29D830FD11EF0876E1FAF586,00000001375,Заморозка абонемента 14 дней,other_sale,0,0,0,0,0,0,,,not observed as subscription product,1
+AD18A4BF01266AD411EDA16336698EFF,00000000920,Заморозка абонемента 15 дней,other_sale,0,0,0,0,0,0,,,not observed as subscription product,1
+AD0CA4BF01266AD411ED97F5CEB6AD30,00000000913,Заморозка абонемента 2 месяца,other_sale,0,0,0,0,0,0,,,not observed as subscription product,1
+AF09000C29D830FD11EF0BA35C6F4680,00000001378,Заморозка абонемента 2 месяца,other_sale,0,0,0,0,0,0,,,not observed as subscription product,1
+AF07000C29D830FD11EF09ED87114051,00000001376,Заморозка абонемента 3 месяца,other_sale,0,0,0,0,0,0,,,not observed as subscription product,1
+AA9BA4BF01266AD311E8AABCC0ED0D8E,00000000050,Заморозка абонемента 30 дней,other_sale,0,0,0,0,0,0,,,not observed as subscription product,1
+AA9BA4BF01266AD311E8AABCC0ED0D90,00000000052,Заморозка абонемента 6 месяцев,other_sale,0,0,0,0,0,0,,,not observed as subscription product,1
+AA9BA4BF01266AD311E8AABCC0ED0D8F,00000000051,Заморозка абонемента 90 дней,other_sale,0,0,0,0,0,0,,,not observed as subscription product,1
+AB51A4BF01266AD411EB9855EE6BC104,00000000367,Абонемент НЕДЕЛЯ КАРЕЛЬСКИЙ,trial_or_guest,0,1,0,70,71,71,8,9,trial/guest/short keyword,0
+AD19A4BF01266AD411EDA1F924D34F23,00000000921,Абонемент Неделя марафон,trial_or_guest,0,1,0,67,67,67,7,8,trial/guest/short keyword,0
+AFFF000C29D830FD11EFC51DA148348F,00000001545,Абонемент 2 недели Фитнес,trial_or_guest,0,1,0,534,546,546,2,45,trial/guest/short keyword,0
+AA9EA4BF01266AD311E8ED722295C17A,00000000111,Абонемент НЕДЕЛЯ САЙТ,trial_or_guest,0,1,0,5278,5497,5497,7,7673,trial/guest/short keyword,0
+AECB000C29D830FD11EEDC85C5FB57D9,00000001324,Пробное посещение АКВА ,full_subscription,1,0,0,48,48,48,1,169,manual csv decision: trial_or_guest -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AD04A4BF01266AD411ED91A42C9B5713,00000000906,Абонемент Неделя Фитнес,trial_or_guest,0,1,0,479,509,509,1,36,trial/guest/short keyword,0
+AD04A4BF01266AD411ED91A1077A7A15,00000000905,Абонемент Неделя сайт 2023,trial_or_guest,0,1,0,463,463,463,6,37,trial/guest/short keyword,0
+AC1CA4BF01266AD411EC30B409A85EAF,00000000414,Абонемент НЕДЕЛЯ ФИТНЕСА БЕСПЛАТНО,trial_or_guest,0,1,0,439,444,444,7,7,trial/guest/short keyword,0
+AAB0A4BF01266AD311E96FD3649B593A,00000000147,Абонемент НЕДЕЛЯ ДРУГ,trial_or_guest,0,1,0,4319,4464,4464,1,7525,trial/guest/short keyword,0
+AECB000C29D830FD11EEDC83652ADBBA,00000001323,Разовое посещение АКВА ,full_subscription,1,0,0,42,69,69,1,27,manual csv decision: trial_or_guest -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AF0A000C29D830FD11EF0C3E7AF7CA20,00000001379,Абонемент Неделя Фитнес (НОВЫЕ КЛИЕНТЫ),trial_or_guest,0,1,0,23,23,23,7,7,trial/guest/short keyword,0
+B067000C29D830FD11F01391870722D6,00000001591,Абонемент Неделя Фитнес 190 рублей,trial_or_guest,0,1,0,23,23,23,7,7,trial/guest/short keyword,0
+AC72A4BF01266AD411ECD10DF4B5B1AE,00000000766,Абонемент 10 ДНЕЙ,trial_or_guest,0,1,0,126,129,129,7,11,short observed duration <= 14 days,0
+AB2EA4BF01266AD411EB7CBC3FB4B8AA,00000000360,Абонемент НЕДЕЛЯ ХОЛОДНЫЕ,trial_or_guest,0,1,0,116,118,118,8,9,trial/guest/short keyword,0
+B129000C29D830FD11F0A075A51AC71E,00000001672,Абонемент Неделя Фитнес 1 рубль,trial_or_guest,0,1,0,107,108,108,1,7,trial/guest/short keyword,0
+AAD4A4BF01266AD311EA6372C1AB9148,00000000293,144 полотенца для ПитерСтрой,trial_or_guest,0,1,0,1,2,2,1,1,short observed duration <= 14 days,0
+B179000C29D830FD11F0DD95636F8ABB,00000001697,Абонемент МУЛЬТИКАРТА 36 месяцев,trial_or_guest,0,1,0,1,1,1,1,1,short observed duration <= 14 days,0
+B091000C29D830FD11F0348F5A42CAAE,00000001609,СУБАРЕНДА безлимит неделя Савостьянова Ксения,trial_or_guest,0,1,0,1,2,2,7,7,trial/guest/short keyword,0
+AD2CA4BF01266AD411EDB7F6A90818B8,00000000956,8 недель фитнеса в подарок,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AFE2000C29D830FD11EFAE44AF123F5D,00000001497,Step-1 разовое посещение без клубной карты,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AFA3000C29D830FD11EF7F2295309884,00000001465,Step-1 разовое посещение при наличии клубной карты,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+B0CC000C29D830FD11F05C952BE63AE7,00000001636,"Батончик ""SNAQ FABRIQ"" вафельный глазированный с фисташковой пастой и хрустящим тестом",trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+B127000C29D830FD11F09EB843C0C76A,00000001660,батончик SNAQ FABRIO QWIKLER с арахисом и хрустящим тестом,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+B0CC000C29D830FD11F05C93EBC57647,00000001635,батончик SNAQ FABRIO QWIKLER с фисташкой и хрустящим тестом,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+B059000C29D830FD11F0097D7593E5E8,00000001585,батончик SNAQ FABRIO SNAQER ( АРАХИС С ФИСТАШКОЙ И ХРУСТЯЩИМ ТЕСТОМ),trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+B127000C29D830FD11F09EB7D98F24E4,00000001659,батончик SNAQ FABRIO SNAQER ( АРАХИС С ХРУСТЯЩИМ ТЕСТОМ) ,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AAD0A4BF01266AD311EA52E8359E0DC5,00000000284,Гостевой визит,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AFC8000C29D830FD11EF99AC5A41628A,00000001481,Гостевой визит купон,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AAE1A4BF01266AD411EAD244D1FFC9B0,00000000315,Джампинг пробное,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AFE2000C29D830FD11EFAE44DEC148D4,00000001498,Джампинг разовое посещение без клубной карты,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AAE1A4BF01266AD411EAD260A513AC0B,00000000317,Джампинг разовое посещение при наличии клубной карты,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AACBA4BF01266AD311EA0612912CA80C,00000000243,Йога- пробуждение,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+BB8808606E6F522E11E922D032BB8CB4,00000000125,Карта Неделя Друг,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AAA5A4BF01266AD311E91A3D4FBC50DC,00000000121,Карта Неделя Сайт,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+B127000C29D830FD11F09EC07DA6BDEC,00000001669,Молочный шоколад SNAQ FABRIO MILKY (с кешью и хрустящим тестом)в пакете,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+B127000C29D830FD11F09EC0B3EC1850,00000001671,Молочный шоколад SNAQ FABRIO MILKY (с фисташковой пастой  и хрустящим тестом)в пакете,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+B0CC000C29D830FD11F05C9681EBC147,00000001637,Молочный шоколад SNAQ FABRIO MILKY (с фисташковой пастой и хрустящим тестом) 34 гр,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+B0CC000C29D830FD11F05C96BE95CD73,00000001638,Молочный шоколад SNAQ FABRIO MILKY (с фисташковой пастой и хрустящим тестом) 55 гр,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+B127000C29D830FD11F09EC09967D82F,00000001670,Молочный шоколад SNAQ FABRIO MILKY (с фундуком  и хрустящим тестом)в пакете,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+B059000C29D830FD11F0097EDCC51E1C,00000001587,"Печенье ""SNAQ FABRIQ"" глазированное с фисташковой пастой хрустящим тестом и карамелью",trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+B059000C29D830FD11F0097E648A2ED1,00000001586,"Печенье DESSERT ""Фисташковое суфле с хрустящим тестом""",trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AAACA4BF01266AD311E940C88DDEF3D2,00000000138,Пробная П/Т,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AAB5A4BF01266AD311E9932BF8E5E737,00000000191,Пробное посещение АКВА,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AA9EA4BF01266AD311E8D82589232D71,00000000092,Разовая ,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AA9EA4BF01266AD311E8D82589232D75,00000000095,Разовая ВИП,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AA9BA4BF01266AD311E8AABC514530A9,00000000003,РАЗОВОЕ ПОСЕЩЕНИЕ,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AA9EA4BF01266AD311E8D82589232D83,00000000109,Разовое посещение,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+ABAAA4BF01266AD411EBDB17D296B250,00000000393,Разовое посещение АКВА ,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AAB5A4BF01266AD311E990DBA6BA4750,00000000179,Разовое посещение АКВА для клиентов Фитнес Империи,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AFA0000C29D830FD11EF7CC34E337BD2,00000001454,Сайкл разовое без клубной карты,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AA9EA4BF01266AD311E8C6D3BB763918,00000000076,Сайкл разовое при наличии клубной карты,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AE51000C29D830FD11EE8202934FD96E,00000001232,Тапочки одноразовые,trial_or_guest,0,1,0,0,0,0,,,trial/guest/short keyword,0
+AA9EA4BF01266AD311E8D82589232D73,00000000093,Пакет 8,other_sale,0,0,0,960,2410,2410,-6773,6996,manual csv decision: unknown_review_required -> other_sale; Customer confirmed all other disputed products should not be counted as subscriptions.,0
+AE39000C29D830FD11EE6F542E78B80A,00000001218,АКВА 26 посещений,full_subscription,1,0,0,75,78,78,2,184,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+ACE7A4BF01266AD411ED7ABA1F8B9722,00000000895,АКВА 38 посещений,full_subscription,1,0,0,69,69,69,26,275,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AAB5A4BF01266AD311E990DC16190F1E,00000000180,АКВА 40 посещений,full_subscription,1,0,0,601,1016,1016,1,7606,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AC3EA4BF01266AD411EC56A05231DDA0,00000000648,СУБАРЕНДА 10 посещений,other_sale,0,0,0,6,11,11,28,31,manual csv decision: unknown_review_required -> other_sale; Customer confirmed SUBARENDA should not be counted as subscription in any case.,0
+ABFFA4BF01266AD411EC1AB45199F07D,00000000409,СУБАРЕНДА безлимит,other_sale,0,0,0,57,837,837,1,8138,manual csv decision: unknown_review_required -> other_sale; Customer confirmed SUBARENDA should not be counted as subscription in any case.,0
+AFB8000C29D830FD11EF8D377302B83E,00000001466,"Спец. цена Полина 9 900,00",other_sale,0,0,0,5,5,5,273,273,manual csv decision: unknown_review_required -> other_sale; Customer confirmed all other disputed products should not be counted as subscriptions.,0
+AB34A4BF01266AD411EB816DD2AE44CE,00000000362,АКВА 35 посещений,full_subscription,1,0,0,41,41,41,111,307,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+ADD1000C29D830FD11EE20895D03FE2D,00000001144,АКВА 48 посещений,full_subscription,1,0,0,37,37,37,188,348,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+ABFFA4BF01266AD411EC1AB433F8DB37,00000000408,СУБАРЕНДА 15 посещений,other_sale,0,0,0,37,480,480,5,63,manual csv decision: unknown_review_required -> other_sale; Customer confirmed SUBARENDA should not be counted as subscription in any case.,0
+AC5FA4BF01266AD411ECA429A81300FB,00000000735,СУБАРЕНДА 12 посещений,other_sale,0,0,0,34,434,434,18,52,manual csv decision: unknown_review_required -> other_sale; Customer confirmed SUBARENDA should not be counted as subscription in any case.,0
+AADDA4BF01266AD411EAA7E8B7F4DA15,00000000306,АКВА 40 посещений САЙТ,full_subscription,1,0,0,32,33,33,134,270,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AFE1000C29D830FD11EFAD7D54FAD4B6,00000001496,Танцевальная тренировка (не использовать!!!),other_sale,0,0,0,29,50,50,30,30,manual csv decision: unknown_review_required -> other_sale; Customer confirmed all other disputed products should not be counted as subscriptions.,0
+AB34A4BF01266AD411EB816FA5002150,00000000363,АКВА 22 посещения,full_subscription,1,0,0,28,28,28,71,154,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+ABFFA4BF01266AD411EC1AB2987E8962,00000000407,СУБАРЕНДА 8 посещений,other_sale,0,0,0,25,93,93,20,9151,manual csv decision: unknown_review_required -> other_sale; Customer confirmed SUBARENDA should not be counted as subscription in any case.,0
+AAB5A4BF01266AD311E990DD47D43461,00000000183,АКВА 24 посещения,full_subscription,1,0,0,243,261,261,60,8053,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AFA3000C29D830FD11EF7EFEFCDDFD1F,00000001464,Подарочный сертификат 1 месяц безлимитного фитнеса,full_subscription,1,0,0,236,237,237,1,31,"manual csv decision: unknown_review_required -> full_subscription; Customer confirmed gift certificate counts as subscription; if not active on cutoff, client goes to reactivation.",0
+AB34A4BF01266AD411EB816D9D2E0EA1,00000000361,АКВА 10 посещений,full_subscription,1,0,0,23,26,26,21,55,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AAB5A4BF01266AD311E990DD2427CA1C,00000000182,АКВА 36 посещений,full_subscription,1,0,0,227,258,258,2,976,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AAB5A4BF01266AD311E990DCFB01527D,00000000181,АКВА 46 посещений,full_subscription,1,0,0,221,270,270,1,841,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AC8FA4BF01266AD411ED282FA9B6A57B,00000000811,АКВА 30 посещений,full_subscription,1,0,0,212,239,239,1,8044,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AA9EA4BF01266AD311E8D82589232D74,00000000094,Пакет 12 (персональные тренировки),full_subscription,1,0,0,2054,8812,8812,-6805,7928,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed Package 12 PT counts as main subscription only when client has no other main subscription; otherwise ignored.,0
+AE21000C29D830FD11EE5DCC477B6971,00000001208,АКВА 6 посещений,full_subscription,1,0,0,2,2,2,31,45,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+B152000C29D830FD11F0BFCCB5A5C951,00000001684,Медленный класс (10 посещений) двойное предложение,other_sale,0,0,0,2,4,4,36,60,manual csv decision: unknown_review_required -> other_sale; Customer confirmed all other disputed products should not be counted as subscriptions.,0
+AE97000C29D830FD11EEB5E224D01D09,00000001279,Наталья триггер2,other_sale,0,0,0,2,2,2,365,366,manual csv decision: unknown_review_required -> other_sale; Customer confirmed all other disputed products should not be counted as subscriptions.,0
+AD33A4BF01266AD411EDBF1F314FA67E,00000000959,"Спец. цена Яна 11 900,00",other_sale,0,0,0,2,2,2,366,366,manual csv decision: unknown_review_required -> other_sale; Customer confirmed all other disputed products should not be counted as subscriptions.,0
+ACD9A4BF01266AD411ED6F1D348DCEFB,00000000876,СУБАРЕНДА 20 посещений,other_sale,0,0,0,2,3,3,30,31,manual csv decision: unknown_review_required -> other_sale; Customer confirmed SUBARENDA should not be counted as subscription in any case.,0
+AFC7000C29D830FD11EF99133B51EC93,00000001480,Фитнес-марафон 2024,other_sale,0,0,0,2,2,2,19,19,manual csv decision: unknown_review_required -> other_sale; Customer confirmed all other disputed products should not be counted as subscriptions.,0
+AD33A4BF01266AD411EDBF1F314FA67F,00000000960,"Спец. цена Яна 10 900,00",other_sale,0,0,0,17,17,17,333,8909,manual csv decision: unknown_review_required -> other_sale; Customer confirmed all other disputed products should not be counted as subscriptions.,0
+AAB5A4BF01266AD311E9941AF979FC72,00000000202,АКВА 8 посещений,full_subscription,1,0,0,169,198,198,10,8825,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AA9EA4BF01266AD311E8D82589232D76,00000000096,Пакет 12 ВИП (персональные тренировки),other_sale,0,0,0,16,57,57,17,7617,manual csv decision: unknown_review_required -> other_sale; Customer confirmed all other disputed products should not be counted as subscriptions.,0
+AC8FA4BF01266AD411ED282F1D85E118,00000000810,АКВА 18 посещений,full_subscription,1,0,0,150,194,194,25,169,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AAB5A4BF01266AD311E9941B0CECB303,00000000203,АКВА 18 посещений,full_subscription,1,0,0,140,162,162,1,169,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AA9EA4BF01266AD311E8D82589232D77,00000000097,Пакет 8 ВИП ,other_sale,0,0,0,13,34,34,8,127,manual csv decision: unknown_review_required -> other_sale; Customer confirmed all other disputed products should not be counted as subscriptions.,0
+AAB5A4BF01266AD311E9941AEB16049A,00000000201,АКВА 4 посещения,full_subscription,1,0,0,120,156,156,4,186,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AE9B000C29D830FD11EEB904C34CBB28,00000001286,АКВА 32 посещения,full_subscription,1,0,0,116,126,126,37,8675,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AAE3A4BF01266AD411EB03B098E57A4D,00000000345,АКВА 46 посещений САЙТ,full_subscription,1,0,0,1,1,1,243,243,manual csv decision: unknown_review_required -> full_subscription; Customer confirmed any AKVA pass/visit counts as prior subscription for reactivation.,0
+AD39A4BF01266AD411EDC401EDA97FE7,00000000965,Карта розыгрыш(Мосеева Екатерина Олеговна),other_sale,0,0,0,1,1,1,32,32,manual csv decision: unknown_review_required -> other_sale; Customer confirmed all other disputed products should not be counted as subscriptions.,0
+AE95000C29D830FD11EEB44107BAD405,00000001278,Наталья триггер,other_sale,0,0,0,1,1,1,366,366,manual csv decision: unknown_review_required -> other_sale; Customer confirmed all other disputed products should not be counted as subscriptions.,0
+ABF0A4BF01266AD411EC0EF77639C4AA,00000000404,Пакет 10 (персональные тренировки),other_sale,0,0,0,1,1,1,60,60,manual csv decision: unknown_review_required -> other_sale; Customer confirmed all other disputed products should not be counted as subscriptions.,0
+B02E000C29D830FD11EFE922AA99F790,00000001553,Пакет 6,other_sale,0,0,0,1,1,1,29,29,manual csv decision: unknown_review_required -> other_sale; Customer confirmed all other disputed products should not be counted as subscriptions.,0
+B091000C29D830FD11F0348FE0F505B9,00000001610,СУБАРЕНДА безлимит Савостьянова Ксения,other_sale,0,0,0,1,5,5,30,31,manual csv decision: unknown_review_required -> other_sale; Customer confirmed SUBARENDA should not be counted as subscription in any case.,0

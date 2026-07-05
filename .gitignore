@@ -18,6 +18,10 @@ output/20251115_0800_fix_owner/raw/
 output/20251115_0800_fix_owner/staging/
 output/20251115_0800_fix_owner/csv/
 output/20251115_0800_fix_owner_new_import/staging/
+output/20260630_fix_owner/raw/
+output/20260630_fix_owner/staging/
+output/20260630_fix_owner/csv/
+output/20260630_fix_owner_new_import/staging/
 *.tar.gz
 
 # macOS metadata

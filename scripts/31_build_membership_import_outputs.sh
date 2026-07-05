@@ -9,8 +9,9 @@ OUTPUT_ROOT="${MEMBERSHIP_OUTPUT_ROOT:-output/20251115_0800_fix_owner_new_import
 DATABASE_NAME="${MEMBERSHIP_DATABASE_NAME:-FitnessRestored_20260523_macos}"
 SQLCMD_SERVER_NAME="${MEMBERSHIP_SQLCMD_SERVER:-mssql-fitness-2022,1433}"
 DATE_STAMP="${MEMBERSHIP_DATE_STAMP:-20260525_0800}"
+LOG_ROOT="${MEMBERSHIP_LOG_ROOT:-logs/new-changes/prolem_2}"
 
-mkdir -p "$OUTPUT_ROOT/staging" "$OUTPUT_ROOT/reports" "logs/new-changes/prolem_2"
+mkdir -p "$OUTPUT_ROOT/staging" "$OUTPUT_ROOT/reports" "$LOG_ROOT"
 
 MSSQL_2022_DATABASE_NAME="$DATABASE_NAME" \
 MSSQL_2022_MDF_PATH="/restoredata/${DATABASE_NAME}.mdf" \
@@ -23,11 +24,11 @@ SQLCMD_SERVER="$SQLCMD_SERVER_NAME" \
   -i /sql/31_build_membership_import_staging.sql \
   -W \
   -s "|" \
-  -o /logs/new-changes/prolem_2/31_build_membership_import_staging.txt
+  -o "/${LOG_ROOT}/31_build_membership_import_staging.txt"
 
 tr -d '\000' \
-  < logs/new-changes/prolem_2/31_build_membership_import_staging.txt \
-  > logs/new-changes/prolem_2/31_build_membership_import_staging.clean.txt
+  < "$LOG_ROOT/31_build_membership_import_staging.txt" \
+  > "$LOG_ROOT/31_build_membership_import_staging.clean.txt"
 
 read -r -d '' BCP_QUERY <<'SQL' || true
 SELECT

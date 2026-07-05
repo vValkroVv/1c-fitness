@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import os
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
@@ -15,10 +16,10 @@ from openpyxl.utils import get_column_letter
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DATE_STAMP = "20260525_0800"
-CUTOFF_DATE = "2026-05-25"
+DATE_STAMP = os.environ.get("ACTIVE_PROBLEM_DATE_STAMP", "20260525_0800")
+CUTOFF_DATE = os.environ.get("ACTIVE_PROBLEM_CUTOFF_DATE", "2026-05-25")
 
-OUTPUT_DIR = ROOT / "output/20251115_0800_fix_owner_new_import"
+OUTPUT_DIR = ROOT / os.environ.get("ACTIVE_PROBLEM_OUTPUT_DIR", "output/20251115_0800_fix_owner_new_import")
 MAIN_XLSX_PATH = OUTPUT_DIR / f"fitbase_import_abonementy_clientov_{DATE_STAMP}.xlsx"
 STAGING_CSV_PATH = OUTPUT_DIR / "staging/membership_import_rows.csv"
 
@@ -26,7 +27,7 @@ STAGING_CSV_PATH = OUTPUT_DIR / "staging/membership_import_rows.csv"
 @dataclass(frozen=True)
 class CaseWorkbookSpec:
     key: str
-    output_name: str
+    output_prefix: str
     description: str
     predicate: Callable[[dict[str, str]], bool]
     sort_key: Callable[[dict[str, str]], tuple[Any, ...]]
@@ -97,21 +98,21 @@ def sort_by_payment_left_desc(row: dict[str, str]) -> tuple[Any, ...]:
 SPECS = [
     CaseWorkbookSpec(
         key="active_no_payment_cash",
-        output_name=f"active_problem_1_no_payment_cash_198_cases_{DATE_STAMP}.xlsx",
+        output_prefix="active_problem_1_no_payment_cash",
         description="Активные/будущие full-членства: price>0, type_of_payment=наличные, платеж не найден.",
         predicate=is_no_payment_cash_active,
         sort_key=sort_by_client_and_date,
     ),
     CaseWorkbookSpec(
         key="active_zero_price_direct_full",
-        output_name=f"active_problem_2_zero_price_direct_full_44_cases_{DATE_STAMP}.xlsx",
+        output_prefix="active_problem_2_zero_price_direct_full",
         description="Активные full-членства: price=0, direct payment есть, возврата Document131 нет.",
         predicate=is_zero_price_direct_active_full,
         sort_key=sort_by_client_and_date,
     ),
     CaseWorkbookSpec(
         key="active_non_named_payment_left",
-        output_name=f"active_problem_3_non_named_payment_left_297_cases_{DATE_STAMP}.xlsx",
+        output_prefix="active_problem_3_non_named_payment_left",
         description="Активные строки с payment_left>0 без слова рассрочка в названии.",
         predicate=is_non_named_payment_left_active,
         sort_key=sort_by_payment_left_desc,
@@ -188,7 +189,7 @@ def main() -> None:
 
         workbook_rows = [main_rows_by_contract[row["contract_id"]] for row in selected]
         wb = build_workbook(headers, workbook_rows)
-        output_path = OUTPUT_DIR / spec.output_name
+        output_path = OUTPUT_DIR / f"{spec.output_prefix}_{len(selected)}_cases_{DATE_STAMP}.xlsx"
         wb.save(output_path)
 
         unique_clients = len({row["client_id"] for row in selected})

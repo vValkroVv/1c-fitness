@@ -84,7 +84,7 @@ def score(row: dict[str, str], spec: ExampleSpec) -> tuple[int, int, int, tuple[
     return name_score, year_score, payment_type_score, sort_key(row)
 
 
-def select_examples(rows: list[dict[str, str]]) -> list[tuple[ExampleSpec, dict[str, str]]]:
+def select_examples(rows: list[dict[str, str]]) -> tuple[list[tuple[ExampleSpec, dict[str, str]]], list[ExampleSpec]]:
     def price(row: dict[str, str]) -> Decimal:
         return decimal_value(row.get("price"))
 
@@ -310,6 +310,7 @@ def select_examples(rows: list[dict[str, str]]) -> list[tuple[ExampleSpec, dict[
     ]
 
     selected: list[tuple[ExampleSpec, dict[str, str]]] = []
+    missing: list[ExampleSpec] = []
     used_contract_ids: set[str] = set()
     for spec in specs:
         candidates = [
@@ -318,14 +319,13 @@ def select_examples(rows: list[dict[str, str]]) -> list[tuple[ExampleSpec, dict[
             if text(row, "contract_id") not in used_contract_ids and spec.predicate(row)
         ]
         if not candidates:
-            raise RuntimeError(f"No candidates for representative example: {spec.key}")
+            missing.append(spec)
+            continue
         picked = sorted(candidates, key=lambda row: score(row, spec))[0]
         selected.append((spec, picked))
         used_contract_ids.add(text(picked, "contract_id"))
 
-    if len(selected) != 30:
-        raise RuntimeError(f"Expected 30 representative examples, got {len(selected)}")
-    return selected
+    return selected, missing
 
 
 def read_staging_rows(path: Path) -> list[dict[str, str]]:
@@ -399,16 +399,22 @@ def write_xlsx(
     wb.close()
 
 
-def write_markdown(path: Path, xlsx_path: Path, selected: list[tuple[ExampleSpec, dict[str, str]]]) -> None:
+def write_markdown(
+    path: Path,
+    xlsx_path: Path,
+    selected: list[tuple[ExampleSpec, dict[str, str]]],
+    missing: list[ExampleSpec],
+    date_stamp: str,
+) -> None:
     lines = [
-        "# Representative 30 membership examples",
+        f"# Representative {len(selected)} membership examples",
         "",
-        "Срез: `2026-05-25 08:00`.",
+        f"date_stamp: `{date_stamp}`.",
         "",
         "Назначение: это не файл для правки правил `price/payment_type`, а",
         "репрезентативная выборка из всей финальной выгрузки абонементов.",
         "XLSX содержит только те же `20` колонок, что основной файл импорта",
-        "`fitbase_import_abonementy_clientov_20260525_0800.xlsx`: без",
+        f"`fitbase_import_abonementy_clientov_{date_stamp}.xlsx`: без",
         "`question_for_manual_check`, `correct_price`, `correct_payment_type`,",
         "`comment` и без технических staging-полей.",
         "",
@@ -440,6 +446,18 @@ def write_markdown(path: Path, xlsx_path: Path, selected: list[tuple[ExampleSpec
     lines.extend(
         [
             "",
+            "## Missing categories",
+            "",
+        ]
+    )
+    if missing:
+        for spec in missing:
+            lines.append(f"- `{spec.key}`: {spec.description}")
+    else:
+        lines.append("- none")
+    lines.extend(
+        [
+            "",
             "## Покрытие",
             "",
             "- массовые full-абонементы `УЛЬТРА` и `МУЛЬТИКАРТА`;",
@@ -462,6 +480,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", default="output/20251115_0800_fix_owner_new_import")
     parser.add_argument("--date-stamp", default=DATE_STAMP)
+    parser.add_argument("--report-md", default="")
     return parser.parse_args()
 
 
@@ -472,17 +491,23 @@ def main() -> None:
         output_dir = ROOT / output_dir
     source_xlsx = output_dir / f"fitbase_import_abonementy_clientov_{args.date_stamp}.xlsx"
     staging_csv = output_dir / "staging" / "membership_import_rows.csv"
-    sample_xlsx = output_dir / f"membership_import_representative_30_examples_{args.date_stamp}.xlsx"
-    sample_md = ROOT / "docs" / "new-changes" / "prolem_2" / "representative_30_examples_20260525_0800.md"
 
     staging_rows = read_staging_rows(staging_csv)
-    selected = select_examples(staging_rows)
+    selected, missing = select_examples(staging_rows)
+    sample_xlsx = output_dir / f"membership_import_representative_{len(selected)}_examples_{args.date_stamp}.xlsx"
+    if args.report_md:
+        sample_md = Path(args.report_md)
+        if not sample_md.is_absolute():
+            sample_md = ROOT / sample_md
+    else:
+        sample_md = output_dir / "reports" / f"representative_{len(selected)}_examples_{args.date_stamp}.md"
     write_xlsx(source_xlsx, sample_xlsx, selected)
-    write_markdown(sample_md, sample_xlsx, selected)
+    write_markdown(sample_md, sample_xlsx, selected, missing, args.date_stamp)
 
     print(f"representative examples xlsx: {sample_xlsx}")
     print(f"representative examples md: {sample_md}")
     print(f"rows: {len(selected)}")
+    print(f"missing_categories: {len(missing)}")
     for idx, (spec, row) in enumerate(selected, start=1):
         print(f"{idx:02d}. {spec.key}: {text(row, 'contract_id')} | {text(row, 'contract_name')}")
 

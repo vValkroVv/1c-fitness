@@ -271,8 +271,6 @@ def build_examples(rows: list[dict[str, str]]) -> list[tuple[str, dict[str, str]
         ["Абонемент УЛЬТРА 12 месяцев", "Абонемент НЕДЕЛЯ САЙТ"],
     )
 
-    if len(examples) != 30:
-        raise RuntimeError(f"Expected 30 examples, got {len(examples)}")
     return examples
 
 
@@ -355,8 +353,28 @@ def main() -> None:
         rows = list(csv.DictReader(handle))
 
     examples = build_examples(rows)
-    output_path = output_dir / f"payment_price_manual_review_examples_30_after_rules_{args.date_stamp}.xlsx"
+    output_path = output_dir / f"payment_price_manual_review_examples_{len(examples)}_after_rules_{args.date_stamp}.xlsx"
     write_examples(output_path, examples)
+
+    report_path = output_dir / "reports" / "payment_price_manual_review_examples_report.md"
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(
+        "\n".join(
+            [
+                "# Payment/price manual review examples",
+                "",
+                f"date_stamp: `{args.date_stamp}`",
+                f"examples: `{len(examples)}`",
+                f"xlsx: `{output_path.relative_to(ROOT)}`",
+                "",
+                "The source categories are best-effort review samples. On newer backups,",
+                "some old manual-review categories may have no matching rows after the",
+                "latest business rules are applied.",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
 
     print(f"manual review examples: {output_path}")
     print(f"rows: {len(examples)}")

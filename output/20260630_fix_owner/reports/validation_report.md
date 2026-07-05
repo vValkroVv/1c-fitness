@@ -1,6 +1,6 @@
 # Part 2 Combined Single-Stage Validation Report
 
-Run date: `2026-07-05T17:51:57`
+Run date: `2026-07-05T20:55:07`
 cutoff_date: `2026-06-30`
 date_stamp: `20260630`
 stage_rows: `73292`

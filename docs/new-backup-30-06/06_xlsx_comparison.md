@@ -28,62 +28,34 @@ window `2026-05-23` to `2026-06-30`, because the new file is
 
 | File | Old rows | New rows | Delta | Old clients | New clients | Client delta | Common | Added | Removed | Changed common | Unchanged common | Suspicious changed |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Импорт заявок | 64934 | 65231 | 297 | 64934 | 65231 | 297 | 64773 | 458 | 161 | 2070 | 62703 | 0 |
+| Импорт заявок | 64934 | 65231 | 297 | 64934 | 65231 | 297 | 64773 | 458 | 161 | 7480 | 57293 | 0 |
 | Пластиковые карты | 10890 | 10907 | 17 |  |  |  | 10099 | 808 | 791 | 285 | 9814 | 0 |
-| Абонементы клиентов | 99383 | 98944 | -439 | 43137 | 43080 | -57 | 98875 | 69 | 508 | 5199 | 93676 | 0 |
+| Абонементы клиентов | 99383 | 98944 | -439 | 43137 | 43080 | -57 | 98875 | 69 | 508 | 11154 | 87721 | 0 |
 | Шаблоны абонементов | 114 | 114 | 0 |  |  |  | 112 | 2 | 2 | 7 | 105 | 0 |
-| Услуги клиентов | 529 | 528 | -1 | 472 | 472 | 0 | 510 | 18 | 19 | 16 | 494 | 0 |
+| Услуги клиентов | 529 | 528 | -1 | 472 | 472 | 0 | 510 | 18 | 19 | 59 | 451 | 0 |
 | Шаблоны услуг | 51 | 51 | 0 |  |  |  | 51 | 0 | 0 | 1 | 50 | 0 |
 
 ## Interpretation
 
-Main count changes are consistent with the newer backup and later cutoff:
+Main count changes are consistent with the newer backup, the later
+cutoff, and the explicit `Карельский -> Ровио` remap:
 
-- `import_заявки`: `+297` clients. There are `458` new exported client ids and
-  `161` old exported client ids no longer exported.
-- `plastic_cards`: `+17` rows. Since this XLSX has no `client_id`, rows are
-  compared by normalized phone + FIO.
-- `абонементы клиентов`: `-439` rows and `-57` row clients. Common contract rows
-  are mostly stable: `93676` of `98875` common `contract_id` rows are byte-level
-  identical at exported-field level.
-- `шаблоны абонементов`: total stayed `114`; two names were renamed/replaced
-  and seven shared template rows changed business values.
+- `import_заявки`: `+297` rows/clients. There are `458` new exported client ids and `161` old exported client ids no longer exported.
+- `plastic_cards`: `+17` rows. Since this XLSX has no `client_id`, rows are compared by normalized phone + FIO.
+- `абонементы клиентов`: `-439` rows and `-57` row clients. Common contract rows are mostly stable: `87721` of `98875` common `contract_id` rows are byte-level identical at exported-field level.
+- `шаблоны абонементов`: total stayed `114`; `7` shared template rows changed business values.
 - `услуги клиентов`: `-1` row; unique client count stayed `472`.
-- `шаблоны услуг`: total stayed `51`; one shared template changed `duration`.
+- `шаблоны услуг`: total stayed `51`; `1` shared template changed business values.
 
-Added/removed `import_заявки` rows were checked against full stage:
+The higher `changed_common` count versus the pre-Karelsky check is expected:
+closed `Карельский` rows are now normalized to `Ровио, 3`, so shared rows also
+receive Rovio managers instead of the former fallback manager.
 
-```text
-added to new XLSX:
-  not_in_old_stage_new_in_backup: 419
-  old_stage_present_filtered_by_phone_dedupe_or_changed_winner: 16
-  was_in_old_stage_but_old_export_filtered: 15
-  old_stage_new_application_without_phone: 8
+Top changed fields confirm that this is primarily a manager remap:
 
-removed from new XLSX:
-  new_stage_new_application_without_phone: 131
-  new_stage_present_filtered_by_phone_dedupe_or_changed_winner: 30
-```
-
-So the new/removed application rows are explained by genuinely new stage rows
-or by the same export filters already used in the old build: no-phone new
-applications and same-phone dedupe winner changes.
-
-For `абонементы клиентов`, removed rows were not random XLSX drift:
-
-```text
-added contract rows:
-  existing_client_new_contract_or_reincluded: 57
-  new_or_updated_date_after_old_backup: 11
-  client_not_in_old_stage: 1
-
-removed contract rows:
-  client_still_in_new_stage_contract_removed_or_reclassified: 508
-```
-
-This means removed `contract_id` rows belong to clients still present in the
-new stage, but the contract set was recalculated by the fresh source data and
-latest rules.
+- `import_заявки`: `manager:6042, funnel:1570, funnel_step:1570, филиал:529, create_date:363, phone:90, client_fio:85`
+- `абонементы клиентов`: `manager:7749, card:2351, freeze:550, end_date:508, create_date:479, contract_name:331, phone:273, amount_of_payments:168`
+- `услуги клиентов`: `manager:58, phone:1`
 
 ## Drift Guard
 
@@ -100,14 +72,15 @@ export source fields stayed identical did not change in the XLSX.
 
 Conclusion: for the six requested XLSX, there are no unexplained changes among
 common keys. Rows that should not change because their exported source fields
-stayed the same did not change.
+stayed the same did not change; the additional manager deltas are the intended
+`Карельский -> Ровио` rule.
 
 ## Changed Field Highlights
 
 ### Импорт заявок
 
-- top changed fields: `funnel:1570, funnel_step:1570, manager:576, филиал:529, create_date:363, phone:90, client_fio:85`
-- reason flags: `stage_export_source_changed:2070, selected_subscription_changed:1333, owner_change_client:800, selected_subscription_sale_after_2026-05-23:646, same_subscription_crossed_cutoff_window:483, export_date_field_changed:363, client_created_after_2026-05-23:59, new_export_date_after_2026-05-23:59`
+- top changed fields: `manager:6042, funnel:1570, funnel_step:1570, филиал:529, create_date:363, phone:90, client_fio:85`
+- reason flags: `stage_export_source_changed:7480, selected_subscription_changed:1354, owner_change_client:1234, selected_subscription_sale_after_2026-05-23:646, same_subscription_crossed_cutoff_window:484, export_date_field_changed:363, client_created_after_2026-05-23:59, new_export_date_after_2026-05-23:59`
 - details: `output/20260630_xlsx_comparison/import_zayavki__changed_common.csv`, `output/20260630_xlsx_comparison/import_zayavki__added.csv`, `output/20260630_xlsx_comparison/import_zayavki__removed.csv`
 
 ### Пластиковые карты
@@ -118,8 +91,8 @@ stayed the same did not change.
 
 ### Абонементы клиентов
 
-- top changed fields: `card:2351, manager:1770, freeze:550, end_date:508, create_date:479, contract_name:331, phone:273, amount_of_payments:168`
-- reason flags: `membership_source_export_fields_changed:5199, client_or_card_fields_changed:3755, new_export_date_after_2026-05-23:1524, export_date_field_changed:976, owner_change_membership:492, money_fields_changed:170`
+- top changed fields: `manager:7749, card:2351, freeze:550, end_date:508, create_date:479, contract_name:331, phone:273, amount_of_payments:168`
+- reason flags: `membership_source_export_fields_changed:11154, client_or_card_fields_changed:9720, new_export_date_after_2026-05-23:1564, export_date_field_changed:976, owner_change_membership:772, money_fields_changed:170`
 - details: `output/20260630_xlsx_comparison/membership_clients__changed_common.csv`, `output/20260630_xlsx_comparison/membership_clients__added.csv`, `output/20260630_xlsx_comparison/membership_clients__removed.csv`
 
 ### Шаблоны абонементов
@@ -130,8 +103,8 @@ stayed the same did not change.
 
 ### Услуги клиентов
 
-- top changed fields: `manager:15, phone:1`
-- reason flags: `service_client_fields_changed:16`
+- top changed fields: `manager:58, phone:1`
+- reason flags: `service_client_fields_changed:59`
 - details: `output/20260630_xlsx_comparison/service_clients__changed_common.csv`, `output/20260630_xlsx_comparison/service_clients__added.csv`, `output/20260630_xlsx_comparison/service_clients__removed.csv`
 
 ### Шаблоны услуг

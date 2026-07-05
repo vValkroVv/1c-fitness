@@ -40,6 +40,12 @@ scripts/16_reclassify_part2_from_csv.py \
   --output-reports-dir "$OUTPUT_ROOT/reports" \
   --decisions config/product_reclassification_decisions.csv
 
+rm -f \
+  "$OUTPUT_ROOT/fitbase_active_clients_import_zayavki_${DATE_STAMP}__all_funnels.xlsx" \
+  "$OUTPUT_ROOT/fitbase_active_clients_import_zayavki_${DATE_STAMP}_all_funnels.xlsx" \
+  "$OUTPUT_ROOT/fitbase_active_clients_plastic_cards_${DATE_STAMP}__all_funnels.xlsx" \
+  "$OUTPUT_ROOT/fitbase_active_clients_plastic_cards_${DATE_STAMP}_all_funnels.xlsx"
+
 python3 scripts/17_build_part2_combined_xlsx.py \
   --cutoff-date "$CUTOFF_DATE" \
   --date-stamp "$DATE_STAMP" \

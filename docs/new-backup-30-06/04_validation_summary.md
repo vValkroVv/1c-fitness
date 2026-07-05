@@ -56,3 +56,15 @@ Warnings остались бизнесово ожидаемыми и не бло
 | `Василевская Вера Михайловна` | `Действующие клиенты`, `Абонемент МУЛЬТИКАРТА 12 месяцев (подарок)` |
 | `Россиева София Сергеевна` | `Действующие клиенты`, `Абонемент МУЛЬТИКАРТА 15 месяцев (подарок) спецпредложение` |
 | `Бламберус Михаил Александрович` | remains `Новые заявки`, no selected subscription |
+
+## Karelsky -> Rovio check
+
+```text
+final_normalized_karelsky: 0
+final_normalized_rovio: 9170
+final_manager_karelsky_fallback: 0
+stg_sales_all raw_club_karelsky: 44873
+stg_sales_all normalized_karelsky: 0
+stg_subscriptions_all raw_club_karelsky: 14108
+stg_subscriptions_all normalized_karelsky: 0
+```

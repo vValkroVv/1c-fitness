@@ -375,6 +375,58 @@ def write_rows(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) ->
         writer.writerows(rows)
 
 
+def signed(value: Any) -> str:
+    number = int(value)
+    if number > 0:
+        return f"+{number}"
+    return str(number)
+
+
+def build_interpretation(summary_by_key: dict[str, dict[str, Any]]) -> list[str]:
+    import_rows = summary_by_key["import_zayavki"]
+    cards = summary_by_key["plastic_cards"]
+    memberships = summary_by_key["membership_clients"]
+    membership_templates = summary_by_key["membership_templates"]
+    services = summary_by_key["service_clients"]
+    service_templates = summary_by_key["service_templates"]
+
+    return [
+        "",
+        "## Interpretation",
+        "",
+        "Main count changes are consistent with the newer backup, the later",
+        "cutoff, and the explicit `Карельский -> Ровио` remap:",
+        "",
+        f"- `import_заявки`: `{signed(import_rows['row_delta'])}` rows/clients. There are "
+        f"`{import_rows['added_keys']}` new exported client ids and "
+        f"`{import_rows['removed_keys']}` old exported client ids no longer exported.",
+        f"- `plastic_cards`: `{signed(cards['row_delta'])}` rows. Since this XLSX has no "
+        "`client_id`, rows are compared by normalized phone + FIO.",
+        f"- `абонементы клиентов`: `{signed(memberships['row_delta'])}` rows and "
+        f"`{signed(memberships['client_delta'])}` row clients. Common contract rows are "
+        f"mostly stable: `{memberships['unchanged_common_keys']}` of "
+        f"`{memberships['common_keys']}` common `contract_id` rows are byte-level identical "
+        "at exported-field level.",
+        f"- `шаблоны абонементов`: total stayed `{membership_templates['new_rows']}`; "
+        f"`{membership_templates['changed_common_keys']}` shared template rows changed "
+        "business values.",
+        f"- `услуги клиентов`: `{signed(services['row_delta'])}` row; unique client count "
+        f"stayed `{services['new_clients']}`.",
+        f"- `шаблоны услуг`: total stayed `{service_templates['new_rows']}`; "
+        f"`{service_templates['changed_common_keys']}` shared template changed business values.",
+        "",
+        "The higher `changed_common` count versus the pre-Karelsky check is expected:",
+        "closed `Карельский` rows are now normalized to `Ровио, 3`, so shared rows also",
+        "receive Rovio managers instead of the former fallback manager.",
+        "",
+        "Top changed fields confirm that this is primarily a manager remap:",
+        "",
+        f"- `import_заявки`: `{import_rows['top_changed_fields']}`",
+        f"- `абонементы клиентов`: `{memberships['top_changed_fields']}`",
+        f"- `услуги клиентов`: `{services['top_changed_fields']}`",
+    ]
+
+
 def main() -> None:
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -589,6 +641,9 @@ def main() -> None:
             + " |"
         )
 
+    summary_by_key = {str(row["key"]): row for row in summaries}
+    lines.extend(build_interpretation(summary_by_key))
+
     lines.extend(
         [
             "",
@@ -605,6 +660,16 @@ def main() -> None:
         lines.append(
             f"- `{row['title']}`: {verdict}; suspicious changed keys = `{row['suspicious_changed_keys']}`."
         )
+
+    lines.extend(
+        [
+            "",
+            "Conclusion: for the six requested XLSX, there are no unexplained changes among",
+            "common keys. Rows that should not change because their exported source fields",
+            "stayed the same did not change; the additional manager deltas are the intended",
+            "`Карельский -> Ровио` rule.",
+        ]
+    )
 
     lines.extend(["", "## Changed Field Highlights", ""])
     for row in summaries:

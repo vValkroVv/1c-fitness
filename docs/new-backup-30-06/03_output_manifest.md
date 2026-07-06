@@ -91,6 +91,7 @@ output/20260630_fix_owner_new_import/reports/validation_report.md
 output/20260630_fix_owner_new_import/reports/validation_recheck.md
 output/20260630_fix_owner_new_import/reports/rassrochka_validation.md
 output/20260630_fix_owner_new_import/reports/membership_import_uncertainties.csv
+output/20260630_fix_owner_new_import/reports/membership_branch_distribution.csv
 ```
 
 ## Импорт услуг
@@ -120,6 +121,7 @@ output/20260630_fix_owner_new_import/reports/services_build_report.md
 output/20260630_fix_owner_new_import/reports/services_validation_report.md
 output/20260630_fix_owner_new_import/reports/services_coverage_report.csv
 output/20260630_fix_owner_new_import/reports/services_active_rows_audit.csv
+output/20260630_fix_owner_new_import/reports/services_branch_distribution.csv
 ```
 
 ## Active-problem XLSX
@@ -135,7 +137,7 @@ output/20260630_fix_owner_new_import/active_problem_3_non_named_payment_left_179
 Проверка:
 
 ```text
-all files have 21 import-abonement columns
+all files have 22 import-abonement columns
 duplicate contract_id inside each file: 0
 contract_id intersections between active-problem files: 0
 validation: PASS

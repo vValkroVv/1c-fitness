@@ -113,6 +113,19 @@ SELECT
     sale_client._Code AS sale_client_id,
     sale_client._Description AS sale_client_fio,
     sale_client._Fld3832 AS sale_client_phone,
+    org._Description AS sale_branch_raw,
+    CASE
+        WHEN org._Description LIKE N'%Гоголев%' THEN N'Фитнес Империя (Гоголевский)'
+        WHEN org._Description LIKE N'%Столиц%' THEN N'Фитнес Империя (Столица)'
+        WHEN org._Description LIKE N'%Карель%' THEN N'Фитнес Империя (Ровио)'
+        WHEN org._Description LIKE N'%Ровио%' THEN N'Фитнес Империя (Ровио)'
+        WHEN org._Description LIKE N'%Промышлен%' THEN N'Фитнес Империя (Промышленная)'
+        ELSE NULL
+    END AS sale_branch,
+    CASE
+        WHEN org._Description IS NOT NULL THEN N'dbo._Document154._Fld1116RRef -> dbo._Reference105'
+        ELSE NULL
+    END AS sale_branch_source,
     l._LineNo1138 AS sale_line_no,
     CASE
         WHEN l._Fld1148_RTRef = 0x000000A3 THEN l._Fld1148_RRRef
@@ -185,6 +198,8 @@ JOIN dbo._Document154 AS d
   ON d._IDRRef = l._Document154_IDRRef
 LEFT JOIN dbo._Reference64 AS sale_client
   ON sale_client._IDRRef = d._Fld1119RRef
+LEFT JOIN dbo._Reference105 AS org
+  ON org._IDRRef = d._Fld1116RRef
 LEFT JOIN dbo._Document163 AS sd
   ON sd._IDRRef = CASE WHEN l._Fld1148_RTRef = 0x000000A3 THEN l._Fld1148_RRRef ELSE NULL END
 LEFT JOIN dbo._Reference64 AS holder
@@ -326,6 +341,9 @@ SELECT
     ss.sale_client_id,
     ss.sale_client_fio,
     ss.sale_client_phone,
+    ss.sale_branch_raw,
+    ss.sale_branch,
+    ss.sale_branch_source,
     ss.linked_service_doc_ref,
     ss.linked_object_rtref,
     ss.service_doc_number,

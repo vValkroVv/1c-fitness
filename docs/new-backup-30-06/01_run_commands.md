@@ -17,6 +17,9 @@ scripts/30_build_owner_change_fix_outputs.sh
 
 ## 2. Импорт абонементов
 
+Скрипт добавляет колонку `филиал` из документа продажи
+`dbo._Document154._Fld1116RRef`.
+
 ```bash
 MEMBERSHIP_SOURCE_OUTPUT_ROOT=output/20260630_fix_owner \
 MEMBERSHIP_OUTPUT_ROOT=output/20260630_fix_owner_new_import \
@@ -28,6 +31,9 @@ scripts/31_build_membership_import_outputs.sh
 ```
 
 ## 3. Импорт услуг
+
+Скрипт добавляет колонку `филиал` из документа продажи
+`dbo._Document154._Fld1116RRef`.
 
 ```bash
 SERVICES_SOURCE_OUTPUT_ROOT=output/20260630_fix_owner \
@@ -46,4 +52,14 @@ ACTIVE_PROBLEM_OUTPUT_DIR=output/20260630_fix_owner_new_import \
 ACTIVE_PROBLEM_DATE_STAMP=20260630 \
 ACTIVE_PROBLEM_CUTOFF_DATE=2026-06-30 \
 python3 scripts/36_build_active_problem_case_workbooks.py
+```
+
+## 5. Delivery без активных проблем
+
+Финальная папка `output/20260630_delivery_without_active_problems/` пересобирается
+из обновленных XLSX. Подробности и контроль по колонке `филиал`:
+
+```text
+docs/new-backup-30-06/11_sale_branch_for_membership_services.md
+docs/new-backup-30-06/10_delivery_without_active_problems.md
 ```

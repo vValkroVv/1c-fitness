@@ -25,13 +25,13 @@ output/20260630_fix_owner_new_import/reports/services_validation_report.md: PASS
 |---|---:|---:|---|
 | `fitbase_active_clients_import_zayavki_20260630_all_funnels.xlsx` | 39524 | 10 | PASS |
 | `fitbase_active_clients_plastic_cards_20260630_all_funnels.xlsx` | 10907 | 3 | PASS |
-| `fitbase_import_abonementy_clientov_20260630.xlsx` | 120040 | 21 | PASS |
+| `fitbase_import_abonementy_clientov_20260630.xlsx` | 120040 | 22 | PASS |
 | `fitbase_import_shablony_abonementov_20260630.xlsx` | 114 | 12 | PASS |
-| `fitbase_import_uslugi_clientov_20260630.xlsx` | 522 | 16 | PASS |
+| `fitbase_import_uslugi_clientov_20260630.xlsx` | 522 | 17 | PASS |
 | `fitbase_import_shablony_uslug_20260630.xlsx` | 51 | 9 | PASS |
-| `active_problem_1_no_payment_cash_3_cases_20260630.xlsx` | 3 | 21 | PASS |
-| `active_problem_2_zero_price_direct_full_41_cases_20260630.xlsx` | 41 | 21 | PASS |
-| `active_problem_3_non_named_payment_left_179_cases_20260630.xlsx` | 179 | 21 | PASS |
+| `active_problem_1_no_payment_cash_3_cases_20260630.xlsx` | 3 | 22 | PASS |
+| `active_problem_2_zero_price_direct_full_41_cases_20260630.xlsx` | 41 | 22 | PASS |
+| `active_problem_3_non_named_payment_left_179_cases_20260630.xlsx` | 179 | 22 | PASS |
 | `payment_price_manual_review_examples_25_after_rules_20260630.xlsx` | 25 | 25 | PASS |
 | `membership_import_representative_28_examples_20260630.xlsx` | 28 | 21 | PASS |
 

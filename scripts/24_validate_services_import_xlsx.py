@@ -31,7 +31,14 @@ CLIENT_HEADERS = [
     "payment_left",
     "type_of_payment",
     "manager",
+    "филиал",
 ]
+ALLOWED_BRANCHES = {
+    "Фитнес Империя (Гоголевский)",
+    "Фитнес Империя (Промышленная)",
+    "Фитнес Империя (Ровио)",
+    "Фитнес Империя (Столица)",
+}
 TEMPLATE_HEADERS = [
     "name",
     "price",
@@ -148,6 +155,7 @@ def main() -> int:
         "amount_of_payment": 12,
         "payment_left": 13,
         "manager": 15,
+        "филиал": 16,
     }
     blanks = Counter()
     for row in client_rows:
@@ -158,6 +166,10 @@ def main() -> int:
         errors.append(f"required blanks: {dict(blanks)}")
 
     payment_type_counts = Counter(str(row[14] or "blank") for row in client_rows)
+    branch_counts = Counter(str(row[16] or "blank") for row in client_rows)
+    invalid_branches = sorted(branch for branch in branch_counts if branch not in ALLOWED_BRANCHES)
+    if invalid_branches:
+        errors.append(f"invalid branch values: {invalid_branches}")
     blank_payment_positive = 0
     for row in client_rows:
         if row[14] in (None, "") and (row[11] or 0) > 0:
@@ -185,6 +197,7 @@ def main() -> int:
         f"- row clients: {len(client_ids)}",
         f"- duplicate service_id values: {len(duplicated_service_ids)}",
         f"- payment types: {dict(payment_type_counts)}",
+        f"- branches: {dict(branch_counts)}",
         f"- template-only services: {len(coverage_missing_selected)}",
         f"- status: {'PASS' if not errors else 'FAIL'}",
         "",

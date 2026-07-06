@@ -43,6 +43,7 @@ CLIENT_HEADERS = [
     "payment_left",
     "type_of_payment",
     "manager",
+    "филиал",
 ]
 CLIENT_RUS_HEADERS = [
     "Тег",
@@ -66,6 +67,7 @@ CLIENT_RUS_HEADERS = [
     "Осталось оплатить *",
     "Тип оплаты",
     "Менеджер ",
+    "Филиал продажи",
 ]
 TEMPLATE_HEADERS = [
     "branches_access",
@@ -142,6 +144,9 @@ FACT_FIELDS = [
     "raw_club",
     "normalized_club",
     "club_source",
+    "sale_branch_raw",
+    "sale_branch",
+    "sale_branch_source",
     "raw_source",
     "doc_duration_value",
     "rg_duration_days",
@@ -730,6 +735,7 @@ def build_rows(
             "payment_left": excel_number(payment_left),
             "type_of_payment": payment_type,
             "manager": source.manager,
+            "филиал": (fact.get("sale_branch") or "").strip() or source.branch,
             "_subscription_ref": fact.get("subscription_ref", ""),
             "_product_ref": fact.get("product_ref", ""),
             "_product_class": fact.get("product_class", ""),
@@ -739,6 +745,8 @@ def build_rows(
             "_money_source": money_source,
             "_payment_method_raw": fact.get("matched_payment_method", ""),
             "_payment_match_source": fact.get("matched_payment_match_source", ""),
+            "_sale_branch_raw": fact.get("sale_branch_raw", ""),
+            "_sale_branch_source": fact.get("sale_branch_source", ""),
             "_business_override": business_override,
             "_membership_sale_line_amount": fact.get("membership_sale_line_amount", ""),
             "_membership_sale_line_count": fact.get("membership_sale_line_count", ""),
@@ -868,6 +876,7 @@ def build_rows(
                 "payment_left": None,
                 "type_of_payment": "",
                 "manager": source.manager,
+                "филиал": source.branch,
                 "_subscription_ref": "",
                 "_product_ref": "",
                 "_product_class": "refuser_without_membership",
@@ -877,6 +886,8 @@ def build_rows(
                 "_money_source": "refuser_without_membership",
                 "_payment_method_raw": "",
                 "_payment_match_source": "",
+                "_sale_branch_raw": "",
+                "_sale_branch_source": "refuser_placeholder_source_import_zayavki_branch",
                 "_business_override": "",
                 "_membership_sale_line_amount": "",
                 "_membership_sale_line_count": "",
@@ -1031,7 +1042,7 @@ def build_validation(
     )
     required_blank_counts = Counter()
     for row in client_rows:
-        required_fields = ["tag", "client_id", "client_fio", "create_date", "manager"]
+        required_fields = ["tag", "client_id", "client_fio", "create_date", "manager", "филиал"]
         if row.get("_refuser_placeholder") != "1":
             required_fields = [
                 "contract_id",
@@ -1042,6 +1053,7 @@ def build_validation(
                 "payment_date",
                 "price",
                 "manager",
+                "филиал",
             ]
         for field in required_fields:
             if row.get(field) in (None, ""):
@@ -1109,6 +1121,10 @@ def build_validation(
             lines.append(f"- {key}: {value}")
     else:
         lines.append("- none")
+    branch_counts = Counter(str(row.get("филиал") or "blank") for row in client_rows)
+    lines.extend(["", "## Branches", ""])
+    for key, value in branch_counts.most_common():
+        lines.append(f"- {key}: {value}")
     lines.extend(["", "## Required Blank Counts", ""])
     if required_blank_counts:
         for key, value in required_blank_counts.items():
@@ -1188,6 +1204,8 @@ def main() -> int:
         "_money_source",
         "_payment_method_raw",
         "_payment_match_source",
+        "_sale_branch_raw",
+        "_sale_branch_source",
         "_business_override",
         "_membership_sale_line_amount",
         "_membership_sale_line_count",
@@ -1237,6 +1255,12 @@ def main() -> int:
         for (product_class, contract_name), rows_count in zero_price_counts.most_common()
     ]
     write_csv(reports_dir / "zero_price_report.csv", zero_price_rows, ["product_class", "contract_name", "rows_count"])
+    branch_counts = Counter(str(row.get("филиал") or "blank") for row in client_rows)
+    write_csv(
+        reports_dir / "membership_branch_distribution.csv",
+        [{"branch": branch, "rows_count": rows_count} for branch, rows_count in branch_counts.most_common()],
+        ["branch", "rows_count"],
+    )
 
     validation_report = build_validation(source_clients, client_rows, template_rows, uncertainties, counters)
     reports_dir.mkdir(parents=True, exist_ok=True)

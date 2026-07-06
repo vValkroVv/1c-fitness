@@ -36,7 +36,14 @@ CLIENT_HEADERS = [
     "payment_left",
     "type_of_payment",
     "manager",
+    "филиал",
 ]
+ALLOWED_BRANCHES = {
+    "Фитнес Империя (Гоголевский)",
+    "Фитнес Империя (Промышленная)",
+    "Фитнес Империя (Ровио)",
+    "Фитнес Империя (Столица)",
+}
 TEMPLATE_HEADERS = [
     "branches_access",
     "name",
@@ -164,7 +171,7 @@ def main() -> int:
             and blank(row[client_idx["contract_id"]])
             and blank(row[client_idx["contract_name"]])
         )
-        required_fields = ["tag", "client_id", "client_fio", "create_date", "manager"] if is_refuser_placeholder else [
+        required_fields = ["tag", "client_id", "client_fio", "create_date", "manager", "филиал"] if is_refuser_placeholder else [
             "contract_id",
             "client_id",
             "client_fio",
@@ -175,6 +182,7 @@ def main() -> int:
             "amount_of_payments",
             "payment_left",
             "manager",
+            "филиал",
         ]
         for field in required_fields:
             if blank(row[client_idx[field]]):
@@ -192,6 +200,10 @@ def main() -> int:
         errors.append(f"blank contract_id rows without tag=отказники: {len(untagged_blank_contract_rows)}")
 
     payment_type_counts = Counter(str(row[client_idx["type_of_payment"]] or "blank") for row in client_rows)
+    branch_counts = Counter(str(row[client_idx["филиал"]] or "blank") for row in client_rows)
+    invalid_branches = sorted(branch for branch in branch_counts if branch not in ALLOWED_BRANCHES)
+    if invalid_branches:
+        errors.append(f"invalid branch values: {invalid_branches}")
     if payment_type_counts.get("blank", 0):
         warnings.append(f"blank payment type rows: {payment_type_counts['blank']}")
 
@@ -208,6 +220,7 @@ def main() -> int:
         f"- duplicate contract_id values: {len(duplicated_contracts)}",
         f"- missing template names: {len(missing_templates)}",
         f"- payment types: {dict(payment_type_counts)}",
+        f"- branches: {dict(branch_counts)}",
         f"- status: {'PASS' if not errors else 'FAIL'}",
         "",
         "## Errors",

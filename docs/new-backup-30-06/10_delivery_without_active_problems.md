@@ -39,13 +39,16 @@ output/20260630_delivery_without_active_problems/
 
 | file | data rows | cols |
 | --- | ---: | ---: |
-| `fitbase_active_clients_import_zayavki_20260630_all_funnels.xlsx` | 39525 | 10 |
+| `fitbase_active_clients_import_zayavki_20260630_all_funnels.xlsx` | 39524 | 10 |
 | `fitbase_active_clients_plastic_cards_20260630_all_funnels.xlsx` | 10907 | 3 |
-| `fitbase_import_abonementy_clientov_20260630.xlsx` | 119818 | 21 |
-| `fitbase_import_shablony_abonementov_20260630.xlsx` | 115 | 12 |
-| `fitbase_import_shablony_uslug_20260630.xlsx` | 52 | 9 |
-| `fitbase_import_uslugi_clientov_20260630.xlsx` | 523 | 16 |
-| `problem_1_no_payment_cash_3_cases_20260630.xlsx` | 3 | 21 |
-| `problem_2_zero_price_direct_full_41_cases_20260630.xlsx` | 41 | 21 |
-| `problem_3_non_named_payment_left_179_cases_20260630.xlsx` | 179 | 21 |
+| `fitbase_import_abonementy_clientov_20260630.xlsx` | 119817 | 22 |
+| `fitbase_import_shablony_abonementov_20260630.xlsx` | 114 | 12 |
+| `fitbase_import_shablony_uslug_20260630.xlsx` | 51 | 9 |
+| `fitbase_import_uslugi_clientov_20260630.xlsx` | 522 | 17 |
+| `problem_1_no_payment_cash_3_cases_20260630.xlsx` | 3 | 22 |
+| `problem_2_zero_price_direct_full_41_cases_20260630.xlsx` | 41 | 22 |
+| `problem_3_non_named_payment_left_179_cases_20260630.xlsx` | 179 | 22 |
 
+Колонка `филиал` есть в `import_заявки`, `fitbase_import_abonementy_clientov_20260630.xlsx`,
+`fitbase_import_uslugi_clientov_20260630.xlsx` и problem-XLSX. Значения только
+из 4 разрешенных филиалов; пустых значений нет.

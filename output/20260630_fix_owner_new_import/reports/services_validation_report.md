@@ -8,6 +8,7 @@
 - row clients: 469
 - duplicate service_id values: 0
 - payment types: {'безналичные': 499, 'наличные': 9, 'сбп': 8, 'blank': 6}
+- branches: {'Фитнес Империя (Гоголевский)': 240, 'Фитнес Империя (Ровио)': 105, 'Фитнес Империя (Промышленная)': 89, 'Фитнес Империя (Столица)': 88}
 - template-only services: 7
 - status: PASS
 

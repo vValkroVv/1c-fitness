@@ -38,6 +38,7 @@ CLIENT_HEADERS = [
     "payment_left",
     "type_of_payment",
     "manager",
+    "филиал",
 ]
 CLIENT_RUS_HEADERS = [
     "Внутренний номер услуги",
@@ -56,6 +57,7 @@ CLIENT_RUS_HEADERS = [
     "Осталось оплатить *",
     "Тип оплаты",
     "Менеджер ",
+    "Филиал продажи",
 ]
 TEMPLATE_HEADERS = [
     "name",
@@ -95,6 +97,9 @@ FACT_FIELDS = [
     "sale_client_id",
     "sale_client_fio",
     "sale_client_phone",
+    "sale_branch_raw",
+    "sale_branch",
+    "sale_branch_source",
     "linked_service_doc_ref",
     "linked_object_rtref",
     "service_doc_number",
@@ -508,9 +513,12 @@ def build_rows(
             "payment_left": 0,
             "type_of_payment": payment_type,
             "manager": source.manager,
+            "филиал": (fact.get("sale_branch") or "").strip() or source.branch,
             "_row_kind": row_kind,
             "_outside_import_zayavki": "0" if client_id in source_clients else "1",
             "_sale_doc_ref": fact.get("sale_doc_ref", ""),
+            "_sale_branch_raw": fact.get("sale_branch_raw", ""),
+            "_sale_branch_source": fact.get("sale_branch_source", ""),
             "_linked_service_doc_ref": fact.get("linked_service_doc_ref", ""),
             "_payment_method_raw": fact.get("payment_method", ""),
             "_is_active_by_balance": fact.get("is_active_by_balance", ""),
@@ -609,7 +617,7 @@ def write_workbook(path: Path, headers: list[str], rus_headers: list[str], rows:
 def write_csv(path: Path, rows: list[dict[str, Any]], fields: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8-sig", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         for row in rows:
             writer.writerow({field: row.get(field, "") for field in fields})
@@ -684,7 +692,10 @@ def main() -> int:
                 "visits_left": row["visits_left"],
                 "price": row["price"],
                 "type_of_payment": row["type_of_payment"],
+                "филиал": row["филиал"],
                 "sale_doc_ref": row["_sale_doc_ref"],
+                "sale_branch_raw": row["_sale_branch_raw"],
+                "sale_branch_source": row["_sale_branch_source"],
                 "linked_service_doc_ref": row["_linked_service_doc_ref"],
                 "is_active_by_balance": row["_is_active_by_balance"],
                 "is_active_by_date": row["_is_active_by_date"],
@@ -700,12 +711,21 @@ def main() -> int:
             "visits_left",
             "price",
             "type_of_payment",
+            "филиал",
             "sale_doc_ref",
+            "sale_branch_raw",
+            "sale_branch_source",
             "linked_service_doc_ref",
             "is_active_by_balance",
             "is_active_by_date",
             "rg3336_signed_balance",
         ],
+    )
+    branch_counts = Counter(str(row.get("филиал") or "blank") for row in client_rows)
+    write_csv(
+        reports_dir / "services_branch_distribution.csv",
+        [{"branch": branch, "rows_count": rows_count} for branch, rows_count in branch_counts.most_common()],
+        ["branch", "rows_count"],
     )
 
     report = [
@@ -721,6 +741,7 @@ def main() -> int:
         f"- services with selected rows: {sum(1 for row in coverage_rows if row['selected_rows'])}",
         f"- services template-only/no final-client rows: {sum(1 for row in coverage_rows if not row['selected_rows'])}",
         f"- payment type counts: {dict(counters['payment_type'])}",
+        f"- branch counts: {dict(branch_counts)}",
         "",
         "## Output",
         "",
@@ -732,6 +753,7 @@ def main() -> int:
         f"- `{(reports_dir / 'services_coverage_report.csv').relative_to(ROOT)}`",
         f"- `{(reports_dir / 'services_import_uncertainties.csv').relative_to(ROOT)}`",
         f"- `{(reports_dir / 'services_active_rows_audit.csv').relative_to(ROOT)}`",
+        f"- `{(reports_dir / 'services_branch_distribution.csv').relative_to(ROOT)}`",
     ]
     (reports_dir / "services_build_report.md").write_text("\n".join(report) + "\n", encoding="utf-8")
     print("\n".join(report))

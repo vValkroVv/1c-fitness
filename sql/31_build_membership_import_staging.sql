@@ -11,6 +11,8 @@ IF OBJECT_ID('tempdb..#direct_membership_payments') IS NOT NULL
     DROP TABLE #direct_membership_payments;
 IF OBJECT_ID('tempdb..#membership_sale_docs') IS NOT NULL
     DROP TABLE #membership_sale_docs;
+IF OBJECT_ID('tempdb..#membership_sale_branch_context') IS NOT NULL
+    DROP TABLE #membership_sale_branch_context;
 IF OBJECT_ID('tempdb..#membership_sale_line_context') IS NOT NULL
     DROP TABLE #membership_sale_line_context;
 IF OBJECT_ID('tempdb..#membership_document131_context') IS NOT NULL
@@ -86,6 +88,31 @@ CREATE INDEX IX_membership_sale_docs_subscription_ref
 
 CREATE INDEX IX_membership_sale_docs_sale_doc_ref
     ON #membership_sale_docs(sale_doc_ref);
+
+SELECT
+    msd.subscription_ref,
+    org._Description AS sale_branch_raw,
+    CASE
+        WHEN org._Description LIKE N'%Гоголев%' THEN N'Фитнес Империя (Гоголевский)'
+        WHEN org._Description LIKE N'%Столиц%' THEN N'Фитнес Империя (Столица)'
+        WHEN org._Description LIKE N'%Карель%' THEN N'Фитнес Империя (Ровио)'
+        WHEN org._Description LIKE N'%Ровио%' THEN N'Фитнес Империя (Ровио)'
+        WHEN org._Description LIKE N'%Промышлен%' THEN N'Фитнес Империя (Промышленная)'
+        ELSE NULL
+    END AS sale_branch,
+    CASE
+        WHEN org._Description IS NOT NULL THEN N'dbo._Document154._Fld1116RRef -> dbo._Reference105'
+        ELSE NULL
+    END AS sale_branch_source
+INTO #membership_sale_branch_context
+FROM #membership_sale_docs AS msd
+JOIN dbo._Document154 AS sale_doc
+  ON sale_doc._IDRRef = msd.sale_doc_ref
+LEFT JOIN dbo._Reference105 AS org
+  ON org._IDRRef = sale_doc._Fld1116RRef;
+
+CREATE UNIQUE INDEX IX_membership_sale_branch_context_subscription_ref
+    ON #membership_sale_branch_context(subscription_ref);
 
 SELECT
     subscription_ref,
@@ -230,11 +257,31 @@ with_sale_doc_context AS (
         wp.*,
         COALESCE(line_context.membership_sale_line_amount, 0) AS membership_sale_line_amount,
         COALESCE(line_context.membership_sale_line_count, 0) AS membership_sale_line_count,
+        COALESCE(branch_context.sale_branch_raw, wp.raw_club) AS sale_branch_raw,
+        COALESCE(
+            branch_context.sale_branch,
+            CASE
+                WHEN wp.normalized_club = N'Коммунальная, 20' THEN N'Фитнес Империя (Гоголевский)'
+                WHEN wp.normalized_club = N'Лососинское шоссе, 26' THEN N'Фитнес Империя (Столица)'
+                WHEN wp.normalized_club = N'Промышленная, 10' THEN N'Фитнес Империя (Промышленная)'
+                WHEN wp.normalized_club IN (N'Ровио, 3', N'Карельский (закрыт)') THEN N'Фитнес Империя (Ровио)'
+                ELSE NULL
+            END
+        ) AS sale_branch,
+        COALESCE(
+            branch_context.sale_branch_source,
+            CASE
+                WHEN wp.normalized_club IS NOT NULL THEN CONCAT(N'historical_membership_without_document154_fallback: ', wp.club_source)
+                ELSE NULL
+            END
+        ) AS sale_branch_source,
         COALESCE(refund_context.document131_refund_count, 0) AS document131_refund_count,
         COALESCE(refund_context.document131_posted_unmarked_refund_count, 0) AS document131_posted_unmarked_refund_count
     FROM with_payment AS wp
     LEFT JOIN #membership_sale_line_context AS line_context
       ON line_context.subscription_ref = wp.subscription_ref
+    LEFT JOIN #membership_sale_branch_context AS branch_context
+      ON branch_context.subscription_ref = wp.subscription_ref
     LEFT JOIN #membership_document131_context AS refund_context
       ON refund_context.subscription_ref = wp.subscription_ref
 ),
@@ -365,6 +412,9 @@ SELECT
     raw_club,
     normalized_club,
     club_source,
+    sale_branch_raw,
+    sale_branch,
+    sale_branch_source,
     raw_source,
     CAST(COALESCE(doc_duration_value, 0) AS decimal(15, 2)) AS doc_duration_value,
     CAST(COALESCE(rg_duration_days, 0) AS decimal(15, 2)) AS rg_duration_days,

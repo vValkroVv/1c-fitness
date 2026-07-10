@@ -1,0 +1,29 @@
+# Параметры проверенной сборки из Fitnes-30-06-26.bak.
+run:
+  date_stamp: "20260630"
+  cutoff_date: "2026-06-30"
+  cutoff_at: "2026-06-30 23:27:03"
+  backup_finish_at: "2026-06-30 23:27:03"
+  membership_cutoff_at: "2026-05-25 08:00:00"
+  services_cutoff_at: "2026-05-25 08:00:00"
+  work_name: "20260630"
+  delivery_name: "20260630_delivery_without_active_problems"
+
+# Здесь указывается уже восстановленная база. Неважно, где она запущена:
+# на Windows, Linux, в Docker или на отдельном сервере. Пароль в этот файл
+# не записывается, скрипт читает его из переменной password_env.
+sql:
+  server: "127.0.0.1"
+  port: 1433
+  database: "FitnessRestored"
+  user: "sa"
+  password_env: "FITNESS_SQL_PASSWORD"
+  login_timeout_seconds: 30
+  query_timeout_seconds: 0
+  encrypt_login: true
+  tls_ca_file: ""
+  tls_validate_host: true
+
+validation:
+  expected_manifest: "reference/expected_20260630.yml"
+  enforce_reference_counts: true

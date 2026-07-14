@@ -17,9 +17,10 @@
 
 - набор имён файлов;
 - количество строк и колонок;
-- 223 уникальных `contract_id` в трёх проблемных файлах;
+- ровно один лист в каждой книге, отсутствие формул и полностью пустых строк данных;
+- 254 уникальных `contract_id` в трёх проблемных файлах;
 - отсутствие одного договора сразу в двух проблемных группах;
-- отсутствие этих 223 договоров в чистом файле абонементов;
+- отсутствие этих 254 договоров в чистом файле абонементов;
 - уникальность остальных непустых `contract_id`;
 - допустимые значения филиала и отсутствие пустого филиала.
 
@@ -28,7 +29,7 @@
 
 ## На чём проверяли сам пакет
 
-Полный прогон делался 10 июля 2026 года на восстановленной копии
+Полный прогон делался 14 июля 2026 года на восстановленной копии
 `Fitnes-30-06-26.bak`.
 
 ```text
@@ -37,24 +38,20 @@ compatibility: 130
 dbo source tables: 2503
 required tables: 17/17
 owner final_funnel_clients: 73292
-membership facts: 99959
-services facts: 50215
-problem counts: 3 / 41 / 179
-problem union: 223
-removed from clean membership: 223
+backup finish / unified cutoff: 2026-06-30 23:27:03
+membership facts: 101436
+services facts: 50710
+problem counts: 10 / 41 / 203
+problem union: 254
+removed from clean membership: 254
 final validation: PASS
 ```
 
-После этого девять новых XLSX сравнили с исходной поставкой
-`output/20260630_delivery_without_active_problems/` не только по количеству строк.
-Совпали:
+Все девять XLSX прошли структурную, логическую и визуальную проверку.
+Дополнительно SQL-аудит показал одинаковый `cutoff_at` во всех 101 436 фактах
+абонементов и 50 710 фактах услуг. Строк с продажей или платежом позже cutoff нет.
 
-- значения всех ячеек;
-- порядок строк;
-- технические и русские заголовки;
-- стили ячеек и числовые форматы.
-
-Чистый файл абонементов содержит 119 817 строк данных. Ни одного из 223
+Чистый файл абонементов содержит 121 242 строки данных. Ни одного из 254
 спорных договоров в нём нет.
 
 SHA-256 самого XLSX здесь бесполезен. Внутри XLSX устроен как ZIP-архив, и при
@@ -66,13 +63,13 @@ SHA-256 самого XLSX здесь бесполезен. Внутри XLSX у�
 После запуска отчётов несколько:
 
 ```text
-work/20260630/reports/database_preflight.md
-work/20260630/owner/reports/validation_report.md
-work/20260630/imports/reports/validation_report.md
-work/20260630/imports/reports/services_validation_report.md
-work/20260630/reports/delivery_build.md
-work/20260630/reports/validation_report.md
-work/20260630/reports/validation_report.json
+work/20260630_full_cutoff/reports/database_preflight.md
+work/20260630_full_cutoff/owner/reports/validation_report.md
+work/20260630_full_cutoff/imports/reports/validation_report.md
+work/20260630_full_cutoff/imports/reports/services_validation_report.md
+work/20260630_full_cutoff/reports/delivery_build.md
+work/20260630_full_cutoff/reports/validation_report.md
+work/20260630_full_cutoff/reports/validation_report.json
 ```
 
 Для финальной поставки смотрите последний `validation_report.md`. Передавать

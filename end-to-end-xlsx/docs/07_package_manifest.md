@@ -18,7 +18,7 @@
 
 | Файл | Что в нём лежит |
 | --- | --- |
-| `config/pipeline.yml` | адрес SQL Server, имя базы, даты срезов и имя output |
+| `config/pipeline.yml` | адрес SQL Server, метаданные backup, единый cutoff и имя output |
 | `config/product_reclassification_decisions.csv` | решения по спорным продуктам |
 | `config/managers_by_club.yml` | список менеджеров каждого клуба |
 | `config/branches_by_club.yml` | перевод внутреннего названия клуба в филиал Fitbase |

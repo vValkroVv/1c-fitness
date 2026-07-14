@@ -2,7 +2,7 @@ SET NOCOUNT ON;
 SET XACT_ABORT ON;
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
-DECLARE @cutoff_at datetime2(0) = '2026-05-25 08:00:00';
+DECLARE @cutoff_at datetime2(0) = '$(cutoff_at)';
 
 IF OBJECT_ID(N'fitbase_part2.membership_import_facts', N'U') IS NOT NULL
     DROP TABLE fitbase_part2.membership_import_facts;

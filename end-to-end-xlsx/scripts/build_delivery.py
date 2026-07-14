@@ -56,7 +56,7 @@ def filter_membership_workbook(
 ) -> int:
     """Rewrite the large workbook once while excluding problem contracts.
 
-    Calling Worksheet.delete_rows for 223 scattered rows repeatedly shifts
+    Calling Worksheet.delete_rows for many scattered rows repeatedly shifts
     millions of cells.  A streaming source plus the original template keeps
     the same workbook structure and makes runtime linear in the row count.
     """

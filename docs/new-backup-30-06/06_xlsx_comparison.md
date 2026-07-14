@@ -1,5 +1,8 @@
 # XLSX comparison: 2026-05-23/25 vs 2026-06-30
 
+> Архивное сравнение с первой смешанной сборкой. Для актуальной поставки используйте
+> `docs/20260630_full_cutoff_rebuild_20260714.md`.
+
 Compared only the six requested XLSX pairs.
 
 Old package:

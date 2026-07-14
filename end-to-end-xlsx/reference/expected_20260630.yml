@@ -19,11 +19,11 @@ files:
     columns: 3
     header_rows: 1
   fitbase_import_abonementy_clientov_20260630.xlsx:
-    data_rows: 119817
+    data_rows: 121242
     columns: 22
     header_rows: 2
   fitbase_import_shablony_abonementov_20260630.xlsx:
-    data_rows: 114
+    data_rows: 119
     columns: 12
     header_rows: 2
   fitbase_import_shablony_uslug_20260630.xlsx:
@@ -34,22 +34,22 @@ files:
     data_rows: 522
     columns: 17
     header_rows: 2
-  problem_1_no_payment_cash_3_cases_20260630.xlsx:
-    data_rows: 3
+  problem_1_no_payment_cash_10_cases_20260630.xlsx:
+    data_rows: 10
     columns: 22
     header_rows: 1
   problem_2_zero_price_direct_full_41_cases_20260630.xlsx:
     data_rows: 41
     columns: 22
     header_rows: 1
-  problem_3_non_named_payment_left_179_cases_20260630.xlsx:
-    data_rows: 179
+  problem_3_non_named_payment_left_203_cases_20260630.xlsx:
+    data_rows: 203
     columns: 22
     header_rows: 1
 
 problem_contracts:
-  unique_total: 223
-  removed_from_clean_membership: 223
+  unique_total: 254
+  removed_from_clean_membership: 254
 
 allowed_branches:
   - "Фитнес Империя (Гоголевский)"

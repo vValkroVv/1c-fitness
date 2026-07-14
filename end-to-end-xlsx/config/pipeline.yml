@@ -4,10 +4,8 @@ run:
   cutoff_date: "2026-06-30"
   cutoff_at: "2026-06-30 23:27:03"
   backup_finish_at: "2026-06-30 23:27:03"
-  membership_cutoff_at: "2026-05-25 08:00:00"
-  services_cutoff_at: "2026-05-25 08:00:00"
-  work_name: "20260630"
-  delivery_name: "20260630_delivery_without_active_problems"
+  work_name: "20260630_full_cutoff"
+  delivery_name: "20260630_delivery_full_cutoff"
 
 # Здесь указывается уже восстановленная база. Неважно, где она запущена:
 # на Windows, Linux, в Docker или на отдельном сервере. Пароль в этот файл
@@ -27,3 +25,11 @@ sql:
 validation:
   expected_manifest: "reference/expected_20260630.yml"
   enforce_reference_counts: true
+
+# Источник единого cutoff. Значение backup_finish_at переносится дословно из
+# RESTORE HEADERONLY.BackupFinishDate; пайплайн сам проверяет все производные даты.
+backup:
+  file_name: "Fitnes-30-06-26.bak"
+  size_bytes: 13137564672
+  sha256: "7e684086442f0eeac44014b9f5170da5c2873620c57788dbc59f58efed1d0810"
+  backup_finish_at: "2026-06-30 23:27:03"

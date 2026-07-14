@@ -125,6 +125,8 @@ class Pipeline:
         self.run_config: dict[str, Any] = self.config["run"]
         self.sql_config: dict[str, Any] = self.config["sql"]
         self.validation_config: dict[str, Any] = self.config["validation"]
+        self.backup_config: dict[str, Any] = self.config["backup"]
+        self._apply_backup_cutoff_contract()
 
         for key, override in [
             ("server", args.server),
@@ -169,18 +171,164 @@ class Pipeline:
         self.delivery_root = ROOT / "output" / delivery_name
         self.pipeline_log = self.logs_root / "pipeline.log"
         self.status_path = self.work_root / "status.json"
-        self.status: dict[str, Any] = {
-            "started_at": datetime.now().isoformat(timespec="seconds"),
-            "config": str(self.config_path),
-            "database": {
-                "server": self.connection_settings.server,
-                "port": self.connection_settings.port,
-                "database": self.connection_settings.database,
-                "user": self.connection_settings.user,
-            },
-            "completed_steps": [],
-            "row_counts": {},
+        if self.args.resume and self.status_path.is_file():
+            self.status = json.loads(self.status_path.read_text(encoding="utf-8"))
+            self.status.setdefault("resumed_at", []).append(
+                datetime.now().isoformat(timespec="seconds")
+            )
+            self.status.pop("finished_at", None)
+            self.status.pop("failed_at", None)
+            self.status.pop("traceback", None)
+        else:
+            self.status = {
+                "started_at": datetime.now().isoformat(timespec="seconds"),
+                "config": str(self.config_path),
+                "database": {
+                    "server": self.connection_settings.server,
+                    "port": self.connection_settings.port,
+                    "database": self.connection_settings.database,
+                    "user": self.connection_settings.user,
+                },
+                "cutoff_contract": {
+                    "source": "backup.backup_finish_at",
+                    "backup_finish_at": self.run_config["backup_finish_at"],
+                    "cutoff_at": self.run_config["cutoff_at"],
+                    "cutoff_date": self.run_config["cutoff_date"],
+                    "date_stamp": self.run_config["date_stamp"],
+                },
+                "completed_steps": [],
+                "row_counts": {},
+                "cutoff_checks": {},
+            }
+
+    def _apply_backup_cutoff_contract(self) -> None:
+        """Derive every export cutoff from RESTORE HEADERONLY.BackupFinishDate."""
+
+        raw_finish = str(self.backup_config.get("backup_finish_at", "")).strip()
+        try:
+            backup_finish = datetime.strptime(raw_finish, "%Y-%m-%d %H:%M:%S")
+        except ValueError as exc:
+            raise ValueError(
+                "backup.backup_finish_at must be RESTORE HEADERONLY.BackupFinishDate "
+                "in YYYY-MM-DD HH:MM:SS format"
+            ) from exc
+
+        canonical = {
+            "backup_finish_at": backup_finish.strftime("%Y-%m-%d %H:%M:%S"),
+            "cutoff_at": backup_finish.strftime("%Y-%m-%d %H:%M:%S"),
+            "cutoff_date": backup_finish.strftime("%Y-%m-%d"),
+            "date_stamp": backup_finish.strftime("%Y%m%d"),
         }
+        for field, expected in canonical.items():
+            configured = str(self.run_config.get(field, expected)).strip()
+            if configured != expected:
+                raise ValueError(
+                    f"run.{field}={configured!r} does not match "
+                    f"backup.backup_finish_at-derived value {expected!r}"
+                )
+            self.run_config[field] = expected
+
+        for legacy_field in ("membership_cutoff_at", "services_cutoff_at"):
+            if legacy_field not in self.run_config:
+                continue
+            configured = str(self.run_config[legacy_field]).strip()
+            if configured != canonical["cutoff_at"]:
+                raise ValueError(
+                    f"run.{legacy_field}={configured!r} does not match the single "
+                    f"backup cutoff {canonical['cutoff_at']!r}"
+                )
+
+    def _record_cutoff_check(self, name: str, values: dict[str, Any]) -> None:
+        self.status.setdefault("cutoff_checks", {})[name] = values
+        self._write_status()
+
+    def _check_owner_cutoff(self, db: DatabaseClient) -> None:
+        rows = db.query_rows(
+            """
+            SELECT
+                CONVERT(varchar(10), cutoff_date, 120),
+                CONVERT(varchar(19), cutoff_at, 120),
+                CONVERT(varchar(19), backup_finish_at, 120)
+            FROM fitbase_part2.staging_run_metadata
+            """
+        )
+        expected = (
+            self.run_config["cutoff_date"],
+            self.run_config["cutoff_at"],
+            self.run_config["backup_finish_at"],
+        )
+        normalized = [tuple(str(value) for value in row) for row in rows]
+        if len(normalized) != 1 or normalized[0] != expected:
+            raise RuntimeError(
+                "owner staging cutoff mismatch: "
+                f"actual={normalized!r}, expected={[expected]!r}"
+            )
+        self._record_cutoff_check(
+            "owner_stage",
+            {
+                "rows": 1,
+                "cutoff_date": normalized[0][0],
+                "cutoff_at": normalized[0][1],
+                "backup_finish_at": normalized[0][2],
+                "verdict": "PASS",
+            },
+        )
+
+    def _check_fact_cutoff(
+        self, db: DatabaseClient, *, table: str, check_name: str
+    ) -> None:
+        datetime_columns = {
+            "membership_import_facts": ("sale_datetime", "matched_payment_datetime"),
+            "services_import_facts": ("sale_datetime", "payment_datetime"),
+        }
+        if table not in datetime_columns:
+            raise ValueError(f"Unsupported cutoff-check table: {table}")
+        sale_column, payment_column = datetime_columns[table]
+        row = db.query_rows(
+            f"""
+            SELECT
+                COUNT_BIG(*),
+                COUNT_BIG(cutoff_at),
+                CONVERT(varchar(19), MIN(cutoff_at), 120),
+                CONVERT(varchar(19), MAX(cutoff_at), 120),
+                CONVERT(varchar(19), MAX({sale_column}), 120),
+                CONVERT(varchar(19), MAX({payment_column}), 120)
+            FROM fitbase_part2.{table}
+            """
+        )[0]
+        count = int(row[0])
+        non_null_cutoff_count = int(row[1])
+        minimum = str(row[2] or "")
+        maximum = str(row[3] or "")
+        maximum_sale = str(row[4] or "")
+        maximum_payment = str(row[5] or "")
+        expected = str(self.run_config["cutoff_at"])
+        if (
+            count <= 0
+            or non_null_cutoff_count != count
+            or minimum != expected
+            or maximum != expected
+            or (maximum_sale and maximum_sale > expected)
+            or (maximum_payment and maximum_payment > expected)
+        ):
+            raise RuntimeError(
+                f"{check_name} cutoff mismatch: rows={count}, min={minimum!r}, "
+                f"max={maximum!r}, max_sale={maximum_sale!r}, "
+                f"max_payment={maximum_payment!r}, expected={expected!r}"
+            )
+        self._record_cutoff_check(
+            check_name,
+            {
+                "rows": count,
+                "non_null_cutoff_rows": non_null_cutoff_count,
+                "minimum_cutoff_at": minimum,
+                "maximum_cutoff_at": maximum,
+                "maximum_sale_datetime": maximum_sale,
+                "maximum_payment_datetime": maximum_payment,
+                "expected_cutoff_at": expected,
+                "verdict": "PASS",
+            },
+        )
 
     def _read_password(self) -> str:
         if self.args.password_file:
@@ -298,6 +446,22 @@ class Pipeline:
             )
         )
         errors: list[str] = []
+        expected_backup = expected.get("backup", {})
+        expected_finish = str(expected_backup.get("backup_finish_at", "")).strip()
+        if expected_finish != str(self.run_config["backup_finish_at"]):
+            errors.append(
+                "Expected manifest backup_finish_at is "
+                f"{expected_finish!r}, configured backup finish is "
+                f"{self.run_config['backup_finish_at']!r}"
+            )
+        for field in ("file_name", "size_bytes", "sha256"):
+            configured = str(self.backup_config.get(field, "")).strip()
+            reference = str(expected_backup.get(field, "")).strip()
+            if configured != reference:
+                errors.append(
+                    f"Backup {field} mismatch: config={configured!r}, "
+                    f"expected_manifest={reference!r}"
+                )
         if str(database_name) != self.connection_settings.database:
             errors.append(
                 f"Connected database is {database_name}, expected {self.connection_settings.database}"
@@ -372,6 +536,7 @@ class Pipeline:
             variables=variables,
             log_path=self.logs_root / "owner_sql.log",
         )
+        self._check_owner_cutoff(db)
 
     def owner_export(self, db: DatabaseClient) -> None:
         log_path = self.logs_root / "owner_export.log"
@@ -477,11 +642,14 @@ class Pipeline:
         db.execute_script(
             SQL / "31_build_membership_import_staging.sql",
             variables={
-                "membership_cutoff_at": sql_string(
-                    str(self.run_config["membership_cutoff_at"])
-                )
+                "cutoff_at": sql_string(str(self.run_config["cutoff_at"]))
             },
             log_path=self.logs_root / "membership_sql.log",
+        )
+        self._check_fact_cutoff(
+            db,
+            table="membership_import_facts",
+            check_name="membership_facts",
         )
 
     def membership_export(self, db: DatabaseClient) -> None:
@@ -537,11 +705,14 @@ class Pipeline:
         db.execute_script(
             SQL / "54_build_services_import_staging.sql",
             variables={
-                "services_cutoff_at": sql_string(
-                    str(self.run_config["services_cutoff_at"])
-                )
+                "cutoff_at": sql_string(str(self.run_config["cutoff_at"]))
             },
             log_path=self.logs_root / "services_sql.log",
+        )
+        self._check_fact_cutoff(
+            db,
+            table="services_import_facts",
+            check_name="services_facts",
         )
 
     def services_export(self, db: DatabaseClient) -> None:

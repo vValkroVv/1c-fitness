@@ -1,13 +1,14 @@
 # Step 30: standalone end-to-end package for nine XLSX
 
-Date: `2026-07-10`
+Date: `2026-07-14`
 
 ## Goal
 
 Create a customer-transferable folder that reproduces
-`output/20260630_delivery_without_active_problems/` from the restored
+`output/20260630_delivery_full_cutoff/` from the restored
 `Fitnes-30-06-26.bak` database without depending on the repository's macOS or
-Docker restore implementation.
+Docker restore implementation. Every export layer must use the backup finish
+time `2026-06-30 23:27:03` as its only cutoff.
 
 ## Result
 
@@ -61,47 +62,50 @@ stg_clients: 73292
 stg_subscriptions_all: 116267
 stg_sales_all: 510407
 final_funnel_clients: 73292
-membership_import_facts: 99959
-services_import_facts: 50215
-problem 1: 3
+membership_import_facts: 101436
+services_import_facts: 50710
+problem 1: 10
 problem 2: 41
-problem 3: 179
-problem union: 223
-removed from clean membership: 223
+problem 3: 203
+problem union: 254
+removed from clean membership: 254
 delivery validation: PASS
 ```
 
-## Exact comparison
+The pipeline status also records `101436/101436` and `50710/50710` non-null
+cutoff values, identical `MIN/MAX(cutoff_at)`, and maximum sale/payment times
+not later than the backup finish time.
 
-After the built-in manifest validator passed, an independent cell-by-cell
-comparison was run against the tracked reference folder
-`output/20260630_delivery_without_active_problems/`.
+## Delivery and format comparison
 
-All nine workbooks matched on:
+After the built-in manifest validator passed, the root delivery was compared
+byte-for-byte with the package delivery. All nine files matched.
 
-- every cell value;
-- every row and its order;
-- every cell style id;
-- every cell number format.
+The workbooks were also compared with the previous delivery templates on:
+
+- sheet names and count;
+- technical and Russian headers;
+- cell styles and used number formats;
+- freeze panes, filters, merged cells and column widths;
+- visual rendering of all nine workbooks.
 
 Expected delivery counts were reproduced exactly:
 
 ```text
-39524 / 10907 / 119817 / 114 / 51 / 522 / 3 / 41 / 179
+39524 / 10907 / 121242 / 119 / 51 / 522 / 10 / 41 / 203
 ```
 
 ## Standalone ZIP audit
 
-`scripts/create_release_zip.py` was executed while the 1.3 GiB work directory
-and generated XLSX existed. The resulting test ZIP:
+`scripts/create_release_zip.py` was executed after the corrected full run while
+the work directory and generated XLSX existed. The resulting test ZIP:
 
 ```text
 files: 46
-uncompressed package inputs: about 0.54 MB
+ZIP size: 172039 bytes
 runtime/personal files included: 0
 backup/secrets included: 0
-extracted scripts --help smoke: PASS
-extracted backup size-check smoke: PASS
+extracted scripts --help smoke with installed requirements: PASS
 ```
 
 Markdown links were checked: `0` missing. All Python files compiled
@@ -109,6 +113,9 @@ successfully.
 
 ## Runtime cleanup
 
-Generated work/output/logs inside `end-to-end-xlsx/` are test artifacts only
-and are removed before handoff. Empty `.gitkeep` files preserve the directory
-layout. A future full run recreates the same artifacts.
+Generated work/output/logs inside `end-to-end-xlsx/` are runtime artifacts. The
+customer-safe ZIP excludes them and keeps only empty `.gitkeep` files for the
+directory layout. A future full run recreates all runtime artifacts.
+
+The detailed rebuild report is
+`docs/20260630_full_cutoff_rebuild_20260714.md`.

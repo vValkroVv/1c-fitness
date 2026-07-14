@@ -2,9 +2,8 @@ SET NOCOUNT ON;
 SET XACT_ABORT ON;
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
--- Rendered by scripts/run_pipeline.py.  This cutoff intentionally remains
--- independent from the 2026-06-30 client-funnel cutoff; see docs/03_business_rules.md.
-DECLARE @cutoff_at datetime2(0) = '$(membership_cutoff_at)';
+-- Rendered by scripts/run_pipeline.py from the single backup-finish cutoff.
+DECLARE @cutoff_at datetime2(0) = '$(cutoff_at)';
 
 IF OBJECT_ID(N'fitbase_part2.membership_import_facts', N'U') IS NOT NULL
     DROP TABLE fitbase_part2.membership_import_facts;

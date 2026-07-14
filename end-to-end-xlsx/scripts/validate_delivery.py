@@ -22,19 +22,30 @@ def as_abs(path: str | Path) -> Path:
 
 
 def workbook_summary(path: Path, header_rows: int) -> dict[str, Any]:
-    workbook = load_workbook(path, read_only=True, data_only=True)
+    workbook = load_workbook(path, read_only=True, data_only=False)
     worksheet = workbook.active
     row_count = 0
     first_rows: list[list[Any]] = []
-    for row in worksheet.iter_rows(values_only=True):
+    formula_cells: list[str] = []
+    blank_data_rows: list[int] = []
+    for row in worksheet.iter_rows():
         row_count += 1
+        values = [cell.value for cell in row]
         if len(first_rows) < header_rows:
-            first_rows.append(list(row))
+            first_rows.append(values)
+        elif not any(value not in (None, "") for value in values):
+            blank_data_rows.append(row_count)
+        for cell in row:
+            if cell.data_type == "f":
+                formula_cells.append(cell.coordinate)
     summary = {
         "total_rows": row_count,
         "data_rows": max(row_count - header_rows, 0),
         "columns": worksheet.max_column,
         "headers": first_rows,
+        "sheet_names": workbook.sheetnames,
+        "formula_cells": formula_cells,
+        "blank_data_rows": blank_data_rows,
     }
     workbook.close()
     return summary
@@ -107,6 +118,19 @@ def validate(args: argparse.Namespace) -> int:
         if summary["columns"] != int(spec["columns"]):
             errors.append(
                 f"{name}: columns={summary['columns']}, expected={spec['columns']}"
+            )
+        if len(summary["sheet_names"]) != 1:
+            errors.append(
+                f"{name}: sheets={summary['sheet_names']!r}, expected exactly one sheet"
+            )
+        if summary["formula_cells"]:
+            errors.append(
+                f"{name}: formula cells are not allowed: "
+                f"{summary['formula_cells'][:10]}"
+            )
+        if summary["blank_data_rows"]:
+            errors.append(
+                f"{name}: fully blank data rows: {summary['blank_data_rows'][:10]}"
             )
         if enforce_counts and summary["data_rows"] != int(spec["data_rows"]):
             errors.append(

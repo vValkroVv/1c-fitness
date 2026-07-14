@@ -1,5 +1,7 @@
 # Representative 28 membership examples
 
+> Архивная выборка из прежней смешанной сборки; она не входит в актуальные 9 XLSX.
+
 date_stamp: `20260630`.
 
 Назначение: это не файл для правки правил `price/payment_type`, а

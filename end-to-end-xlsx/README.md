@@ -1,15 +1,16 @@
 # Выгрузка 9 XLSX из backup Fitness
 
 Эта папка собирает девять файлов для импорта в Fitbase из базы 1С Fitness.
-Результат повторяет проверенную выгрузку от 30 июня 2026 года: шесть обычных
-XLSX и три отдельных файла с договорами, которые нужно разобрать вручную.
+Результат — проверенная выгрузка из `Fitnes-30-06-26.bak` с единым
+срезом `2026-06-30 23:27:03`: шесть обычных XLSX и три отдельных файла с
+договорами, которые нужно разобрать вручную.
 
 Если вы открыли проект впервые, разбираться во всех номерных скриптах не надо.
 Для обычного запуска нужны три вещи:
 
 1. настройки подключения в `config/pipeline.yml`;
 2. команда `python scripts/run_pipeline.py`;
-3. готовые файлы в `output/20260630_delivery_without_active_problems/`.
+3. готовые файлы в `output/20260630_delivery_full_cutoff/`.
 
 Я специально оставил один нормальный вход: `run_pipeline.py`. Остальные
 скрипты запускает он сам, вручную их обычно не трогают.
@@ -53,19 +54,22 @@ end-to-end-xlsx/
 Для запуска на восстановленной копии того же backup обычно меняют только блок
 `sql` в `config/pipeline.yml` и задают пароль через переменную среды.
 
-Даты срезов, SQL, шаблоны и CSV с классификацией продуктов менять не стоит.
-Именно на этих файлах получена и проверена выгрузка `20260630`. Если изменить
-их, результат уже не обязан совпасть с контрольными девятью файлами.
+Единый `cutoff_at` берётся из
+`RESTORE HEADERONLY.BackupFinishDate`. Для другого backup нужно заменить его
+метаданные в `pipeline.yml` и контрольный manifest. Пайплайн не позволит
+задать для абонементов или услуг другую дату. SQL, шаблоны и CSV с
+классификацией продуктов влияют на бизнес-результат, поэтому их меняют
+только после отдельного согласования.
 
 ### Где искать результат и ошибки
 
 | Что нужно | Где лежит |
 | --- | --- |
-| готовые XLSX | `output/20260630_delivery_without_active_problems/` |
-| итоговый отчёт | `work/20260630/reports/validation_report.md` |
-| последний выполненный этап | `work/20260630/status.json` |
-| общий лог | `logs/20260630/pipeline.log` |
-| лог конкретного этапа | `logs/20260630/<имя_этапа>.log` |
+| готовые XLSX | `output/20260630_delivery_full_cutoff/` |
+| итоговый отчёт | `work/20260630_full_cutoff/reports/validation_report.md` |
+| последний выполненный этап | `work/20260630_full_cutoff/status.json` |
+| общий лог | `logs/20260630_full_cutoff/pipeline.log` |
+| лог конкретного этапа | `logs/20260630_full_cutoff/<имя_этапа>.log` |
 
 ## Что требуется на входе
 
@@ -172,11 +176,12 @@ python scripts/run_pipeline.py \
 
 ```text
 delivery_validate: verdict=PASS
-PIPELINE PASS delivery=.../output/20260630_delivery_without_active_problems
+PIPELINE PASS delivery=.../output/20260630_delivery_full_cutoff
 ```
 
 Если `PASS` нет, файлы заказчику передавать рано. Сначала откройте
-`work/20260630/status.json`, затем лог упавшего этапа в `logs/20260630/`.
+`work/20260630_full_cutoff/status.json`, затем лог упавшего этапа в
+`logs/20260630_full_cutoff/`.
 
 ## Какие файлы получатся
 
@@ -184,15 +189,15 @@ PIPELINE PASS delivery=.../output/20260630_delivery_without_active_problems
 | --- | ---: |
 | `fitbase_active_clients_import_zayavki_20260630_all_funnels.xlsx` | 39 524 |
 | `fitbase_active_clients_plastic_cards_20260630_all_funnels.xlsx` | 10 907 |
-| `fitbase_import_abonementy_clientov_20260630.xlsx` | 119 817 |
-| `fitbase_import_shablony_abonementov_20260630.xlsx` | 114 |
+| `fitbase_import_abonementy_clientov_20260630.xlsx` | 121 242 |
+| `fitbase_import_shablony_abonementov_20260630.xlsx` | 119 |
 | `fitbase_import_shablony_uslug_20260630.xlsx` | 51 |
 | `fitbase_import_uslugi_clientov_20260630.xlsx` | 522 |
-| `problem_1_no_payment_cash_3_cases_20260630.xlsx` | 3 |
+| `problem_1_no_payment_cash_10_cases_20260630.xlsx` | 10 |
 | `problem_2_zero_price_direct_full_41_cases_20260630.xlsx` | 41 |
-| `problem_3_non_named_payment_left_179_cases_20260630.xlsx` | 179 |
+| `problem_3_non_named_payment_left_203_cases_20260630.xlsx` | 203 |
 
-В чистом файле абонементов нет 223 договоров из трёх проблемных файлов. Эти
+В чистом файле абонементов нет 254 договоров из трёх проблемных файлов. Эти
 договоры не потеряны: они лежат рядом отдельными XLSX, чтобы их можно было
 разобрать вручную.
 
@@ -235,9 +240,10 @@ python scripts/run_pipeline.py \
 python scripts/run_pipeline.py --help
 ```
 
-Параметр `--skip-reference-counts` нужен только для исследования другого
-backup. С ним структура файлов всё ещё проверяется, но точные количества строк
-не сверяются. Такой результат уже не повторяет выгрузку `20260630`.
+Для другого backup сначала нужно создать его собственный expected manifest с новыми
+метаданными, `date_stamp` и именами файлов, затем указать его в `pipeline.yml`.
+`--skip-reference-counts` отключает только точные счётчики строк, но не проверку личности
+backup, структуры и имён XLSX. Такой результат уже не повторяет выгрузку `20260630`.
 
 ## Как подготовить папку к передаче
 

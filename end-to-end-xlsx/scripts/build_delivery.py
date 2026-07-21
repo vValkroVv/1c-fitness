@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Assemble the six clean XLSX files and three separate problem XLSX files."""
+"""Assemble a versioned clean delivery and its separate problem XLSX files."""
 
 from __future__ import annotations
 
 import argparse
 import shutil
 from pathlib import Path
+from typing import Any
 
-from openpyxl import load_workbook
+from openpyxl import Workbook, load_workbook
+from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 
 
@@ -48,12 +50,74 @@ def read_problem_contracts(path: Path) -> set[str]:
     return contracts
 
 
+def canonical_contract_id(value: str) -> str:
+    """Return the zero-padded contract identifier used in membership XLSX files."""
+
+    text = str(value or "").strip()
+    if not text or not text.isdigit():
+        raise ValueError(f"Contract ID must contain digits only, got {value!r}")
+    return text.zfill(11)
+
+
+def validate_run_id(value: str) -> str:
+    """Accept a single safe path component for an immutable delivery run."""
+
+    run_id = str(value or "").strip()
+    if not run_id or run_id in {".", ".."} or Path(run_id).name != run_id:
+        raise ValueError(
+            "--delivery-run-id must be one non-empty directory name without path separators"
+        )
+    return run_id
+
+
+def autosize_problem_sheet(worksheet: Any) -> None:
+    """Match the sizing rules used by the existing problem1-3 builder."""
+
+    for column in worksheet.columns:
+        letter = get_column_letter(column[0].column)
+        max_len = 0
+        for cell in column:
+            if cell.value is not None:
+                max_len = max(max_len, len(str(cell.value)))
+        worksheet.column_dimensions[letter].width = min(max(max_len + 2, 10), 45)
+
+
+def write_single_contract_problem_workbook(
+    destination: Path,
+    headers: list[str],
+    values: list[Any],
+) -> None:
+    """Write one membership row in exactly the same shape as problem1-3."""
+
+    workbook = Workbook()
+    worksheet = workbook.active
+    worksheet.title = "Импорт_абонементы"
+    worksheet.append(headers)
+    worksheet.append(values)
+
+    header_fill = PatternFill("solid", fgColor="1F4E78")
+    for cell in worksheet[1]:
+        cell.font = Font(bold=True, color="FFFFFF")
+        cell.fill = header_fill
+        cell.alignment = Alignment(wrap_text=True, vertical="top")
+    for cell in worksheet[2]:
+        cell.alignment = Alignment(wrap_text=True, vertical="top")
+
+    worksheet.freeze_panes = "A2"
+    worksheet.auto_filter.ref = worksheet.dimensions
+    autosize_problem_sheet(worksheet)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    workbook.save(destination)
+    workbook.close()
+
+
 def filter_membership_workbook(
     source: Path,
     destination: Path,
     problem_ids: set[str],
     template_path: Path,
-) -> int:
+    capture_ids: set[str] | None = None,
+) -> tuple[int, list[str], dict[str, list[Any]]]:
     """Rewrite the large workbook once while excluding problem contracts.
 
     Calling Worksheet.delete_rows for many scattered rows repeatedly shifts
@@ -103,6 +167,8 @@ def filter_membership_workbook(
         elif number_formats[column - 1] and number_formats[column - 1] != "General":
             format_columns[column] = number_formats[column - 1]
 
+    capture_ids = capture_ids or set()
+    captured_rows: dict[str, list[Any]] = {}
     found: set[str] = set()
     removed = 0
     target_row = 2
@@ -111,6 +177,14 @@ def filter_membership_workbook(
         if contract_id in problem_ids:
             found.add(contract_id)
             removed += 1
+            if contract_id in capture_ids:
+                if contract_id in captured_rows:
+                    source_workbook.close()
+                    target_workbook.close()
+                    raise RuntimeError(
+                        f"Captured contract_id occurs more than once: {contract_id}"
+                    )
+                captured_rows[contract_id] = list(values[:width])
             continue
         target_sheet.append(list(values[:width]))
         target_row += 1
@@ -141,20 +215,38 @@ def filter_membership_workbook(
     target_workbook.save(destination)
     source_workbook.close()
     target_workbook.close()
-    return removed
+    missing_captures = sorted(capture_ids - set(captured_rows))
+    if missing_captures:
+        raise RuntimeError(
+            f"Requested problem rows were not captured: {missing_captures[:10]}"
+        )
+    return removed, headers, captured_rows
 
 
 def build(args: argparse.Namespace) -> None:
     owner_dir = as_abs(args.owner_dir)
     imports_dir = as_abs(args.imports_dir)
-    output_dir = as_abs(args.output_dir)
+    output_base = as_abs(args.output_dir)
+    if args.delivery_run_id:
+        run_id = validate_run_id(args.delivery_run_id)
+        output_dir = (output_base / run_id).resolve()
+        if output_dir.exists() and any(output_dir.iterdir()):
+            raise FileExistsError(
+                f"Versioned delivery already exists and will not be overwritten: {output_dir}"
+            )
+    else:
+        run_id = ""
+        output_dir = output_base
     report_path = as_abs(args.report)
     membership_template = as_abs(args.membership_template)
     date_stamp = args.date_stamp
 
     output_dir.mkdir(parents=True, exist_ok=True)
-    for stale in output_dir.glob("*.xlsx"):
-        stale.unlink()
+    if not run_id:
+        # Backward-compatible behaviour for the original pipeline. Versioned
+        # runs are immutable and fail above instead of deleting prior output.
+        for stale in output_dir.glob("*.xlsx"):
+            stale.unlink()
 
     main_name = f"fitbase_active_clients_import_zayavki_{date_stamp}_all_funnels.xlsx"
     cards_name = f"fitbase_active_clients_plastic_cards_{date_stamp}_all_funnels.xlsx"
@@ -175,7 +267,7 @@ def build(args: argparse.Namespace) -> None:
             raise FileNotFoundError(source)
         shutil.copy2(source, output_dir / name)
 
-    problem_sources = [
+    base_problem_sources = [
         one_match(
             imports_dir, f"active_problem_1_no_payment_cash_*_cases_{date_stamp}.xlsx"
         ),
@@ -188,7 +280,21 @@ def build(args: argparse.Namespace) -> None:
             f"active_problem_3_non_named_payment_left_*_cases_{date_stamp}.xlsx",
         ),
     ]
-    problem_sets = [read_problem_contracts(path) for path in problem_sources]
+    problem_sets = [read_problem_contracts(path) for path in base_problem_sources]
+    problem_labels = [path.name for path in base_problem_sources]
+
+    problem4_contract_id = ""
+    problem4_path: Path | None = None
+    if args.problem4_contract_id:
+        problem4_contract_id = canonical_contract_id(args.problem4_contract_id)
+        short_contract_id = problem4_contract_id.lstrip("0") or "0"
+        problem4_path = output_dir / (
+            "problem_4_subrent_visits_left_contract_"
+            f"{short_contract_id}_1_case_{date_stamp}.xlsx"
+        )
+        problem_sets.append({problem4_contract_id})
+        problem_labels.append(problem4_path.name)
+
     problem_ids = set().union(*problem_sets)
     summed = sum(len(values) for values in problem_sets)
     if len(problem_ids) != summed:
@@ -196,19 +302,27 @@ def build(args: argparse.Namespace) -> None:
             f"A contract_id belongs to more than one problem group: summed={summed}, union={len(problem_ids)}"
         )
 
-    for source in problem_sources:
+    for source in base_problem_sources:
         output_name = source.name.removeprefix("active_")
         shutil.copy2(source, output_dir / output_name)
 
     full_membership = imports_dir / membership_name
     if not full_membership.is_file():
         raise FileNotFoundError(full_membership)
-    removed = filter_membership_workbook(
+    capture_ids = {problem4_contract_id} if problem4_contract_id else set()
+    removed, membership_headers, captured_rows = filter_membership_workbook(
         full_membership,
         output_dir / membership_name,
         problem_ids,
         membership_template,
+        capture_ids,
     )
+    if problem4_path is not None:
+        write_single_contract_problem_workbook(
+            problem4_path,
+            membership_headers,
+            captured_rows[problem4_contract_id],
+        )
 
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
@@ -218,16 +332,17 @@ def build(args: argparse.Namespace) -> None:
                 "",
                 f"- date stamp: `{date_stamp}`",
                 f"- output: `{output_dir}`",
+                f"- delivery run id: `{run_id or 'legacy/unversioned'}`",
                 "- clean XLSX: `6`",
-                "- problem XLSX: `3`",
+                f"- problem XLSX: `{len(problem_sets)}`",
                 f"- unique problem contract_id: `{len(problem_ids)}`",
                 f"- rows removed from clean membership XLSX: `{removed}`",
                 "",
                 "## Problem groups",
                 "",
                 *[
-                    f"- `{path.name}`: `{len(values)}`"
-                    for path, values in zip(problem_sources, problem_sets, strict=True)
+                    f"- `{name}`: `{len(values)}`"
+                    for name, values in zip(problem_labels, problem_sets, strict=True)
                 ],
                 "",
             ]
@@ -244,9 +359,23 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--owner-dir", required=True)
     parser.add_argument("--imports-dir", required=True)
     parser.add_argument("--output-dir", required=True)
+    parser.add_argument(
+        "--delivery-run-id",
+        help=(
+            "Optional child directory under --output-dir. A non-empty versioned "
+            "directory is never overwritten."
+        ),
+    )
     parser.add_argument("--date-stamp", required=True)
     parser.add_argument("--report", required=True)
     parser.add_argument("--membership-template", required=True)
+    parser.add_argument(
+        "--problem4-contract-id",
+        help=(
+            "Optional contract ID for a one-row problem4 workbook; short numeric "
+            "IDs are zero-padded to the membership XLSX convention."
+        ),
+    )
     return parser.parse_args()
 
 

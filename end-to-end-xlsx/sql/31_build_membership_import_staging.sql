@@ -167,7 +167,33 @@ WITH membership_source AS (
             WHEN LOWER(s.subscription_name) LIKE N'%субаренд%'
              AND LOWER(s.subscription_name) NOT LIKE N'%безлимит%' THEN 1
             ELSE 0
-        END AS is_limited_subrent
+        END AS is_limited_subrent,
+        CASE
+            WHEN LOWER(s.subscription_name) LIKE N'%сайкл%'
+             AND LOWER(s.subscription_name) NOT LIKE N'%безлимит%'
+             AND (
+                 LOWER(s.subscription_name) LIKE N'%8 пос%'
+                 OR LOWER(s.subscription_name) LIKE N'%12 пос%'
+             )
+            THEN 1
+            ELSE 0
+        END AS is_cycle_visit_limited,
+        CASE
+            WHEN (
+                LOWER(s.subscription_name) LIKE N'%субаренд%'
+                AND LOWER(s.subscription_name) NOT LIKE N'%безлимит%'
+            )
+            OR (
+                LOWER(s.subscription_name) LIKE N'%сайкл%'
+                AND LOWER(s.subscription_name) NOT LIKE N'%безлимит%'
+                AND (
+                    LOWER(s.subscription_name) LIKE N'%8 пос%'
+                    OR LOWER(s.subscription_name) LIKE N'%12 пос%'
+                )
+            )
+            THEN 1
+            ELSE 0
+        END AS is_visit_limited
     FROM fitbase_part2.stg_subscriptions_all AS s
     JOIN dbo._Document163 AS d
       ON CONVERT(varchar(32), d._IDRRef, 2) = s.subscription_ref
@@ -286,19 +312,22 @@ with_sale_doc_context AS (
     LEFT JOIN #membership_document131_context AS refund_context
       ON refund_context.subscription_ref = wp.subscription_ref
 ),
+-- Legacy output column names below retain the `subrent_` prefix to keep the
+-- 81-column TSV ABI stable. They now carry the selected RG3336 balance for
+-- every visit-limited membership: limited subrent or Cycle.
 with_subrent_visits AS (
     SELECT
         wp.*,
         limit_calc.visit_limit AS subrent_visit_limit,
         CASE
-            WHEN wp.is_limited_subrent = 1
+            WHEN wp.is_visit_limited = 1
              AND wp.start_date <= CAST(@cutoff_at AS date)
              AND wp.end_date >= CAST(@cutoff_at AS date)
             THEN 1
             ELSE 0
         END AS subrent_active_by_dates_on_cutoff,
         CASE
-            WHEN wp.is_limited_subrent = 1
+            WHEN wp.is_visit_limited = 1
              AND wp.end_date < CAST(@cutoff_at AS date)
             THEN 1
             ELSE 0
@@ -310,7 +339,7 @@ with_subrent_visits AS (
         COALESCE(balance.receipt_rows, 0) AS subrent_rg3336_receipt_rows,
         COALESCE(balance.expense_rows, 0) AS subrent_rg3336_expense_rows,
         CASE
-            WHEN wp.is_limited_subrent = 0 THEN N''
+            WHEN wp.is_visit_limited = 0 THEN N''
             WHEN COALESCE(balance.receipt_qty, 0) = limit_calc.visit_limit
              AND COALESCE(balance.signed_balance, 0) BETWEEN 0 AND limit_calc.visit_limit
             THEN N'clean_register_balance'
@@ -331,11 +360,11 @@ with_subrent_visits AS (
     FROM with_sale_doc_context AS wp
     CROSS APPLY (
         SELECT CASE
-            WHEN wp.is_limited_subrent = 1 AND LOWER(wp.subscription_name) LIKE N'%20 посещ%' THEN 20
-            WHEN wp.is_limited_subrent = 1 AND LOWER(wp.subscription_name) LIKE N'%15 посещ%' THEN 15
-            WHEN wp.is_limited_subrent = 1 AND LOWER(wp.subscription_name) LIKE N'%12 посещ%' THEN 12
-            WHEN wp.is_limited_subrent = 1 AND LOWER(wp.subscription_name) LIKE N'%10 посещ%' THEN 10
-            WHEN wp.is_limited_subrent = 1 AND LOWER(wp.subscription_name) LIKE N'%8 посещ%' THEN 8
+            WHEN wp.is_visit_limited = 1 AND LOWER(wp.subscription_name) LIKE N'%20 пос%' THEN 20
+            WHEN wp.is_visit_limited = 1 AND LOWER(wp.subscription_name) LIKE N'%15 пос%' THEN 15
+            WHEN wp.is_visit_limited = 1 AND LOWER(wp.subscription_name) LIKE N'%12 пос%' THEN 12
+            WHEN wp.is_visit_limited = 1 AND LOWER(wp.subscription_name) LIKE N'%10 пос%' THEN 10
+            WHEN wp.is_visit_limited = 1 AND LOWER(wp.subscription_name) LIKE N'%8 пос%' THEN 8
             ELSE 0
         END AS visit_limit
     ) AS limit_calc
@@ -356,12 +385,24 @@ with_subrent_visits AS (
             SUM(CASE WHEN r._RecordKind = 0 THEN 1 ELSE 0 END) AS receipt_rows,
             SUM(CASE WHEN r._RecordKind = 1 THEN 1 ELSE 0 END) AS expense_rows
         FROM dbo._AccumRg3336 AS r
-        WHERE wp.is_limited_subrent = 1
+        WHERE wp.is_visit_limited = 1
           AND r._Active = 0x01
           AND r._Fld3337_RRRef = CONVERT(binary(16), wp.subscription_ref, 2)
-          AND r._Fld3338_TYPE = 0x01
-          AND r._Fld3338_RTRef = 0x00000000
-          AND r._Fld3338_RRRef = 0x00000000000000000000000000000000
+          AND (
+              (
+                  wp.is_limited_subrent = 1
+                  AND r._Fld3338_TYPE = 0x01
+                  AND r._Fld3338_RTRef = 0x00000000
+                  AND r._Fld3338_RRRef = 0x00000000000000000000000000000000
+              )
+              OR (
+                  wp.is_cycle_visit_limited = 1
+                  AND wp.is_limited_subrent = 0
+                  AND r._Fld3338_TYPE = 0x08
+                  AND r._Fld3338_RTRef = 0x00000048
+                  AND r._Fld3338_RRRef = 0xAA9EA4BF01266AD311E8C6D3BB763918
+              )
+          )
           AND r._Fld3339 <> 0
           AND DATEADD(year, -2000, r._Period) <= @cutoff_at
     ) AS balance

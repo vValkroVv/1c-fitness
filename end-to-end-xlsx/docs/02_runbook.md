@@ -7,11 +7,11 @@
 
 1. Проверьте `.bak` через `scripts/verify_backup.py`.
 2. Восстановите его в SQL Server.
-3. Заполните SQL-подключение в `config/pipeline.yml`.
+3. Заполните SQL-подключение в `config/pipeline_manager_fixes_20260630.yml`.
 4. Задайте `FITNESS_SQL_PASSWORD`.
-5. Запустите `scripts/run_pipeline.py`.
+5. Запустите `scripts/run_pipeline.py --config config/pipeline_manager_fixes_20260630.yml`.
 6. Дождитесь `delivery_validate: verdict=PASS`.
-7. Заберите девять файлов из `output/20260630_delivery_full_cutoff/`.
+7. Заберите десять файлов из `output/20260630_delivery_manager_fixes_v2/`.
 
 На этом всё. Номерные Python-скрипты вручную запускать не нужно.
 
@@ -30,8 +30,8 @@
 | `services_sql` | Факты по 51 нужной услуге | `services_import_facts` |
 | `services_export` | Выгрузка 50 710 фактов по услугам | UTF-16 TSV |
 | `services_xlsx` | Клиентские услуги и шаблоны услуг | ещё 2 XLSX |
-| `problem_xlsx` | Отбор трёх групп спорных договоров | 3 временных XLSX |
-| `delivery` | Удаление 254 спорных договоров из чистого файла | итоговые 6 + 3 XLSX |
+| `problem_xlsx` | Отбор трёх финансовых групп спорных договоров | 3 временных XLSX |
+| `delivery` | Добавление problem4 для `151350` и удаление 255 спорных договоров из clean | итоговые 6 + 4 XLSX |
 | `validate` | Проверка имён, строк, колонок, филиалов и договоров | `validation_report.md` |
 
 ## Где виден прогресс
@@ -39,13 +39,13 @@
 Общий журнал:
 
 ```text
-logs/20260630_full_cutoff/pipeline.log
+logs/20260630_manager_fixes_v2/pipeline.log
 ```
 
 Состояние запуска в JSON:
 
 ```text
-work/20260630_full_cutoff/status.json
+work/20260630_manager_fixes_v2/status.json
 ```
 
 У каждого этапа есть свой файл в `logs/20260630_full_cutoff/`. Если процесс остановился,
@@ -98,7 +98,7 @@ python scripts/run_pipeline.py --password-file /безопасный/путь/sq
 ## Запустить всё заново
 
 Обычный запуск без `--resume` удаляет старые данные текущего среза из
-`work/20260630_full_cutoff`, `logs/20260630_full_cutoff` и папки с готовыми XLSX. Это нужно, чтобы в
+`work/20260630_manager_fixes_v2`, `logs/20260630_manager_fixes_v2` и папки с готовыми XLSX. Это нужно, чтобы в
 новую сборку случайно не попал файл от прошлого запуска.
 
 Полностью очистить рабочие каталоги можно отдельно:

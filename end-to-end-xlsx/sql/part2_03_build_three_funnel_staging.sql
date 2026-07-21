@@ -41,6 +41,10 @@ DECLARE @cutoff_sql_at datetime2 = DATEADD(year, 2000, @cutoff_at);
 DECLARE @backup_finish_at datetime2 = '$(backup_finish_at)';
 DECLARE @backup_finish_sql_at datetime2 = DATEADD(year, 2000, @backup_finish_at);
 DECLARE @output_run_label nvarchar(100) = N'$(output_run_label)';
+-- dbo._Document138._Fld761RRef is the "operation type" enum.  Enum186 order 5
+-- is shown in 1C as "Смена владельца".  _Fld764RRef is only the modifier
+-- (for example, paid/free re-registration) and must not be used as the filter.
+DECLARE @owner_change_operation_ref binary(16) = 0x9C10896C259288044EBD0A4A7A054001;
 
 CREATE TABLE fitbase_part2.staging_run_metadata (
     cutoff_date date NOT NULL,
@@ -442,7 +446,7 @@ WITH owner_change_base AS (
         ) AS owner_change_rank,
         COUNT(*) OVER (PARTITION BY d._Fld763RRef) AS owner_change_count_for_membership
     FROM dbo._Document138 AS d
-    JOIN dbo._Reference72 AS mod
+    LEFT JOIN dbo._Reference72 AS mod
       ON mod._IDRRef = d._Fld764RRef
     LEFT JOIN dbo._Document163 AS sale
       ON sale._IDRRef = d._Fld763RRef
@@ -452,10 +456,7 @@ WITH owner_change_base AS (
       AND d._Marked = 0x00
       AND d._Date_Time <= @cutoff_sql_at
       AND d._Date_Time <= @backup_finish_sql_at
-      AND LTRIM(RTRIM(mod._Description)) IN (
-          N'Смена владельца',
-          N'Смена владельца подарочной карты'
-      )
+      AND d._Fld761RRef = @owner_change_operation_ref
       AND d._Fld762RRef <> 0x00000000000000000000000000000000
       AND d._Fld767RRef <> 0x00000000000000000000000000000000
       AND d._Fld763RRef <> 0x00000000000000000000000000000000
@@ -517,7 +518,7 @@ WITH owner_change_base AS (
         ) AS owner_change_rank,
         COUNT(*) OVER (PARTITION BY d._Fld763RRef) AS owner_change_count_for_membership
     FROM dbo._Document138 AS d
-    JOIN dbo._Reference72 AS mod
+    LEFT JOIN dbo._Reference72 AS mod
       ON mod._IDRRef = d._Fld764RRef
     LEFT JOIN dbo._Document163 AS sale
       ON sale._IDRRef = d._Fld763RRef
@@ -527,10 +528,7 @@ WITH owner_change_base AS (
       AND d._Marked = 0x00
       AND d._Date_Time <= @cutoff_sql_at
       AND d._Date_Time <= @backup_finish_sql_at
-      AND LTRIM(RTRIM(mod._Description)) IN (
-          N'Смена владельца',
-          N'Смена владельца подарочной карты'
-      )
+      AND d._Fld761RRef = @owner_change_operation_ref
       AND d._Fld762RRef <> 0x00000000000000000000000000000000
       AND d._Fld767RRef <> 0x00000000000000000000000000000000
       AND d._Fld763RRef <> 0x00000000000000000000000000000000

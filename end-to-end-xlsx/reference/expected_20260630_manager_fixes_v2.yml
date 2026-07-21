@@ -1,0 +1,68 @@
+backup:
+  file_name: "Fitnes-30-06-26.bak"
+  size_bytes: 13137564672
+  sha256: "7e684086442f0eeac44014b9f5170da5c2873620c57788dbc59f58efed1d0810"
+  database_name_in_backup: "Fitness"
+  backup_finish_at: "2026-06-30 23:27:03"
+
+database:
+  minimum_source_tables: 2503
+  compatibility_level: 130
+
+delivery:
+  run_id: "20260630_delivery_manager_fixes_v2"
+
+# Counts below are pinned to the verified manager-fixes rebuild.
+files:
+  fitbase_active_clients_import_zayavki_20260630_all_funnels.xlsx:
+    data_rows: 39550
+    columns: 10
+    header_rows: 2
+  fitbase_active_clients_plastic_cards_20260630_all_funnels.xlsx:
+    data_rows: 11024
+    columns: 3
+    header_rows: 1
+  fitbase_import_abonementy_clientov_20260630.xlsx:
+    data_rows: 121207
+    columns: 22
+    header_rows: 2
+  fitbase_import_shablony_abonementov_20260630.xlsx:
+    data_rows: 119
+    columns: 12
+    header_rows: 2
+  fitbase_import_shablony_uslug_20260630.xlsx:
+    data_rows: 51
+    columns: 9
+    header_rows: 2
+  fitbase_import_uslugi_clientov_20260630.xlsx:
+    data_rows: 522
+    columns: 17
+    header_rows: 2
+  problem_1_no_payment_cash_10_cases_20260630.xlsx:
+    data_rows: 10
+    columns: 22
+    header_rows: 1
+  problem_2_zero_price_direct_full_41_cases_20260630.xlsx:
+    data_rows: 41
+    columns: 22
+    header_rows: 1
+  problem_3_non_named_payment_left_203_cases_20260630.xlsx:
+    data_rows: 203
+    columns: 22
+    header_rows: 1
+  problem_4_subrent_visits_left_contract_151350_1_case_20260630.xlsx:
+    data_rows: 1
+    columns: 22
+    header_rows: 1
+    contract_ids:
+      - "00000151350"
+
+problem_contracts:
+  unique_total: 255
+  removed_from_clean_membership: 255
+
+allowed_branches:
+  - "Фитнес Империя (Гоголевский)"
+  - "Фитнес Империя (Столица)"
+  - "Фитнес Империя (Промышленная)"
+  - "Фитнес Империя (Ровио)"

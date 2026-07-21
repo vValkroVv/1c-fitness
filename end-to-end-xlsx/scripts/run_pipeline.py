@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the verified nine-XLSX Fitbase delivery from a restored SQL database."""
+"""Build a verified Fitbase XLSX delivery from a restored SQL database."""
 
 from __future__ import annotations
 
@@ -126,6 +126,7 @@ class Pipeline:
         self.sql_config: dict[str, Any] = self.config["sql"]
         self.validation_config: dict[str, Any] = self.config["validation"]
         self.backup_config: dict[str, Any] = self.config["backup"]
+        self.delivery_config: dict[str, Any] = self.config.get("delivery", {})
         self._apply_backup_cutoff_contract()
 
         for key, override in [
@@ -537,6 +538,15 @@ class Pipeline:
             log_path=self.logs_root / "owner_sql.log",
         )
         self._check_owner_cutoff(db)
+        owner_change_audit = str(
+            self.validation_config.get("owner_change_audit_sql", "")
+        ).strip()
+        if owner_change_audit:
+            db.execute_script(
+                as_abs(owner_change_audit),
+                variables=variables,
+                log_path=self.logs_root / "owner_change_audit.log",
+            )
 
     def owner_export(self, db: DatabaseClient) -> None:
         log_path = self.logs_root / "owner_export.log"
@@ -776,24 +786,30 @@ class Pipeline:
         )
 
     def delivery(self) -> None:
+        command: list[str | Path] = [
+            sys.executable,
+            SCRIPTS / "build_delivery.py",
+            "--owner-dir",
+            self.owner_root,
+            "--imports-dir",
+            self.imports_root,
+            "--output-dir",
+            self.delivery_root,
+            "--date-stamp",
+            self.date_stamp,
+            "--report",
+            self.reports_root / "delivery_build.md",
+            "--membership-template",
+            TEMPLATES / "membership_clients.xlsx",
+        ]
+        problem4_contract_id = str(
+            self.delivery_config.get("problem4_contract_id", "")
+        ).strip()
+        if problem4_contract_id:
+            command.extend(["--problem4-contract-id", problem4_contract_id])
         self.run_command(
             "delivery",
-            [
-                sys.executable,
-                SCRIPTS / "build_delivery.py",
-                "--owner-dir",
-                self.owner_root,
-                "--imports-dir",
-                self.imports_root,
-                "--output-dir",
-                self.delivery_root,
-                "--date-stamp",
-                self.date_stamp,
-                "--report",
-                self.reports_root / "delivery_build.md",
-                "--membership-template",
-                TEMPLATES / "membership_clients.xlsx",
-            ],
+            command,
         )
 
     def validate(self) -> None:

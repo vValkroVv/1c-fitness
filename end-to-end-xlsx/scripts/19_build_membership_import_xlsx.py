@@ -193,6 +193,36 @@ class SourceClient:
     tag: str = ""
 
 
+@dataclass(frozen=True)
+class TemplateCanonicalization:
+    """Checked-in decision for one normalized membership template name."""
+
+    canonical_name: str
+    branches_access: str
+    price: int | float
+    duration: int | float
+    visits: int | float | None
+    freeze: int | float | None
+    source_contract_id: str
+    decision_basis: str
+    review_status: str
+    note: str
+
+    @property
+    def normalized_name(self) -> str:
+        return normalize_key(self.canonical_name)
+
+    @property
+    def variant(self) -> tuple[Any, ...]:
+        return (
+            self.price,
+            self.duration,
+            self.visits,
+            self.freeze,
+            self.branches_access,
+        )
+
+
 def as_abs(path: str | Path) -> Path:
     p = Path(path)
     return p if p.is_absolute() else ROOT / p
@@ -250,6 +280,121 @@ def int_or_blank(value: Decimal) -> int | None:
 
 def normalize_key(value: str) -> str:
     return re.sub(r"\s+", " ", (value or "").strip().lower())
+
+
+def parse_config_number(
+    value: str | None,
+    *,
+    field: str,
+    row_number: int,
+    allow_blank: bool,
+) -> int | float | None:
+    """Parse a canonicalization number without silently coercing bad input to zero."""
+
+    text = (value or "").strip().replace(",", ".")
+    if not text:
+        if allow_blank:
+            return None
+        raise ValueError(
+            f"Template canonicalization row {row_number}: {field} must not be blank"
+        )
+    try:
+        parsed = Decimal(text)
+    except InvalidOperation as exc:
+        raise ValueError(
+            f"Template canonicalization row {row_number}: invalid {field}={value!r}"
+        ) from exc
+    if not parsed.is_finite():
+        raise ValueError(
+            f"Template canonicalization row {row_number}: non-finite {field}={value!r}"
+        )
+    return excel_number(parsed)
+
+
+def read_template_canonicalizations(
+    path: Path,
+) -> dict[str, TemplateCanonicalization]:
+    """Load explicit template decisions and reject duplicate or malformed names."""
+
+    required = {
+        "canonical_name",
+        "branches_access",
+        "price",
+        "duration",
+        "visits",
+        "freeze",
+        "source_contract_id",
+        "decision_basis",
+        "review_status",
+        "note",
+    }
+    decisions: dict[str, TemplateCanonicalization] = {}
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        missing = sorted(required - set(reader.fieldnames or []))
+        if missing:
+            raise ValueError(
+                f"Missing template canonicalization columns in {path}: {missing}"
+            )
+        for row_number, row in enumerate(reader, start=2):
+            canonical_name = (row.get("canonical_name") or "").strip()
+            key = normalize_key(canonical_name)
+            if not key:
+                raise ValueError(
+                    f"Template canonicalization row {row_number}: canonical_name is blank"
+                )
+            if key in decisions:
+                raise ValueError(
+                    f"Duplicate normalized template name in {path} at row {row_number}: "
+                    f"{canonical_name!r}"
+                )
+            branches_access = (row.get("branches_access") or "").strip()
+            if branches_access not in {"Все", "Продажа"}:
+                raise ValueError(
+                    f"Template canonicalization row {row_number}: invalid "
+                    f"branches_access={branches_access!r}"
+                )
+            source_contract_id = (row.get("source_contract_id") or "").strip()
+            decision_basis = (row.get("decision_basis") or "").strip()
+            review_status = (row.get("review_status") or "").strip()
+            if not source_contract_id or not decision_basis or not review_status:
+                raise ValueError(
+                    f"Template canonicalization row {row_number}: source_contract_id, "
+                    "decision_basis and review_status are required"
+                )
+            decisions[key] = TemplateCanonicalization(
+                canonical_name=canonical_name,
+                branches_access=branches_access,
+                price=parse_config_number(
+                    row.get("price"),
+                    field="price",
+                    row_number=row_number,
+                    allow_blank=False,
+                ),
+                duration=parse_config_number(
+                    row.get("duration"),
+                    field="duration",
+                    row_number=row_number,
+                    allow_blank=False,
+                ),
+                visits=parse_config_number(
+                    row.get("visits"),
+                    field="visits",
+                    row_number=row_number,
+                    allow_blank=True,
+                ),
+                freeze=parse_config_number(
+                    row.get("freeze"),
+                    field="freeze",
+                    row_number=row_number,
+                    allow_blank=True,
+                ),
+                source_contract_id=source_contract_id,
+                decision_basis=decision_basis,
+                review_status=review_status,
+                note=(row.get("note") or "").strip(),
+            )
+    return decisions
 
 
 FORCED_FREE_TRIAL_NAMES = {
@@ -487,45 +632,110 @@ def payment_type_from_positive_no_payment(price: Decimal, business_override: str
     return "наличные"
 
 
+VISIT_LIMIT_PATTERN = re.compile(
+    r"(?<!\d)(\d+)\s*пос(?:\.|ещ(?:\.|ение|ения|ений)?)?(?![а-яё])",
+    re.IGNORECASE,
+)
+
+
 def parse_template_visits(name: str) -> int | None:
-    match = re.search(r"(\d+)\s*посещ", name.lower())
+    """Read a visit limit from both short and full Russian word forms."""
+
+    match = VISIT_LIMIT_PATTERN.search(name or "")
     if not match:
         return None
     return int(match.group(1))
 
 
-def compute_visits_left(fact: dict[str, str], contract_name: str) -> tuple[int | float | None, str, str]:
-    """Return visits_left and the source used for limited subrent rows."""
+def is_visit_limited_membership(fact: dict[str, str], contract_name: str) -> bool:
+    """Return whether the membership needs a finite visit limit and balance."""
 
-    if fact.get("is_limited_subrent") != "1":
-        return None, "not_limited_subrent", ""
+    if fact.get("is_limited_subrent") == "1":
+        return True
+    name = normalize_key(contract_name)
+    return (
+        "сайкл" in name
+        and "безлимит" not in name
+        and parse_template_visits(name) is not None
+    )
 
-    if fact.get("subrent_finished_by_dates_before_cutoff") == "1":
-        return 0, "business_expired_limited_subrent_zero_visits_left", ""
+
+def compute_visits_left(
+    fact: dict[str, str], contract_name: str
+) -> tuple[int | float | None, str, str]:
+    """Return visits_left and its source for subrent and Cycle contracts."""
+
+    if not is_visit_limited_membership(fact, contract_name):
+        return None, "not_visit_limited_membership", ""
+
+    is_cycle = "сайкл" in normalize_key(contract_name)
+    finished_on_cutoff = fact.get("subrent_finished_by_dates_before_cutoff") == "1"
+    active_on_cutoff = fact.get("subrent_active_by_dates_on_cutoff") == "1"
+    # The generic flags are a compatibility fallback for Cycle facts exported
+    # before the SQL staging started populating the legacy `subrent_*` columns.
+    if is_cycle:
+        finished_on_cutoff = (
+            finished_on_cutoff or fact.get("is_finished_before_cutoff") == "1"
+        )
+        active_on_cutoff = active_on_cutoff or fact.get("is_active_on_cutoff") == "1"
+
+    if finished_on_cutoff:
+        return 0, "business_expired_visit_limited_zero_visits_left", ""
 
     visit_limit = decimal_value(fact.get("subrent_visit_limit"))
     if visit_limit <= 0:
         parsed_limit = parse_template_visits(contract_name)
         visit_limit = Decimal(parsed_limit or 0)
+    if visit_limit <= 0:
+        return (
+            None,
+            "visit_limit_not_parsed",
+            ("Visit-limited membership has no positive limit in staging or its name."),
+        )
 
     balance = decimal_value(fact.get("subrent_rg3336_signed_balance"))
     case_group = (fact.get("subrent_rg3336_case_group") or "").strip()
 
-    if fact.get("subrent_active_by_dates_on_cutoff") == "1":
-        if case_group == "clean_register_balance" and Decimal("0") <= balance <= visit_limit:
+    if active_on_cutoff:
+        if (
+            case_group == "clean_register_balance"
+            and Decimal("0") <= balance <= visit_limit
+        ):
             return excel_number(balance), "rg3336_correct_dimension_balance", ""
-        if balance >= 0:
-            return excel_number(balance), "rg3336_correct_dimension_balance_needs_review", (
-                f"Active limited subrent has non-clean register balance: "
-                f"case_group={case_group}; limit={visit_limit}; balance={balance}."
+        if case_group in {"", "no_register_movements"}:
+            return (
+                None,
+                "rg3336_visit_limited_balance_missing",
+                (
+                    f"Active visit-limited membership has no usable register balance: "
+                    f"case_group={case_group or '<blank>'}; limit={visit_limit}."
+                ),
             )
-        return 0, "rg3336_correct_dimension_negative_active_clamped_to_zero", (
-            f"Active limited subrent has negative register balance: "
-            f"case_group={case_group}; limit={visit_limit}; balance={balance}."
+        if balance >= 0:
+            return (
+                excel_number(balance),
+                "rg3336_correct_dimension_balance_needs_review",
+                (
+                    f"Active visit-limited membership has non-clean register balance: "
+                    f"case_group={case_group}; limit={visit_limit}; balance={balance}."
+                ),
+            )
+        return (
+            0,
+            "rg3336_correct_dimension_negative_active_clamped_to_zero",
+            (
+                f"Active visit-limited membership has negative register balance: "
+                f"case_group={case_group}; limit={visit_limit}; balance={balance}."
+            ),
         )
 
-    return None, "limited_subrent_no_cutoff_rule", (
-        "Limited subrent is neither active nor expired by date flags; visits_left left blank."
+    return (
+        None,
+        "visit_limited_no_cutoff_rule",
+        (
+            "Visit-limited membership is neither active nor expired by date flags; "
+            "visits_left left blank."
+        ),
     )
 
 
@@ -662,16 +872,142 @@ def find_contact_next_exclusions(facts: list[dict[str, str]]) -> tuple[set[str],
     return excluded_refs, sorted(excluded_rows.values(), key=lambda row: (row["client_id"], row["contract_id"]))
 
 
+def template_variant(row: dict[str, Any]) -> tuple[Any, ...]:
+    """Return the exact fields that define one FitBase template variant."""
+
+    return (
+        row.get("price"),
+        row.get("duration"),
+        row.get("visits"),
+        row.get("freeze"),
+        row.get("branches_access"),
+    )
+
+
+def canonicalize_template_candidates(
+    candidates_by_name: dict[str, list[dict[str, Any]]],
+    decisions: dict[str, TemplateCanonicalization],
+    uncertainties: list[dict[str, str]],
+    counters: dict[str, Counter],
+) -> dict[str, dict[str, Any]]:
+    """Resolve variants only through checked-in decisions; never by row order/date."""
+
+    canonical: dict[str, dict[str, Any]] = {}
+    for template_key in sorted(candidates_by_name):
+        candidates = candidates_by_name[template_key]
+        variants = {template_variant(candidate) for candidate in candidates}
+        decision = decisions.get(template_key)
+
+        if len(variants) > 1 and decision is None:
+            rendered_variants = "; ".join(sorted((repr(item) for item in variants)))
+            raise ValueError(
+                "Unresolved membership template conflict. Add an explicit row to "
+                "config/membership_template_canonicalization.csv: "
+                f"name={template_key!r}; variants={rendered_variants}"
+            )
+
+        if decision is not None:
+            if decision.variant not in variants:
+                rendered_variants = "; ".join(sorted((repr(item) for item in variants)))
+                raise ValueError(
+                    "Configured membership template variant is not present in staging: "
+                    f"name={decision.canonical_name!r}; configured={decision.variant!r}; "
+                    f"observed={rendered_variants}"
+                )
+            source_candidates = [
+                candidate
+                for candidate in candidates
+                if str(candidate.get("_source_contract_id") or "")
+                == decision.source_contract_id
+            ]
+            if source_candidates and all(
+                template_variant(candidate) != decision.variant
+                for candidate in source_candidates
+            ):
+                raise ValueError(
+                    "Configured source contract no longer has the configured template variant: "
+                    f"name={decision.canonical_name!r}; "
+                    f"source_contract_id={decision.source_contract_id!r}"
+                )
+            source_contract_present = bool(source_candidates)
+            if not source_contract_present:
+                # The configured values remain authoritative for later backups
+                # even if the audit/provenance contract is no longer selected
+                # into the current client population. The variant itself was
+                # already required to exist above.
+                counters["template_canonicalization"][
+                    "configured_source_contract_absent"
+                ] += 1
+            canonical[template_key] = {
+                "branches_access": decision.branches_access,
+                "name": decision.canonical_name,
+                "price": decision.price,
+                "duration": decision.duration,
+                "duration_type": "месяц",
+                "visits": decision.visits,
+                "guests": None,
+                "freeze": decision.freeze,
+                "first_visit_activation": None,
+                "archive": None,
+                "category": None,
+                "legal_entity": None,
+                "_canonicalization_source": "checked_in_config",
+                "_source_contract_id": decision.source_contract_id,
+            }
+            counters["template_canonicalization"]["checked_in_config"] += 1
+            if len(variants) > 1:
+                uncertainties.append(
+                    {
+                        "issue_type": "template_variants_canonicalized_by_config",
+                        "contract_id": decision.source_contract_id,
+                        "client_id": "",
+                        "client_fio": "",
+                        "contract_name": decision.canonical_name,
+                        "details": (
+                            f"{len(variants)} variants; selected={decision.variant!r}; "
+                            f"source_contract_present={source_contract_present}; "
+                            f"decision_basis={decision.decision_basis}; "
+                            f"review_status={decision.review_status}; note={decision.note}"
+                        ),
+                    }
+                )
+            continue
+
+        # A single observed variant is safe. Pick display casing deterministically,
+        # independent of input row order, and copy only template fields.
+        selected = min(
+            candidates,
+            key=lambda row: (
+                str(row.get("name") or "").casefold(),
+                str(row.get("name") or ""),
+                str(row.get("_source_contract_id") or ""),
+            ),
+        )
+        canonical[template_key] = {
+            key: value for key, value in selected.items() if key in TEMPLATE_HEADERS
+        }
+        counters["template_canonicalization"]["single_observed_variant"] += 1
+
+    return canonical
+
+
 def build_rows(
     source_clients: dict[str, SourceClient],
     cards: dict[str, str],
     facts: list[dict[str, str]],
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, str]], list[dict[str, str]], dict[str, Counter]]:
+    template_decisions: dict[str, TemplateCanonicalization] | None = None,
+) -> tuple[
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    list[dict[str, str]],
+    list[dict[str, str]],
+    dict[str, Counter],
+]:
     client_rows: list[dict[str, Any]] = []
     uncertainties: list[dict[str, str]] = []
     counters: dict[str, Counter] = defaultdict(Counter)
-    template_by_name: dict[str, dict[str, Any]] = {}
-    template_variants: dict[str, set[tuple[Any, ...]]] = defaultdict(set)
+    template_candidates: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    template_decisions = template_decisions or {}
     excluded_refs, excluded_rows = find_contact_next_exclusions(facts)
     counters["exclusions"]["exclude_active_later_contact_full"] = len(excluded_rows)
 
@@ -685,7 +1021,9 @@ def build_rows(
             continue
 
         contract_name = (fact.get("subscription_name") or "").strip()
-        contract_id = (fact.get("document_number") or "").strip() or (fact.get("subscription_ref") or "").strip()
+        contract_id = (fact.get("document_number") or "").strip() or (
+            fact.get("subscription_ref") or ""
+        ).strip()
         duration, duration_source = compute_duration_months(fact)
         price, paid, payment_left, money_source = compute_money(fact)
         business_override = business_zero_override_reason(fact)
@@ -696,10 +1034,13 @@ def build_rows(
             money_source = business_override
         is_subrent = fact.get("is_subrent") == "1"
         is_limited_subrent = fact.get("is_limited_subrent") == "1"
-        visits = parse_template_visits(contract_name) if is_limited_subrent else None
+        is_visit_limited = is_visit_limited_membership(fact, contract_name)
+        visits = parse_template_visits(contract_name) if is_visit_limited else None
         payment_type = map_payment_type(fact.get("matched_payment_method", ""))
         if not payment_type:
-            payment_type = payment_type_from_direct_blank_method(fact, price, business_override)
+            payment_type = payment_type_from_direct_blank_method(
+                fact, price, business_override
+            )
         if not payment_type:
             payment_type = payment_type_from_positive_no_payment(
                 price,
@@ -709,9 +1050,12 @@ def build_rows(
         if business_override:
             payment_type = ""
         freeze_days = int_or_blank(decimal_value(fact.get("rg_freeze_days")))
+        sale_date = excel_date(fact.get("sale_date"))
         activation_date = excel_date(fact.get("start_date"))
         end_date = excel_date(fact.get("end_date"))
-        visits_left, visits_left_source, visits_left_issue = compute_visits_left(fact, contract_name)
+        visits_left, visits_left_source, visits_left_issue = compute_visits_left(
+            fact, contract_name
+        )
 
         row = {
             "tag": source.tag,
@@ -723,8 +1067,11 @@ def build_rows(
             "card": cards.get(client_id, ""),
             "duration": duration,
             "duration_type": "месяц",
-            "create_date": source.create_date,
-            "payment_date": excel_date(fact.get("sale_date")),
+            # In the client membership import FitBase renders create_date as
+            # "Куплен". It must therefore be this Document163 sale, not the
+            # client's first-sale date inherited from the funnel workbook.
+            "create_date": sale_date,
+            "payment_date": sale_date,
             "activation_date": activation_date,
             "end_date": end_date,
             "freeze": freeze_days,
@@ -741,6 +1088,7 @@ def build_rows(
             "_product_class": fact.get("product_class", ""),
             "_is_subrent": "1" if is_subrent else "0",
             "_is_limited_subrent": "1" if is_limited_subrent else "0",
+            "_is_visit_limited": "1" if is_visit_limited else "0",
             "_duration_source": duration_source,
             "_money_source": money_source,
             "_payment_method_raw": fact.get("matched_payment_method", ""),
@@ -774,11 +1122,17 @@ def build_rows(
             counters["special"]["subrent_rows"] += 1
         if is_limited_subrent:
             counters["special"]["limited_subrent_rows"] += 1
-            counters["subrent_rg3336_case_group"][fact.get("subrent_rg3336_case_group", "") or "blank"] += 1
+        if is_visit_limited:
+            counters["special"]["visit_limited_rows"] += 1
+            if "сайкл" in normalize_key(contract_name):
+                counters["special"]["cycle_visit_limited_rows"] += 1
+            counters["subrent_rg3336_case_group"][
+                fact.get("subrent_rg3336_case_group", "") or "blank"
+            ] += 1
             if visits_left_issue:
                 uncertainties.append(
                     {
-                        "issue_type": "limited_subrent_visits_left_rule_review",
+                        "issue_type": "visit_limited_visits_left_rule_review",
                         "contract_id": contract_id,
                         "client_id": client_id,
                         "client_fio": source.client_fio,
@@ -820,16 +1174,10 @@ def build_rows(
                 }
             )
 
-        branches_access = "Все" if "мультикарта" in normalize_key(contract_name) else "Продажа"
-        template_key = normalize_key(contract_name)
-        template_variant = (
-            excel_number(price),
-            duration,
-            visits,
-            freeze_days,
-            branches_access,
+        branches_access = (
+            "Все" if "мультикарта" in normalize_key(contract_name) else "Продажа"
         )
-        template_variants[template_key].add(template_variant)
+        template_key = normalize_key(contract_name)
         template_row = {
             "branches_access": branches_access,
             "name": contract_name,
@@ -843,11 +1191,9 @@ def build_rows(
             "archive": None,
             "category": None,
             "legal_entity": None,
-            "_last_sale_datetime": fact.get("sale_datetime", ""),
+            "_source_contract_id": contract_id,
         }
-        current = template_by_name.get(template_key)
-        if current is None or str(template_row["_last_sale_datetime"]) >= str(current.get("_last_sale_datetime", "")):
-            template_by_name[template_key] = template_row
+        template_candidates[template_key].append(template_row)
 
     row_client_ids = {str(row.get("client_id", "")) for row in client_rows}
     for source in source_clients.values():
@@ -882,6 +1228,7 @@ def build_rows(
                 "_product_class": "refuser_without_membership",
                 "_is_subrent": "0",
                 "_is_limited_subrent": "0",
+                "_is_visit_limited": "0",
                 "_duration_source": "refuser_without_membership",
                 "_money_source": "refuser_without_membership",
                 "_payment_method_raw": "",
@@ -906,31 +1253,37 @@ def build_rows(
         counters["visits_left_source"]["refuser_without_membership"] += 1
         counters["refusers"]["placeholder_rows"] += 1
 
-    for template_key, variants in template_variants.items():
-        if len(variants) > 1:
-            template = template_by_name[template_key]
-            uncertainties.append(
-                {
-                    "issue_type": "template_variants_collapsed_to_latest_sale",
-                    "contract_id": "",
-                    "client_id": "",
-                    "client_fio": "",
-                    "contract_name": str(template.get("name", "")),
-                    "details": f"{len(variants)} price/duration/freeze/access variants found for one template name; latest sale variant used.",
-                }
-            )
+    template_by_name = canonicalize_template_candidates(
+        template_candidates,
+        template_decisions,
+        uncertainties,
+        counters,
+    )
 
-    canonical_template_names = {key: str(row.get("name", "")) for key, row in template_by_name.items()}
+    canonical_template_names = {
+        key: str(row.get("name", "")) for key, row in template_by_name.items()
+    }
     for row in client_rows:
-        canonical_name = canonical_template_names.get(normalize_key(str(row.get("contract_name", ""))))
+        canonical_name = canonical_template_names.get(
+            normalize_key(str(row.get("contract_name", "")))
+        )
         if canonical_name:
             row["contract_name"] = canonical_name
 
     template_rows = sorted(
-        ({k: v for k, v in row.items() if not k.startswith("_")} for row in template_by_name.values()),
+        (
+            {k: v for k, v in row.items() if not k.startswith("_")}
+            for row in template_by_name.values()
+        ),
         key=lambda item: normalize_key(str(item.get("name", ""))),
     )
-    client_rows.sort(key=lambda item: (str(item["client_id"]), str(item["payment_date"] or ""), str(item["contract_id"])))
+    client_rows.sort(
+        key=lambda item: (
+            str(item["client_id"]),
+            str(item["payment_date"] or ""),
+            str(item["contract_id"]),
+        )
+    )
     return client_rows, template_rows, uncertainties, excluded_rows, counters
 
 
@@ -1032,17 +1385,34 @@ def build_validation(
     uncertainties: list[dict[str, str]],
     counters: dict[str, Counter],
 ) -> str:
-    contract_ids = [str(row["contract_id"]) for row in client_rows if str(row.get("contract_id") or "").strip()]
-    duplicate_contract_ids = [item for item, count in Counter(contract_ids).items() if count > 1]
+    contract_ids = [
+        str(row["contract_id"])
+        for row in client_rows
+        if str(row.get("contract_id") or "").strip()
+    ]
+    duplicate_contract_ids = [
+        item for item, count in Counter(contract_ids).items() if count > 1
+    ]
     row_client_ids = {str(row["client_id"]) for row in client_rows}
     template_names = {str(row["name"]) for row in template_rows}
     missing_template_names = sorted(
-        {str(row["contract_name"]) for row in client_rows if str(row.get("contract_name") or "").strip()}
+        {
+            str(row["contract_name"])
+            for row in client_rows
+            if str(row.get("contract_name") or "").strip()
+        }
         - template_names
     )
     required_blank_counts = Counter()
     for row in client_rows:
-        required_fields = ["tag", "client_id", "client_fio", "create_date", "manager", "филиал"]
+        required_fields = [
+            "tag",
+            "client_id",
+            "client_fio",
+            "create_date",
+            "manager",
+            "филиал",
+        ]
         if row.get("_refuser_placeholder") != "1":
             required_fields = [
                 "contract_id",
@@ -1058,13 +1428,27 @@ def build_validation(
         for field in required_fields:
             if row.get(field) in (None, ""):
                 required_blank_counts[field] += 1
-    refuser_client_ids = {client.client_id for client in source_clients.values() if client.tag == "отказники"}
-    tagged_refuser_client_ids = {str(row["client_id"]) for row in client_rows if row.get("tag") == "отказники"}
-    refuser_placeholder_rows = sum(1 for row in client_rows if row.get("_refuser_placeholder") == "1")
+    refuser_client_ids = {
+        client.client_id
+        for client in source_clients.values()
+        if client.tag == "отказники"
+    }
+    tagged_refuser_client_ids = {
+        str(row["client_id"]) for row in client_rows if row.get("tag") == "отказники"
+    }
+    refuser_placeholder_rows = sum(
+        1 for row in client_rows if row.get("_refuser_placeholder") == "1"
+    )
     refuser_real_rows = sum(
         1
         for row in client_rows
         if row.get("tag") == "отказники" and row.get("_refuser_placeholder") != "1"
+    )
+    membership_date_mismatches = sum(
+        1
+        for row in client_rows
+        if row.get("_refuser_placeholder") != "1"
+        and row.get("create_date") != row.get("payment_date")
     )
 
     lines = [
@@ -1109,9 +1493,15 @@ def build_validation(
     lines.extend(["", "## Visits Left Sources", ""])
     for key, value in counters["visits_left_source"].most_common():
         lines.append(f"- {key}: {value}")
-    lines.extend(["", "## Limited Subrent Register Balance Groups", ""])
+    lines.extend(["", "## Visit-Limited Register Balance Groups", ""])
     if counters["subrent_rg3336_case_group"]:
         for key, value in counters["subrent_rg3336_case_group"].most_common():
+            lines.append(f"- {key}: {value}")
+    else:
+        lines.append("- none")
+    lines.extend(["", "## Template Canonicalization", ""])
+    if counters["template_canonicalization"]:
+        for key, value in counters["template_canonicalization"].most_common():
             lines.append(f"- {key}: {value}")
     else:
         lines.append("- none")
@@ -1132,10 +1522,23 @@ def build_validation(
     else:
         lines.append("- none")
     lines.extend(["", "## Hard Checks", ""])
-    lines.append(f"- all row clients are from source final XLSX: {'yes' if row_client_ids <= set(source_clients) else 'no'}")
-    lines.append(f"- contract_id unique: {'yes' if not duplicate_contract_ids else 'no'}")
-    lines.append(f"- every contract_name exists in templates: {'yes' if not missing_template_names else 'no'}")
-    lines.append(f"- every refuser client has a tagged row: {'yes' if refuser_client_ids <= tagged_refuser_client_ids else 'no'}")
+    lines.append(
+        f"- all row clients are from source final XLSX: {'yes' if row_client_ids <= set(source_clients) else 'no'}"
+    )
+    lines.append(
+        f"- contract_id unique: {'yes' if not duplicate_contract_ids else 'no'}"
+    )
+    lines.append(
+        f"- every contract_name exists in templates: {'yes' if not missing_template_names else 'no'}"
+    )
+    lines.append(
+        f"- every refuser client has a tagged row: {'yes' if refuser_client_ids <= tagged_refuser_client_ids else 'no'}"
+    )
+    lines.append(
+        "- every membership create_date equals its Document163 sale/payment_date: "
+        f"{'yes' if membership_date_mismatches == 0 else 'no'} "
+        f"(mismatches={membership_date_mismatches})"
+    )
     return "\n".join(lines) + "\n"
 
 
@@ -1168,8 +1571,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-dir", default="work/20260630/imports")
     parser.add_argument("--date-stamp", default=DATE_STAMP)
     parser.add_argument("--facts-tsv", default=None)
-    parser.add_argument("--client-template", default="templates/membership_clients.xlsx")
-    parser.add_argument("--membership-template", default="templates/membership_templates.xlsx")
+    parser.add_argument(
+        "--client-template", default="templates/membership_clients.xlsx"
+    )
+    parser.add_argument(
+        "--membership-template", default="templates/membership_templates.xlsx"
+    )
+    parser.add_argument(
+        "--template-canonicalization",
+        default="config/membership_template_canonicalization.csv",
+    )
     return parser.parse_args()
 
 
@@ -1179,92 +1590,162 @@ def main() -> int:
     output_dir = as_abs(args.output_dir)
     reports_dir = output_dir / "reports"
     staging_dir = output_dir / "staging"
-    source_clients_xlsx = source_output_dir / f"fitbase_active_clients_import_zayavki_{args.date_stamp}_all_funnels.xlsx"
+    source_clients_xlsx = (
+        source_output_dir
+        / f"fitbase_active_clients_import_zayavki_{args.date_stamp}_all_funnels.xlsx"
+    )
     refuser_clients_csv = source_output_dir / "csv" / "new_application_refusers.csv"
-    facts_tsv = as_abs(args.facts_tsv) if args.facts_tsv else staging_dir / "membership_import_facts.tsv"
+    facts_tsv = (
+        as_abs(args.facts_tsv)
+        if args.facts_tsv
+        else staging_dir / "membership_import_facts.tsv"
+    )
 
     source_clients = read_source_clients(source_clients_xlsx)
     source_clients.update(read_refuser_clients(refuser_clients_csv))
     cards = read_cards(source_output_dir / "staging")
     facts = read_facts(facts_tsv)
-    client_rows, template_rows, uncertainties, excluded_rows, counters = build_rows(source_clients, cards, facts)
+    template_decisions = read_template_canonicalizations(
+        as_abs(args.template_canonicalization)
+    )
+    client_rows, template_rows, uncertainties, excluded_rows, counters = build_rows(
+        source_clients,
+        cards,
+        facts,
+        template_decisions,
+    )
 
-    client_xlsx = output_dir / f"fitbase_import_abonementy_clientov_{args.date_stamp}.xlsx"
-    template_xlsx = output_dir / f"fitbase_import_shablony_abonementov_{args.date_stamp}.xlsx"
-    write_workbook(as_abs(args.client_template), client_xlsx, CLIENT_HEADERS, client_rows, CLIENT_RUS_HEADERS)
-    write_workbook(as_abs(args.membership_template), template_xlsx, TEMPLATE_HEADERS, template_rows, TEMPLATE_RUS_HEADERS)
+    client_xlsx = (
+        output_dir / f"fitbase_import_abonementy_clientov_{args.date_stamp}.xlsx"
+    )
+    template_xlsx = (
+        output_dir / f"fitbase_import_shablony_abonementov_{args.date_stamp}.xlsx"
+    )
+    write_workbook(
+        as_abs(args.client_template),
+        client_xlsx,
+        CLIENT_HEADERS,
+        client_rows,
+        CLIENT_RUS_HEADERS,
+    )
+    write_workbook(
+        as_abs(args.membership_template),
+        template_xlsx,
+        TEMPLATE_HEADERS,
+        template_rows,
+        TEMPLATE_RUS_HEADERS,
+    )
 
-    write_csv(staging_dir / "membership_import_rows.csv", client_rows, CLIENT_HEADERS + [
-        "_subscription_ref",
-        "_product_ref",
-        "_product_class",
-        "_is_subrent",
-        "_is_limited_subrent",
-        "_duration_source",
-        "_money_source",
-        "_payment_method_raw",
-        "_payment_match_source",
-        "_sale_branch_raw",
-        "_sale_branch_source",
-        "_business_override",
-        "_membership_sale_line_amount",
-        "_membership_sale_line_count",
-        "_document131_refund_count",
-        "_document131_posted_unmarked_refund_count",
-        "_owner_change_ref",
-        "_visits_left_source",
-        "_subrent_rg3336_case_group",
-        "_refuser_placeholder",
-    ])
-    write_csv(staging_dir / "membership_template_rows.csv", template_rows, TEMPLATE_HEADERS)
-    write_csv(staging_dir / "membership_import_excluded_rows.csv", excluded_rows, [
-        "rule",
-        "contract_id",
-        "client_id",
-        "client_fio",
-        "contract_name",
-        "sale_datetime",
-        "start_date",
-        "end_date",
-        "status",
-        "price_candidate",
-        "paid_candidate",
-        "matched_payment_ref",
-        "matched_payment_amount",
-        "matched_payment_method",
-        "current_contract_id",
-        "current_contract_name",
-        "current_start_date",
-        "current_end_date",
-        "current_status",
-        "current_matched_payment_ref",
-        "current_matched_payment_amount",
-        "current_matched_payment_method",
-    ])
+    write_csv(
+        staging_dir / "membership_import_rows.csv",
+        client_rows,
+        CLIENT_HEADERS
+        + [
+            "_subscription_ref",
+            "_product_ref",
+            "_product_class",
+            "_is_subrent",
+            "_is_limited_subrent",
+            "_is_visit_limited",
+            "_duration_source",
+            "_money_source",
+            "_payment_method_raw",
+            "_payment_match_source",
+            "_sale_branch_raw",
+            "_sale_branch_source",
+            "_business_override",
+            "_membership_sale_line_amount",
+            "_membership_sale_line_count",
+            "_document131_refund_count",
+            "_document131_posted_unmarked_refund_count",
+            "_owner_change_ref",
+            "_visits_left_source",
+            "_subrent_rg3336_case_group",
+            "_refuser_placeholder",
+        ],
+    )
+    write_csv(
+        staging_dir / "membership_template_rows.csv", template_rows, TEMPLATE_HEADERS
+    )
+    write_csv(
+        staging_dir / "membership_import_excluded_rows.csv",
+        excluded_rows,
+        [
+            "rule",
+            "contract_id",
+            "client_id",
+            "client_fio",
+            "contract_name",
+            "sale_datetime",
+            "start_date",
+            "end_date",
+            "status",
+            "price_candidate",
+            "paid_candidate",
+            "matched_payment_ref",
+            "matched_payment_amount",
+            "matched_payment_method",
+            "current_contract_id",
+            "current_contract_name",
+            "current_start_date",
+            "current_end_date",
+            "current_status",
+            "current_matched_payment_ref",
+            "current_matched_payment_amount",
+            "current_matched_payment_method",
+        ],
+    )
     write_csv(
         reports_dir / "membership_import_uncertainties.csv",
         uncertainties,
-        ["issue_type", "contract_id", "client_id", "client_fio", "contract_name", "details"],
+        [
+            "issue_type",
+            "contract_id",
+            "client_id",
+            "client_fio",
+            "contract_name",
+            "details",
+        ],
     )
     zero_price_counts: Counter[tuple[str, str]] = Counter()
     for row in client_rows:
         if decimal_value(row.get("price")) == 0:
-            zero_price_counts[(str(row.get("_product_class", "")), str(row.get("contract_name", "")))] += 1
+            zero_price_counts[
+                (str(row.get("_product_class", "")), str(row.get("contract_name", "")))
+            ] += 1
     zero_price_rows = [
-        {"product_class": product_class, "contract_name": contract_name, "rows_count": rows_count}
-        for (product_class, contract_name), rows_count in zero_price_counts.most_common()
+        {
+            "product_class": product_class,
+            "contract_name": contract_name,
+            "rows_count": rows_count,
+        }
+        for (
+            product_class,
+            contract_name,
+        ), rows_count in zero_price_counts.most_common()
     ]
-    write_csv(reports_dir / "zero_price_report.csv", zero_price_rows, ["product_class", "contract_name", "rows_count"])
+    write_csv(
+        reports_dir / "zero_price_report.csv",
+        zero_price_rows,
+        ["product_class", "contract_name", "rows_count"],
+    )
     branch_counts = Counter(str(row.get("филиал") or "blank") for row in client_rows)
     write_csv(
         reports_dir / "membership_branch_distribution.csv",
-        [{"branch": branch, "rows_count": rows_count} for branch, rows_count in branch_counts.most_common()],
+        [
+            {"branch": branch, "rows_count": rows_count}
+            for branch, rows_count in branch_counts.most_common()
+        ],
         ["branch", "rows_count"],
     )
 
-    validation_report = build_validation(source_clients, client_rows, template_rows, uncertainties, counters)
+    validation_report = build_validation(
+        source_clients, client_rows, template_rows, uncertainties, counters
+    )
     reports_dir.mkdir(parents=True, exist_ok=True)
-    (reports_dir / "validation_report.md").write_text(validation_report, encoding="utf-8")
+    (reports_dir / "validation_report.md").write_text(
+        validation_report, encoding="utf-8"
+    )
     (reports_dir / "rassrochka_validation.md").write_text(
         build_rassrochka_report(client_rows, uncertainties),
         encoding="utf-8",

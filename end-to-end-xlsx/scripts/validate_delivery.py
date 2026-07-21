@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the complete nine-XLSX delivery against structural invariants."""
+"""Validate a complete XLSX delivery against structural invariants."""
 
 from __future__ import annotations
 
@@ -46,6 +46,31 @@ def workbook_summary(path: Path, header_rows: int) -> dict[str, Any]:
         "sheet_names": workbook.sheetnames,
         "formula_cells": formula_cells,
         "blank_data_rows": blank_data_rows,
+    }
+    workbook.close()
+    return summary
+
+
+def problem_format_summary(path: Path, header_rows: int) -> dict[str, Any]:
+    """Read layout metadata from a small problem workbook.
+
+    ``ReadOnlyWorksheet`` deliberately omits freeze panes and some formatting
+    metadata, so this helper uses normal mode only for the tiny problem files.
+    The large clean membership workbook remains streamed by ``workbook_summary``.
+    """
+
+    workbook = load_workbook(path, read_only=False, data_only=False)
+    worksheet = workbook.active
+    summary = {
+        "freeze_panes": str(worksheet.freeze_panes or ""),
+        "auto_filter": str(worksheet.auto_filter.ref or ""),
+        "dimension": worksheet.calculate_dimension(),
+        "header_style_ids": [cell.style_id for cell in worksheet[1]],
+        "first_data_style_ids": (
+            [cell.style_id for cell in worksheet[header_rows + 1]]
+            if worksheet.max_row > header_rows
+            else []
+        ),
     }
     workbook.close()
     return summary
@@ -136,8 +161,71 @@ def validate(args: argparse.Namespace) -> int:
             errors.append(
                 f"{name}: data_rows={summary['data_rows']}, expected={spec['data_rows']}"
             )
+        expected_contracts = {
+            str(value).strip() for value in spec.get("contract_ids", [])
+        }
+        if expected_contracts:
+            actual_contracts, contract_rows = read_contract_ids(
+                path, int(spec["header_rows"]) + 1
+            )
+            if actual_contracts != expected_contracts:
+                errors.append(
+                    f"{name}: contract_id set={sorted(actual_contracts)}, "
+                    f"expected={sorted(expected_contracts)}"
+                )
+            if contract_rows != len(expected_contracts):
+                errors.append(
+                    f"{name}: contract_id rows={contract_rows}, "
+                    f"expected exactly={len(expected_contracts)}"
+                )
 
     problem_names = sorted(name for name in wanted_names if name.startswith("problem_"))
+    available_problem_names = [
+        name for name in problem_names if (output_dir / name).is_file()
+    ]
+    if available_problem_names:
+        baseline_name = available_problem_names[0]
+        baseline = summaries[baseline_name]
+        problem_formats = {
+            name: problem_format_summary(
+                output_dir / name, int(expected_files[name]["header_rows"])
+            )
+            for name in available_problem_names
+        }
+        baseline_format = problem_formats[baseline_name]
+        baseline_headers = baseline["headers"]
+        baseline_header_styles = baseline_format["header_style_ids"]
+        baseline_data_styles = baseline_format["first_data_style_ids"]
+        baseline_sheets = baseline["sheet_names"]
+        for name in available_problem_names:
+            summary = summaries[name]
+            format_summary = problem_formats[name]
+            if summary["headers"] != baseline_headers:
+                errors.append(
+                    f"{name}: problem workbook headers differ from {baseline_name}"
+                )
+            if format_summary["header_style_ids"] != baseline_header_styles:
+                errors.append(
+                    f"{name}: problem header format differs from {baseline_name}"
+                )
+            if format_summary["first_data_style_ids"] != baseline_data_styles:
+                errors.append(
+                    f"{name}: problem data-row format differs from {baseline_name}"
+                )
+            if summary["sheet_names"] != baseline_sheets:
+                errors.append(
+                    f"{name}: problem sheet names differ from {baseline_name}"
+                )
+            if format_summary["freeze_panes"] != "A2":
+                errors.append(
+                    f"{name}: freeze_panes={format_summary['freeze_panes']!r}, expected='A2'"
+                )
+            if format_summary["auto_filter"] != format_summary["dimension"]:
+                errors.append(
+                    f"{name}: auto_filter={format_summary['auto_filter']!r}, "
+                    f"expected full range {format_summary['dimension']!r}"
+                )
+
     problem_sets: list[set[str]] = []
     for name in problem_names:
         path = output_dir / name
@@ -207,7 +295,7 @@ def validate(args: argparse.Namespace) -> int:
 
     verdict = "PASS" if not errors else "FAIL"
     report_lines = [
-        "# Nine-XLSX delivery validation",
+        f"# {len(expected_files)}-XLSX delivery validation",
         "",
         f"- verdict: **{verdict}**",
         f"- directory: `{output_dir}`",

@@ -7,7 +7,7 @@
 
 | Файл | Когда нужен |
 | --- | --- |
-| `scripts/run_pipeline.py` | полный прогон от восстановленной базы до девяти XLSX |
+| `scripts/run_pipeline.py` | полный прогон от восстановленной базы до 9 или 10 XLSX по конфигу |
 | `scripts/verify_backup.py` | проверка размера и SHA-256 `.bak` |
 | `scripts/clean_runtime.py` | удаление `work`, `logs` и `output` перед передачей папки |
 | `scripts/create_release_zip.py` | создание ZIP без данных клиентов и секретов |
@@ -19,6 +19,8 @@
 | Файл | Что в нём лежит |
 | --- | --- |
 | `config/pipeline.yml` | адрес SQL Server, метаданные backup, единый cutoff и имя output |
+| `config/pipeline_manager_fixes_20260630.yml` | актуальная 10-файловая сборка с owner-audit и problem4 |
+| `config/membership_template_canonicalization.csv` | явные варианты конфликтующих шаблонов абонементов |
 | `config/product_reclassification_decisions.csv` | решения по спорным продуктам |
 | `config/managers_by_club.yml` | список менеджеров каждого клуба |
 | `config/branches_by_club.yml` | перевод внутреннего названия клуба в филиал Fitbase |
@@ -81,15 +83,15 @@ templates/services_required.xlsx
 | Файл | Что делает |
 | --- | --- |
 | `scripts/database.py` | подключается к SQL Server, разбивает SQL по `GO` и пишет CSV/TSV |
-| `scripts/build_delivery.py` | собирает 6 обычных и 3 проблемных XLSX |
+| `scripts/build_delivery.py` | собирает 6 обычных и 3/4 проблемных XLSX; problem4 включается конфигом |
 | `scripts/validate_delivery.py` | проверяет готовую папку перед передачей |
 
 ## Контрольные данные
 
-В `reference/expected_20260630.yml` записаны:
+В `reference/expected_20260630_manager_fixes_v2.yml` записаны:
 
 - размер и SHA-256 backup;
-- имена девяти файлов;
+- имена десяти файлов;
 - ожидаемые строки и колонки;
 - общее число спорных договоров;
 - четыре допустимых филиала.

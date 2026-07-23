@@ -176,6 +176,23 @@ FACT_FIELDS = [
     "matched_payment_match_source",
     "membership_sale_line_amount",
     "membership_sale_line_count",
+    "membership_sale_nonzero_line_count",
+    "financial_sale_document_count",
+    "financial_sale_membership_count",
+    "financial_sale_total_line_count",
+    "financial_sale_nonzero_line_count",
+    "financial_sale_total_line_amount",
+    "financial_sale_document_number",
+    "financial_sale_document_datetime",
+    "financial_sale_document_ref",
+    "financial_register_allocation_unambiguous",
+    "financial_register_row_count",
+    "financial_register_charge_sum",
+    "financial_register_payment_sum",
+    "financial_register_signed_debt",
+    "financial_register_charge_row_count",
+    "financial_register_payment_row_count",
+    "financial_register_last_movement_datetime",
     "document131_refund_count",
     "document131_posted_unmarked_refund_count",
     "cutoff_at",
@@ -423,13 +440,21 @@ ZERO_PRICE_DIRECT_SALE_LINE_FREE_TRIAL_NAMES = {
 }
 
 
-def business_zero_override_reason(fact: dict[str, str]) -> str:
+def business_zero_override_reason(
+    fact: dict[str, str],
+    computed_price: Decimal | None = None,
+) -> str:
     """Return the explicit business rule forcing price/payment to blank."""
 
     name = normalize_key(fact.get("subscription_name", ""))
     sale_date = (fact.get("sale_date") or "").strip()
     product_class = (fact.get("product_class") or "").strip()
-    price = decimal_value(fact.get("rg_price"))
+    info_price = decimal_value(fact.get("rg_price"))
+    price = (
+        computed_price
+        if computed_price is not None
+        else choose_financial_price(fact)[0]
+    )
     matched_payment_ref = (fact.get("matched_payment_ref") or "").strip()
     matched_payment_source = (fact.get("matched_payment_match_source") or "").strip()
     matched_payment_method = (fact.get("matched_payment_method") or "").strip()
@@ -459,7 +484,7 @@ def business_zero_override_reason(fact: dict[str, str]) -> str:
     ):
         return "business_direct_free_site_week_sale_line_zero_blank_payment"
     if (
-        price <= 0
+        info_price <= 0
         and matched_payment_ref
         and matched_payment_source.startswith("direct")
         and document131_posted_unmarked_refund_count > 0
@@ -756,23 +781,80 @@ def compute_duration_months(fact: dict[str, str]) -> tuple[int, str]:
     return 0, "missing_duration"
 
 
-def compute_money(fact: dict[str, str]) -> tuple[Decimal, Decimal, Decimal, str]:
-    price = decimal_value(fact.get("rg_price"))
-    paid_candidate = decimal_value(fact.get("rg_paid_candidate"))
-    name = normalize_key(fact.get("subscription_name", ""))
+def choose_financial_price(fact: dict[str, str]) -> tuple[Decimal, str]:
+    """Choose the sold amount without confusing a debt balance with a payment.
 
-    if price <= 0:
-        return Decimal("0"), Decimal("0"), Decimal("0"), "zero_price"
-    if paid_candidate > 0:
-        paid = min(paid_candidate, price)
-        return price, paid, max(price - paid, Decimal("0")), "rg_fld3072_paid_candidate"
-    if "рассроч" in name:
-        matched_payment_amount = decimal_value(fact.get("matched_payment_amount"))
-        if matched_payment_amount > 0:
-            paid = min(matched_payment_amount, price)
-            return price, paid, max(price - paid, Decimal("0")), "matched_payment_amount_for_installment"
-        return price, Decimal("0"), price, "installment_without_paid_candidate"
-    return price, price, Decimal("0"), "assume_paid_full_when_no_installment_marker"
+    ``InfoRg3060._Fld3070`` remains the primary per-membership sold amount.
+    Some active rows have a zero information-register value even though their
+    posted sale line is positive, so the exact membership sale-line sum is the
+    first fallback.  A register charge is used only for an unambiguous
+    one-membership sale when neither sold source is positive.
+    """
+
+    info_price = decimal_value(fact.get("rg_price"))
+    sale_line_amount = decimal_value(fact.get("membership_sale_line_amount"))
+    register_charge = decimal_value(fact.get("financial_register_charge_sum"))
+    allocation_unambiguous = (
+        fact.get("financial_register_allocation_unambiguous") == "1"
+    )
+
+    if info_price > 0:
+        return info_price, "info_rg3060_fld3070"
+    if sale_line_amount > 0:
+        return sale_line_amount, "document154_vt1137_fld1160"
+    if allocation_unambiguous and register_charge > 0:
+        return register_charge, "accumrg3305_charge_fallback"
+    return Decimal("0"), "zero_sold_amount"
+
+
+def compute_money(fact: dict[str, str]) -> tuple[Decimal, Decimal, Decimal, str]:
+    """Return sold, paid, and debt independently as of the backup cutoff.
+
+    The accounting register is authoritative only when its sale belongs to one
+    membership, because ``_AccumRg3305`` is dimensioned by sale rather than by
+    membership line.  For older or multi-membership sales without an
+    unambiguous register allocation, ``InfoRg3060._Fld3072`` is used as a debt
+    fallback, never as an amount paid.
+    """
+
+    price, price_source = choose_financial_price(fact)
+    register_rows = decimal_value(fact.get("financial_register_row_count"))
+    allocation_unambiguous = (
+        fact.get("financial_register_allocation_unambiguous") == "1"
+    )
+
+    if register_rows > 0 and allocation_unambiguous:
+        paid_raw = decimal_value(fact.get("financial_register_payment_sum"))
+        debt_raw = decimal_value(fact.get("financial_register_signed_debt"))
+        paid = max(paid_raw, Decimal("0"))
+        debt = max(debt_raw, Decimal("0"))
+        suffix = "_negative_debt_clamped_to_zero" if debt_raw < 0 else ""
+        return (
+            price,
+            paid,
+            debt,
+            f"accumrg3305_sale_balance__{price_source}{suffix}",
+        )
+
+    debt_candidate = max(
+        decimal_value(fact.get("rg_paid_candidate")),
+        Decimal("0"),
+    )
+    if price <= 0 and debt_candidate <= 0:
+        return Decimal("0"), Decimal("0"), Decimal("0"), "zero_price_no_balance"
+
+    paid = max(price - debt_candidate, Decimal("0"))
+    reason = (
+        "ambiguous_multi_membership_sale"
+        if register_rows > 0 and not allocation_unambiguous
+        else "no_unambiguous_register_balance"
+    )
+    return (
+        price,
+        paid,
+        debt_candidate,
+        f"info_rg3060_fld3072_debt_fallback__{reason}__{price_source}",
+    )
 
 
 def is_full_subscription_fact(fact: dict[str, str]) -> bool:
@@ -907,7 +989,14 @@ def canonicalize_template_candidates(
             )
 
         if decision is not None:
-            if decision.variant not in variants:
+            configured_price_only_override = (
+                decision.variant not in variants
+                and any(
+                    observed[1:] == decision.variant[1:]
+                    for observed in variants
+                )
+            )
+            if decision.variant not in variants and not configured_price_only_override:
                 rendered_variants = "; ".join(sorted((repr(item) for item in variants)))
                 raise ValueError(
                     "Configured membership template variant is not present in staging: "
@@ -924,11 +1013,18 @@ def canonicalize_template_candidates(
                 template_variant(candidate) != decision.variant
                 for candidate in source_candidates
             ):
-                raise ValueError(
-                    "Configured source contract no longer has the configured template variant: "
-                    f"name={decision.canonical_name!r}; "
-                    f"source_contract_id={decision.source_contract_id!r}"
+                source_nonprice_match = any(
+                    template_variant(candidate)[1:] == decision.variant[1:]
+                    for candidate in source_candidates
                 )
+                if not source_nonprice_match:
+                    raise ValueError(
+                        "Configured source contract no longer has the configured "
+                        "template variant: "
+                        f"name={decision.canonical_name!r}; "
+                        f"source_contract_id={decision.source_contract_id!r}"
+                    )
+                configured_price_only_override = True
             source_contract_present = bool(source_candidates)
             if not source_contract_present:
                 # The configured values remain authoritative for later backups
@@ -955,6 +1051,26 @@ def canonicalize_template_candidates(
                 "_source_contract_id": decision.source_contract_id,
             }
             counters["template_canonicalization"]["checked_in_config"] += 1
+            if configured_price_only_override:
+                counters["template_canonicalization"][
+                    "configured_template_price_preserved_after_transaction_rebuild"
+                ] += 1
+                uncertainties.append(
+                    {
+                        "issue_type": (
+                            "configured_template_price_preserved_after_transaction_rebuild"
+                        ),
+                        "contract_id": decision.source_contract_id,
+                        "client_id": "",
+                        "client_fio": "",
+                        "contract_name": decision.canonical_name,
+                        "details": (
+                            "Client transaction price changed after rebuilding money "
+                            "from sale/register sources. The independently checked-in "
+                            f"template price remains authoritative: {decision.price!r}."
+                        ),
+                    }
+                )
             if len(variants) > 1:
                 uncertainties.append(
                     {
@@ -1026,7 +1142,7 @@ def build_rows(
         ).strip()
         duration, duration_source = compute_duration_months(fact)
         price, paid, payment_left, money_source = compute_money(fact)
-        business_override = business_zero_override_reason(fact)
+        business_override = business_zero_override_reason(fact, price)
         if business_override:
             price = Decimal("0")
             paid = Decimal("0")
@@ -1086,6 +1202,10 @@ def build_rows(
             "_subscription_ref": fact.get("subscription_ref", ""),
             "_product_ref": fact.get("product_ref", ""),
             "_product_class": fact.get("product_class", ""),
+            "_is_active_on_cutoff": fact.get("is_active_on_cutoff", ""),
+            "_is_finished_before_cutoff": fact.get(
+                "is_finished_before_cutoff", ""
+            ),
             "_is_subrent": "1" if is_subrent else "0",
             "_is_limited_subrent": "1" if is_limited_subrent else "0",
             "_is_visit_limited": "1" if is_visit_limited else "0",
@@ -1098,6 +1218,45 @@ def build_rows(
             "_business_override": business_override,
             "_membership_sale_line_amount": fact.get("membership_sale_line_amount", ""),
             "_membership_sale_line_count": fact.get("membership_sale_line_count", ""),
+            "_membership_sale_nonzero_line_count": fact.get(
+                "membership_sale_nonzero_line_count", ""
+            ),
+            "_financial_sale_document_count": fact.get(
+                "financial_sale_document_count", ""
+            ),
+            "_financial_sale_membership_count": fact.get(
+                "financial_sale_membership_count", ""
+            ),
+            "_financial_sale_total_line_count": fact.get(
+                "financial_sale_total_line_count", ""
+            ),
+            "_financial_sale_nonzero_line_count": fact.get(
+                "financial_sale_nonzero_line_count", ""
+            ),
+            "_financial_sale_total_line_amount": fact.get(
+                "financial_sale_total_line_amount", ""
+            ),
+            "_financial_sale_document_number": fact.get(
+                "financial_sale_document_number", ""
+            ),
+            "_financial_sale_document_datetime": fact.get(
+                "financial_sale_document_datetime", ""
+            ),
+            "_financial_register_allocation_unambiguous": fact.get(
+                "financial_register_allocation_unambiguous", ""
+            ),
+            "_financial_register_row_count": fact.get(
+                "financial_register_row_count", ""
+            ),
+            "_financial_register_charge_sum": fact.get(
+                "financial_register_charge_sum", ""
+            ),
+            "_financial_register_payment_sum": fact.get(
+                "financial_register_payment_sum", ""
+            ),
+            "_financial_register_signed_debt": fact.get(
+                "financial_register_signed_debt", ""
+            ),
             "_document131_refund_count": fact.get("document131_refund_count", ""),
             "_document131_posted_unmarked_refund_count": fact.get(
                 "document131_posted_unmarked_refund_count", ""
@@ -1140,15 +1299,34 @@ def build_rows(
                         "details": visits_left_issue,
                     }
                 )
-        if "installment_without_paid_candidate" == money_source:
+        if "info_rg3060_fld3072_debt_fallback" in money_source:
             uncertainties.append(
                 {
-                    "issue_type": "installment_without_paid_candidate",
+                    "issue_type": "financial_register_balance_fallback",
                     "contract_id": contract_id,
                     "client_id": client_id,
                     "client_fio": source.client_fio,
                     "contract_name": contract_name,
-                    "details": "Name contains installment marker but InfoRg3060._Fld3072 is zero; payment_left set to full price.",
+                    "details": (
+                        "No unambiguous one-membership _AccumRg3305 balance; "
+                        "InfoRg3060._Fld3072 was interpreted as debt fallback. "
+                        f"money_source={money_source}."
+                    ),
+                }
+            )
+        if "negative_debt_clamped_to_zero" in money_source:
+            uncertainties.append(
+                {
+                    "issue_type": "financial_register_negative_debt",
+                    "contract_id": contract_id,
+                    "client_id": client_id,
+                    "client_fio": source.client_fio,
+                    "contract_name": contract_name,
+                    "details": (
+                        "The signed _AccumRg3305 balance is negative; "
+                        "payment_left was clamped to zero while paid movements "
+                        "were preserved."
+                    ),
                 }
             )
         if not payment_type and price > 0:
@@ -1544,22 +1722,34 @@ def build_validation(
 
 def build_rassrochka_report(client_rows: list[dict[str, Any]], uncertainties: list[dict[str, str]]) -> str:
     installment_rows = [row for row in client_rows if "рассроч" in normalize_key(str(row.get("contract_name", "")))]
-    unresolved = [row for row in uncertainties if row["issue_type"] == "installment_without_paid_candidate"]
+    unresolved_contracts = {
+        row["contract_id"]
+        for row in uncertainties
+        if row["issue_type"] == "financial_register_balance_fallback"
+    }
+    unresolved = [
+        row
+        for row in installment_rows
+        if str(row.get("contract_id") or "") in unresolved_contracts
+    ]
     payment_left_positive = [row for row in installment_rows if decimal_value(row.get("payment_left")) > 0]
     lines = [
         "# Rassrochka validation",
         "",
         f"- installment rows by name marker: {len(installment_rows)}",
         f"- installment rows with positive payment_left: {len(payment_left_positive)}",
-        f"- installment rows with missing paid candidate: {len(unresolved)}",
+        f"- installment rows without unambiguous register balance: {len(unresolved)}",
         "",
-        "Rule used: `amount_of_payments = InfoRg3060._Fld3072` when it is positive; otherwise, for rows with `рассрочка` in the name, fallback to the nearest matched `Document152` payment amount. `payment_left = price - amount_of_payments`. Rows are flagged only when both sources are empty.",
+        "Rule used: `amount_of_payments` and `payment_left` are independent values from the sale-level `_AccumRg3305` balance at the backup cutoff. `InfoRg3060._Fld3072` is treated only as a debt fallback when the sale-to-membership allocation is not unambiguous.",
         "",
         "## First Flagged Rows",
         "",
     ]
     for item in unresolved[:30]:
-        lines.append(f"- {item['client_id']} {item['client_fio']} | {item['contract_id']} | {item['contract_name']}")
+        lines.append(
+            f"- {item['client_id']} {item['client_fio']} | "
+            f"{item['contract_id']} | {item['contract_name']}"
+        )
     if not unresolved:
         lines.append("- none")
     return "\n".join(lines) + "\n"
@@ -1644,6 +1834,8 @@ def main() -> int:
             "_subscription_ref",
             "_product_ref",
             "_product_class",
+            "_is_active_on_cutoff",
+            "_is_finished_before_cutoff",
             "_is_subrent",
             "_is_limited_subrent",
             "_is_visit_limited",
@@ -1656,6 +1848,19 @@ def main() -> int:
             "_business_override",
             "_membership_sale_line_amount",
             "_membership_sale_line_count",
+            "_membership_sale_nonzero_line_count",
+            "_financial_sale_document_count",
+            "_financial_sale_membership_count",
+            "_financial_sale_total_line_count",
+            "_financial_sale_nonzero_line_count",
+            "_financial_sale_total_line_amount",
+            "_financial_sale_document_number",
+            "_financial_sale_document_datetime",
+            "_financial_register_allocation_unambiguous",
+            "_financial_register_row_count",
+            "_financial_register_charge_sum",
+            "_financial_register_payment_sum",
+            "_financial_register_signed_debt",
             "_document131_refund_count",
             "_document131_posted_unmarked_refund_count",
             "_owner_change_ref",

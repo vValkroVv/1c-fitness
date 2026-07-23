@@ -4,6 +4,7 @@ import importlib.util
 import sys
 import unittest
 from datetime import date
+from decimal import Decimal
 from pathlib import Path
 
 
@@ -61,6 +62,25 @@ def fact(
         "rg_freeze_days": "0",
         "rg_price": price,
         "rg_paid_candidate": "0",
+        "membership_sale_line_amount": price,
+        "membership_sale_line_count": "1",
+        "membership_sale_nonzero_line_count": "1" if price != "0" else "0",
+        "financial_sale_document_count": "1",
+        "financial_sale_membership_count": "1",
+        "financial_sale_total_line_count": "1",
+        "financial_sale_nonzero_line_count": "1" if price != "0" else "0",
+        "financial_sale_total_line_amount": price,
+        "financial_sale_document_number": "SALE",
+        "financial_sale_document_datetime": f"{sale_date} 10:00:00",
+        "financial_sale_document_ref": "SALE_REF",
+        "financial_register_allocation_unambiguous": "0",
+        "financial_register_row_count": "0",
+        "financial_register_charge_sum": "0",
+        "financial_register_payment_sum": "0",
+        "financial_register_signed_debt": "0",
+        "financial_register_charge_row_count": "0",
+        "financial_register_payment_row_count": "0",
+        "financial_register_last_movement_datetime": "",
         "matched_payment_ref": "PAYMENT",
         "matched_payment_method": "Эквайринг",
         "matched_payment_match_source": "direct_test",
@@ -180,6 +200,124 @@ class VisitLimitTests(unittest.TestCase):
 
 
 class MembershipBuildTests(unittest.TestCase):
+    def test_money_uses_register_payment_and_debt_independently(self) -> None:
+        current_fact = fact(
+            client_id="DEBT",
+            contract_id="00000151758",
+            name="Абонемент",
+            sale_date="2026-06-14",
+            duration_days="365",
+            price="10990",
+        )
+        current_fact.update(
+            {
+                "rg_paid_candidate": "2747",
+                "financial_register_allocation_unambiguous": "1",
+                "financial_register_row_count": "3",
+                "financial_register_charge_sum": "10990",
+                "financial_register_payment_sum": "8243",
+                "financial_register_signed_debt": "2747",
+            }
+        )
+        price, paid, debt, source_name = builder.compute_money(current_fact)
+        self.assertEqual((price, paid, debt), (10990, 8243, 2747))
+        self.assertIn("accumrg3305_sale_balance", source_name)
+
+    def test_money_keeps_register_correction_out_of_sold_amount(self) -> None:
+        current_fact = fact(
+            client_id="CORRECTION",
+            contract_id="00000148035",
+            name="Абонемент",
+            sale_date="2026-03-13",
+            duration_days="365",
+            price="11990",
+        )
+        current_fact.update(
+            {
+                "rg_paid_candidate": "3997.11",
+                "financial_register_allocation_unambiguous": "1",
+                "financial_register_row_count": "3",
+                "financial_register_charge_sum": "8993",
+                "financial_register_payment_sum": "5995",
+                "financial_register_signed_debt": "2998",
+            }
+        )
+        self.assertEqual(
+            builder.compute_money(current_fact)[:3],
+            (11990, 5995, 2998),
+        )
+
+    def test_money_treats_fld3072_as_debt_when_register_is_ambiguous(self) -> None:
+        current_fact = fact(
+            client_id="LEGACY",
+            contract_id="LEGACY",
+            name="Абонемент",
+            sale_date="2020-01-01",
+            duration_days="365",
+            price="11000",
+        )
+        current_fact.update(
+            {
+                "rg_paid_candidate": "6000",
+                "financial_register_allocation_unambiguous": "0",
+                "financial_register_row_count": "1",
+                "financial_sale_membership_count": "2",
+            }
+        )
+        price, paid, debt, source_name = builder.compute_money(current_fact)
+        self.assertEqual((price, paid, debt), (11000, 5000, 6000))
+        self.assertIn("fld3072_debt_fallback", source_name)
+
+    def test_money_uses_sale_line_when_information_price_is_zero(self) -> None:
+        current_fact = fact(
+            client_id="ZERO_INFO",
+            contract_id="ZERO_INFO",
+            name="Абонемент",
+            sale_date="2026-02-01",
+            duration_days="365",
+            price="0",
+        )
+        current_fact.update(
+            {
+                "membership_sale_line_amount": "11990",
+                "financial_register_allocation_unambiguous": "1",
+                "financial_register_row_count": "2",
+                "financial_register_charge_sum": "11990",
+                "financial_register_payment_sum": "11990",
+                "financial_register_signed_debt": "0",
+            }
+        )
+        self.assertEqual(
+            builder.compute_money(current_fact)[:3],
+            (11990, 11990, 0),
+        )
+        self.assertEqual(
+            builder.business_zero_override_reason(current_fact, Decimal("11990")),
+            "",
+        )
+
+    def test_historical_refund_override_still_uses_zero_info_price(self) -> None:
+        current_fact = fact(
+            client_id="REFUND",
+            contract_id="REFUND",
+            name="Абонемент",
+            sale_date="2020-02-01",
+            duration_days="365",
+            price="0",
+        )
+        current_fact.update(
+            {
+                "membership_sale_line_amount": "11990",
+                "matched_payment_match_source": "direct_test",
+                "document131_posted_unmarked_refund_count": "1",
+                "is_active_on_cutoff": "0",
+            }
+        )
+        self.assertEqual(
+            builder.business_zero_override_reason(current_fact, Decimal("11990")),
+            "business_historical_document131_refund_zero_direct_blank_payment",
+        )
+
     def test_ponedelnik_sale_date_and_cycle_fields(self) -> None:
         current_fact = fact(
             client_id="PONEDELNIK",

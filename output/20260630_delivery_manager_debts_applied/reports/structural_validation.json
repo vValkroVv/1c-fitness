@@ -1,0 +1,304 @@
+{
+  "verdict": "PASS",
+  "errors": [],
+  "warnings": [],
+  "files": {
+    "fitbase_active_clients_import_zayavki_20260630_all_funnels.xlsx": {
+      "total_rows": 39552,
+      "data_rows": 39550,
+      "columns": 10,
+      "headers": [
+        [
+          "client_id",
+          "phone",
+          "client_fio",
+          "email",
+          "funnel",
+          "funnel_step",
+          "budget",
+          "create_date",
+          "manager",
+          "филиал"
+        ],
+        [
+          "Внутренний номер клиента ",
+          "Телефон *",
+          "ФИО клиента *",
+          "Почта",
+          "Воронка *",
+          "Этап воронки *",
+          "Бюджет ",
+          "Дата создания *",
+          "Менеджер ",
+          "филиал"
+        ]
+      ],
+      "sheet_names": [
+        "Лист1"
+      ],
+      "formula_cells": [],
+      "blank_data_rows": []
+    },
+    "fitbase_active_clients_plastic_cards_20260630_all_funnels.xlsx": {
+      "total_rows": 11025,
+      "data_rows": 11024,
+      "columns": 3,
+      "headers": [
+        [
+          "телефон",
+          "фио",
+          "номер пластиковой карты"
+        ]
+      ],
+      "sheet_names": [
+        "Лист1"
+      ],
+      "formula_cells": [],
+      "blank_data_rows": []
+    },
+    "fitbase_import_abonementy_clientov_20260630.xlsx": {
+      "total_rows": 121463,
+      "data_rows": 121461,
+      "columns": 22,
+      "headers": [
+        [
+          "tag",
+          "contract_id",
+          "client_id",
+          "phone",
+          "client_fio",
+          "contract_name",
+          "card",
+          "duration",
+          "duration_type",
+          "create_date",
+          "payment_date",
+          "activation_date",
+          "end_date",
+          "freeze",
+          "guests",
+          "visits_left",
+          "price",
+          "amount_of_payments",
+          "payment_left",
+          "type_of_payment",
+          "manager",
+          "филиал"
+        ],
+        [
+          "Тег",
+          "Внутренний номер абонемента",
+          "Внутренний номер клиента",
+          "Телефон клиента",
+          "ФИО клиента  *",
+          "Название абонемента *",
+          "Номер карты",
+          "Продолжительность",
+          "Тип продолжительности",
+          "Дата  добавления *",
+          "Дата оплаты *",
+          "Дата активации ",
+          "Дата окончания",
+          "Осталось дней для заморозки",
+          "Осталось гостевых визитов",
+          "Осталось посещений *",
+          "Стоимость *",
+          "Оплачено *",
+          "Осталось оплатить *",
+          "Тип оплаты",
+          "Менеджер ",
+          "Филиал продажи"
+        ]
+      ],
+      "sheet_names": [
+        "Лист1"
+      ],
+      "formula_cells": [],
+      "blank_data_rows": []
+    },
+    "fitbase_import_shablony_abonementov_20260630.xlsx": {
+      "total_rows": 121,
+      "data_rows": 119,
+      "columns": 12,
+      "headers": [
+        [
+          "branches_access",
+          "name",
+          "price",
+          "duration",
+          "duration_type",
+          "visits",
+          "guests",
+          "freeze",
+          "first_visit_activation",
+          "archive",
+          "category",
+          "legal_entity"
+        ],
+        [
+          "Доступ в филиалах",
+          "Название абонемента *",
+          "Стоимость *",
+          "Продолжительность  *",
+          "Тип продолжительности *",
+          "Посещений ",
+          "Гостевые визиты",
+          "Дни для заморозки",
+          "Активация с первого посещения?",
+          "В архиве?",
+          "Категория в структуре",
+          "Юр.лицо"
+        ]
+      ],
+      "sheet_names": [
+        "Лист1"
+      ],
+      "formula_cells": [],
+      "blank_data_rows": []
+    },
+    "fitbase_import_shablony_uslug_20260630.xlsx": {
+      "total_rows": 53,
+      "data_rows": 51,
+      "columns": 9,
+      "headers": [
+        [
+          "name",
+          "price",
+          "duration",
+          "visits",
+          "do_enter",
+          "first_visit_activation",
+          "archive",
+          "category",
+          "legal_entity"
+        ],
+        [
+          "Название услуги *",
+          "Цена *",
+          "Продолжительность ( в днях ) *",
+          "Количество тренировок *",
+          "Осуществлять вход в клуб?",
+          "Активация с первого посещения?",
+          "В архиве?",
+          "Категория в структуре",
+          "Юр.лицо"
+        ]
+      ],
+      "sheet_names": [
+        "Лист1"
+      ],
+      "formula_cells": [],
+      "blank_data_rows": []
+    },
+    "fitbase_import_uslugi_clientov_20260630.xlsx": {
+      "total_rows": 524,
+      "data_rows": 522,
+      "columns": 17,
+      "headers": [
+        [
+          "service_id",
+          "client_id",
+          "phone",
+          "client_fio",
+          "service_name",
+          "create_date",
+          "payment_date",
+          "activation_date",
+          "end_date",
+          "count",
+          "visits_left",
+          "price",
+          "amount_of_payment",
+          "payment_left",
+          "type_of_payment",
+          "manager",
+          "филиал"
+        ],
+        [
+          "Внутренний номер услуги",
+          "Внутренний номер клиента",
+          "Телефон клиента",
+          "ФИО клиента *",
+          "Название услуги *",
+          "Дата добавления *",
+          "Дата оплаты *",
+          "Дата активации ",
+          "Дата окончания",
+          "Количество услуг",
+          "Осталось посещений ",
+          "Цена *",
+          "Оплачено *",
+          "Осталось оплатить *",
+          "Тип оплаты",
+          "Менеджер ",
+          "Филиал продажи"
+        ]
+      ],
+      "sheet_names": [
+        "Лист1"
+      ],
+      "formula_cells": [],
+      "blank_data_rows": []
+    },
+    "problem_4_subrent_visits_left_contract_151350_1_case_20260630.xlsx": {
+      "total_rows": 2,
+      "data_rows": 1,
+      "columns": 22,
+      "headers": [
+        [
+          "tag",
+          "contract_id",
+          "client_id",
+          "phone",
+          "client_fio",
+          "contract_name",
+          "card",
+          "duration",
+          "duration_type",
+          "create_date",
+          "payment_date",
+          "activation_date",
+          "end_date",
+          "freeze",
+          "guests",
+          "visits_left",
+          "price",
+          "amount_of_payments",
+          "payment_left",
+          "type_of_payment",
+          "manager",
+          "филиал"
+        ]
+      ],
+      "sheet_names": [
+        "Импорт_абонементы"
+      ],
+      "formula_cells": [],
+      "blank_data_rows": []
+    }
+  },
+  "problem_contract_ids": 1,
+  "branches": {
+    "fitbase_import_abonementy_clientov_20260630.xlsx": {
+      "Фитнес Империя (Гоголевский)": 73623,
+      "Фитнес Империя (Промышленная)": 15561,
+      "Фитнес Империя (Столица)": 18274,
+      "Фитнес Империя (Ровио)": 14003
+    },
+    "problem_4_subrent_visits_left_contract_151350_1_case_20260630.xlsx": {
+      "Фитнес Империя (Гоголевский)": 1
+    },
+    "fitbase_active_clients_import_zayavki_20260630_all_funnels.xlsx": {
+      "Фитнес Империя (Гоголевский)": 22672,
+      "Фитнес Империя (Столица)": 6143,
+      "Фитнес Империя (Ровио)": 5675,
+      "Фитнес Империя (Промышленная)": 5060
+    },
+    "fitbase_import_uslugi_clientov_20260630.xlsx": {
+      "Фитнес Империя (Гоголевский)": 237,
+      "Фитнес Империя (Ровио)": 108,
+      "Фитнес Империя (Промышленная)": 89,
+      "Фитнес Империя (Столица)": 88
+    }
+  }
+}

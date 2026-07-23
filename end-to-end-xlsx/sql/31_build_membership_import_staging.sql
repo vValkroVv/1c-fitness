@@ -16,17 +16,25 @@ IF OBJECT_ID('tempdb..#membership_sale_branch_context') IS NOT NULL
     DROP TABLE #membership_sale_branch_context;
 IF OBJECT_ID('tempdb..#membership_sale_line_context') IS NOT NULL
     DROP TABLE #membership_sale_line_context;
+IF OBJECT_ID('tempdb..#sale_membership_counts') IS NOT NULL
+    DROP TABLE #sale_membership_counts;
+IF OBJECT_ID('tempdb..#sale_line_scope_context') IS NOT NULL
+    DROP TABLE #sale_line_scope_context;
+IF OBJECT_ID('tempdb..#membership_sale_identity_context') IS NOT NULL
+    DROP TABLE #membership_sale_identity_context;
+IF OBJECT_ID('tempdb..#membership_register_financial_context') IS NOT NULL
+    DROP TABLE #membership_register_financial_context;
 IF OBJECT_ID('tempdb..#membership_document131_context') IS NOT NULL
     DROP TABLE #membership_document131_context;
 
-SELECT DISTINCT
+SELECT
     CONVERT(varchar(32), membership_doc._IDRRef, 2) AS subscription_ref,
     CONVERT(varchar(32), p._IDRRef, 2) AS sale_ref,
     CASE
         WHEN p._Date_Time > '3000-01-01' THEN DATEADD(year, -2000, p._Date_Time)
         ELSE p._Date_Time
     END AS sale_datetime,
-    CAST(p._Fld1080 AS decimal(15, 2)) AS amount,
+    SUM(CAST(payment_line._Fld1090 AS decimal(15, 2))) AS amount,
     pm._Description AS payment_method,
     op._Description AS operation_name,
     N'direct_doc152_vt1083_doc154_vt1137_doc163' AS match_source,
@@ -56,7 +64,16 @@ WHERE p._Posted = 0x01
   AND CASE
         WHEN p._Date_Time > '3000-01-01' THEN DATEADD(year, -2000, p._Date_Time)
         ELSE p._Date_Time
-      END <= @cutoff_at;
+      END <= @cutoff_at
+GROUP BY
+    membership_doc._IDRRef,
+    p._IDRRef,
+    CASE
+        WHEN p._Date_Time > '3000-01-01' THEN DATEADD(year, -2000, p._Date_Time)
+        ELSE p._Date_Time
+    END,
+    pm._Description,
+    op._Description;
 
 CREATE INDEX IX_direct_membership_payments_subscription_ref
     ON #direct_membership_payments(subscription_ref);
@@ -64,8 +81,16 @@ CREATE INDEX IX_direct_membership_payments_subscription_ref
 SELECT
     s.subscription_ref,
     sale_doc._IDRRef AS sale_doc_ref,
+    sale_doc._Number AS sale_doc_number,
+    CASE
+        WHEN sale_doc._Date_Time > '3000-01-01'
+        THEN DATEADD(year, -2000, sale_doc._Date_Time)
+        ELSE sale_doc._Date_Time
+    END AS sale_doc_datetime,
     SUM(CAST(sale_line._Fld1160 AS decimal(15, 2))) AS membership_sale_line_amount,
-    COUNT_BIG(*) AS membership_sale_line_count
+    COUNT_BIG(*) AS membership_sale_line_count,
+    SUM(CASE WHEN sale_line._Fld1160 <> 0 THEN 1 ELSE 0 END)
+        AS membership_sale_nonzero_line_count
 INTO #membership_sale_docs
 FROM fitbase_part2.stg_subscriptions_all AS s
 JOIN dbo._Document154_VT1137 AS sale_line
@@ -76,19 +101,133 @@ JOIN dbo._Document154 AS sale_doc
  AND sale_doc._Posted = 0x01
  AND sale_doc._Marked = 0x00
 WHERE s.sale_datetime <= @cutoff_at
+  AND CASE
+        WHEN sale_doc._Date_Time > '3000-01-01'
+        THEN DATEADD(year, -2000, sale_doc._Date_Time)
+        ELSE sale_doc._Date_Time
+      END <= @cutoff_at
   AND (
       s.product_class IN (N'full_subscription', N'trial_or_guest')
       OR LOWER(s.subscription_name) LIKE N'%субаренд%'
   )
 GROUP BY
     s.subscription_ref,
-    sale_doc._IDRRef;
+    sale_doc._IDRRef,
+    sale_doc._Number,
+    CASE
+        WHEN sale_doc._Date_Time > '3000-01-01'
+        THEN DATEADD(year, -2000, sale_doc._Date_Time)
+        ELSE sale_doc._Date_Time
+    END;
 
 CREATE INDEX IX_membership_sale_docs_subscription_ref
     ON #membership_sale_docs(subscription_ref);
 
 CREATE INDEX IX_membership_sale_docs_sale_doc_ref
     ON #membership_sale_docs(sale_doc_ref);
+
+SELECT
+    sale_doc_ref,
+    COUNT_BIG(*) AS sale_membership_count
+INTO #sale_membership_counts
+FROM #membership_sale_docs
+GROUP BY sale_doc_ref;
+
+CREATE UNIQUE INDEX IX_sale_membership_counts_sale_doc_ref
+    ON #sale_membership_counts(sale_doc_ref);
+
+SELECT
+    scoped_sales.sale_doc_ref,
+    COUNT_BIG(*) AS financial_sale_total_line_count,
+    SUM(CASE WHEN sale_line._Fld1160 <> 0 THEN 1 ELSE 0 END)
+        AS financial_sale_nonzero_line_count,
+    SUM(CAST(sale_line._Fld1160 AS decimal(15, 2)))
+        AS financial_sale_total_line_amount
+INTO #sale_line_scope_context
+FROM (
+    SELECT DISTINCT sale_doc_ref
+    FROM #membership_sale_docs
+) AS scoped_sales
+JOIN dbo._Document154_VT1137 AS sale_line
+  ON sale_line._Document154_IDRRef = scoped_sales.sale_doc_ref
+GROUP BY scoped_sales.sale_doc_ref;
+
+CREATE UNIQUE INDEX IX_sale_line_scope_context_sale_doc_ref
+    ON #sale_line_scope_context(sale_doc_ref);
+
+SELECT
+    msd.subscription_ref,
+    COUNT_BIG(*) AS financial_sale_document_count,
+    MAX(smc.sale_membership_count) AS financial_sale_membership_count,
+    MAX(scope.financial_sale_total_line_count) AS financial_sale_total_line_count,
+    MAX(scope.financial_sale_nonzero_line_count)
+        AS financial_sale_nonzero_line_count,
+    MAX(scope.financial_sale_total_line_amount)
+        AS financial_sale_total_line_amount,
+    MIN(msd.sale_doc_number) AS financial_sale_document_number,
+    MIN(msd.sale_doc_datetime) AS financial_sale_document_datetime,
+    MIN(CONVERT(varchar(32), msd.sale_doc_ref, 2)) AS financial_sale_document_ref,
+    CASE
+        WHEN COUNT_BIG(*) = 1
+         AND MAX(smc.sale_membership_count) = 1
+         AND MAX(scope.financial_sale_nonzero_line_count)
+             = MAX(msd.membership_sale_nonzero_line_count)
+        THEN 1
+        ELSE 0
+    END AS financial_register_allocation_unambiguous
+INTO #membership_sale_identity_context
+FROM #membership_sale_docs AS msd
+JOIN #sale_membership_counts AS smc
+  ON smc.sale_doc_ref = msd.sale_doc_ref
+JOIN #sale_line_scope_context AS scope
+  ON scope.sale_doc_ref = msd.sale_doc_ref
+GROUP BY msd.subscription_ref;
+
+CREATE UNIQUE INDEX IX_membership_sale_identity_context_subscription_ref
+    ON #membership_sale_identity_context(subscription_ref);
+
+SELECT
+    msd.subscription_ref,
+    COUNT_BIG(rg._Fld3311) AS financial_register_row_count,
+    SUM(CASE
+        WHEN rg._RecordKind = 1
+        THEN CAST(rg._Fld3311 AS decimal(15, 2))
+        ELSE 0
+    END) AS financial_register_charge_sum,
+    SUM(CASE
+        WHEN rg._RecordKind = 0
+        THEN CAST(rg._Fld3311 AS decimal(15, 2))
+        ELSE 0
+    END) AS financial_register_payment_sum,
+    SUM(CASE
+        WHEN rg._RecordKind = 1
+        THEN CAST(rg._Fld3311 AS decimal(15, 2))
+        WHEN rg._RecordKind = 0
+        THEN -CAST(rg._Fld3311 AS decimal(15, 2))
+        ELSE 0
+    END) AS financial_register_signed_debt,
+    SUM(CASE WHEN rg._RecordKind = 1 THEN 1 ELSE 0 END)
+        AS financial_register_charge_row_count,
+    SUM(CASE WHEN rg._RecordKind = 0 THEN 1 ELSE 0 END)
+        AS financial_register_payment_row_count,
+    MAX(CASE
+        WHEN rg._Period > '3000-01-01' THEN DATEADD(year, -2000, rg._Period)
+        ELSE rg._Period
+    END) AS financial_register_last_movement_datetime
+INTO #membership_register_financial_context
+FROM #membership_sale_docs AS msd
+LEFT JOIN dbo._AccumRg3305 AS rg
+  ON rg._Active = 0x01
+ AND rg._Fld3308_RTRef = 0x0000009A
+ AND rg._Fld3308_RRRef = msd.sale_doc_ref
+ AND CASE
+        WHEN rg._Period > '3000-01-01' THEN DATEADD(year, -2000, rg._Period)
+        ELSE rg._Period
+     END <= @cutoff_at
+GROUP BY msd.subscription_ref;
+
+CREATE UNIQUE INDEX IX_membership_register_financial_context_subscription_ref
+    ON #membership_register_financial_context(subscription_ref);
 
 SELECT
     msd.subscription_ref,
@@ -118,7 +257,8 @@ CREATE UNIQUE INDEX IX_membership_sale_branch_context_subscription_ref
 SELECT
     subscription_ref,
     SUM(membership_sale_line_amount) AS membership_sale_line_amount,
-    SUM(membership_sale_line_count) AS membership_sale_line_count
+    SUM(membership_sale_line_count) AS membership_sale_line_count,
+    SUM(membership_sale_nonzero_line_count) AS membership_sale_nonzero_line_count
 INTO #membership_sale_line_context
 FROM #membership_sale_docs
 GROUP BY subscription_ref;
@@ -284,6 +424,36 @@ with_sale_doc_context AS (
         wp.*,
         COALESCE(line_context.membership_sale_line_amount, 0) AS membership_sale_line_amount,
         COALESCE(line_context.membership_sale_line_count, 0) AS membership_sale_line_count,
+        COALESCE(line_context.membership_sale_nonzero_line_count, 0)
+            AS membership_sale_nonzero_line_count,
+        COALESCE(identity_context.financial_sale_document_count, 0)
+            AS financial_sale_document_count,
+        COALESCE(identity_context.financial_sale_membership_count, 0)
+            AS financial_sale_membership_count,
+        COALESCE(identity_context.financial_sale_total_line_count, 0)
+            AS financial_sale_total_line_count,
+        COALESCE(identity_context.financial_sale_nonzero_line_count, 0)
+            AS financial_sale_nonzero_line_count,
+        COALESCE(identity_context.financial_sale_total_line_amount, 0)
+            AS financial_sale_total_line_amount,
+        identity_context.financial_sale_document_number,
+        identity_context.financial_sale_document_datetime,
+        identity_context.financial_sale_document_ref,
+        COALESCE(identity_context.financial_register_allocation_unambiguous, 0)
+            AS financial_register_allocation_unambiguous,
+        COALESCE(register_context.financial_register_row_count, 0)
+            AS financial_register_row_count,
+        COALESCE(register_context.financial_register_charge_sum, 0)
+            AS financial_register_charge_sum,
+        COALESCE(register_context.financial_register_payment_sum, 0)
+            AS financial_register_payment_sum,
+        COALESCE(register_context.financial_register_signed_debt, 0)
+            AS financial_register_signed_debt,
+        COALESCE(register_context.financial_register_charge_row_count, 0)
+            AS financial_register_charge_row_count,
+        COALESCE(register_context.financial_register_payment_row_count, 0)
+            AS financial_register_payment_row_count,
+        register_context.financial_register_last_movement_datetime,
         COALESCE(branch_context.sale_branch_raw, wp.raw_club) AS sale_branch_raw,
         COALESCE(
             branch_context.sale_branch,
@@ -307,6 +477,10 @@ with_sale_doc_context AS (
     FROM with_payment AS wp
     LEFT JOIN #membership_sale_line_context AS line_context
       ON line_context.subscription_ref = wp.subscription_ref
+    LEFT JOIN #membership_sale_identity_context AS identity_context
+      ON identity_context.subscription_ref = wp.subscription_ref
+    LEFT JOIN #membership_register_financial_context AS register_context
+      ON register_context.subscription_ref = wp.subscription_ref
     LEFT JOIN #membership_sale_branch_context AS branch_context
       ON branch_context.subscription_ref = wp.subscription_ref
     LEFT JOIN #membership_document131_context AS refund_context
@@ -486,6 +660,27 @@ SELECT
     matched_payment_match_source,
     CAST(COALESCE(membership_sale_line_amount, 0) AS decimal(15, 2)) AS membership_sale_line_amount,
     membership_sale_line_count,
+    membership_sale_nonzero_line_count,
+    financial_sale_document_count,
+    financial_sale_membership_count,
+    financial_sale_total_line_count,
+    financial_sale_nonzero_line_count,
+    CAST(COALESCE(financial_sale_total_line_amount, 0) AS decimal(15, 2))
+        AS financial_sale_total_line_amount,
+    financial_sale_document_number,
+    financial_sale_document_datetime,
+    financial_sale_document_ref,
+    financial_register_allocation_unambiguous,
+    financial_register_row_count,
+    CAST(COALESCE(financial_register_charge_sum, 0) AS decimal(15, 2))
+        AS financial_register_charge_sum,
+    CAST(COALESCE(financial_register_payment_sum, 0) AS decimal(15, 2))
+        AS financial_register_payment_sum,
+    CAST(COALESCE(financial_register_signed_debt, 0) AS decimal(15, 2))
+        AS financial_register_signed_debt,
+    financial_register_charge_row_count,
+    financial_register_payment_row_count,
+    financial_register_last_movement_datetime,
     document131_refund_count,
     document131_posted_unmarked_refund_count,
     @cutoff_at AS cutoff_at

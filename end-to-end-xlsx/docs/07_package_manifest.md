@@ -7,26 +7,34 @@
 
 | Файл | Когда нужен |
 | --- | --- |
-| `scripts/run_pipeline.py` | полный прогон от восстановленной базы до 9 или 10 XLSX по конфигу |
+| `scripts/run_pipeline.py` | полный прогон от восстановленной базы до итоговых XLSX по конфигу |
+| `scripts/compare_manager_debt_to_register.py` | контрольная сверка регистрового баланса и новой выгрузки с менеджерским XLSX |
+| `scripts/build_manager_debt_delivery.py` | исторический post-processing менеджерского XLSX для problem1–3 |
+| `scripts/validate_manager_debt_delivery.py` | историческая проверка manager-based поставки и fallback-правила |
+| `scripts/build_fallback_membership_subset.py` | историческая отдельная таблица 62 fallback-договоров |
 | `scripts/verify_backup.py` | проверка размера и SHA-256 `.bak` |
 | `scripts/clean_runtime.py` | удаление `work`, `logs` и `output` перед передачей папки |
 | `scripts/create_release_zip.py` | создание ZIP без данных клиентов и секретов |
 
-Для обычной выгрузки запускайте только `run_pipeline.py`.
+Для обычной выгрузки запускайте только `run_pipeline.py`. В актуальном конфиге
+он сам рассчитывает деньги из регистра и запускает менеджерскую сверку.
 
 ## Настройки
 
 | Файл | Что в нём лежит |
 | --- | --- |
 | `config/pipeline.yml` | адрес SQL Server, метаданные backup, единый cutoff и имя output |
-| `config/pipeline_manager_fixes_20260630.yml` | актуальная 10-файловая сборка с owner-audit и problem4 |
+| `config/pipeline_register_debts_20260630.yml` | актуальная 7-файловая сборка с долгами из `_AccumRg3305` |
+| `config/pipeline_manager_fixes_20260630.yml` | историческая 10-файловая сборка до исправления долгов |
+| `config/manager_debt_resolution_20260630.yml` | историческая manager-based поставка с fallback `12000 / 12000 / 0` |
 | `config/membership_template_canonicalization.csv` | явные варианты конфликтующих шаблонов абонементов |
 | `config/product_reclassification_decisions.csv` | решения по спорным продуктам |
 | `config/managers_by_club.yml` | список менеджеров каждого клуба |
 | `config/branches_by_club.yml` | перевод внутреннего названия клуба в филиал Fitbase |
 
 При переносе на другую машину обычно меняется только SQL-блок в
-`pipeline.yml`. Остальные три файла влияют на бизнес-результат.
+`pipeline_register_debts_20260630.yml`. Остальные настройки влияют на
+бизнес-результат.
 
 ## SQL-запросы
 
@@ -83,7 +91,7 @@ templates/services_required.xlsx
 | Файл | Что делает |
 | --- | --- |
 | `scripts/database.py` | подключается к SQL Server, разбивает SQL по `GO` и пишет CSV/TSV |
-| `scripts/build_delivery.py` | собирает 6 обычных и 3/4 проблемных XLSX; problem4 включается конфигом |
+| `scripts/build_delivery.py` | собирает 6 обычных XLSX; при закрытых problem1–3 оставляет только problem4 |
 | `scripts/validate_delivery.py` | проверяет готовую папку перед передачей |
 
 ## Контрольные данные
@@ -97,6 +105,11 @@ templates/services_required.xlsx
 - четыре допустимых филиала.
 
 Это не выгрузка клиентов. Персональных данных в `reference` нет.
+
+В `reference/expected_20260630_register_debts.yml` закреплены состав актуальной
+семифайловой поставки, ожидаемое число строк и единственный problem4. Сам
+менеджерский XLSX не является источником контрольных значений поставки:
+пайплайн использует его только для validation-only сверки 274 продаж.
 
 ## Чего в ZIP быть не должно
 

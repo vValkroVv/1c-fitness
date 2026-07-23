@@ -45,6 +45,7 @@ STEPS = [
     "problem_xlsx",
     "delivery",
     "validate",
+    "finance_validate",
 ]
 
 STAGE_TABLES = [
@@ -163,13 +164,16 @@ class Pipeline:
         delivery_name = safe_path_component(
             self.run_config["delivery_name"], "run.delivery_name"
         )
+        delivery_base = as_abs(
+            str(self.delivery_config.get("output_base", "output"))
+        )
         self.work_root = ROOT / "work" / work_name
         self.raw_root = self.work_root / "raw"
         self.owner_root = self.work_root / "owner"
         self.imports_root = self.work_root / "imports"
         self.reports_root = self.work_root / "reports"
         self.logs_root = ROOT / "logs" / work_name
-        self.delivery_root = ROOT / "output" / delivery_name
+        self.delivery_root = delivery_base / delivery_name
         self.pipeline_log = self.logs_root / "pipeline.log"
         self.status_path = self.work_root / "status.json"
         if self.args.resume and self.status_path.is_file():
@@ -279,12 +283,21 @@ class Pipeline:
         self, db: DatabaseClient, *, table: str, check_name: str
     ) -> None:
         datetime_columns = {
-            "membership_import_facts": ("sale_datetime", "matched_payment_datetime"),
+            "membership_import_facts": (
+                "sale_datetime",
+                "financial_sale_document_datetime",
+                "matched_payment_datetime",
+                "financial_register_last_movement_datetime",
+            ),
             "services_import_facts": ("sale_datetime", "payment_datetime"),
         }
         if table not in datetime_columns:
             raise ValueError(f"Unsupported cutoff-check table: {table}")
-        sale_column, payment_column = datetime_columns[table]
+        checked_columns = datetime_columns[table]
+        maximum_expressions = ",\n                ".join(
+            f"CONVERT(varchar(19), MAX({column}), 120)"
+            for column in checked_columns
+        )
         row = db.query_rows(
             f"""
             SELECT
@@ -292,8 +305,7 @@ class Pipeline:
                 COUNT_BIG(cutoff_at),
                 CONVERT(varchar(19), MIN(cutoff_at), 120),
                 CONVERT(varchar(19), MAX(cutoff_at), 120),
-                CONVERT(varchar(19), MAX({sale_column}), 120),
-                CONVERT(varchar(19), MAX({payment_column}), 120)
+                {maximum_expressions}
             FROM fitbase_part2.{table}
             """
         )[0]
@@ -301,21 +313,21 @@ class Pipeline:
         non_null_cutoff_count = int(row[1])
         minimum = str(row[2] or "")
         maximum = str(row[3] or "")
-        maximum_sale = str(row[4] or "")
-        maximum_payment = str(row[5] or "")
+        maxima = {
+            column: str(row[4 + index] or "")
+            for index, column in enumerate(checked_columns)
+        }
         expected = str(self.run_config["cutoff_at"])
         if (
             count <= 0
             or non_null_cutoff_count != count
             or minimum != expected
             or maximum != expected
-            or (maximum_sale and maximum_sale > expected)
-            or (maximum_payment and maximum_payment > expected)
+            or any(value and value > expected for value in maxima.values())
         ):
             raise RuntimeError(
                 f"{check_name} cutoff mismatch: rows={count}, min={minimum!r}, "
-                f"max={maximum!r}, max_sale={maximum_sale!r}, "
-                f"max_payment={maximum_payment!r}, expected={expected!r}"
+                f"max={maximum!r}, maxima={maxima!r}, expected={expected!r}"
             )
         self._record_cutoff_check(
             check_name,
@@ -324,8 +336,7 @@ class Pipeline:
                 "non_null_cutoff_rows": non_null_cutoff_count,
                 "minimum_cutoff_at": minimum,
                 "maximum_cutoff_at": maximum,
-                "maximum_sale_datetime": maximum_sale,
-                "maximum_payment_datetime": maximum_payment,
+                "maximum_source_datetimes": maxima,
                 "expected_cutoff_at": expected,
                 "verdict": "PASS",
             },
@@ -807,12 +818,23 @@ class Pipeline:
         ).strip()
         if problem4_contract_id:
             command.extend(["--problem4-contract-id", problem4_contract_id])
+        problem4_source = str(
+            self.delivery_config.get("problem4_source", "")
+        ).strip()
+        if problem4_source:
+            command.extend(["--problem4-source", as_abs(problem4_source)])
+        if bool(self.delivery_config.get("financial_problem_groups_resolved", False)):
+            command.append("--financial-problem-groups-resolved")
         self.run_command(
             "delivery",
             command,
         )
 
     def validate(self) -> None:
+        delivery_reports = self.delivery_root / "reports"
+        delivery_reports.mkdir(parents=True, exist_ok=True)
+        structural_report = delivery_reports / "structural_validation.md"
+        structural_json = delivery_reports / "structural_validation.json"
         command: list[str | Path] = [
             sys.executable,
             SCRIPTS / "validate_delivery.py",
@@ -821,9 +843,9 @@ class Pipeline:
             "--expected",
             as_abs(self.validation_config["expected_manifest"]),
             "--report",
-            self.reports_root / "validation_report.md",
+            structural_report,
             "--json-report",
-            self.reports_root / "validation_report.json",
+            structural_json,
         ]
         enforce = (
             bool(self.validation_config.get("enforce_reference_counts", True))
@@ -832,6 +854,61 @@ class Pipeline:
         if enforce:
             command.append("--enforce-reference-counts")
         self.run_command("delivery_validate", command)
+        shutil.copy2(structural_report, self.reports_root / "validation_report.md")
+        shutil.copy2(structural_json, self.reports_root / "validation_report.json")
+
+    def finance_validate(self) -> None:
+        manager_debt_xlsx = str(
+            self.validation_config.get("manager_debt_xlsx", "")
+        ).strip()
+        if not manager_debt_xlsx:
+            self.log("finance_validate: skipped (validation.manager_debt_xlsx absent)")
+            return
+        reports = self.delivery_root / "reports"
+        reports.mkdir(parents=True, exist_ok=True)
+        membership_name = (
+            f"fitbase_import_abonementy_clientov_{self.date_stamp}.xlsx"
+        )
+        self.run_command(
+            "finance_validate",
+            [
+                sys.executable,
+                SCRIPTS / "compare_manager_debt_to_register.py",
+                "--manager-xlsx",
+                as_abs(manager_debt_xlsx),
+                "--membership-rows-csv",
+                self.imports_root / "staging" / "membership_import_rows.csv",
+                "--delivery-membership-xlsx",
+                self.delivery_root / membership_name,
+                "--output-xlsx",
+                reports
+                / f"manager_debt_comparison_274_cases_{self.date_stamp}.xlsx",
+                "--report",
+                reports / "manager_debt_comparison.md",
+                "--json-report",
+                reports / "manager_debt_comparison.json",
+                "--coverage-csv",
+                reports / "financial_source_coverage.csv",
+                "--cutoff-at",
+                str(self.run_config["cutoff_at"]),
+                "--expected-manager-sales",
+                str(
+                    int(
+                        self.validation_config.get(
+                            "manager_debt_expected_sales", 274
+                        )
+                    )
+                ),
+                "--expected-paid-mismatches",
+                str(
+                    int(
+                        self.validation_config.get(
+                            "manager_debt_expected_paid_mismatches", 63
+                        )
+                    )
+                ),
+            ],
+        )
 
     def run(self) -> None:
         self.prepare_directories()
@@ -885,6 +962,8 @@ class Pipeline:
                     self.delivery()
                 elif step == "validate":
                     self.validate()
+                elif step == "finance_validate":
+                    self.finance_validate()
                 self.mark_complete(step)
                 self.log(f"DONE step={step}")
         except Exception:

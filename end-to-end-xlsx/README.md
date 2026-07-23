@@ -1,21 +1,38 @@
-# Выгрузка 10 XLSX из backup Fitness
+# Выгрузка XLSX из backup Fitness
 
-Эта папка собирает десять файлов для импорта в Fitbase из базы 1С Fitness.
-Результат — проверенная выгрузка из `Fitnes-30-06-26.bak` с единым
-срезом `2026-06-30 23:27:03`: шесть обычных XLSX и четыре отдельных файла с
-договорами, которые нужно разобрать вручную. Четвёртый problem-файл содержит
-только договор `151350`, для которого регистр даёт остаток `0`, а интерфейс 1С
-показывает `остаток (резерв) 8`.
+Эта папка собирает семь файлов для импорта в Fitbase из базы 1С Fitness.
+Актуальная выгрузка из `Fitnes-30-06-26.bak` построена на едином срезе
+`2026-06-30 23:27:03`: шесть обычных XLSX и один отдельный problem4 XLSX.
+
+Долги problem1–3 теперь рассчитываются прямо из регистра взаиморасчётов 1С
+`_AccumRg3305` на cutoff backup. Внешний менеджерский XLSX используется только
+как контрольный отчёт и не поставляет значения в итоговую выгрузку. Актуальный
+результат:
+
+```text
+../output/20260630_delivery_register_debts/
+```
+
+В нём все прежние problem1–3 возвращены в основной файл абонементов. Отдельно
+остаётся только договор `151350`: его проблема относится к остаткам посещений,
+а не к деньгам.
 
 Если вы открыли проект впервые, разбираться во всех номерных скриптах не надо.
 Для обычного запуска нужны три вещи:
 
-1. настройки подключения в `config/pipeline_manager_fixes_20260630.yml`;
-2. команда `python scripts/run_pipeline.py --config config/pipeline_manager_fixes_20260630.yml`;
-3. готовые файлы в `output/20260630_delivery_manager_fixes_v2/`.
+1. настройки подключения в `config/pipeline_register_debts_20260630.yml`;
+2. команда `python scripts/run_pipeline.py --config config/pipeline_register_debts_20260630.yml`;
+3. готовые файлы в `output/20260630_delivery_register_debts/`.
 
 Я специально оставил один нормальный вход: `run_pipeline.py`. Остальные
 скрипты запускает он сам, вручную их обычно не трогают.
+
+После сборки пайплайн сам сравнивает все 274 продажи из менеджерского файла с
+регистровым балансом и итоговым XLSX. Отдельно эту проверку можно повторить так:
+
+```shell
+.venv/bin/python scripts/compare_manager_debt_to_register.py --help
+```
 
 ## Что лежит в папке
 
@@ -26,7 +43,7 @@ end-to-end-xlsx/
 │
 ├── config/                       настройки и согласованные бизнес-правила
 │   ├── pipeline.yml              историческая 9-файловая full-cutoff сборка
-│   ├── pipeline_manager_fixes_20260630.yml  актуальная 10-файловая сборка
+│   ├── pipeline_register_debts_20260630.yml  актуальная 7-файловая сборка
 │   ├── membership_template_canonicalization.csv  явные решения по шаблонам
 │   ├── branches_by_club.yml      соответствие клуба филиалу Fitbase
 │   ├── managers_by_club.yml      менеджеры по клубам
@@ -56,7 +73,7 @@ end-to-end-xlsx/
 ### Что можно менять
 
 Для запуска на восстановленной копии того же backup обычно меняют только блок
-`sql` в `config/pipeline_manager_fixes_20260630.yml` и задают пароль через
+`sql` в `config/pipeline_register_debts_20260630.yml` и задают пароль через
 переменную среды.
 
 Единый `cutoff_at` берётся из
@@ -70,12 +87,12 @@ end-to-end-xlsx/
 
 | Что нужно | Где лежит |
 | --- | --- |
-| готовые XLSX | `output/20260630_delivery_manager_fixes_v2/` |
-| итоговый отчёт | `work/20260630_manager_fixes_v2/reports/validation_report.md` |
-| отчёт о manager fixes и остаточных рисках | `../docs/20260630_manager_fixes_v2_rebuild_20260720.md` |
-| последний выполненный этап | `work/20260630_manager_fixes_v2/status.json` |
-| общий лог | `logs/20260630_manager_fixes_v2/pipeline.log` |
-| лог конкретного этапа | `logs/20260630_manager_fixes_v2/<имя_этапа>.log` |
+| готовые XLSX | `../output/20260630_delivery_register_debts/` |
+| структурная проверка | `../output/20260630_delivery_register_debts/reports/structural_validation.md` |
+| сверка 274 продаж | `../output/20260630_delivery_register_debts/reports/manager_debt_comparison.md` |
+| последний выполненный этап | `work/20260630_register_debts/status.json` |
+| общий лог | `logs/20260630_register_debts/pipeline.log` |
+| лог конкретного этапа | `logs/20260630_register_debts/<имя_этапа>.log` |
 
 ## Что требуется на входе
 
@@ -123,7 +140,7 @@ Python-библиотеку `python-tds`.
 
 ### 2. Указать SQL Server
 
-Откройте `config/pipeline_manager_fixes_20260630.yml` и заполните блок `sql`:
+Откройте `config/pipeline_register_debts_20260630.yml` и заполните блок `sql`:
 
 ```yaml
 sql:
@@ -159,14 +176,14 @@ Linux или macOS:
 
 ```shell
 .venv/bin/python scripts/run_pipeline.py \
-  --config config/pipeline_manager_fixes_20260630.yml
+  --config config/pipeline_register_debts_20260630.yml
 ```
 
 Windows PowerShell:
 
 ```powershell
 .venv\Scripts\python.exe scripts\run_pipeline.py `
-  --config config\pipeline_manager_fixes_20260630.yml
+  --config config\pipeline_register_debts_20260630.yml
 ```
 
 Адрес базы можно передать прямо в командной строке. Это удобно, если не хочется
@@ -174,7 +191,7 @@ Windows PowerShell:
 
 ```shell
 python scripts/run_pipeline.py \
-  --config config/pipeline_manager_fixes_20260630.yml \
+  --config config/pipeline_register_debts_20260630.yml \
   --server sql.example.local \
   --port 1433 \
   --database FitnessRestored \
@@ -185,12 +202,13 @@ python scripts/run_pipeline.py \
 
 ```text
 delivery_validate: verdict=PASS
-PIPELINE PASS delivery=.../output/20260630_delivery_manager_fixes_v2
+finance_validate: verdict=PASS
+PIPELINE PASS delivery=.../output/20260630_delivery_register_debts
 ```
 
 Если `PASS` нет, файлы заказчику передавать рано. Сначала откройте
-`work/20260630_manager_fixes_v2/status.json`, затем лог упавшего этапа в
-`logs/20260630_manager_fixes_v2/`.
+`work/20260630_register_debts/status.json`, затем лог упавшего этапа в
+`logs/20260630_register_debts/`.
 
 ## Какие файлы получатся
 
@@ -198,18 +216,14 @@ PIPELINE PASS delivery=.../output/20260630_delivery_manager_fixes_v2
 | --- | ---: |
 | `fitbase_active_clients_import_zayavki_20260630_all_funnels.xlsx` | 39 550 |
 | `fitbase_active_clients_plastic_cards_20260630_all_funnels.xlsx` | 11 024 |
-| `fitbase_import_abonementy_clientov_20260630.xlsx` | 121 207 |
+| `fitbase_import_abonementy_clientov_20260630.xlsx` | 121 461 |
 | `fitbase_import_shablony_abonementov_20260630.xlsx` | 119 |
 | `fitbase_import_shablony_uslug_20260630.xlsx` | 51 |
 | `fitbase_import_uslugi_clientov_20260630.xlsx` | 522 |
-| `problem_1_no_payment_cash_10_cases_20260630.xlsx` | 10 |
-| `problem_2_zero_price_direct_full_41_cases_20260630.xlsx` | 41 |
-| `problem_3_non_named_payment_left_203_cases_20260630.xlsx` | 203 |
 | `problem_4_subrent_visits_left_contract_151350_1_case_20260630.xlsx` | 1 |
 
-В чистом файле абонементов нет 255 договоров из четырёх проблемных файлов. Эти
-договоры не потеряны: они лежат рядом отдельными XLSX, чтобы их можно было
-разобрать вручную.
+Все 254 договора прежних problem1–3 находятся в основном файле абонементов.
+Отдельно исключён только problem4-договор `00000151350`.
 
 ## Проверка исходного backup
 

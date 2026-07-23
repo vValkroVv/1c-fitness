@@ -267,24 +267,30 @@ def build(args: argparse.Namespace) -> None:
             raise FileNotFoundError(source)
         shutil.copy2(source, output_dir / name)
 
-    base_problem_sources = [
-        one_match(
-            imports_dir, f"active_problem_1_no_payment_cash_*_cases_{date_stamp}.xlsx"
-        ),
-        one_match(
-            imports_dir,
-            f"active_problem_2_zero_price_direct_full_*_cases_{date_stamp}.xlsx",
-        ),
-        one_match(
-            imports_dir,
-            f"active_problem_3_non_named_payment_left_*_cases_{date_stamp}.xlsx",
-        ),
-    ]
+    base_problem_sources = (
+        []
+        if args.financial_problem_groups_resolved
+        else [
+            one_match(
+                imports_dir,
+                f"active_problem_1_no_payment_cash_*_cases_{date_stamp}.xlsx",
+            ),
+            one_match(
+                imports_dir,
+                f"active_problem_2_zero_price_direct_full_*_cases_{date_stamp}.xlsx",
+            ),
+            one_match(
+                imports_dir,
+                f"active_problem_3_non_named_payment_left_*_cases_{date_stamp}.xlsx",
+            ),
+        ]
+    )
     problem_sets = [read_problem_contracts(path) for path in base_problem_sources]
     problem_labels = [path.name for path in base_problem_sources]
 
     problem4_contract_id = ""
     problem4_path: Path | None = None
+    problem4_source: Path | None = None
     if args.problem4_contract_id:
         problem4_contract_id = canonical_contract_id(args.problem4_contract_id)
         short_contract_id = problem4_contract_id.lstrip("0") or "0"
@@ -294,8 +300,18 @@ def build(args: argparse.Namespace) -> None:
         )
         problem_sets.append({problem4_contract_id})
         problem_labels.append(problem4_path.name)
+        if args.problem4_source:
+            problem4_source = as_abs(args.problem4_source)
+            if not problem4_source.is_file():
+                raise FileNotFoundError(problem4_source)
+            source_contracts = read_problem_contracts(problem4_source)
+            if source_contracts != {problem4_contract_id}:
+                raise RuntimeError(
+                    "Configured problem4 source contract set differs from "
+                    f"{problem4_contract_id}: {sorted(source_contracts)}"
+                )
 
-    problem_ids = set().union(*problem_sets)
+    problem_ids = set().union(*problem_sets) if problem_sets else set()
     summed = sum(len(values) for values in problem_sets)
     if len(problem_ids) != summed:
         raise RuntimeError(
@@ -309,7 +325,11 @@ def build(args: argparse.Namespace) -> None:
     full_membership = imports_dir / membership_name
     if not full_membership.is_file():
         raise FileNotFoundError(full_membership)
-    capture_ids = {problem4_contract_id} if problem4_contract_id else set()
+    capture_ids = (
+        {problem4_contract_id}
+        if problem4_contract_id and problem4_source is None
+        else set()
+    )
     removed, membership_headers, captured_rows = filter_membership_workbook(
         full_membership,
         output_dir / membership_name,
@@ -317,7 +337,9 @@ def build(args: argparse.Namespace) -> None:
         membership_template,
         capture_ids,
     )
-    if problem4_path is not None:
+    if problem4_path is not None and problem4_source is not None:
+        shutil.copy2(problem4_source, problem4_path)
+    elif problem4_path is not None:
         write_single_contract_problem_workbook(
             problem4_path,
             membership_headers,
@@ -337,6 +359,8 @@ def build(args: argparse.Namespace) -> None:
                 f"- problem XLSX: `{len(problem_sets)}`",
                 f"- unique problem contract_id: `{len(problem_ids)}`",
                 f"- rows removed from clean membership XLSX: `{removed}`",
+                "- financial problem groups 1-3 resolved in clean membership: "
+                f"`{'yes' if args.financial_problem_groups_resolved else 'no'}`",
                 "",
                 "## Problem groups",
                 "",
@@ -374,6 +398,22 @@ def parse_args() -> argparse.Namespace:
         help=(
             "Optional contract ID for a one-row problem4 workbook; short numeric "
             "IDs are zero-padded to the membership XLSX convention."
+        ),
+    )
+    parser.add_argument(
+        "--problem4-source",
+        help=(
+            "Optional previously approved one-row problem4 XLSX to copy "
+            "byte-for-byte instead of regenerating it."
+        ),
+    )
+    parser.add_argument(
+        "--financial-problem-groups-resolved",
+        action="store_true",
+        help=(
+            "Keep former financial problem groups 1-3 in the clean membership "
+            "workbook. Use only when their money fields were rebuilt from an "
+            "authoritative cutoff-aware source."
         ),
     )
     return parser.parse_args()

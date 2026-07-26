@@ -1,11 +1,15 @@
-# Full 30.06.2026 delivery with money rebuilt from the 1C accounting register.
+# Targeted correction of customer-service end dates for the 30.06.2026 backup.
+#
+# Run through services_xlsx, then assemble the immutable final folder with
+# scripts/build_service_end_date_delivery.py so every other accepted XLSX is
+# copied byte-for-byte from 20260630_delivery_register_debts.
 run:
   date_stamp: "20260630"
   cutoff_date: "2026-06-30"
   cutoff_at: "2026-06-30 23:27:03"
   backup_finish_at: "2026-06-30 23:27:03"
-  work_name: "20260630_register_debts"
-  delivery_name: "20260630_delivery_register_debts"
+  work_name: "20260630_service_end_dates_fixed_20260727"
+  delivery_name: "20260630_delivery_service_end_dates_fixed_20260727"
 
 sql:
   server: "127.0.0.1"
@@ -23,7 +27,6 @@ validation:
   expected_manifest: "reference/expected_20260630_register_debts.yml"
   enforce_reference_counts: true
   owner_change_audit_sql: "sql/audit_owner_change_20260630.sql"
-  # Validation-only benchmark. It never supplies delivery values.
   manager_debt_xlsx: "../Задолженности клиентов 30.06.2026.xlsx"
   manager_debt_expected_sales: 274
   manager_debt_expected_paid_mismatches: 63
@@ -35,13 +38,8 @@ validation:
 
 delivery:
   output_base: "../output"
-  # Financial problem groups 1-3 are now resolved by the cutoff-aware
-  # _AccumRg3305 balance and must remain in the clean membership workbook.
   financial_problem_groups_resolved: true
-  # Visits-left semantics for this one future-start subrent stay separate.
   problem4_contract_id: "151350"
-  # The row is captured from the freshly built full membership workbook, so a
-  # clean run does not depend on any prior delivery or on the manager XLSX.
 
 backup:
   file_name: "Fitnes-30-06-26.bak"

@@ -776,9 +776,27 @@ class Pipeline:
                 TEMPLATES / "service_templates.xlsx",
             ],
         )
+        regression_args: list[str] = []
+        for config_key, option in [
+            ("services_expected_real_end_rows", "--expected-real-end-rows"),
+            ("services_expected_fallback_rows", "--expected-fallback-rows"),
+            ("services_expected_live_rows", "--expected-live-rows"),
+            ("services_expected_case_service_id", "--expected-case-service-id"),
+            ("services_expected_case_end_date", "--expected-case-end-date"),
+        ]:
+            value = self.validation_config.get(config_key)
+            if value not in (None, ""):
+                regression_args.extend([option, str(value)])
         self.run_command(
             "services_xlsx_validate",
-            [sys.executable, SCRIPTS / "24_validate_services_import_xlsx.py", *common],
+            [
+                sys.executable,
+                SCRIPTS / "24_validate_services_import_xlsx.py",
+                *common,
+                "--cutoff-date",
+                str(self.run_config["cutoff_date"]),
+                *regression_args,
+            ],
         )
 
     def problem_xlsx(self) -> None:

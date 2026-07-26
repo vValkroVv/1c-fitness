@@ -26,6 +26,7 @@ if [[ ! "$BACKUP_FINISH_AT" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}\ [0-9]{2}:[0-9]{2}:[0
 fi
 
 EXPECTED_DATE_STAMP="${BACKUP_FINISH_AT:0:10}"
+CUTOFF_DATE="${BACKUP_FINISH_AT:0:10}"
 EXPECTED_DATE_STAMP="${EXPECTED_DATE_STAMP//-/}"
 DATE_STAMP="${DATE_STAMP:-$EXPECTED_DATE_STAMP}"
 LOG_ROOT="${LOG_ROOT:-logs/${EXPECTED_DATE_STAMP}_services}"
@@ -82,6 +83,7 @@ SELECT
     service_doc_holder_id,
     REPLACE(REPLACE(REPLACE(service_doc_holder_fio, CHAR(9), N' '), CHAR(10), N' '), CHAR(13), N' ') AS service_doc_holder_fio,
     CONVERT(varchar(10), service_start_date, 120) AS service_start_date,
+    CONVERT(varchar(10), service_register_start_date, 120) AS service_register_start_date,
     CONVERT(varchar(10), service_end_date, 120) AS service_end_date,
     service_doc_duration_value,
     service_doc_posted,
@@ -137,4 +139,5 @@ python3 scripts/23_build_services_import_xlsx.py \
 python3 scripts/24_validate_services_import_xlsx.py \
   --source-output-dir "$SOURCE_OUTPUT_ROOT" \
   --output-dir "$OUTPUT_ROOT" \
-  --date-stamp "$DATE_STAMP"
+  --date-stamp "$DATE_STAMP" \
+  --cutoff-date "$CUTOFF_DATE"

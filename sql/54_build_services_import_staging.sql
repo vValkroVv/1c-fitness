@@ -10,6 +10,7 @@ IF OBJECT_ID(N'fitbase_part2.services_import_facts', N'U') IS NOT NULL
 
 DROP TABLE IF EXISTS #service_list;
 DROP TABLE IF EXISTS #service_products;
+DROP TABLE IF EXISTS #service_register_cardinality;
 DROP TABLE IF EXISTS #service_sales;
 DROP TABLE IF EXISTS #linked_service_docs;
 DROP TABLE IF EXISTS #balance_by_doc;
@@ -92,6 +93,16 @@ CREATE INDEX IX_tmp_service_products_product_ref
     ON #service_products(product_ref_bin);
 
 SELECT
+    rg._Fld3061RRef AS linked_service_doc_ref_bin,
+    COUNT_BIG(*) AS register_row_count
+INTO #service_register_cardinality
+FROM dbo._InfoRg3060 AS rg
+GROUP BY rg._Fld3061RRef;
+
+CREATE UNIQUE CLUSTERED INDEX IX_tmp_service_register_cardinality
+    ON #service_register_cardinality(linked_service_doc_ref_bin);
+
+SELECT
     sp.service_order,
     sp.service_name,
     sp.product_ref,
@@ -170,14 +181,27 @@ SELECT
     CONVERT(varchar(32), sd._Fld9152RRef, 2) AS service_doc_holder_ref,
     holder._Code AS service_doc_holder_id,
     holder._Description AS service_doc_holder_fio,
+    COALESCE(rc.register_row_count, 0) AS service_register_row_count,
+    -- Keep the established activation source so a targeted end-date correction
+    -- does not alter already accepted activation cells.
     CASE
         WHEN sd._Fld1450 > '3000-01-01' THEN CONVERT(date, DATEADD(year, -2000, sd._Fld1450))
         WHEN sd._Fld1450 > '1900-01-01' THEN CONVERT(date, sd._Fld1450)
         ELSE NULL
     END AS service_start_date_raw,
+    -- The register start is used only to prove that a service is live on the
+    -- cutoff; it is deliberately not written over the accepted XLSX value.
     CASE
-        WHEN sd._Fld1482 > '3000-01-01' THEN CONVERT(date, DATEADD(year, -2000, sd._Fld1482))
-        WHEN sd._Fld1482 > '1900-01-01' THEN CONVERT(date, sd._Fld1482)
+        WHEN rg._Fld3063 > '3000-01-01' THEN CONVERT(date, DATEADD(year, -2000, rg._Fld3063))
+        WHEN rg._Fld3063 > '1900-01-01' THEN CONVERT(date, rg._Fld3063)
+        ELSE NULL
+    END AS service_register_start_date_raw,
+    -- The end date shown by 1C in the service/package card is maintained in
+    -- InfoRg3060. Document163._Fld1482 is normally the technical
+    -- 2001-01-01 sentinel and must not be exported as the package end date.
+    CASE
+        WHEN rg._Fld3064 > '3000-01-01' THEN CONVERT(date, DATEADD(year, -2000, rg._Fld3064))
+        WHEN rg._Fld3064 > '1900-01-01' THEN CONVERT(date, rg._Fld3064)
         ELSE NULL
     END AS service_end_date_raw,
     CAST(COALESCE(sd._Fld1481, 0) AS decimal(15, 2)) AS service_doc_duration_value,
@@ -204,6 +228,8 @@ LEFT JOIN dbo._Document163 AS sd
   ON sd._IDRRef = CASE WHEN l._Fld1148_RTRef = 0x000000A3 THEN l._Fld1148_RRRef ELSE NULL END
 LEFT JOIN dbo._Reference64 AS holder
   ON holder._IDRRef = sd._Fld9152RRef
+LEFT JOIN #service_register_cardinality AS rc
+  ON rc.linked_service_doc_ref_bin = sd._IDRRef
 LEFT JOIN dbo._InfoRg3060 AS rg
   ON rg._Fld3061RRef = sd._IDRRef
 WHERE d._Posted = 0x01
@@ -219,6 +245,16 @@ CREATE INDEX IX_tmp_service_sales_linked_doc
     ON #service_sales(linked_service_doc_ref_bin);
 CREATE INDEX IX_tmp_service_sales_name
     ON #service_sales(service_order, service_name);
+
+IF EXISTS (
+    SELECT 1
+    FROM #service_sales
+    WHERE linked_service_doc_ref_bin IS NOT NULL
+      AND service_register_row_count <> 1
+)
+    THROW 51000,
+        'Every linked target service document must match exactly one InfoRg3060 row.',
+        1;
 
 SELECT DISTINCT linked_service_doc_ref_bin
 INTO #linked_service_docs
@@ -352,6 +388,10 @@ SELECT
     ss.service_doc_holder_id,
     ss.service_doc_holder_fio,
     CASE WHEN ss.service_start_date_raw <= '2001-01-02' THEN NULL ELSE ss.service_start_date_raw END AS service_start_date,
+    CASE
+        WHEN ss.service_register_start_date_raw <= '2001-01-02' THEN NULL
+        ELSE ss.service_register_start_date_raw
+    END AS service_register_start_date,
     CASE WHEN ss.service_end_date_raw <= '2001-01-02' THEN NULL ELSE ss.service_end_date_raw END AS service_end_date,
     ss.service_doc_duration_value,
     ss.service_doc_posted,
@@ -377,7 +417,9 @@ SELECT
     CASE WHEN ss.linked_service_doc_ref IS NOT NULL THEN 1 ELSE 0 END AS has_linked_service_doc,
     CASE WHEN COALESCE(b.signed_balance, 0) > 0 THEN 1 ELSE 0 END AS is_active_by_balance,
     CASE
-        WHEN ss.service_end_date_raw > '2001-01-02'
+        WHEN ss.service_register_start_date_raw > '2001-01-02'
+         AND ss.service_register_start_date_raw <= @cutoff_date
+         AND ss.service_end_date_raw > '2001-01-02'
          AND ss.service_end_date_raw >= @cutoff_date
          AND ss.sale_datetime <= @cutoff_at THEN 1
         ELSE 0
@@ -387,7 +429,9 @@ SELECT
          AND (
              COALESCE(b.signed_balance, 0) > 0
              OR (
-                 ss.service_end_date_raw > '2001-01-02'
+                 ss.service_register_start_date_raw > '2001-01-02'
+                 AND ss.service_register_start_date_raw <= @cutoff_date
+                 AND ss.service_end_date_raw > '2001-01-02'
                  AND ss.service_end_date_raw >= @cutoff_date
              )
          ) THEN 1

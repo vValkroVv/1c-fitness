@@ -10,22 +10,26 @@
 результат:
 
 ```text
-../output/20260630_delivery_register_debts/
+../output/20260630_delivery_service_end_dates_fixed_20260727/
 ```
 
 В нём все прежние problem1–3 возвращены в основной файл абонементов. Отдельно
 остаётся только договор `151350`: его проблема относится к остаткам посещений,
-а не к деньгам.
+а не к деньгам. В клиентских услугах дата окончания исправлена по
+`_InfoRg3060._Fld3064`; остальные XLSX сохранены побайтно.
 
 Если вы открыли проект впервые, разбираться во всех номерных скриптах не надо.
 Для обычного запуска нужны три вещи:
 
-1. настройки подключения в `config/pipeline_register_debts_20260630.yml`;
-2. команда `python scripts/run_pipeline.py --config config/pipeline_register_debts_20260630.yml`;
-3. готовые файлы в `output/20260630_delivery_register_debts/`.
+1. настройки подключения через `FITNESS_SQL_SERVER`, `FITNESS_SQL_PORT` и
+   `FITNESS_SQL_DATABASE`;
+2. команда `scripts/run_service_end_date_fix_20260630.sh`;
+3. готовые файлы в
+   `output/20260630_delivery_service_end_dates_fixed_20260727/`.
 
-Я специально оставил один нормальный вход: `run_pipeline.py`. Остальные
-скрипты запускает он сам, вручную их обычно не трогают.
+Таргетированный shell-скрипт вызывает основной `run_pipeline.py`, затем
+собирает immutable-поставку и проверяет, что вне `end_date` ничего не
+изменилось. Внутренние скрипты вручную запускать обычно не нужно.
 
 После сборки пайплайн сам сравнивает все 274 продажи из менеджерского файла с
 регистровым балансом и итоговым XLSX. Отдельно эту проверку можно повторить так:
@@ -44,6 +48,7 @@ end-to-end-xlsx/
 ├── config/                       настройки и согласованные бизнес-правила
 │   ├── pipeline.yml              историческая 9-файловая full-cutoff сборка
 │   ├── pipeline_register_debts_20260630.yml  актуальная 7-файловая сборка
+│   ├── pipeline_service_end_dates_20260630.yml  коррекция дат услуг
 │   ├── membership_template_canonicalization.csv  явные решения по шаблонам
 │   ├── branches_by_club.yml      соответствие клуба филиалу Fitbase
 │   ├── managers_by_club.yml      менеджеры по клубам
@@ -87,12 +92,13 @@ end-to-end-xlsx/
 
 | Что нужно | Где лежит |
 | --- | --- |
-| готовые XLSX | `../output/20260630_delivery_register_debts/` |
-| структурная проверка | `../output/20260630_delivery_register_debts/reports/structural_validation.md` |
-| сверка 274 продаж | `../output/20260630_delivery_register_debts/reports/manager_debt_comparison.md` |
-| последний выполненный этап | `work/20260630_register_debts/status.json` |
-| общий лог | `logs/20260630_register_debts/pipeline.log` |
-| лог конкретного этапа | `logs/20260630_register_debts/<имя_этапа>.log` |
+| готовые XLSX | `../output/20260630_delivery_service_end_dates_fixed_20260727/` |
+| структурная проверка | `../output/20260630_delivery_service_end_dates_fixed_20260727/reports/structural_validation.md` |
+| проверка дат услуг | `../output/20260630_delivery_service_end_dates_fixed_20260727/reports/services_validation_report.md` |
+| сверка 274 продаж | `../output/20260630_delivery_service_end_dates_fixed_20260727/reports/manager_debt_comparison.md` |
+| последний выполненный этап | `work/20260630_service_end_dates_fixed_20260727/status.json` |
+| общий лог | `logs/20260630_service_end_dates_fixed_20260727/pipeline.log` |
+| лог конкретного этапа | `logs/20260630_service_end_dates_fixed_20260727/<имя_этапа>.log` |
 
 ## Что требуется на входе
 

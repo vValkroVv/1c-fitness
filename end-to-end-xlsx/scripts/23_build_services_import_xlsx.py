@@ -20,6 +20,13 @@ from openpyxl.utils import get_column_letter
 
 ROOT = Path(__file__).resolve().parents[1]
 DATE_STAMP = "20260630"
+ACTIVE_MEMBERSHIP_FUNNEL = "Действующие абонементы"
+REGISTER_END_DATE_SOURCE = "dbo._InfoRg3060._Fld3064"
+DOCUMENT_ACTIVATION_DATE_SOURCE = "dbo._Document163._Fld1450"
+SALE_DATE_FALLBACK_SOURCE = "sale_date_conservative_fallback"
+PRESERVED_BLANK_ACTIVATION_SOURCE = (
+    "xlsx_activation_blank_preserved_register_start_available"
+)
 
 CLIENT_HEADERS = [
     "service_id",
@@ -108,6 +115,7 @@ FACT_FIELDS = [
     "service_doc_holder_id",
     "service_doc_holder_fio",
     "service_start_date",
+    "service_register_start_date",
     "service_end_date",
     "service_doc_duration_value",
     "service_doc_posted",
@@ -153,6 +161,8 @@ class SourceClient:
     create_date: date | None
     manager: str
     branch: str
+    funnel: str
+    funnel_step: str
 
 
 def as_abs(path: str | Path) -> Path:
@@ -206,7 +216,16 @@ def read_source_clients(path: Path) -> dict[str, SourceClient]:
     ws = wb.active
     headers = list(next(ws.iter_rows(min_row=1, max_row=1, values_only=True)))
     indexes = {str(name): idx for idx, name in enumerate(headers) if name}
-    required = ["client_id", "phone", "client_fio", "create_date", "manager", "филиал"]
+    required = [
+        "client_id",
+        "phone",
+        "client_fio",
+        "create_date",
+        "manager",
+        "funnel",
+        "funnel_step",
+        "филиал",
+    ]
     missing = [name for name in required if name not in indexes]
     if missing:
         raise ValueError(f"Missing required columns in {path}: {missing}")
@@ -223,6 +242,8 @@ def read_source_clients(path: Path) -> dict[str, SourceClient]:
             create_date=parse_date(values[indexes["create_date"]]),
             manager=str(values[indexes["manager"]] or "").strip(),
             branch=str(values[indexes["филиал"]] or "").strip(),
+            funnel=str(values[indexes["funnel"]] or "").strip(),
+            funnel_step=str(values[indexes["funnel_step"]] or "").strip(),
         )
     wb.close()
     return clients
@@ -302,6 +323,8 @@ def source_client_for_fact(fact: dict[str, str], source_clients: dict[str, Sourc
         create_date=None,
         manager="УТОЧНИТЬ: вне import_заявки",
         branch="",
+        funnel="",
+        funnel_step="",
     )
 
 
@@ -488,12 +511,61 @@ def build_rows(
 
         sale_date = parse_date(fact.get("sale_date"))
         payment_date = parse_date(fact.get("payment_datetime")) or sale_date
-        activation_date = parse_date(fact.get("service_start_date"))
-        end_date = parse_date(fact.get("service_end_date"))
+        source_activation_date = parse_date(fact.get("service_start_date"))
+        register_start_date = parse_date(fact.get("service_register_start_date"))
+        source_end_date = parse_date(fact.get("service_end_date"))
+        activation_date = source_activation_date
+        # Keep the agreed first-visit activation behavior: an unused package
+        # has no activation date. Historical examples retain the established
+        # sale-date placeholder so their non-date columns stay regression-safe.
+        if row_kind == "historical_fallback" and activation_date is None:
+            activation_date = sale_date
+        end_date = source_end_date or sale_date
+        activation_date_source = (
+            DOCUMENT_ACTIVATION_DATE_SOURCE
+            if source_activation_date is not None
+            else (
+                SALE_DATE_FALLBACK_SOURCE
+                if activation_date is not None
+                else (
+                    PRESERVED_BLANK_ACTIVATION_SOURCE
+                    if register_start_date is not None
+                    else "not_activated_in_register"
+                )
+            )
+        )
+        end_date_source = (
+            REGISTER_END_DATE_SOURCE
+            if source_end_date is not None
+            else SALE_DATE_FALLBACK_SOURCE
+        )
+        if source_end_date is not None:
+            date_state = "real_register_dates"
+        elif fact.get("linked_service_doc_ref"):
+            date_state = "unactivated_service_technical_2001_dates"
+        else:
+            date_state = "direct_sale_without_linked_service_document"
+        if end_date is None:
+            raise ValueError(
+                "Selected service row has neither InfoRg3060 end date nor sale-date fallback: "
+                f"service_id={sid!r}, client_id={client_id!r}"
+            )
+        if source_end_date is None:
+            uncertainties.append(
+                {
+                    "issue_type": "service_end_date_sale_date_fallback",
+                    "service_id": sid,
+                    "client_id": source.client_id,
+                    "client_fio": source.client_fio,
+                    "service_name": fact.get("service_name", ""),
+                    "details": (
+                        f"date_state={date_state}; row_kind={row_kind}; "
+                        f"end_date={end_date.isoformat()}; source={SALE_DATE_FALLBACK_SOURCE}."
+                    ),
+                }
+            )
         visits_left = active_visits_left(fact)
         if row_kind == "historical_fallback":
-            activation_date = activation_date or sale_date
-            end_date = end_date or sale_date
             visits_left = 0
 
         row = {
@@ -523,8 +595,15 @@ def build_rows(
             "_payment_method_raw": fact.get("payment_method", ""),
             "_is_active_by_balance": fact.get("is_active_by_balance", ""),
             "_is_active_by_date": fact.get("is_active_by_date", ""),
+            "_is_active_on_cutoff": fact.get("is_active_on_cutoff", ""),
             "_rg3336_signed_balance": fact.get("rg3336_signed_balance", ""),
             "_sale_datetime": fact.get("sale_datetime", ""),
+            "_activation_date_source": activation_date_source,
+            "_end_date_source": end_date_source,
+            "_register_start_date": register_start_date,
+            "_date_state": date_state,
+            "_source_funnel": source.funnel,
+            "_source_funnel_step": source.funnel_step,
         }
         client_rows.append(row)
         counters["rows_by_kind"][row_kind] += 1
@@ -681,45 +760,105 @@ def main() -> int:
         ["issue_type", "service_id", "client_id", "client_fio", "service_name", "details"],
     )
     active_rows = [row for row in client_rows if row.get("_row_kind") == "active"]
+    live_date_rows = [row for row in active_rows if row.get("_is_active_by_date") == "1"]
+    fallback_date_rows = [
+        row
+        for row in client_rows
+        if row.get("_end_date_source") == SALE_DATE_FALLBACK_SOURCE
+    ]
+    invalid_live_rows = [
+        row
+        for row in live_date_rows
+        if row.get("_end_date_source") != REGISTER_END_DATE_SOURCE
+        or row.get("_register_start_date") is None
+        or row.get("_source_funnel") != ACTIVE_MEMBERSHIP_FUNNEL
+    ]
+    if invalid_live_rows:
+        sample = invalid_live_rows[0]
+        raise ValueError(
+            "A service with a live end date is not backed by InfoRg3060 or its client "
+            f"is outside {ACTIVE_MEMBERSHIP_FUNNEL!r}: service_id={sample['service_id']!r}, "
+            f"client_id={sample['client_id']!r}, funnel={sample['_source_funnel']!r}"
+        )
+
+    audit_fields = [
+        "service_id",
+        "client_id",
+        "client_fio",
+        "service_name",
+        "create_date",
+        "activation_date",
+        "end_date",
+        "activation_date_source",
+        "end_date_source",
+        "register_start_date",
+        "date_state",
+        "row_kind",
+        "source_funnel",
+        "source_funnel_step",
+        "visits_left",
+        "price",
+        "type_of_payment",
+        "филиал",
+        "sale_doc_ref",
+        "sale_branch_raw",
+        "sale_branch_source",
+        "linked_service_doc_ref",
+        "is_active_by_balance",
+        "is_active_by_date",
+        "is_active_on_cutoff",
+        "rg3336_signed_balance",
+    ]
+
+    def audit_row(row: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "service_id": row["service_id"],
+            "client_id": row["client_id"],
+            "client_fio": row["client_fio"],
+            "service_name": row["service_name"],
+            "create_date": row["create_date"],
+            "activation_date": row["activation_date"],
+            "end_date": row["end_date"],
+            "activation_date_source": row["_activation_date_source"],
+            "end_date_source": row["_end_date_source"],
+            "register_start_date": row["_register_start_date"],
+            "date_state": row["_date_state"],
+            "row_kind": row["_row_kind"],
+            "source_funnel": row["_source_funnel"],
+            "source_funnel_step": row["_source_funnel_step"],
+            "visits_left": row["visits_left"],
+            "price": row["price"],
+            "type_of_payment": row["type_of_payment"],
+            "филиал": row["филиал"],
+            "sale_doc_ref": row["_sale_doc_ref"],
+            "sale_branch_raw": row["_sale_branch_raw"],
+            "sale_branch_source": row["_sale_branch_source"],
+            "linked_service_doc_ref": row["_linked_service_doc_ref"],
+            "is_active_by_balance": row["_is_active_by_balance"],
+            "is_active_by_date": row["_is_active_by_date"],
+            "is_active_on_cutoff": row["_is_active_on_cutoff"],
+            "rg3336_signed_balance": row["_rg3336_signed_balance"],
+        }
+
+    write_csv(
+        reports_dir / "services_end_dates_audit.csv",
+        [audit_row(row) for row in client_rows],
+        audit_fields,
+    )
     write_csv(
         reports_dir / "services_active_rows_audit.csv",
-        [
-            {
-                "service_id": row["service_id"],
-                "client_id": row["client_id"],
-                "client_fio": row["client_fio"],
-                "service_name": row["service_name"],
-                "visits_left": row["visits_left"],
-                "price": row["price"],
-                "type_of_payment": row["type_of_payment"],
-                "филиал": row["филиал"],
-                "sale_doc_ref": row["_sale_doc_ref"],
-                "sale_branch_raw": row["_sale_branch_raw"],
-                "sale_branch_source": row["_sale_branch_source"],
-                "linked_service_doc_ref": row["_linked_service_doc_ref"],
-                "is_active_by_balance": row["_is_active_by_balance"],
-                "is_active_by_date": row["_is_active_by_date"],
-                "rg3336_signed_balance": row["_rg3336_signed_balance"],
-            }
-            for row in active_rows
-        ],
-        [
-            "service_id",
-            "client_id",
-            "client_fio",
-            "service_name",
-            "visits_left",
-            "price",
-            "type_of_payment",
-            "филиал",
-            "sale_doc_ref",
-            "sale_branch_raw",
-            "sale_branch_source",
-            "linked_service_doc_ref",
-            "is_active_by_balance",
-            "is_active_by_date",
-            "rg3336_signed_balance",
-        ],
+        [audit_row(row) for row in active_rows],
+        audit_fields,
+    )
+    write_csv(
+        reports_dir / "services_live_active_membership_audit.csv",
+        [audit_row(row) for row in live_date_rows],
+        audit_fields,
+    )
+    write_csv(
+        reports_dir / "services_end_date_fallbacks.csv",
+        [audit_row(row) for row in fallback_date_rows],
+        audit_fields,
     )
     branch_counts = Counter(str(row.get("филиал") or "blank") for row in client_rows)
     write_csv(
@@ -735,6 +874,10 @@ def main() -> int:
         f"- raw service facts: {len(facts)}",
         f"- client rows selected: {len(client_rows)}",
         f"- active client rows selected: {counters['rows_by_kind'].get('active', 0)}",
+        f"- active rows with live InfoRg3060 end date: {len(live_date_rows)}",
+        f"- live rows whose client has an active membership: {sum(row['_source_funnel'] == ACTIVE_MEMBERSHIP_FUNNEL for row in live_date_rows)}",
+        f"- rows with real InfoRg3060 end date: {sum(row['_end_date_source'] == REGISTER_END_DATE_SOURCE for row in client_rows)}",
+        f"- rows with conservative sale-date fallback: {len(fallback_date_rows)}",
         f"- historical fallback rows selected: {counters['rows_by_kind'].get('historical_fallback', 0)}",
         f"- outside import_zayavki fallback rows selected: {counters['rows_by_kind'].get('historical_fallback_outside_import_zayavki', 0)}",
         f"- template rows: {len(template_rows)}",
@@ -752,7 +895,10 @@ def main() -> int:
         "",
         f"- `{(reports_dir / 'services_coverage_report.csv').relative_to(ROOT)}`",
         f"- `{(reports_dir / 'services_import_uncertainties.csv').relative_to(ROOT)}`",
+        f"- `{(reports_dir / 'services_end_dates_audit.csv').relative_to(ROOT)}`",
         f"- `{(reports_dir / 'services_active_rows_audit.csv').relative_to(ROOT)}`",
+        f"- `{(reports_dir / 'services_live_active_membership_audit.csv').relative_to(ROOT)}`",
+        f"- `{(reports_dir / 'services_end_date_fallbacks.csv').relative_to(ROOT)}`",
         f"- `{(reports_dir / 'services_branch_distribution.csv').relative_to(ROOT)}`",
     ]
     (reports_dir / "services_build_report.md").write_text("\n".join(report) + "\n", encoding="utf-8")

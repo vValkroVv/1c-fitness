@@ -1,0 +1,50 @@
+{
+  "verdict": "PASS",
+  "errors": [],
+  "audit": {
+    "resolved_contracts": 254,
+    "manager_debt_report": 192,
+    "fallback_not_in_manager_debt_report": 62,
+    "changed_rows": 165,
+    "changed_cells": 326,
+    "by_problem_group": {
+      "1": {
+        "total": 10,
+        "manager_debt_report": 1,
+        "fallback_not_in_manager_debt_report": 9
+      },
+      "2": {
+        "total": 41,
+        "manager_debt_report": 0,
+        "fallback_not_in_manager_debt_report": 41
+      },
+      "3": {
+        "total": 203,
+        "manager_debt_report": 191,
+        "fallback_not_in_manager_debt_report": 12
+      }
+    },
+    "target_sums": {
+      "price": "3095510",
+      "amount_of_payments": "2297110",
+      "payment_left": "931367"
+    }
+  },
+  "membership": {
+    "compared_rows": 121461,
+    "audited_rows": 254,
+    "excluded_rows": 1,
+    "nonfinancial_differences": 0,
+    "financial_differences_outside_audit": 0
+  },
+  "problem4_contracts": [
+    "00000151350"
+  ],
+  "unchanged_workbook_sha256": {
+    "fitbase_active_clients_import_zayavki_20260630_all_funnels.xlsx": "50c6ec9e2d6722ae10016f32d8e59d75f5745482c3294156fe11d22afa26cd8e",
+    "fitbase_active_clients_plastic_cards_20260630_all_funnels.xlsx": "eeb95c6283fb446a5a57a5daa725ef168da1f7d55bfbc8a5afc98a561b369bc9",
+    "fitbase_import_shablony_abonementov_20260630.xlsx": "7377e09304025b0451b22b84c279d9c87100eb3df9915c350d8ce48a01052b4e",
+    "fitbase_import_shablony_uslug_20260630.xlsx": "c117f1723c36c275f2a2158251ecb6f484fcf1e5682895b878d6ccb3d0cec6ca",
+    "fitbase_import_uslugi_clientov_20260630.xlsx": "05b9f927306e008190243ececd70a320c468b7511d21c1c78883228f86a8885d"
+  }
+}

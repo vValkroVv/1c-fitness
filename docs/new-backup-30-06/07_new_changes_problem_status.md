@@ -1,5 +1,8 @@
 # Статус 3 проблем `new-changes` на backup 2026-06-30
 
+> Архивный аудит прежней смешанной сборки. Описанный ниже майский cutoff в SQL уже удалён;
+> актуальные problem-группы равны `10 / 41 / 203`.
+
 Дата анализа: `2026-07-05`.
 
 Сравнивались последняя рабочая сборка на старом backup/cutoff `2026-05-25 08:00`
@@ -212,4 +215,3 @@ Template-only список не изменился:
 - `output/20260630_problem_status_analysis/owner_change_named_cases.csv`
 - `output/20260630_problem_status_analysis/missing_old_owner_changes.csv`
 - `output/20260630_problem_status_analysis/services_coverage_diff.csv`
-

@@ -16,8 +16,15 @@ from openpyxl.utils import get_column_letter
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DATE_STAMP = os.environ.get("ACTIVE_PROBLEM_DATE_STAMP", "20260525_0800")
-CUTOFF_DATE = os.environ.get("ACTIVE_PROBLEM_CUTOFF_DATE", "2026-05-25")
+DATE_STAMP = os.environ.get("ACTIVE_PROBLEM_DATE_STAMP", "").strip()
+CUTOFF_DATE = os.environ.get("ACTIVE_PROBLEM_CUTOFF_DATE", "").strip()
+
+if not DATE_STAMP or not CUTOFF_DATE:
+    raise RuntimeError(
+        "ACTIVE_PROBLEM_DATE_STAMP and ACTIVE_PROBLEM_CUTOFF_DATE are required"
+    )
+if DATE_STAMP != CUTOFF_DATE.replace("-", ""):
+    raise RuntimeError("ACTIVE_PROBLEM_DATE_STAMP must match ACTIVE_PROBLEM_CUTOFF_DATE")
 
 OUTPUT_DIR = ROOT / os.environ.get("ACTIVE_PROBLEM_OUTPUT_DIR", "output/20251115_0800_fix_owner_new_import")
 MAIN_XLSX_PATH = OUTPUT_DIR / f"fitbase_import_abonementy_clientov_{DATE_STAMP}.xlsx"

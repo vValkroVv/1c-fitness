@@ -1,0 +1,39 @@
+# Post-processing verified manager_fixes_v2 with the authoritative debt report.
+run:
+  date_stamp: "20260630"
+  cutoff_date: "2026-06-30"
+  cutoff_at: "2026-06-30 23:27:03"
+  backup_finish_at: "2026-06-30 23:27:03"
+
+inputs:
+  base_delivery: "../output/20260630_delivery_manager_fixes_v2"
+  full_membership: "work/20260630_manager_fixes_v2/imports/fitbase_import_abonementy_clientov_20260630.xlsx"
+  full_membership_sha256: "9fea1ddbc32c143c734a13673c5ea26f1a53ef22000fdf5bd88d0c6a8433c3ae"
+  membership_template: "templates/membership_clients.xlsx"
+  membership_template_sha256: "5be442e91bf1c035af8865afb7c83353723dc8dfa8282fe5bf26602416f6632e"
+  manager_debt_xlsx: "../Задолженности клиентов 30.06.2026.xlsx"
+  manager_debt_sha256: "20fbbcc082507c0c9941f3555ca13a3133e90ba9543c2248f69433ab0c2b3f32"
+  source_manifest: "reference/expected_20260630_manager_fixes_v2.yml"
+  base_delivery_sha256:
+    fitbase_active_clients_import_zayavki_20260630_all_funnels.xlsx: "50c6ec9e2d6722ae10016f32d8e59d75f5745482c3294156fe11d22afa26cd8e"
+    fitbase_active_clients_plastic_cards_20260630_all_funnels.xlsx: "eeb95c6283fb446a5a57a5daa725ef168da1f7d55bfbc8a5afc98a561b369bc9"
+    fitbase_import_abonementy_clientov_20260630.xlsx: "2cb353520dbdc8318dc2e417be0325f5a0c5c6d2300f32f4320cdf4f671b3338"
+    fitbase_import_shablony_abonementov_20260630.xlsx: "7377e09304025b0451b22b84c279d9c87100eb3df9915c350d8ce48a01052b4e"
+    fitbase_import_shablony_uslug_20260630.xlsx: "c117f1723c36c275f2a2158251ecb6f484fcf1e5682895b878d6ccb3d0cec6ca"
+    fitbase_import_uslugi_clientov_20260630.xlsx: "05b9f927306e008190243ececd70a320c468b7511d21c1c78883228f86a8885d"
+    problem_1_no_payment_cash_10_cases_20260630.xlsx: "fecf4bebc39819b104fef69c841dc96b1f72245649588fcba5054834d281a475"
+    problem_2_zero_price_direct_full_41_cases_20260630.xlsx: "25448b9d7fb755a9cf9724e8935475ff4bc52367440fb9ff5763a4c54b9e6e3a"
+    problem_3_non_named_payment_left_203_cases_20260630.xlsx: "5bf053b290abaeb528dcfa49322315ff0a91c7571e7bbb8109f3a8108c45c0c2"
+    problem_4_subrent_visits_left_contract_151350_1_case_20260630.xlsx: "16d0ff2db6e212826c1fdfd79e22f657f5e75a16bec253964797771524970a1a"
+
+rule:
+  # The three values are independent. Never recalculate payment_left as
+  # price - amount_of_payments when a manager row exists.
+  not_in_manager_debt_report:
+    price: 12000
+    amount_of_payments: 12000
+    payment_left: 0
+
+output:
+  directory: "../output/20260630_delivery_manager_debts_applied"
+  membership_file_name: "fitbase_import_abonementy_clientov_20260630.xlsx"

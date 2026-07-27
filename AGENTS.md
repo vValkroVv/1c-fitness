@@ -13,6 +13,19 @@ task-desc/fitness_updated_restore_to_fitbase_plan.md (в иснтрукции п
 ##итоговые файлы##
 Скрипты обрабаотки установки создавай в папке scripts, а итоговый файлы xlsx в output (более детально посмотри в файле task-desc/fitness_updated_restore_to_fitbase_plan.md, там все раписано)
 
+##единый срез для любого backup##
+Для любого нового `.bak` все выгрузки без исключений считать на дату и время, когда был завершен именно этот backup. Единый `cutoff_at` брать из `BackupFinishDate` в `RESTORE HEADERONLY`.
+
+Обязательный контракт для каждого прогона:
+
+```text
+cutoff_at = backup_finish_at = RESTORE HEADERONLY.BackupFinishDate
+cutoff_date = date(cutoff_at)
+date_stamp = YYYYMMDD(cutoff_at)
+```
+
+Тот же `cutoff_at` должен применяться ко всем слоям: клиенты, воронки, карты, абонементы, услуги, шаблоны и problem-файлы. Запрещено переносить cutoff от предыдущего backup или задавать отдельные даты для абонементов и услуг. Пайплайн должен падать с ошибкой при любом несовпадении этих дат.
+
 ##текущее sql окружение##
 На текущем сервере ARM64 поднят SQL-compatible runtime для работы с backup:
 
@@ -67,9 +80,26 @@ step 10 schema inventory: success, output/schema_inventory.csv, output/schema_ta
 ##github##
 Чтобы пушить в репозиторий используй токен из .env
 
-##текущие финальные воронки part2##
+##текущая финальная поставка 9 xlsx##
 
-Актуальная финальная сборка на срез `2026-04-29` лежит здесь:
+Актуальная финальная сборка из `data/Fitnes-30-06-26.bak` лежит здесь:
+
+```text
+output/20260630_delivery_full_cutoff/
+```
+
+Единый срез всех девяти XLSX: `2026-06-30 23:27:03`, точно
+`RESTORE HEADERONLY.BackupFinishDate`. Воспроизводимый пакет обновлён в:
+
+```text
+end-to-end-xlsx/
+```
+
+Итоговый отчёт: `docs/20260630_full_cutoff_rebuild_20260714.md`.
+
+##исторические финальные воронки part2##
+
+Историческая финальная сборка на срез `2026-04-29` лежит здесь:
 
 ```text
 output/part2_20260429_final/

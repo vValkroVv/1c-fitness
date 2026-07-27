@@ -1,0 +1,37 @@
+# Исправленная поставка по комментариям менеджера.
+# Срез не меняется: это тот же backup от 30.06.2026.
+run:
+  date_stamp: "20260630"
+  cutoff_date: "2026-06-30"
+  cutoff_at: "2026-06-30 23:27:03"
+  backup_finish_at: "2026-06-30 23:27:03"
+  work_name: "20260630_manager_fixes_v2"
+  delivery_name: "20260630_delivery_manager_fixes_v2"
+
+sql:
+  server: "127.0.0.1"
+  port: 1433
+  database: "FitnessRestored"
+  user: "sa"
+  password_env: "FITNESS_SQL_PASSWORD"
+  login_timeout_seconds: 30
+  query_timeout_seconds: 0
+  encrypt_login: true
+  tls_ca_file: ""
+  tls_validate_host: true
+
+validation:
+  expected_manifest: "reference/expected_20260630_manager_fixes_v2.yml"
+  enforce_reference_counts: true
+  owner_change_audit_sql: "sql/audit_owner_change_20260630.sql"
+
+delivery:
+  # Остаток по этому договору не исправляем до согласования
+  # семантики 1С "остаток (резерв)". Строка не теряется, а идёт в problem4.
+  problem4_contract_id: "151350"
+
+backup:
+  file_name: "Fitnes-30-06-26.bak"
+  size_bytes: 13137564672
+  sha256: "7e684086442f0eeac44014b9f5170da5c2873620c57788dbc59f58efed1d0810"
+  backup_finish_at: "2026-06-30 23:27:03"

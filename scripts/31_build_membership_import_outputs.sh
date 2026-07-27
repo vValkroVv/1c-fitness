@@ -4,12 +4,35 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-SOURCE_OUTPUT_ROOT="${MEMBERSHIP_SOURCE_OUTPUT_ROOT:-output/20251115_0800_fix_owner}"
-OUTPUT_ROOT="${MEMBERSHIP_OUTPUT_ROOT:-output/20251115_0800_fix_owner_new_import}"
-DATABASE_NAME="${MEMBERSHIP_DATABASE_NAME:-FitnessRestored_20260523_macos}"
+: "${MEMBERSHIP_SOURCE_OUTPUT_ROOT:?Set MEMBERSHIP_SOURCE_OUTPUT_ROOT for this backup}"
+: "${MEMBERSHIP_OUTPUT_ROOT:?Set MEMBERSHIP_OUTPUT_ROOT for this backup}"
+: "${MEMBERSHIP_DATABASE_NAME:?Set MEMBERSHIP_DATABASE_NAME for this restored backup}"
+
+SOURCE_OUTPUT_ROOT="$MEMBERSHIP_SOURCE_OUTPUT_ROOT"
+OUTPUT_ROOT="$MEMBERSHIP_OUTPUT_ROOT"
+DATABASE_NAME="$MEMBERSHIP_DATABASE_NAME"
 SQLCMD_SERVER_NAME="${MEMBERSHIP_SQLCMD_SERVER:-mssql-fitness-2022,1433}"
-DATE_STAMP="${MEMBERSHIP_DATE_STAMP:-20260525_0800}"
-LOG_ROOT="${MEMBERSHIP_LOG_ROOT:-logs/new-changes/prolem_2}"
+DATE_STAMP="${MEMBERSHIP_DATE_STAMP:-}"
+LOG_ROOT="${MEMBERSHIP_LOG_ROOT:-}"
+BACKUP_FINISH_AT="${MEMBERSHIP_BACKUP_FINISH_AT:-}"
+
+if [[ -z "$BACKUP_FINISH_AT" ]]; then
+  echo "Set MEMBERSHIP_BACKUP_FINISH_AT to RESTORE HEADERONLY.BackupFinishDate" >&2
+  exit 2
+fi
+if [[ ! "$BACKUP_FINISH_AT" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}\ [0-9]{2}:[0-9]{2}:[0-9]{2}$ ]]; then
+  echo "MEMBERSHIP_BACKUP_FINISH_AT must use YYYY-MM-DD HH:MM:SS" >&2
+  exit 2
+fi
+
+EXPECTED_DATE_STAMP="${BACKUP_FINISH_AT:0:10}"
+EXPECTED_DATE_STAMP="${EXPECTED_DATE_STAMP//-/}"
+DATE_STAMP="${DATE_STAMP:-$EXPECTED_DATE_STAMP}"
+LOG_ROOT="${LOG_ROOT:-logs/${EXPECTED_DATE_STAMP}_membership}"
+if [[ "$DATE_STAMP" != "$EXPECTED_DATE_STAMP" ]]; then
+  echo "MEMBERSHIP_DATE_STAMP=$DATE_STAMP does not match backup finish date $EXPECTED_DATE_STAMP" >&2
+  exit 2
+fi
 
 mkdir -p "$OUTPUT_ROOT/staging" "$OUTPUT_ROOT/reports" "$LOG_ROOT"
 
@@ -22,6 +45,7 @@ SQLCMD_SERVER="$SQLCMD_SERVER_NAME" \
   "$ROOT_DIR/scripts/macos_backup_sqlcmd.sh" \
   -d "$DATABASE_NAME" \
   -i /sql/31_build_membership_import_staging.sql \
+  -v "cutoff_at=$BACKUP_FINISH_AT" \
   -W \
   -s "|" \
   -o "/${LOG_ROOT}/31_build_membership_import_staging.txt"

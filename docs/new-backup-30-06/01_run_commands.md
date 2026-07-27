@@ -1,5 +1,9 @@
 # Новый backup 2026-06-30: команды пересборки
 
+> Исправлено 2026-07-14: абонементы и услуги теперь обязательно получают
+> `BackupFinishDate`. Прежние команды не передавали это значение и фактически
+> использовали майский cutoff.
+
 ## 1. Owner-change / import_заявки / пластиковые карты
 
 ```bash
@@ -25,6 +29,7 @@ MEMBERSHIP_SOURCE_OUTPUT_ROOT=output/20260630_fix_owner \
 MEMBERSHIP_OUTPUT_ROOT=output/20260630_fix_owner_new_import \
 MEMBERSHIP_DATABASE_NAME=FitnessRestored_20260630_macos \
 MEMBERSHIP_SQLCMD_SERVER=mssql-fitness-2022,1433 \
+MEMBERSHIP_BACKUP_FINISH_AT="2026-06-30 23:27:03" \
 MEMBERSHIP_DATE_STAMP=20260630 \
 MEMBERSHIP_LOG_ROOT=logs/new-backup-30-06/membership \
 scripts/31_build_membership_import_outputs.sh
@@ -40,6 +45,7 @@ SERVICES_SOURCE_OUTPUT_ROOT=output/20260630_fix_owner \
 SERVICES_OUTPUT_ROOT=output/20260630_fix_owner_new_import \
 SERVICES_DATABASE_NAME=FitnessRestored_20260630_macos \
 SERVICES_SQLCMD_SERVER=mssql-fitness-2022,1433 \
+SERVICES_BACKUP_FINISH_AT="2026-06-30 23:27:03" \
 SERVICES_DATE_STAMP=20260630 \
 SERVICES_LOG_ROOT=logs/new-backup-30-06/services \
 scripts/32_build_services_import_outputs.sh
@@ -54,10 +60,15 @@ ACTIVE_PROBLEM_CUTOFF_DATE=2026-06-30 \
 python3 scripts/36_build_active_problem_case_workbooks.py
 ```
 
-## 5. Delivery без активных проблем
+## 5. Финальная поставка
 
-Финальная папка `output/20260630_delivery_without_active_problems/` пересобирается
-из обновленных XLSX. Подробности и контроль по колонке `филиал`:
+Актуальная папка единого июньского среза:
+
+```text
+output/20260630_delivery_full_cutoff/
+```
+
+Прежние отчёты о филиалах и устаревшей смешанной поставке сохранены для истории:
 
 ```text
 docs/new-backup-30-06/11_sale_branch_for_membership_services.md

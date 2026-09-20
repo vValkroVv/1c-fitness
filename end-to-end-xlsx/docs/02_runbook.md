@@ -7,11 +7,13 @@
 
 1. Проверьте `.bak` через `scripts/verify_backup.py`.
 2. Восстановите его в SQL Server.
-3. Заполните SQL-подключение в `config/pipeline_manager_fixes_20260630.yml`.
+3. Заполните SQL-подключение в `config/pipeline_register_debts_20260630.yml`.
 4. Задайте `FITNESS_SQL_PASSWORD`.
-5. Запустите `scripts/run_pipeline.py --config config/pipeline_manager_fixes_20260630.yml`.
-6. Дождитесь `delivery_validate: verdict=PASS`.
-7. Заберите десять файлов из `output/20260630_delivery_manager_fixes_v2/`.
+5. Запустите `scripts/run_pipeline.py --config config/pipeline_register_debts_20260630.yml`.
+6. Запустите `scripts/run_service_end_date_fix_20260630.sh`.
+7. Запустите `scripts/run_funnel_label_rename_20260630.sh`.
+8. Дождитесь `PASS` от таргетированной и структурной проверок.
+9. Заберите семь файлов из `output/20260630_delivery_funnel_labels_20260820/`.
 
 На этом всё. Номерные Python-скрипты вручную запускать не нужно.
 

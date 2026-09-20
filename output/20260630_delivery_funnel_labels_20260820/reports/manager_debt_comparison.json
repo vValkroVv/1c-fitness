@@ -1,0 +1,16 @@
+{
+  "cutoff_at": "2026-06-30 23:27:03",
+  "manager_sales": 274,
+  "mapped_sales": 274,
+  "manager_sold_mismatches": 0,
+  "manager_paid_mismatches": 63,
+  "manager_debt_mismatches": 0,
+  "manager_full_matches": 211,
+  "delivery_tuple_mismatches": 0,
+  "manager_paid_excess": 216149,
+  "active_register_positive_debts": 279,
+  "active_register_positive_debt_mismatches": 0,
+  "active_nonregister_positive_debts": 0,
+  "verdict": "PASS",
+  "errors": []
+}

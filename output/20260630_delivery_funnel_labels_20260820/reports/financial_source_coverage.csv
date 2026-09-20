@@ -1,0 +1,10 @@
+﻿scope,source_group,rows,positive_debt_rows
+active_on_cutoff,business_override,239,0
+active_on_cutoff,info_debt_fallback_ambiguous_sale,25,0
+active_on_cutoff,register_balance,11305,279
+other_or_placeholder,business_override,29088,0
+other_or_placeholder,info_debt_fallback_ambiguous_sale,560,3
+other_or_placeholder,info_debt_fallback_no_register,16,0
+other_or_placeholder,refuser_placeholder,21051,0
+other_or_placeholder,register_balance,59175,802
+other_or_placeholder,zero_price_no_balance,3,0

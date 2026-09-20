@@ -26,6 +26,9 @@ output/20260630_fix_owner/csv/
 output/20260630_fix_owner_new_import/staging/
 # Personal client photos: local delivery only, never commit to Git.
 output/test_active_client_photos_20260630.zip
+output/*/fitbase_client_photos_*.zip
+output/*/reports/photos.json
+output/20260920_rehearsal*/
 *.tar.gz
 
 # macOS metadata

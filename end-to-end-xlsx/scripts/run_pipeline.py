@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.util
 import json
 import os
@@ -22,6 +23,7 @@ import openpyxl
 import yaml
 
 from database import ConnectionSettings, DatabaseClient, find_dbo_source_tables
+from cutoff_contract import resolve_cutoff
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -46,6 +48,8 @@ STEPS = [
     "delivery",
     "validate",
     "finance_validate",
+    "photos",
+    "manifest",
 ]
 
 STAGE_TABLES = [
@@ -118,6 +122,14 @@ def installed_version(distribution: str) -> str:
         return "unknown"
 
 
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
 class Pipeline:
     def __init__(self, args: argparse.Namespace) -> None:
         self.args = args
@@ -128,6 +140,7 @@ class Pipeline:
         self.validation_config: dict[str, Any] = self.config["validation"]
         self.backup_config: dict[str, Any] = self.config["backup"]
         self.delivery_config: dict[str, Any] = self.config.get("delivery", {})
+        self.photos_config: dict[str, Any] = self.config.get("photos", {})
         self._apply_backup_cutoff_contract()
 
         for key, override in [
@@ -176,8 +189,21 @@ class Pipeline:
         self.delivery_root = delivery_base / delivery_name
         self.pipeline_log = self.logs_root / "pipeline.log"
         self.status_path = self.work_root / "status.json"
+        input_hashes = {
+            str(path): hashlib.sha256(path.read_bytes()).hexdigest()
+            for path in [CONFIG / "managers_by_club.yml", CONFIG / "branches_by_club.yml",
+                         CONFIG / "product_reclassification_decisions.csv",
+                         as_abs(self.validation_config["expected_manifest"])]
+        }
+        config_signature = hashlib.sha256(json.dumps(
+            {"config": self.config, "input_hashes": input_hashes,
+             "skip_reference_counts": bool(self.args.skip_reference_counts)},
+            sort_keys=True, ensure_ascii=False, default=str
+        ).encode()).hexdigest()
         if self.args.resume and self.status_path.is_file():
             self.status = json.loads(self.status_path.read_text(encoding="utf-8"))
+            if self.status.get("config_signature") != config_signature:
+                raise ValueError("Cannot resume with changed configuration or cutoff; use a new run name")
             self.status.setdefault("resumed_at", []).append(
                 datetime.now().isoformat(timespec="seconds")
             )
@@ -194,54 +220,17 @@ class Pipeline:
                     "database": self.connection_settings.database,
                     "user": self.connection_settings.user,
                 },
-                "cutoff_contract": {
-                    "source": "backup.backup_finish_at",
-                    "backup_finish_at": self.run_config["backup_finish_at"],
-                    "cutoff_at": self.run_config["cutoff_at"],
-                    "cutoff_date": self.run_config["cutoff_date"],
-                    "date_stamp": self.run_config["date_stamp"],
-                },
+                "cutoff_contract": self.cutoff_contract,
+                "config_signature": config_signature,
+                "input_hashes": input_hashes,
                 "completed_steps": [],
                 "row_counts": {},
                 "cutoff_checks": {},
             }
 
     def _apply_backup_cutoff_contract(self) -> None:
-        """Derive every export cutoff from RESTORE HEADERONLY.BackupFinishDate."""
-
-        raw_finish = str(self.backup_config.get("backup_finish_at", "")).strip()
-        try:
-            backup_finish = datetime.strptime(raw_finish, "%Y-%m-%d %H:%M:%S")
-        except ValueError as exc:
-            raise ValueError(
-                "backup.backup_finish_at must be RESTORE HEADERONLY.BackupFinishDate "
-                "in YYYY-MM-DD HH:MM:SS format"
-            ) from exc
-
-        canonical = {
-            "backup_finish_at": backup_finish.strftime("%Y-%m-%d %H:%M:%S"),
-            "cutoff_at": backup_finish.strftime("%Y-%m-%d %H:%M:%S"),
-            "cutoff_date": backup_finish.strftime("%Y-%m-%d"),
-            "date_stamp": backup_finish.strftime("%Y%m%d"),
-        }
-        for field, expected in canonical.items():
-            configured = str(self.run_config.get(field, expected)).strip()
-            if configured != expected:
-                raise ValueError(
-                    f"run.{field}={configured!r} does not match "
-                    f"backup.backup_finish_at-derived value {expected!r}"
-                )
-            self.run_config[field] = expected
-
-        for legacy_field in ("membership_cutoff_at", "services_cutoff_at"):
-            if legacy_field not in self.run_config:
-                continue
-            configured = str(self.run_config[legacy_field]).strip()
-            if configured != canonical["cutoff_at"]:
-                raise ValueError(
-                    f"run.{legacy_field}={configured!r} does not match the single "
-                    f"backup cutoff {canonical['cutoff_at']!r}"
-                )
+        """Keep provenance immutable; apply the customer's explicit as-of choice."""
+        self.cutoff_contract = resolve_cutoff(self.run_config, self.backup_config)
 
     def _record_cutoff_check(self, name: str, values: dict[str, Any]) -> None:
         self.status.setdefault("cutoff_checks", {})[name] = values
@@ -364,11 +353,11 @@ class Pipeline:
 
     def prepare_directories(self) -> None:
         if not self.args.resume:
-            shutil.rmtree(self.work_root, ignore_errors=True)
-            shutil.rmtree(self.logs_root, ignore_errors=True)
-            if self.delivery_root.exists():
-                for path in self.delivery_root.glob("*.xlsx"):
-                    path.unlink()
+            for path in (self.work_root, self.logs_root, self.delivery_root):
+                if path.exists() and any(path.iterdir()):
+                    raise FileExistsError(f"Run directory is not empty: {path}; use a new run name or --resume")
+        elif not self.status_path.is_file():
+            raise FileNotFoundError(f"Cannot resume without status: {self.status_path}")
         for path in [
             self.raw_root / "staging",
             self.raw_root / "reports",
@@ -400,7 +389,8 @@ class Pipeline:
         )
 
     def mark_complete(self, step: str) -> None:
-        self.status["completed_steps"].append(step)
+        if step not in self.status["completed_steps"]:
+            self.status["completed_steps"].append(step)
         self.status["last_completed_at"] = datetime.now().isoformat(timespec="seconds")
         self._write_status()
 
@@ -508,6 +498,11 @@ class Pipeline:
         if missing:
             errors.append(f"Missing required 1C source tables: {', '.join(missing)}")
 
+        if self.backup_config.get("backup_set_uuid"):
+            from prepare_backup import verify_restored_backup
+            observed = verify_restored_backup(db, self.connection_settings.database, self.backup_config)
+            self.status["restored_backup"] = observed
+
         report = [
             "# Database preflight",
             "",
@@ -560,6 +555,7 @@ class Pipeline:
             )
 
     def owner_export(self, db: DatabaseClient) -> None:
+        self._check_owner_cutoff(db)
         log_path = self.logs_root / "owner_export.log"
         row_counts: dict[str, int] = {}
         with log_path.open("w", encoding="utf-8") as log:
@@ -620,6 +616,8 @@ class Pipeline:
             TEMPLATES / "plastic_cards.xlsx",
             "--branches-config",
             CONFIG / "branches_by_club.yml",
+            "--managers-config",
+            CONFIG / "managers_by_club.yml",
             "--main-require-phone-for-new-applications",
             "--main-transfer-new-applications-to-memberships",
             "--cards-funnel-filter",
@@ -634,8 +632,6 @@ class Pipeline:
                 *common,
                 "--csv-dir",
                 self.owner_root / "csv",
-                "--managers-config",
-                CONFIG / "managers_by_club.yml",
                 "--fitbase-label-mode",
                 "customer_20260520_single_stage",
             ],
@@ -660,6 +656,7 @@ class Pipeline:
             source.replace(destination)
 
     def membership_sql(self, db: DatabaseClient) -> None:
+        self._check_owner_cutoff(db)
         db.execute_script(
             SQL / "31_build_membership_import_staging.sql",
             variables={
@@ -723,6 +720,7 @@ class Pipeline:
         )
 
     def services_sql(self, db: DatabaseClient) -> None:
+        self._check_owner_cutoff(db)
         db.execute_script(
             SQL / "54_build_services_import_staging.sql",
             variables={
@@ -874,6 +872,9 @@ class Pipeline:
         self.run_command("delivery_validate", command)
         shutil.copy2(structural_report, self.reports_root / "validation_report.md")
         shutil.copy2(structural_json, self.reports_root / "validation_report.json")
+        self.status["validated_xlsx_hashes"] = {
+            path.name: sha256_file(path) for path in self.delivery_root.glob("*.xlsx")
+        }
 
     def finance_validate(self) -> None:
         manager_debt_xlsx = str(
@@ -887,6 +888,7 @@ class Pipeline:
         membership_name = (
             f"fitbase_import_abonementy_clientov_{self.date_stamp}.xlsx"
         )
+
         self.run_command(
             "finance_validate",
             [
@@ -928,12 +930,78 @@ class Pipeline:
             ],
         )
 
+    def photos(self) -> None:
+        if not self.photos_config.get("enabled", False):
+            self.log("photos: disabled in this historical configuration")
+            return
+        report = self.delivery_root / "reports" / "photos.json"
+        command: list[str | Path] = [
+            sys.executable, SCRIPTS / "41_export_active_client_photos_zip.py",
+            "--container", str(self.photos_config["container"]),
+            "--database", self.connection_settings.database,
+            "--cutoff-at", str(self.run_config["cutoff_at"]),
+            "--backup-finish-at", str(self.run_config["backup_finish_at"]),
+            "--clients-xlsx", self.delivery_root / f"fitbase_active_clients_import_zayavki_{self.date_stamp}_all_funnels.xlsx",
+            "--output", self.delivery_root / f"fitbase_client_photos_{self.date_stamp}.zip",
+            "--inner-dir", f"fitbase_client_photos_{self.date_stamp}",
+            "--report-json", report,
+        ]
+        if self.args.resume:
+            command.append("--overwrite")
+        self.run_command("photos", command)
+        self.status["photos"] = json.loads(report.read_text(encoding="utf-8"))
+        if self.status["photos"].get("status") != "PASS":
+            raise RuntimeError("Photo exporter did not return a PASS report")
+
+    def manifest(self) -> None:
+        """Publish the audit envelope only after every configured check passed."""
+        reports = self.delivery_root / "reports"
+        reports.mkdir(parents=True, exist_ok=True)
+        expected_hashes = dict(self.status.get("validated_xlsx_hashes", {}))
+        if not expected_hashes:
+            raise RuntimeError("No validated XLSX fingerprints available")
+        if self.photos_config.get("enabled", False):
+            expected_hashes[f"fitbase_client_photos_{self.date_stamp}.zip"] = self.status["photos"]["validation"]["zip_sha256"]
+        files = []
+        for path in sorted(self.delivery_root.iterdir()):
+            if path.suffix not in {".xlsx", ".zip"}:
+                continue
+            files.append({"name": path.name, "size_bytes": path.stat().st_size, "sha256": sha256_file(path)})
+        if {item["name"]: item["sha256"] for item in files} != expected_hashes:
+            raise RuntimeError("Delivery files changed since validation; rebuild and revalidate before delivery")
+        payload = {
+            "verdict": "PASS", "cutoff_contract": self.cutoff_contract,
+            "backup": self.backup_config, "files": files,
+            "config_signature": self.status["config_signature"],
+            "input_hashes": self.status["input_hashes"],
+            "cutoff_checks": self.status["cutoff_checks"],
+            "photos_enabled": bool(self.photos_config.get("enabled", False)),
+        }
+        (reports / "delivery_manifest.json").write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2, default=str) + "\n", encoding="utf-8"
+        )
+        (reports / "resolved_config.yml").write_text(
+            yaml.safe_dump(self.config, allow_unicode=True, sort_keys=False), encoding="utf-8"
+        )
+        shutil.copy2(CONFIG / "managers_by_club.yml", reports / "managers.yml")
+        (self.delivery_root / "READY.txt").write_text(
+            f"PASS\nbackup_finish_at={self.run_config['backup_finish_at']}\n"
+            f"effective_at={self.run_config['cutoff_at']}\n"
+            "See reports/delivery_manifest.json for file hashes and provenance.\n", encoding="utf-8"
+        )
+
     def run(self) -> None:
-        self.prepare_directories()
         start_index = STEPS.index(self.args.start_at)
         stop_index = STEPS.index(self.args.stop_after)
         if stop_index < start_index:
             raise ValueError("--stop-after must not precede --start-at")
+        if start_index and (not self.args.resume or not set(STEPS[:start_index]).issubset(self.status["completed_steps"])):
+            raise ValueError("Starting at a later step requires --resume and all prior steps completed in this run")
+        self.prepare_directories()
+        self.status["completed_steps"] = [step for step in self.status["completed_steps"] if STEPS.index(step) < start_index]
+        self._write_status()
+        (self.delivery_root / "READY.txt").unlink(missing_ok=True)
+        (self.delivery_root / "reports" / "delivery_manifest.json").unlink(missing_ok=True)
 
         db_steps = {
             "preflight",
@@ -982,6 +1050,10 @@ class Pipeline:
                     self.validate()
                 elif step == "finance_validate":
                     self.finance_validate()
+                elif step == "photos":
+                    self.photos()
+                elif step == "manifest":
+                    self.manifest()
                 self.mark_complete(step)
                 self.log(f"DONE step={step}")
         except Exception:

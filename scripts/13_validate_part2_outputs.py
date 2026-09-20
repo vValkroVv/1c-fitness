@@ -5,11 +5,11 @@ from __future__ import annotations
 
 import argparse
 import csv
+import importlib.util
 from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
 
-import yaml
 from openpyxl import load_workbook
 
 
@@ -106,9 +106,18 @@ def card_xlsx_comma_count(path: Path) -> int:
     return count
 
 
+def load_manager_builder():
+    path = ROOT / "scripts" / "12_build_part2_three_funnel_xlsx.py"
+    spec = importlib.util.spec_from_file_location("manager_assignment_builder", path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Cannot load manager assignment: {path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def load_managers(path: Path) -> dict[str, set[str]]:
-    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-    return {str(club): {str(manager) for manager in managers} for club, managers in data.get("clubs", {}).items()}
+    return {club: set(managers) for club, managers in load_manager_builder().load_managers(path).items()}
 
 
 def validate(args: argparse.Namespace) -> int:
@@ -211,8 +220,9 @@ def validate(args: argparse.Namespace) -> int:
             break
         manager = row.get("manager", "")
         club = row.get("normalized_club", "")
-        if manager and manager not in managers_by_club.get(club, set()):
-            errors.append(f"manager is not configured for club: client_id={row.get('client_id')}, club={club}, manager={manager}")
+        allowed_managers = managers_by_club.get("*", managers_by_club.get(club, set()))
+        if (manager or "*" in managers_by_club) and manager not in allowed_managers:
+            errors.append(f"manager is not configured: client_id={row.get('client_id')}, club={club}, manager={manager}")
             break
         if row.get("funnel") == "Действующие клиенты":
             days = int_value(row.get("days_to_end"), -999999)

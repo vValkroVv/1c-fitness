@@ -15,6 +15,14 @@ builder = importlib.util.module_from_spec(SPEC)
 sys.modules[SPEC.name] = builder
 SPEC.loader.exec_module(builder)
 
+VALIDATOR_SPEC = importlib.util.spec_from_file_location(
+    "services_import_validator", ROOT / "scripts" / "24_validate_services_import_xlsx.py"
+)
+assert VALIDATOR_SPEC is not None and VALIDATOR_SPEC.loader is not None
+validator = importlib.util.module_from_spec(VALIDATOR_SPEC)
+sys.modules[VALIDATOR_SPEC.name] = validator
+VALIDATOR_SPEC.loader.exec_module(validator)
+
 
 def source(
     client_id: str = "CLIENT",
@@ -164,6 +172,58 @@ class ServiceEndDateTests(unittest.TestCase):
         self.assertEqual(row["activation_date"], date(2022, 2, 3))
         self.assertEqual(row["end_date"], date(2022, 2, 3))
         self.assertEqual(row["visits_left"], 0)
+
+
+class ServiceManagerTests(unittest.TestCase):
+    POOL = ["Пеуна Анастасия Ивановна", "Пилия Анастасия Артуровна", "Ефремова Алена"]
+
+    def outside_fact(self):
+        return fact(
+            service_id="SERVICE_ONLY", sale_date="2022-02-03", start_date="", end_date="",
+            active_on_cutoff="0", active_by_date="0", linked=False,
+        )
+
+    def test_service_only_client_keeps_row_and_all_fields_except_manager(self):
+        current = self.outside_fact()
+        previous, *_ = builder.build_rows({}, ["Пакет 8"], [current])
+        rows, *_ = builder.build_rows({}, ["Пакет 8"], [current], manager_pools={"*": self.POOL})
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["manager"], builder.manager_tools().stable_manager("CLIENT", self.POOL))
+        self.assertEqual(rows[0]["_outside_import_zayavki"], "1")
+        self.assertEqual(rows[0]["phone"], "79990000000")
+        self.assertEqual({key: value for key, value in rows[0].items() if key != "manager"},
+                         {key: value for key, value in previous[0].items() if key != "manager"})
+        for branch in ("Гоголевский", "Ровио", "", "Неизвестный клуб"):
+            changed = {**current, "sale_branch": branch, "sale_branch_raw": branch}
+            assigned = builder.source_client_for_fact(changed, {}, {"*": self.POOL})
+            self.assertEqual(assigned.manager, rows[0]["manager"])
+
+    def test_existing_client_assignment_is_shared_with_main_workbook(self):
+        current = self.outside_fact()
+        manager = builder.manager_tools().stable_manager("CLIENT", self.POOL)
+        original = source()
+        existing = builder.SourceClient(**{**original.__dict__, "manager": manager})
+        selected = builder.source_client_for_fact(current, {"CLIENT": existing}, {"*": self.POOL})
+        self.assertIs(selected, existing)
+        rows, *_ = builder.build_rows({"CLIENT": existing}, ["Пакет 8"], [current], manager_pools={"*": self.POOL})
+        values = [tuple(row.get(header) for header in builder.CLIENT_HEADERS) for row in rows]
+        self.assertEqual(validator.manager_validation_errors(values, {"*": self.POOL}, {"CLIENT": manager}), [])
+
+    def test_validator_rejects_placeholder_and_wrong_valid_pool_member(self):
+        rows, *_ = builder.build_rows({}, ["Пакет 8"], [self.outside_fact()], manager_pools={"*": self.POOL})
+        original = rows[0]
+        values = [tuple(original.get(header) for header in builder.CLIENT_HEADERS)]
+        self.assertEqual(validator.manager_validation_errors(values, {"*": self.POOL}, {}), [])
+        for wrong in ("УТОЧНИТЬ: вне import_заявки", next(name for name in self.POOL if name != original["manager"])):
+            changed = {**original, "manager": wrong}
+            values = [tuple(changed.get(header) for header in builder.CLIENT_HEADERS)]
+            errors = validator.manager_validation_errors(values, {"*": self.POOL}, {})
+            self.assertTrue(any("global client-ID assignment" in error for error in errors))
+
+    def test_historical_club_config_keeps_service_only_fallback(self):
+        historical = {"Гоголевский": ["Исторический менеджер"]}
+        assigned = builder.source_client_for_fact(self.outside_fact(), {}, historical)
+        self.assertEqual(assigned.manager, "УТОЧНИТЬ: вне import_заявки")
 
 
 if __name__ == "__main__":

@@ -8,6 +8,7 @@ DECLARE @cutoff_at datetime2 = '$(cutoff_at)';
 DECLARE @cutoff_date date = CONVERT(date, @cutoff_at);
 DECLARE @cutoff_sql_date date = DATEADD(year, 2000, @cutoff_date);
 DECLARE @cutoff_sql_at datetime2 = DATEADD(year, 2000, @cutoff_at);
+-- BackupFinishDate is source provenance; every business event uses the effective cutoff.
 DECLARE @backup_finish_at datetime2 = '$(backup_finish_at)';
 DECLARE @backup_finish_sql_at datetime2 = DATEADD(year, 2000, @backup_finish_at);
 DECLARE @output_run_label nvarchar(100) = N'$(output_run_label)';
@@ -38,6 +39,7 @@ DECLARE @cutoff_at datetime2 = '$(cutoff_at)';
 DECLARE @cutoff_date date = CONVERT(date, @cutoff_at);
 DECLARE @cutoff_sql_date date = DATEADD(year, 2000, @cutoff_date);
 DECLARE @cutoff_sql_at datetime2 = DATEADD(year, 2000, @cutoff_at);
+-- BackupFinishDate is source provenance; every business event uses the effective cutoff.
 DECLARE @backup_finish_at datetime2 = '$(backup_finish_at)';
 DECLARE @backup_finish_sql_at datetime2 = DATEADD(year, 2000, @backup_finish_at);
 DECLARE @output_run_label nvarchar(100) = N'$(output_run_label)';
@@ -233,7 +235,7 @@ LEFT JOIN dbo._Reference72 AS p
   ON p._IDRRef = d._Fld1446RRef
 LEFT JOIN dbo._Reference105 AS org
   ON org._IDRRef = d._Fld1443RRef
-WHERE d._Date_Time <= @backup_finish_sql_at;
+WHERE d._Date_Time <= @cutoff_sql_at;
 
 CREATE INDEX IX_doc163_docs_sale_ref ON #document163_docs(sale_ref_bin);
 CREATE INDEX IX_doc163_docs_client_ref ON #document163_docs(client_ref_bin);
@@ -455,7 +457,6 @@ WITH owner_change_base AS (
     WHERE d._Posted = 0x01
       AND d._Marked = 0x00
       AND d._Date_Time <= @cutoff_sql_at
-      AND d._Date_Time <= @backup_finish_sql_at
       AND d._Fld761RRef = @owner_change_operation_ref
       AND d._Fld762RRef <> 0x00000000000000000000000000000000
       AND d._Fld767RRef <> 0x00000000000000000000000000000000
@@ -527,7 +528,6 @@ WITH owner_change_base AS (
     WHERE d._Posted = 0x01
       AND d._Marked = 0x00
       AND d._Date_Time <= @cutoff_sql_at
-      AND d._Date_Time <= @backup_finish_sql_at
       AND d._Fld761RRef = @owner_change_operation_ref
       AND d._Fld762RRef <> 0x00000000000000000000000000000000
       AND d._Fld767RRef <> 0x00000000000000000000000000000000
@@ -682,7 +682,7 @@ WITH payment_sales AS (
       ON org._IDRRef = d._Fld1051RRef
     WHERE d._Posted = 0x01
       AND d._Marked = 0x00
-      AND d._Date_Time <= @backup_finish_sql_at
+      AND d._Date_Time <= @cutoff_sql_at
 ),
 product_sales AS (
     SELECT

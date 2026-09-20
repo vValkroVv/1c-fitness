@@ -5,9 +5,11 @@ from __future__ import annotations
 
 import argparse
 import csv
+import importlib.util
 from collections import Counter
 from datetime import date, datetime
 from pathlib import Path
+from functools import lru_cache
 from typing import Any
 
 from openpyxl import load_workbook
@@ -56,6 +58,18 @@ TEMPLATE_HEADERS = [
 ]
 
 
+@lru_cache(maxsize=1)
+def manager_tools():
+    """Reuse the same assignment implementation as the main client workbook."""
+    path = ROOT / "scripts" / "12_build_part2_three_funnel_xlsx.py"
+    spec = importlib.util.spec_from_file_location("services_client_manager_assignment", path)
+    if spec is None or spec.loader is None:
+        raise ImportError(path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def as_abs(path: str | Path) -> Path:
     p = Path(path)
     return p if p.is_absolute() else ROOT / p
@@ -80,19 +94,49 @@ def read_service_names(path: Path) -> list[str]:
     return names
 
 
-def read_source_clients(path: Path) -> dict[str, str]:
+def read_source_clients(path: Path) -> tuple[dict[str, str], dict[str, str]]:
     wb = load_workbook(path, read_only=True, data_only=True)
-    ws = wb.active
-    headers = list(next(ws.iter_rows(min_row=1, max_row=1, values_only=True)))
-    client_col = headers.index("client_id")
-    funnel_col = headers.index("funnel")
-    clients = {
-        str(row[client_col]).strip(): str(row[funnel_col] or "").strip()
-        for row in ws.iter_rows(min_row=3, values_only=True)
-        if row[client_col] not in (None, "")
-    }
-    wb.close()
-    return clients
+    try:
+        ws = wb.active
+        headers = list(next(ws.iter_rows(min_row=1, max_row=1, values_only=True)))
+        client_col = headers.index("client_id")
+        funnel_col = headers.index("funnel")
+        manager_col = headers.index("manager")
+        clients: dict[str, str] = {}
+        managers: dict[str, str] = {}
+        for row in ws.iter_rows(min_row=3, values_only=True):
+            if row[client_col] in (None, ""):
+                continue
+            client_id = str(row[client_col]).strip()
+            clients[client_id] = str(row[funnel_col] or "").strip()
+            managers[client_id] = str(row[manager_col] or "").strip()
+        return clients, managers
+    finally:
+        wb.close()
+
+
+def manager_validation_errors(
+    client_rows: list[tuple[Any, ...]],
+    manager_pools: dict[str, list[str]],
+    source_managers: dict[str, str],
+) -> list[str]:
+    """Check every service client, including clients absent from main заявки."""
+    global_managers = manager_pools.get("*", [])
+    global_mismatches = 0
+    source_mismatches = 0
+    for row in client_rows:
+        client_id = str(row[1] or "").strip()
+        actual = str(row[15] or "").strip()
+        if global_managers and actual != manager_tools().stable_manager(client_id, global_managers):
+            global_mismatches += 1
+        if client_id in source_managers and actual != source_managers[client_id]:
+            source_mismatches += 1
+    errors: list[str] = []
+    if global_mismatches:
+        errors.append(f"service manager does not match global client-ID assignment: {global_mismatches}")
+    if source_mismatches:
+        errors.append(f"service managers differ from final import_zayavki: {source_mismatches}")
+    return errors
 
 
 def parse_date(value: Any) -> date | None:
@@ -127,6 +171,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--source-output-dir", default="output/20251115_0800_fix_owner")
     parser.add_argument("--output-dir", default="output/20251115_0800_fix_owner_new_import")
     parser.add_argument("--date-stamp", default=DATE_STAMP)
+    parser.add_argument("--managers-config", default="config/managers_by_club.yml")
     parser.add_argument(
         "--cutoff-date",
         help="Single backup cutoff date; defaults to the first YYYYMMDD in --date-stamp.",
@@ -150,7 +195,8 @@ def main() -> int:
     coverage_path = output_dir / "reports" / "services_coverage_report.csv"
 
     service_names = read_service_names(as_abs(args.services_list))
-    source_clients = read_source_clients(source_clients_xlsx)
+    source_clients, source_managers = read_source_clients(source_clients_xlsx)
+    manager_pools = manager_tools().load_managers(as_abs(args.managers_config))
     source_client_ids = set(source_clients)
     client_headers, client_rows = iter_data_rows(client_xlsx, len(CLIENT_HEADERS))
     template_headers, template_rows = iter_data_rows(template_xlsx, len(TEMPLATE_HEADERS))
@@ -165,6 +211,7 @@ def main() -> int:
 
     errors: list[str] = []
     warnings: list[str] = []
+    errors.extend(manager_validation_errors(client_rows, manager_pools, source_managers))
     if client_headers != CLIENT_HEADERS:
         errors.append(f"client headers mismatch: {client_headers}")
     if template_headers != TEMPLATE_HEADERS:
@@ -452,6 +499,7 @@ def main() -> int:
         f"- services represented in client rows: {len(client_service_names)}",
         f"- source final clients: {len(source_client_ids)}",
         f"- row clients: {len(client_ids)}",
+        f"- manager assignment: {'global client-ID pool' if '*' in manager_pools else 'historical club pools; source workbook equality'}",
         f"- duplicate service_id values: {len(duplicated_service_ids)}",
         f"- rows with a real InfoRg3060 end date: {real_end_date_rows}",
         f"- rows with conservative sale-date fallback: {len(fallback_audit)}",

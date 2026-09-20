@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import importlib.util
 import re
 from collections import Counter, defaultdict
 from copy import copy
@@ -12,6 +13,7 @@ from dataclasses import dataclass
 from datetime import date, datetime
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from pathlib import Path
+from functools import lru_cache
 from typing import Any
 
 from openpyxl import load_workbook
@@ -165,6 +167,18 @@ class SourceClient:
     funnel_step: str
 
 
+@lru_cache(maxsize=1)
+def manager_tools():
+    """Reuse the same assignment implementation as the main client workbook."""
+    path = ROOT / "scripts" / "12_build_part2_three_funnel_xlsx.py"
+    spec = importlib.util.spec_from_file_location("services_client_manager_assignment", path)
+    if spec is None or spec.loader is None:
+        raise ImportError(path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def as_abs(path: str | Path) -> Path:
     p = Path(path)
     return p if p.is_absolute() else ROOT / p
@@ -309,19 +323,27 @@ def fact_client_fio(fact: dict[str, str]) -> str:
     return (fact.get("service_doc_holder_fio") or fact.get("sale_client_fio") or "").strip()
 
 
-def source_client_for_fact(fact: dict[str, str], source_clients: dict[str, SourceClient]) -> SourceClient | None:
+def source_client_for_fact(
+    fact: dict[str, str], source_clients: dict[str, SourceClient],
+    manager_pools: dict[str, list[str]] | None = None,
+) -> SourceClient | None:
     client_id = fact_client_id(fact)
     source = source_clients.get(client_id)
     if source:
         return source
     if not client_id:
         return None
+    global_managers = (manager_pools or {}).get("*", [])
+    manager = (
+        manager_tools().stable_manager(client_id, global_managers)
+        if global_managers else "УТОЧНИТЬ: вне import_заявки"
+    )
     return SourceClient(
         client_id=client_id,
         phone=(fact.get("sale_client_phone") or "").strip(),
         client_fio=fact_client_fio(fact),
         create_date=None,
-        manager="УТОЧНИТЬ: вне import_заявки",
+        manager=manager,
         branch="",
         funnel="",
         funnel_step="",
@@ -406,6 +428,8 @@ def build_rows(
     source_clients: dict[str, SourceClient],
     service_names: list[str],
     facts: list[dict[str, str]],
+    *,
+    manager_pools: dict[str, list[str]] | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, str]], list[dict[str, Any]], dict[str, Counter]]:
     facts_by_service: dict[str, list[dict[str, str]]] = defaultdict(list)
     facts_for_final_by_service: dict[str, list[dict[str, str]]] = defaultdict(list)
@@ -493,7 +517,7 @@ def build_rows(
     seen_ids: Counter[str] = Counter()
     for fact, row_kind in selected_facts:
         client_id = fact_client_id(fact)
-        source = source_client_for_fact(fact, source_clients)
+        source = source_client_for_fact(fact, source_clients, manager_pools)
         if not source:
             continue
 
@@ -707,6 +731,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--source-output-dir", default="output/20251115_0800_fix_owner")
     parser.add_argument("--output-dir", default="output/20251115_0800_fix_owner_new_import")
     parser.add_argument("--date-stamp", default=DATE_STAMP)
+    parser.add_argument("--managers-config", default="config/managers_by_club.yml")
     parser.add_argument("--services-list", default="new-changes/Услуги список нужных.xlsx")
     parser.add_argument("--client-template", default="new-changes/Импорт_услуги_клиентов.xlsx")
     parser.add_argument("--template-template", default="new-changes/Импорт_шаблоны_услуг.xlsx")
@@ -728,7 +753,10 @@ def main() -> int:
     service_names = read_service_names(as_abs(args.services_list))
     facts = read_facts(facts_tsv)
 
-    client_rows, template_rows, uncertainties, coverage_rows, counters = build_rows(source_clients, service_names, facts)
+    manager_pools = manager_tools().load_managers(as_abs(args.managers_config))
+    client_rows, template_rows, uncertainties, coverage_rows, counters = build_rows(
+        source_clients, service_names, facts, manager_pools=manager_pools,
+    )
 
     client_xlsx = output_dir / f"fitbase_import_uslugi_clientov_{args.date_stamp}.xlsx"
     template_xlsx = output_dir / f"fitbase_import_shablony_uslug_{args.date_stamp}.xlsx"

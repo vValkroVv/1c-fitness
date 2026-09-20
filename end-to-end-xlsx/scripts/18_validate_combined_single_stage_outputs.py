@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import importlib.util
 import re
 from collections import Counter, defaultdict
 from datetime import date, datetime
@@ -116,6 +117,35 @@ def load_branches(path: Path) -> dict[str, str]:
     if not isinstance(branches, dict) or not branches:
         raise ValueError(f"No branches found in {path}")
     return {str(club): str(branch) for club, branch in branches.items()}
+
+
+def load_manager_builder():
+    path = ROOT / "scripts" / "12_build_part2_three_funnel_xlsx.py"
+    spec = importlib.util.spec_from_file_location("manager_assignment_builder", path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Cannot load manager assignment: {path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def validate_manager_assignments(
+    main_rows: list[tuple[object, ...]],
+    expected_rows: list[dict[str, str]],
+    managers_config: Path,
+) -> list[str]:
+    builder = load_manager_builder()
+    pools = builder.load_managers(managers_config)
+    expected = [dict(row) for row in expected_rows]
+    builder.assign_managers(expected, pools)
+    errors: list[str] = []
+    if any(not row["manager"] for row in expected):
+        errors.append("manager configuration does not cover every exported client")
+    expected_assignments = Counter((row.get("client_id", ""), row["manager"]) for row in expected)
+    actual_assignments = Counter((str(row[0] or ""), str(row[8] or "")) for row in main_rows)
+    if actual_assignments != expected_assignments:
+        errors.append("main XLSX manager assignments do not match configured deterministic assignment")
+    return errors
 
 
 def workbook_rows(path: Path, first_data_row: int, width: int) -> tuple[list[object], list[tuple[object, ...]]]:
@@ -410,6 +440,7 @@ def validate(args: argparse.Namespace) -> int:
     expected_main_ids = Counter(row.get("client_id", "") for row in expected_main_rows if row.get("client_id"))
     if Counter(xlsx_client_ids) != expected_main_ids:
         errors.append("main XLSX client_id set does not match expected filtered stage rows")
+    errors.extend(validate_manager_assignments(main_rows, expected_main_rows, as_abs(args.managers_config)))
     actual_branch_counts = Counter(str(row[9] or "") for row in main_rows if len(row) >= 10)
     expected_branch_counts = Counter(expected_branch(row, branches_by_club) for row in expected_main_rows)
     if actual_branch_counts != expected_branch_counts:
@@ -612,14 +643,15 @@ def validate(args: argparse.Namespace) -> int:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--cutoff-date", default="2026-06-30")
-    parser.add_argument("--date-stamp", default="20260630")
-    parser.add_argument("--stage-dir", default="work/20260630/owner/staging")
-    parser.add_argument("--output-dir", default="work/20260630/owner")
-    parser.add_argument("--reports-dir", default="work/20260630/owner/reports")
-    parser.add_argument("--main-template", default="templates/import_zayavki.xlsx")
-    parser.add_argument("--cards-template", default="templates/plastic_cards.xlsx")
+    parser.add_argument("--cutoff-date", default="2026-05-25")
+    parser.add_argument("--date-stamp", default="")
+    parser.add_argument("--stage-dir", default="output/part2_20260525_0800_final/staging")
+    parser.add_argument("--output-dir", default="output/part2_20260525_0800_final_combined")
+    parser.add_argument("--reports-dir", default="output/part2_20260525_0800_final/reports")
+    parser.add_argument("--main-template", default="task-desc/Копия Импорт_заявки.xlsx")
+    parser.add_argument("--cards-template", default="task-desc/Пластиковая карта.xlsx")
     parser.add_argument("--branches-config", default=str(DEFAULT_BRANCHES_CONFIG))
+    parser.add_argument("--managers-config", default=str(ROOT / "config" / "managers_by_club.yml"))
     parser.add_argument(
         "--main-require-phone-for-new-applications",
         action="store_true",

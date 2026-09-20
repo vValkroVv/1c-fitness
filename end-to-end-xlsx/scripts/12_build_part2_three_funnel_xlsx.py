@@ -7,7 +7,7 @@ import argparse
 import copy
 import csv
 import hashlib
-from collections import Counter
+from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
 from typing import Iterable
@@ -213,11 +213,37 @@ def write_cards_xlsx(template_path: Path, output_path: Path, rows: list[dict[str
 
 
 def load_managers(path: Path) -> dict[str, list[str]]:
+    """Load one global pool (``managers``), or historical pools by ``clubs``.
+
+    The internal ``*`` key means all clubs, including unknown or empty clubs.
+    Reject mixed configurations so club-specific managers cannot silently win.
+    """
     data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-    clubs = data.get("clubs", {})
-    if not isinstance(clubs, dict) or not clubs:
-        raise ValueError(f"No clubs found in {path}")
-    return {str(club): [str(manager) for manager in managers] for club, managers in clubs.items()}
+    if not isinstance(data, dict):
+        raise ValueError(f"Manager configuration must be a mapping: {path}")
+    if "managers" in data and "clubs" in data:
+        raise ValueError(f"Configure either global managers or clubs, not both: {path}")
+    if "managers" in data:
+        pools = {"*": data["managers"]}
+    else:
+        pools = data.get("clubs", {})
+        if not isinstance(pools, dict) or not pools:
+            raise ValueError(f"No managers or clubs found in {path}")
+    result: dict[str, list[str]] = {}
+    for club, managers in pools.items():
+        if not isinstance(managers, list) or not managers:
+            raise ValueError(f"Manager pool must be a non-empty list: {path}, club={club}")
+        if any(not isinstance(manager, str) or not manager.strip() for manager in managers):
+            raise ValueError(f"Manager names must be non-empty strings: {path}, club={club}")
+        names = [manager.strip() for manager in managers]
+        if len(set(names)) != len(names):
+            raise ValueError(f"Duplicate manager names: {path}, club={club}")
+        result[str(club)] = names
+    return result
+
+
+def managers_for_club(managers_by_club: dict[str, list[str]], club: str) -> list[str]:
+    return managers_by_club.get("*", managers_by_club.get(club, []))
 
 
 def load_branches(path: Path) -> dict[str, str]:
@@ -236,7 +262,7 @@ def stable_manager(client_id: str, managers: list[str]) -> str:
 def assign_managers(rows: list[dict[str, str]], managers_by_club: dict[str, list[str]]) -> None:
     for row in rows:
         club = row.get("normalized_club", "")
-        managers = managers_by_club.get(club)
+        managers = managers_for_club(managers_by_club, club)
         row["manager"] = stable_manager(row.get("client_id", ""), managers) if managers else ""
 
 
@@ -441,7 +467,7 @@ def write_reports(
             **row,
             "last_sale_ref": "",
             "club_source_attempted": row.get("club_source", ""),
-            "reason": "normalized club is empty or not mapped to configured managers",
+            "reason": "normalized club is empty",
         }
         for row in rows
         if not (row.get("normalized_club") or "").strip()
@@ -615,7 +641,7 @@ def write_reports(
         ["client_ref", "client_id", "client_fio", "funnel", "funnel_step", "missing_fields", "create_date"],
     )
 
-    active_diff = build_active_diff(rows, ROOT / "reference" / "previous_active_clients_optional.csv")
+    active_diff = build_active_diff(rows, ROOT / "output" / "final_active_clients_20260429.csv")
     write_csv(
         reports_dir / "active_diff_vs_previous_export.csv",
         active_diff,
@@ -728,14 +754,14 @@ def build_outputs(args: argparse.Namespace) -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--cutoff-date", default="2026-06-30")
-    parser.add_argument("--date-stamp", default="20260630")
-    parser.add_argument("--stage-dir", default=str(ROOT / "work" / "20260630" / "owner" / "staging"))
-    parser.add_argument("--output-dir", default=str(ROOT / "work" / "20260630" / "owner"))
+    parser.add_argument("--cutoff-date", default="2026-04-29")
+    parser.add_argument("--date-stamp", default="")
+    parser.add_argument("--stage-dir", default=str(ROOT / "output" / "part2_20260429" / "staging"))
+    parser.add_argument("--output-dir", default=str(ROOT / "output" / "part2_20260429"))
     parser.add_argument("--reports-dir", default="")
     parser.add_argument("--csv-dir", default="")
-    parser.add_argument("--main-template", default=str(ROOT / "templates" / "import_zayavki.xlsx"))
-    parser.add_argument("--cards-template", default=str(ROOT / "templates" / "plastic_cards.xlsx"))
+    parser.add_argument("--main-template", default=str(ROOT / "task-desc" / "Копия Импорт_заявки.xlsx"))
+    parser.add_argument("--cards-template", default=str(ROOT / "task-desc" / "Пластиковая карта.xlsx"))
     parser.add_argument("--managers-config", default=str(ROOT / "config" / "managers_by_club.yml"))
     parser.add_argument("--branches-config", default=str(ROOT / "config" / "branches_by_club.yml"))
     parser.add_argument("--doc-suffix", default="")

@@ -145,3 +145,11 @@ output/part2_20260429_final_combined/fitbase_active_clients_plastic_cards_202604
 ```text
 output/part2_20260429_final/reports/validation_report.md
 ```
+
+
+## Branch policy
+
+Work only on `main` unless the user explicitly requests a different branch.
+Never create, switch to, commit to, or push another branch without that explicit
+request. This also applies to branches created for worktrees. An ordinary task
+or a request to commit and push does not authorize using a separate branch.

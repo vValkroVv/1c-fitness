@@ -1,0 +1,54 @@
+[
+  {
+    "contract_dimension_type": "000000A3",
+    "secondary_dimension_type": "0000005C",
+    "all_groups": 197353,
+    "retained_groups": 197301,
+    "removed_groups": 24,
+    "added_groups": 28,
+    "changed_balance_groups": 0,
+    "changed_row_count_groups": 58,
+    "june_balance": 2686516.0,
+    "september_historical_balance": 2686516.0,
+    "total_absolute_balance_change": 0.0
+  },
+  {
+    "contract_dimension_type": "0000009A",
+    "secondary_dimension_type": "00000048",
+    "all_groups": 53731,
+    "retained_groups": 53730,
+    "removed_groups": 1,
+    "added_groups": 0,
+    "changed_balance_groups": 1,
+    "changed_row_count_groups": 15,
+    "june_balance": -100537.499,
+    "september_historical_balance": -100538.499,
+    "total_absolute_balance_change": 1.0
+  },
+  {
+    "contract_dimension_type": "000000A3",
+    "secondary_dimension_type": "00000048",
+    "all_groups": 13966,
+    "retained_groups": 13965,
+    "removed_groups": 0,
+    "added_groups": 1,
+    "changed_balance_groups": 1,
+    "changed_row_count_groups": 2,
+    "june_balance": 5976.0,
+    "september_historical_balance": 5988.0,
+    "total_absolute_balance_change": 12.0
+  },
+  {
+    "contract_dimension_type": "000000A3",
+    "secondary_dimension_type": "00000000",
+    "all_groups": 116749,
+    "retained_groups": 116722,
+    "removed_groups": 12,
+    "added_groups": 15,
+    "changed_balance_groups": 1,
+    "changed_row_count_groups": 2777,
+    "june_balance": 658.0,
+    "september_historical_balance": 659.0,
+    "total_absolute_balance_change": 1.0
+  }
+]

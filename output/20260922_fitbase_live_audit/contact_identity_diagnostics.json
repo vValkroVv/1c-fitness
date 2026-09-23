@@ -1,0 +1,3663 @@
+[
+  {
+    "file": "leads_gogolevsky_reactivation_peuna.csv",
+    "csv_row": 253,
+    "client_id": "000013421",
+    "client_fio": "Пахомова Юлия Алексеевна",
+    "_xlsx_row": "15675",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4167606",
+        "live": "79535433693"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000051022",
+        "phone": "+7 (953) 5433693",
+        "client_fio": "Пахомова Юлия Алексеевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000051022",
+        "phone": "+7 (953) 5433693",
+        "client_fio": "Пахомова Юлия Алексеевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_peuna.csv",
+    "csv_row": 1560,
+    "client_id": "000050561",
+    "client_fio": "Дэрук Алина -",
+    "_xlsx_row": "32338",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "",
+        "live": "79535480377"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000032142",
+        "phone": "+7 (953) 5480377",
+        "client_fio": "Дэрук Алина -"
+      },
+      {
+        "client_id": "000050561",
+        "phone": "",
+        "client_fio": "Дэрук Алина -"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000032142",
+        "phone": "+7 (953) 5480377",
+        "client_fio": "Дэрук Алина -"
+      }
+    ]
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_peuna.csv",
+    "csv_row": 4299,
+    "client_id": "000006166",
+    "client_fio": "Зинина Динара Козбековна",
+    "_xlsx_row": "13257",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "00000000000000",
+        "live": ""
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000006166",
+        "phone": "00000000000000",
+        "client_fio": "Зинина Динара Козбековна"
+      }
+    ],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_peuna.csv",
+    "csv_row": 4534,
+    "client_id": "000009158",
+    "client_fio": "Кузнецова Лилия Андреевна",
+    "_xlsx_row": "14247",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "79114000424630424",
+        "live": "79114000424630400"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000009158",
+        "phone": "79114000424630424",
+        "client_fio": "Кузнецова Лилия Андреевна"
+      }
+    ],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_peuna.csv",
+    "csv_row": 5098,
+    "client_id": "000016619",
+    "client_fio": "Смирнова Наталья Александровна",
+    "_xlsx_row": "16716",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "",
+        "live": "79535405844"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000016521",
+        "phone": "+7 (953) 5405844",
+        "client_fio": "Смирнова Наталья Александровна"
+      },
+      {
+        "client_id": "000016619",
+        "phone": "",
+        "client_fio": "Смирнова Наталья Александровна"
+      },
+      {
+        "client_id": "000016620",
+        "phone": "+7 (953) 5253246, +7 (999) 2949684",
+        "client_fio": "Смирнова Наталья Александровна"
+      },
+      {
+        "client_id": "000046428",
+        "phone": "+7 (911) 4140533",
+        "client_fio": "Смирнова Наталья Александровна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000016521",
+        "phone": "+7 (953) 5405844",
+        "client_fio": "Смирнова Наталья Александровна"
+      }
+    ]
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_pilia.csv",
+    "csv_row": 249,
+    "client_id": "000068086",
+    "client_fio": "Булак Карина-Антонина Алексеевна",
+    "_xlsx_row": "39251",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (921) 4502995",
+        "live": "79218007301"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000002236",
+        "phone": "+7 (921) 8007301",
+        "client_fio": "Булак Карина-Антонина Алексеевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000002236",
+        "phone": "+7 (921) 8007301",
+        "client_fio": "Булак Карина-Антонина Алексеевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_pilia.csv",
+    "csv_row": 687,
+    "client_id": "000061988",
+    "client_fio": "Пеуна Максим Иванович",
+    "_xlsx_row": "36821",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "0000000000000000000000000000000000000",
+        "live": ""
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000061988",
+        "phone": "0000000000000000000000000000000000000",
+        "client_fio": "Пеуна Максим Иванович"
+      }
+    ],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_pilia.csv",
+    "csv_row": 1852,
+    "client_id": "000045701",
+    "client_fio": "Кузнецова Олеся Андреевна",
+    "_xlsx_row": "30392",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "000000000000",
+        "live": ""
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000045701",
+        "phone": "000000000000",
+        "client_fio": "Кузнецова Олеся Андреевна"
+      }
+    ],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_pilia.csv",
+    "csv_row": 2682,
+    "client_id": "000034453",
+    "client_fio": "Богданова Ольга Николаевна",
+    "_xlsx_row": "26024",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+9114156787 (7), +7 (911) 4156787",
+        "live": "79215294050"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000001850",
+        "phone": "+7 (921) 5294050",
+        "client_fio": "Богданова Ольга Николаевна"
+      },
+      {
+        "client_id": "000034453",
+        "phone": "+9114156787 (7), +7 (911) 4156787",
+        "client_fio": "Богданова Ольга Николаевна"
+      },
+      {
+        "client_id": "000042807",
+        "phone": "+7 (911) 4031643",
+        "client_fio": "Богданова Ольга Николаевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000001850",
+        "phone": "+7 (921) 5294050",
+        "client_fio": "Богданова Ольга Николаевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_pilia.csv",
+    "csv_row": 3815,
+    "client_id": "000001389",
+    "client_fio": "Бегамов Жамшед Джумаевич",
+    "_xlsx_row": "11587",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "89535389099891140648",
+        "live": "89535389099891097600"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000001389",
+        "phone": "89535389099891140648",
+        "client_fio": "Бегамов Жамшед Джумаевич"
+      }
+    ],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_pilia.csv",
+    "csv_row": 3886,
+    "client_id": "000002338",
+    "client_fio": "Бутов Василий Александрович",
+    "_xlsx_row": "11916",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "-, +7 (996) 9630844",
+        "live": ""
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000002338",
+        "phone": "-, +7 (996) 9630844",
+        "client_fio": "Бутов Василий Александрович"
+      }
+    ],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_pilia.csv",
+    "csv_row": 3984,
+    "client_id": "000003468",
+    "client_fio": "Гао Мин",
+    "_xlsx_row": "12342",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "03031995",
+        "live": "3031995"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000003468",
+        "phone": "03031995",
+        "client_fio": "Гао Мин"
+      }
+    ],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_efremova.csv",
+    "csv_row": 264,
+    "client_id": "000061435",
+    "client_fio": "Пономаренко Яна Владимировна",
+    "_xlsx_row": "36627",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 0536458",
+        "live": "79535296442"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000038681",
+        "phone": "+7 (953) 5296442",
+        "client_fio": "Пономаренко Яна Владимировна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000038681",
+        "phone": "+7 (953) 5296442",
+        "client_fio": "Пономаренко Яна Владимировна"
+      }
+    ]
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_efremova.csv",
+    "csv_row": 1117,
+    "client_id": "000055207",
+    "client_fio": "Корнилова Надежда Николаевна",
+    "_xlsx_row": "34226",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 6636058",
+        "live": "79210199680"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000070176",
+        "phone": "+7 (921) 0199680",
+        "client_fio": "Корнилова Надежда Николаевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000070176",
+        "phone": "+7 (921) 0199680",
+        "client_fio": "Корнилова Надежда Николаевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_efremova.csv",
+    "csv_row": 2404,
+    "client_id": "000037864",
+    "client_fio": "Гаврилова Наталья Сергеевна",
+    "_xlsx_row": "27510",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (921) 0115994",
+        "live": "79535448189"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000025948",
+        "phone": "+7 (953) 5448189, +7 (965) 8171388",
+        "client_fio": "Гаврилова Наталья Сергеевна"
+      },
+      {
+        "client_id": "000037864",
+        "phone": "+7 (921) 0115994",
+        "client_fio": "Гаврилова Наталья Сергеевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000025948",
+        "phone": "+7 (953) 5448189, +7 (965) 8171388",
+        "client_fio": "Гаврилова Наталья Сергеевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_efremova.csv",
+    "csv_row": 4903,
+    "client_id": "000019871",
+    "client_fio": "Шакшин Игорь Александрович",
+    "_xlsx_row": "17805",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "89210185079892101850",
+        "live": "89210185079892099072"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000019871",
+        "phone": "89210185079892101850",
+        "client_fio": "Шакшин Игорь Александрович"
+      }
+    ],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_industrial_active.csv",
+    "csv_row": 1026,
+    "client_id": "000035464",
+    "client_fio": "Анхимова Елена Александровна",
+    "_xlsx_row": "3701",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (953) 5444379",
+        "live": "79114063525"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000035464",
+        "phone": "+7 (953) 5444379",
+        "client_fio": "Анхимова Елена Александровна"
+      },
+      {
+        "client_id": "000061300",
+        "phone": "+7 (911) 4063525",
+        "client_fio": "Анхимова Елена Александровна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000061300",
+        "phone": "+7 (911) 4063525",
+        "client_fio": "Анхимова Елена Александровна"
+      }
+    ]
+  },
+  {
+    "file": "leads_industrial_reactivation.csv",
+    "csv_row": 3061,
+    "client_id": "000006461",
+    "client_fio": "Иванова Мария Александровна",
+    "_xlsx_row": "13341",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (921) 4569025",
+        "live": "79535302950"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000006461",
+        "phone": "+7 (921) 4569025",
+        "client_fio": "Иванова Мария Александровна"
+      },
+      {
+        "client_id": "000069986",
+        "phone": "+7 (953) 5302950",
+        "client_fio": "Иванова Мария Александровна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000069986",
+        "phone": "+7 (953) 5302950",
+        "client_fio": "Иванова Мария Александровна"
+      }
+    ]
+  },
+  {
+    "file": "leads_industrial_reactivation.csv",
+    "csv_row": 3094,
+    "client_id": "000009081",
+    "client_fio": "Кузнецов Андрей Николаевич",
+    "_xlsx_row": "14224",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (921) 7011801",
+        "live": "79116656859"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000009081",
+        "phone": "+7 (921) 7011801",
+        "client_fio": "Кузнецов Андрей Николаевич"
+      },
+      {
+        "client_id": "000029999",
+        "phone": "+7 (911) 6656859",
+        "client_fio": "Кузнецов Андрей Николаевич"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000029999",
+        "phone": "+7 (911) 6656859",
+        "client_fio": "Кузнецов Андрей Николаевич"
+      }
+    ]
+  },
+  {
+    "file": "leads_industrial_reactivation.csv",
+    "csv_row": 3417,
+    "client_id": "000025336",
+    "client_fio": "Дарья Николаевна",
+    "_xlsx_row": "20996",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4020339",
+        "live": "79114263128"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000025336",
+        "phone": "+7 (911) 4020339",
+        "client_fio": "Дарья Николаевна"
+      },
+      {
+        "client_id": "000057870",
+        "phone": "+7 (911) 4263128",
+        "client_fio": "Дарья Николаевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000057870",
+        "phone": "+7 (911) 4263128",
+        "client_fio": "Дарья Николаевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_industrial_reactivation.csv",
+    "csv_row": 3450,
+    "client_id": "000025511",
+    "client_fio": "Захарова Наталья Владимировна",
+    "_xlsx_row": "21124",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (921) 4524696",
+        "live": "79114245652"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000025511",
+        "phone": "+7 (921) 4524696",
+        "client_fio": "Захарова Наталья Владимировна"
+      },
+      {
+        "client_id": "000044434",
+        "phone": "+7 (911) 4245652",
+        "client_fio": "Захарова Наталья Владимировна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000044434",
+        "phone": "+7 (911) 4245652",
+        "client_fio": "Захарова Наталья Владимировна"
+      }
+    ]
+  },
+  {
+    "file": "leads_industrial_reactivation.csv",
+    "csv_row": 3459,
+    "client_id": "000025540",
+    "client_fio": "Барсуков Лев Александрович",
+    "_xlsx_row": "21148",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4121069",
+        "live": "79116663313"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000025540",
+        "phone": "+7 (911) 4121069",
+        "client_fio": "Барсуков Лев Александрович"
+      },
+      {
+        "client_id": "000071589",
+        "phone": "+7 (911) 6663313",
+        "client_fio": "Барсуков Лев Александрович"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000071589",
+        "phone": "+7 (911) 6663313",
+        "client_fio": "Барсуков Лев Александрович"
+      }
+    ]
+  },
+  {
+    "file": "leads_industrial_reactivation.csv",
+    "csv_row": 3583,
+    "client_id": "000025968",
+    "client_fio": "Тесаева Тамила Хасановна",
+    "_xlsx_row": "21462",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 6680249",
+        "live": "791166249"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000025968",
+        "phone": "+7 (911) 6680249",
+        "client_fio": "Тесаева Тамила Хасановна"
+      },
+      {
+        "client_id": "000027461",
+        "phone": "+7 (911) 66249",
+        "client_fio": "Тесаева Тамила Хасановна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000027461",
+        "phone": "+7 (911) 66249",
+        "client_fio": "Тесаева Тамила Хасановна"
+      }
+    ]
+  },
+  {
+    "file": "leads_industrial_reactivation.csv",
+    "csv_row": 3661,
+    "client_id": "000026221",
+    "client_fio": "Семенова Юлия Александровна",
+    "_xlsx_row": "21655",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 6603462",
+        "live": "79313651280"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000026221",
+        "phone": "+7 (911) 6603462",
+        "client_fio": "Семенова Юлия Александровна"
+      },
+      {
+        "client_id": "000075356",
+        "phone": "+7 (931) 3651280",
+        "client_fio": "Семенова Юлия Александровна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000075356",
+        "phone": "+7 (931) 3651280",
+        "client_fio": "Семенова Юлия Александровна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_active.csv",
+    "csv_row": 267,
+    "client_id": "000072748",
+    "client_fio": "Маликина Нина Олеговна",
+    "_xlsx_row": "9649",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (921) 2268464",
+        "live": "79535341825"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000024453",
+        "phone": "+7 (953) 5341825",
+        "client_fio": "Маликина Нина Олеговна"
+      },
+      {
+        "client_id": "000072748",
+        "phone": "+7 (921) 2268464",
+        "client_fio": "Маликина Нина Олеговна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000024453",
+        "phone": "+7 (953) 5341825",
+        "client_fio": "Маликина Нина Олеговна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_active.csv",
+    "csv_row": 710,
+    "client_id": "000068456",
+    "client_fio": "Михеева Наталья Александровна",
+    "_xlsx_row": "7871",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 0353717",
+        "live": "79027711959"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000055372",
+        "phone": "+7 (902) 7711959",
+        "client_fio": "Михеева Наталья Александровна"
+      },
+      {
+        "client_id": "000068456",
+        "phone": "+7 (911) 0353717",
+        "client_fio": "Михеева Наталья Александровна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000055372",
+        "phone": "+7 (902) 7711959",
+        "client_fio": "Михеева Наталья Александровна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_active.csv",
+    "csv_row": 781,
+    "client_id": "000066956",
+    "client_fio": "Васильев Иван Александрович",
+    "_xlsx_row": "7542",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (900) 4551500",
+        "live": "79637432182"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000066956",
+        "phone": "+7 (900) 4551500",
+        "client_fio": "Васильев Иван Александрович"
+      },
+      {
+        "client_id": "000072278",
+        "phone": "+7 (963) 7432182",
+        "client_fio": "Васильев Иван Александрович"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000072278",
+        "phone": "+7 (963) 7432182",
+        "client_fio": "Васильев Иван Александрович"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_active.csv",
+    "csv_row": 1301,
+    "client_id": "000036174",
+    "client_fio": "Бочарова Екатерина Сергеевна",
+    "_xlsx_row": "3763",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4387613",
+        "live": "79643172852"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000036174",
+        "phone": "+7 (911) 4387613",
+        "client_fio": "Бочарова Екатерина Сергеевна"
+      },
+      {
+        "client_id": "000039609",
+        "phone": "+7 (964) 3172852",
+        "client_fio": "Бочарова Екатерина Сергеевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000039609",
+        "phone": "+7 (964) 3172852",
+        "client_fio": "Бочарова Екатерина Сергеевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_active.csv",
+    "csv_row": 1376,
+    "client_id": "000035550",
+    "client_fio": "Ловчикова Елена Генадьевна",
+    "_xlsx_row": "3707",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (921) 0135306",
+        "live": "79114097290"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000032989",
+        "phone": "+7 (911) 4097290",
+        "client_fio": "Ловчикова Елена Генадьевна"
+      },
+      {
+        "client_id": "000035550",
+        "phone": "+7 (921) 0135306",
+        "client_fio": "Ловчикова Елена Генадьевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000032989",
+        "phone": "+7 (911) 4097290",
+        "client_fio": "Ловчикова Елена Генадьевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_active.csv",
+    "csv_row": 1604,
+    "client_id": "000007541",
+    "client_fio": "Кирилюк Дмитрий Сергеевич",
+    "_xlsx_row": "609",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4069276",
+        "live": "79114188249"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000007541",
+        "phone": "+7 (911) 4069276",
+        "client_fio": "Кирилюк Дмитрий Сергеевич"
+      },
+      {
+        "client_id": "000049421",
+        "phone": "+7 (911) 4188249",
+        "client_fio": "Кирилюк Дмитрий Сергеевич"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000049421",
+        "phone": "+7 (911) 4188249",
+        "client_fio": "Кирилюк Дмитрий Сергеевич"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_active.csv",
+    "csv_row": 1672,
+    "client_id": "000016625",
+    "client_fio": "Смирнова Ольга Владимировна",
+    "_xlsx_row": "1402",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (953) 5252178",
+        "live": "79062098335"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000016625",
+        "phone": "+7 (953) 5252178",
+        "client_fio": "Смирнова Ольга Владимировна"
+      },
+      {
+        "client_id": "000063872",
+        "phone": "+7 (906) 2098335",
+        "client_fio": "Смирнова Ольга Владимировна"
+      },
+      {
+        "client_id": "000067212",
+        "phone": "+7 (953) 5310618",
+        "client_fio": "Смирнова Ольга Владимировна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000063872",
+        "phone": "+7 (906) 2098335",
+        "client_fio": "Смирнова Ольга Владимировна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_active.csv",
+    "csv_row": 1811,
+    "client_id": "000027544",
+    "client_fio": "Никитина Юлия Николаевна",
+    "_xlsx_row": "2712",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 6670092",
+        "live": "79210109644"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000027544",
+        "phone": "+7 (911) 6670092",
+        "client_fio": "Никитина Юлия Николаевна"
+      },
+      {
+        "client_id": "000065049",
+        "phone": "+7 (921) 0109644",
+        "client_fio": "Никитина Юлия Николаевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000065049",
+        "phone": "+7 (921) 0109644",
+        "client_fio": "Никитина Юлия Николаевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 341,
+    "client_id": "000067641",
+    "client_fio": "Полькина Галина Андреевна",
+    "_xlsx_row": "39079",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4162012",
+        "live": "79114162013"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000068084",
+        "phone": "+7 (911) 4162013",
+        "client_fio": "Полькина Галина Андреевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000068084",
+        "phone": "+7 (911) 4162013",
+        "client_fio": "Полькина Галина Андреевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 359,
+    "client_id": "000067442",
+    "client_fio": "Левицкая Анна Анатольевна",
+    "_xlsx_row": "38994",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "Левицкая Анна Анатольевна, +7 (911) 4161578",
+        "live": ""
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000067442",
+        "phone": "Левицкая Анна Анатольевна, +7 (911) 4161578",
+        "client_fio": "Левицкая Анна Анатольевна"
+      }
+    ],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 404,
+    "client_id": "000066889",
+    "client_fio": "Дарья",
+    "_xlsx_row": "38763",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "00",
+        "live": "79535351215"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000032859",
+        "phone": "+7 (953) 5351215",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000033959",
+        "phone": "+7 (968) 1805082",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000036550",
+        "phone": "+7 (963) 7495759",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000038383",
+        "phone": "+7 (909) 5691626",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000038992",
+        "phone": "+7 (911) 4219288",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000039030",
+        "phone": "+7 (921) 4219288",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000039879",
+        "phone": "+7 (963) 7476932",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000040003",
+        "phone": "+7 (964) 3075806",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000040091",
+        "phone": "+7 (900) 4569310",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000040847",
+        "phone": "+7 (960) 2123430",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000041128",
+        "phone": "+7 (981) 4057167",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000041284",
+        "phone": "+7 (953) 5253650",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000041507",
+        "phone": "+7 (911) 4082432",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000041872",
+        "phone": "+7 (960) 2135947",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000042186",
+        "phone": "+7 (999) 2900756",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000042466",
+        "phone": "+7 (911) 6671501",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000042477",
+        "phone": "+7 (911) 4073250",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000042794",
+        "phone": "+7 (953) 5262356",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000043594",
+        "phone": "+7 (953) 5299791",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000046662",
+        "phone": "+7 (963) 7466607",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000050265",
+        "phone": "+7 (953) 5410186",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000051927",
+        "phone": "+7 (8142) 536735",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000053072",
+        "phone": "+7 (911) 4077545",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000053638",
+        "phone": "+7 (900) 4573057",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000056113",
+        "phone": "+7 (8142) 566040",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000056543",
+        "phone": "+7 (953) 5291602",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000057008",
+        "phone": "+7 (906) 1932937",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000057421",
+        "phone": "+7 (953) 5456319",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000058014",
+        "phone": "+7 (911) 4145162",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000058070",
+        "phone": "+7 (950) 8907969",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000058166",
+        "phone": "+7 (993) 3842764",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000058372",
+        "phone": "+7 (953) 5322550",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000060296",
+        "phone": "+7 (902) 7707810",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000060901",
+        "phone": "+7 (921) 4580956",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000061939",
+        "phone": "+7 (995) 3294780",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000063678",
+        "phone": "+7 (953) 5362389",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000063695",
+        "phone": "+7 (953) 5280184",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000063825",
+        "phone": "+7 (952) 2705339",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000064375",
+        "phone": "+7 (911) 4143000",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000064412",
+        "phone": "+7 (911) 4378292",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000064469",
+        "phone": "+7 (911) 6699291",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000065161",
+        "phone": "+7 (911) 6663661",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000065178",
+        "phone": "+7 (953) 5262020",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000066410",
+        "phone": "+7 (911) 4200425",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000066500",
+        "phone": "+7 (953) 5483963",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000066793",
+        "phone": "+7 (911) 6691515",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000066889",
+        "phone": "00",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000067085",
+        "phone": "+7 (921) 4526884",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000067329",
+        "phone": "+7 (911) 3398056",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000067525",
+        "phone": "+7 (981) 4048726",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000067619",
+        "phone": "+7 (911) 4182989",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000067993",
+        "phone": "+7 (953) 5435056",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000068465",
+        "phone": "+7 (902) 7724190",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000068753",
+        "phone": "+7 (911) 0531708",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000069078",
+        "phone": "+7 (996) 1127323",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000069183",
+        "phone": "+7 (921) 5264636",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000069600",
+        "phone": "+7 (921) 0172631",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000069621",
+        "phone": "+7 (953) 5484820",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000070320",
+        "phone": "+7 (911) 4311885",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000070544",
+        "phone": "+7 (921) 4565699",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000071014",
+        "phone": "+7 (909) 5696900",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000071163",
+        "phone": "+7 (953) 5429578",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000073147",
+        "phone": "+7 (911) 4268466",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000073584",
+        "phone": "+7 (981) 4058392",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000075084",
+        "phone": "+7 (902) 7702425",
+        "client_fio": "Дарья"
+      },
+      {
+        "client_id": "000075123",
+        "phone": "+7 (911) 4117986",
+        "client_fio": "Дарья"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000032859",
+        "phone": "+7 (953) 5351215",
+        "client_fio": "Дарья"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 425,
+    "client_id": "000001825",
+    "client_fio": "Богданова Екатерина Владимировна",
+    "_xlsx_row": "11739",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4277049",
+        "live": "79877114946"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000064919",
+        "phone": "+7 (987) 7114946",
+        "client_fio": "Богданова Екатерина Владимировна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000064919",
+        "phone": "+7 (987) 7114946",
+        "client_fio": "Богданова Екатерина Владимировна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 426,
+    "client_id": "000066563",
+    "client_fio": "Погребняк Ирина Ивановна",
+    "_xlsx_row": "38653",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (981) 7614751",
+        "live": "79114384313"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000013935",
+        "phone": "+7 (911) 4384313",
+        "client_fio": "Погребняк Ирина Ивановна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000013935",
+        "phone": "+7 (911) 4384313",
+        "client_fio": "Погребняк Ирина Ивановна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 502,
+    "client_id": "000065048",
+    "client_fio": "Белянинова Надежда Юрьевна",
+    "_xlsx_row": "38055",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (963) 7417340",
+        "live": "79602102174"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000001555",
+        "phone": "+7 (960) 2102174",
+        "client_fio": "Белянинова Надежда Юрьевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000001555",
+        "phone": "+7 (960) 2102174",
+        "client_fio": "Белянинова Надежда Юрьевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 553,
+    "client_id": "000064178",
+    "client_fio": "Светлана",
+    "_xlsx_row": "37739",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4075301",
+        "live": "7911405410"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000004284",
+        "phone": "+7 (911) 4376863",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000025234",
+        "phone": "+7 (911) 4183541",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000032959",
+        "phone": "+8 (911) 405410",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000033933",
+        "phone": "+7 (922) 2274705",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000035441",
+        "phone": "+7 (906) 2072999",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000035938",
+        "phone": "+7 (911) 4197369",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000036366",
+        "phone": "+7 (911) 4362058",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000036893",
+        "phone": "+7 (900) 4647512",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000036894",
+        "phone": "+7 (911) 4071909",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000038835",
+        "phone": "+7 (921) 4630309",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000039155",
+        "phone": "+7 (909) 5710220",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000040232",
+        "phone": "+7 (911) 4132764",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000040401",
+        "phone": "+7 (953) 5300308",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000040655",
+        "phone": "+7 (921) 5220594",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000041679",
+        "phone": "+7 (902) 7700443",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000042206",
+        "phone": "+7 (953) 5292416",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000043236",
+        "phone": "+7 (8142) 760401",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000043421",
+        "phone": "+7 (921) 0144681",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000043553",
+        "phone": "+7 (911) 4209601",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000045249",
+        "phone": "+7 (953) 5443647",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000046708",
+        "phone": "+7 (911) 4040213",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000047050",
+        "phone": "+7 (921) 4661280",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000048694",
+        "phone": "+7 (911) 4071290",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000051921",
+        "phone": "+7 (953) 5437239",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000052080",
+        "phone": "+7 (911) 4093514",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000052279",
+        "phone": "+7 (921) 6206128",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000052921",
+        "phone": "+7 (921) 6040510",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000053635",
+        "phone": "+7 (921) 2247408",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000053750",
+        "phone": "+7 (911) 3018840",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000054916",
+        "phone": "+7 (963) 3432833",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000055767",
+        "phone": "+7 (953) 5476333",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000056862",
+        "phone": "+7 (911) 6612870",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000057139",
+        "phone": "+7 (931) 7014285",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000057582",
+        "phone": "+7 (921) 2207342",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000059726",
+        "phone": "+7 (7911) 429340",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000059785",
+        "phone": "+7 (906) 2086477",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000060056",
+        "phone": "+7 (953) 5471779",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000060433",
+        "phone": "+7 (900) 4551261",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000060976",
+        "phone": "+7 (968) 6363615",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000061225",
+        "phone": "+7 (921) 4535294",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000061379",
+        "phone": "+7 (911) 4114193",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000061703",
+        "phone": "+7 (958) 1692379",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000062096",
+        "phone": "+7 (921) 3093479",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000062241",
+        "phone": "+7 (921) 0113745",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000062692",
+        "phone": "+7 (900) 4641929",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000062696",
+        "phone": "+7 (911) 4258697",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000062828",
+        "phone": "+7 (965) 0204645",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000063220",
+        "phone": "+7 (911) 4358311",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000064595",
+        "phone": "+7 (995) 5092530",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000064612",
+        "phone": "+7 (981) 7913190",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000064859",
+        "phone": "+7 (921) 453757",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000064932",
+        "phone": "+7 (960) 2138177",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000066558",
+        "phone": "+7 (911) 0519448",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000066575",
+        "phone": "+7 (911) 4034018",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000066732",
+        "phone": "+7 (963) 7450308",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000066799",
+        "phone": "+7 (911) 4335005",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000066830",
+        "phone": "+7 (921) 4669283",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000067318",
+        "phone": "+7 (911) 4072534",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000067456",
+        "phone": "+7 (911) 4389794",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000068082",
+        "phone": "+7 (921) 7285026",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000068281",
+        "phone": "+7 (921) 0133340",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000068752",
+        "phone": "+7 (911) 4114449",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000069322",
+        "phone": "+7 (911) 3051233",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000069372",
+        "phone": "+7 (911) 4132116",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000069413",
+        "phone": "+7 (911) 4212771",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000069813",
+        "phone": "+7 (953) 5325761",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000070002",
+        "phone": "+7 (921) 4672295",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000070261",
+        "phone": "+7 (905) 2997247",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000071330",
+        "phone": "+7 (921) 5259945",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000071378",
+        "phone": "+7 (931) 7017978",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000071421",
+        "phone": "+7 (911) 4346965",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000071960",
+        "phone": "+7 (921) 4501147",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000072115",
+        "phone": "+7 (911) 4206457",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000074296",
+        "phone": "+7 (911) 4089962",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000074723",
+        "phone": "+7 (902) 7701323",
+        "client_fio": "Светлана"
+      },
+      {
+        "client_id": "000075521",
+        "phone": "+7 (921) 5289673",
+        "client_fio": "Светлана"
+      }
+    ],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 671,
+    "client_id": "000062281",
+    "client_fio": "Оксана",
+    "_xlsx_row": "36938",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4145111",
+        "live": "78142762406"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000034764",
+        "phone": "+7 (911) 4284436",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000035365",
+        "phone": "+7 (911) 4306103",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000036796",
+        "phone": "+7 (911) 4028847",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000037204",
+        "phone": "+7 (8142) 762406",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000037427",
+        "phone": "+7 (953) 5443232",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000037617",
+        "phone": "+7 (911) 4068682",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000037848",
+        "phone": "+7 (921) 4666676",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000037897",
+        "phone": "+7 (911) 4029972",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000039712",
+        "phone": "+7 (8142) 332088",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000040132",
+        "phone": "+7 (911) 4020213",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000040239",
+        "phone": "+7 (906) 2072485",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000044280",
+        "phone": "+7 (921) 0125298",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000045550",
+        "phone": "+7 (953) 5346576",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000046792",
+        "phone": "+7 (909) 1221620",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000048617",
+        "phone": "+7 (981) 4042567",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000048628",
+        "phone": "+7 (911) 4004565",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000049459",
+        "phone": "+7 (921) 2262380",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000050096",
+        "phone": "+7 (909) 5701206",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000050727",
+        "phone": "+7 (953) 5495502",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000052657",
+        "phone": "+7 (911) 4123578",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000053583",
+        "phone": "+7 (953) 5408353",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000054609",
+        "phone": "+7 (911) 4306614",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000054713",
+        "phone": "+7 (911) 4219374",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000059233",
+        "phone": "+7 (911) 4351251",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000061644",
+        "phone": "+7 (953) 5364606",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000064271",
+        "phone": "+7 (953) 5273807",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000064711",
+        "phone": "+7 (911) 4250477",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000064907",
+        "phone": "+7 (911) 4047749",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000064935",
+        "phone": "+7 (921) 4503270",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000065621",
+        "phone": "+7 (900) 4610660",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000066307",
+        "phone": "+7 (921) 4579042",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000067826",
+        "phone": "+7 (911) 4243820",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000068596",
+        "phone": "+7 (902) 7710227",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000068986",
+        "phone": "+7 (911) 4050424",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000069390",
+        "phone": "+7 (911) 4279385",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000070647",
+        "phone": "+7 (911) 4058911",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000071008",
+        "phone": "+7 (981) 4028409",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000071055",
+        "phone": "+7 (911) 4040070",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000071814",
+        "phone": "+7 (921) 0168488",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000072113",
+        "phone": "+7 (911) 4280403",
+        "client_fio": "Оксана"
+      },
+      {
+        "client_id": "000072777",
+        "phone": "+7 (911) 4092691",
+        "client_fio": "Оксана"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000037204",
+        "phone": "+7 (8142) 762406",
+        "client_fio": "Оксана"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 761,
+    "client_id": "000060887",
+    "client_fio": "Петрова Ольга Александровна",
+    "_xlsx_row": "36397",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (900) 4586932",
+        "live": "79215214710"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000065757",
+        "phone": "+7 (921) 5214710",
+        "client_fio": "Петрова Ольга Александровна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000065757",
+        "phone": "+7 (921) 5214710",
+        "client_fio": "Петрова Ольга Александровна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 783,
+    "client_id": "000060241",
+    "client_fio": "Медведева Елена Юрьевна",
+    "_xlsx_row": "36151",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (909) 5711106",
+        "live": "79216282829"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000029067",
+        "phone": "+7 (921) 6282829",
+        "client_fio": "Медведева Елена Юрьевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000029067",
+        "phone": "+7 (921) 6282829",
+        "client_fio": "Медведева Елена Юрьевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 834,
+    "client_id": "000048435",
+    "client_fio": "Иванова Дарья Игоревна",
+    "_xlsx_row": "31456",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (900) 4632475, +7 (8142) 798798",
+        "live": "79114151313"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000071926",
+        "phone": "+7 (911) 4151313",
+        "client_fio": "Иванова Дарья Игоревна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000071926",
+        "phone": "+7 (911) 4151313",
+        "client_fio": "Иванова Дарья Игоревна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 880,
+    "client_id": "000058540",
+    "client_fio": "Романова Алена Игоревна",
+    "_xlsx_row": "35497",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (906) 0347671",
+        "live": "79020347671"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000058540",
+        "phone": "+7 (906) 0347671",
+        "client_fio": "Романова Алена Игоревна"
+      },
+      {
+        "client_id": "000069619",
+        "phone": "+7 (902) 0347671",
+        "client_fio": "Романова Алена Игоревна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000069619",
+        "phone": "+7 (902) 0347671",
+        "client_fio": "Романова Алена Игоревна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 973,
+    "client_id": "000056927",
+    "client_fio": "Удальцова Елена Сергеевна",
+    "_xlsx_row": "34882",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (953) 5420876",
+        "live": "79116614504"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000018311",
+        "phone": "+7 (911) 6614504",
+        "client_fio": "Удальцова Елена Сергеевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000018311",
+        "phone": "+7 (911) 6614504",
+        "client_fio": "Удальцова Елена Сергеевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 988,
+    "client_id": "000057358",
+    "client_fio": "Килбас Марина Ивановна",
+    "_xlsx_row": "35036",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (953) 5287362",
+        "live": "79114154527"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000057079",
+        "phone": "+7 (911) 4154527",
+        "client_fio": "Килбас Марина Ивановна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000057079",
+        "phone": "+7 (911) 4154527",
+        "client_fio": "Килбас Марина Ивановна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 1029,
+    "client_id": "000055975",
+    "client_fio": "Фролова Анастасия Александровна",
+    "_xlsx_row": "34529",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (995) 1046089",
+        "live": "79969637590"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000018941",
+        "phone": "+7 (996) 9637590",
+        "client_fio": "Фролова Анастасия Александровна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000018941",
+        "phone": "+7 (996) 9637590",
+        "client_fio": "Фролова Анастасия Александровна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 1094,
+    "client_id": "000055443",
+    "client_fio": "Томилина Елена Владимировна",
+    "_xlsx_row": "34306",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4241989",
+        "live": "79114072341"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000028351",
+        "phone": "+7 (911) 4072341",
+        "client_fio": "Томилина Елена Владимировна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000028351",
+        "phone": "+7 (911) 4072341",
+        "client_fio": "Томилина Елена Владимировна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 1192,
+    "client_id": "000053269",
+    "client_fio": "Малявко Лариса Валерьевна",
+    "_xlsx_row": "33411",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4030827",
+        "live": "79602148459"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000010831",
+        "phone": "+7 (960) 2148459",
+        "client_fio": "Малявко Лариса Валерьевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000010831",
+        "phone": "+7 (960) 2148459",
+        "client_fio": "Малявко Лариса Валерьевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 1242,
+    "client_id": "000053337",
+    "client_fio": "Зайцева Александра Владимировна",
+    "_xlsx_row": "33431",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (900) 4628462",
+        "live": "79535263490"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000043954",
+        "phone": "+7 (953) 5263490, +7 (911) 4328035",
+        "client_fio": "Зайцева Александра Владимировна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000043954",
+        "phone": "+7 (953) 5263490, +7 (911) 4328035",
+        "client_fio": "Зайцева Александра Владимировна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 1243,
+    "client_id": "000053333",
+    "client_fio": "Сорокина Елена Викторовна",
+    "_xlsx_row": "33430",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4270100",
+        "live": "79116625312"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000027232",
+        "phone": "+7 (911) 4378528",
+        "client_fio": "Сорокина Елена Викторовна"
+      },
+      {
+        "client_id": "000048125",
+        "phone": "+7 (911) 6625312",
+        "client_fio": "Сорокина Елена Викторовна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000048125",
+        "phone": "+7 (911) 6625312",
+        "client_fio": "Сорокина Елена Викторовна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 1439,
+    "client_id": "000050183",
+    "client_fio": "Назарьев Михаил Александрович",
+    "_xlsx_row": "32157",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4201331",
+        "live": "79114201231"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000027258",
+        "phone": "+7 (911) 4201231",
+        "client_fio": "Назарьев Михаил Александрович"
+      },
+      {
+        "client_id": "000050183",
+        "phone": "+7 (911) 4201331",
+        "client_fio": "Назарьев Михаил Александрович"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000027258",
+        "phone": "+7 (911) 4201231",
+        "client_fio": "Назарьев Михаил Александрович"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 1649,
+    "client_id": "000047305",
+    "client_fio": "Яковенко Елена Николаевна",
+    "_xlsx_row": "30950",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (981) 4027885",
+        "live": "79535460482"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000066943",
+        "phone": "+7 (953) 5460482",
+        "client_fio": "Яковенко Елена Николаевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000066943",
+        "phone": "+7 (953) 5460482",
+        "client_fio": "Яковенко Елена Николаевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 1868,
+    "client_id": "000043387",
+    "client_fio": "Савкина Ирина Анатольевна",
+    "_xlsx_row": "29504",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (963) 7419127",
+        "live": "79602153602"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000015533",
+        "phone": "+7 (960) 2153602, +7 (900) 4633888",
+        "client_fio": "Савкина Ирина Анатольевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000015533",
+        "phone": "+7 (960) 2153602, +7 (900) 4633888",
+        "client_fio": "Савкина Ирина Анатольевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 2030,
+    "client_id": "000040286",
+    "client_fio": "Чуркина Ирина Александровна",
+    "_xlsx_row": "28503",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4045638",
+        "live": "79116694671"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000027476",
+        "phone": "+7 (911) 6694671",
+        "client_fio": "Чуркина Ирина Александровна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000027476",
+        "phone": "+7 (911) 6694671",
+        "client_fio": "Чуркина Ирина Александровна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 2271,
+    "client_id": "000013743",
+    "client_fio": "Пеуна Елена Николаевна",
+    "_xlsx_row": "15794",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "000000000000000000000000000000000",
+        "live": ""
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000013743",
+        "phone": "000000000000000000000000000000000",
+        "client_fio": "Пеуна Елена Николаевна"
+      }
+    ],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 3018,
+    "client_id": "000020304",
+    "client_fio": "Шмелева Наталья Владимировна",
+    "_xlsx_row": "17976",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4247757, +7 (964) 3178190",
+        "live": "79114383941"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000032072",
+        "phone": "+7 (911) 4383941",
+        "client_fio": "Шмелева Наталья Владимировна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000032072",
+        "phone": "+7 (911) 4383941",
+        "client_fio": "Шмелева Наталья Владимировна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 3213,
+    "client_id": "000007106",
+    "client_fio": "Капова Елена Сергеевна",
+    "_xlsx_row": "13567",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (963) 7462044",
+        "live": "79295867988"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000007106",
+        "phone": "+7 (963) 7462044",
+        "client_fio": "Капова Елена Сергеевна"
+      },
+      {
+        "client_id": "000049823",
+        "phone": "+7 (929) 5867988",
+        "client_fio": "Капова Елена Сергеевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000049823",
+        "phone": "+7 (929) 5867988",
+        "client_fio": "Капова Елена Сергеевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 3215,
+    "client_id": "000007467",
+    "client_fio": "Кипиани Марина Григорьевна",
+    "_xlsx_row": "13698",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (953) 5312095",
+        "live": "79992157436"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000007467",
+        "phone": "+7 (953) 5312095",
+        "client_fio": "Кипиани Марина Григорьевна"
+      },
+      {
+        "client_id": "000065214",
+        "phone": "+7 (999) 2157436",
+        "client_fio": "Кипиани Марина Григорьевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000065214",
+        "phone": "+7 (999) 2157436",
+        "client_fio": "Кипиани Марина Григорьевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 3260,
+    "client_id": "000011087",
+    "client_fio": "Матвеев Егор Сергеевич",
+    "_xlsx_row": "14869",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (996) 9636649",
+        "live": "891166557220"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000011087",
+        "phone": "+7 (996) 9636649",
+        "client_fio": "Матвеев Егор Сергеевич"
+      },
+      {
+        "client_id": "000037396",
+        "phone": "891166557220",
+        "client_fio": "Матвеев Егор Сергеевич"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000037396",
+        "phone": "891166557220",
+        "client_fio": "Матвеев Егор Сергеевич"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 3343,
+    "client_id": "000018911",
+    "client_fio": "Фофанова Елена Владимировна",
+    "_xlsx_row": "17482",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4355351",
+        "live": "79215289554"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000018911",
+        "phone": "+7 (911) 4355351",
+        "client_fio": "Фофанова Елена Владимировна"
+      },
+      {
+        "client_id": "000058603",
+        "phone": "+7 (921) 5289554",
+        "client_fio": "Фофанова Елена Владимировна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000058603",
+        "phone": "+7 (921) 5289554",
+        "client_fio": "Фофанова Елена Владимировна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 3521,
+    "client_id": "000026940",
+    "client_fio": "Рыжкова Нина Владимировна",
+    "_xlsx_row": "21939",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 05322",
+        "live": "79110532247"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000030754",
+        "phone": "+7 (911) 0532247",
+        "client_fio": "Рыжкова Нина Владимировна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000030754",
+        "phone": "+7 (911) 0532247",
+        "client_fio": "Рыжкова Нина Владимировна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 3601,
+    "client_id": "000027355",
+    "client_fio": "Соловьева Елена Владимировна",
+    "_xlsx_row": "22119",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4307345",
+        "live": "79535355451"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000039965",
+        "phone": "+7 (953) 5355451",
+        "client_fio": "Соловьева Елена Владимировна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000039965",
+        "phone": "+7 (953) 5355451",
+        "client_fio": "Соловьева Елена Владимировна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 3618,
+    "client_id": "000027390",
+    "client_fio": "Богданова Татьяна Андреевна",
+    "_xlsx_row": "22143",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (953) 5399780",
+        "live": "79116620252"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000033820",
+        "phone": "+7 (911) 6620252",
+        "client_fio": "Богданова Татьяна Андреевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000033820",
+        "phone": "+7 (911) 6620252",
+        "client_fio": "Богданова Татьяна Андреевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 3664,
+    "client_id": "000027453",
+    "client_fio": "Искеева Елена Васильевна",
+    "_xlsx_row": "22195",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4025419, +7 (8142) 795919",
+        "live": "75445454545"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000025761",
+        "phone": "+7 (5445) 454545",
+        "client_fio": "Искеева Елена Васильевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000025761",
+        "phone": "+7 (5445) 454545",
+        "client_fio": "Искеева Елена Васильевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 3692,
+    "client_id": "000027488",
+    "client_fio": "Бондаренко Ксения Андреевна",
+    "_xlsx_row": "22226",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (953) 534178",
+        "live": "79535341789"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000056239",
+        "phone": "+7 (953) 5341789",
+        "client_fio": "Бондаренко Ксения Андреевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000056239",
+        "phone": "+7 (953) 5341789",
+        "client_fio": "Бондаренко Ксения Андреевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 3713,
+    "client_id": "000027514",
+    "client_fio": "Кудрявцева Наталья Николаевна",
+    "_xlsx_row": "22251",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (921) 4625227, +7 (8142) 514877, +7 (921) 4608294",
+        "live": "76587454545"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000009038",
+        "phone": "+7 (6587) 454545",
+        "client_fio": "Кудрявцева Наталья Николаевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000009038",
+        "phone": "+7 (6587) 454545",
+        "client_fio": "Кудрявцева Наталья Николаевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 1288,
+    "client_id": "000052549",
+    "client_fio": "Пашкова Алёна Сергеевна",
+    "_xlsx_row": "33156",
+    "match_basis": "name_yo_date_manager",
+    "differences": {
+      "client_fio": {
+        "source": "Пашкова Алёна Сергеевна",
+        "live": "Пашкова Алена Сергеевна"
+      },
+      "phone_mismatch": {
+        "source": "+7 (953) 5283538",
+        "live": "79110527078"
+      }
+    },
+    "same_name_source_clients": [],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 1294,
+    "client_id": "000052406",
+    "client_fio": "Кошелева Алёна Александровна",
+    "_xlsx_row": "33092",
+    "match_basis": "name_yo_date_manager",
+    "differences": {
+      "client_fio": {
+        "source": "Кошелева Алёна Александровна",
+        "live": "Кошелева Алена Александровна"
+      },
+      "phone_mismatch": {
+        "source": "+7 (953) 5309572",
+        "live": "79116646276"
+      }
+    },
+    "same_name_source_clients": [],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "csv_row": 2570,
+    "client_id": "000032461",
+    "client_fio": "Колмыкова Анастасия Михайловна",
+    "_xlsx_row": "25312",
+    "match_basis": "phone_leading_zero_date_manager",
+    "differences": {
+      "client_fio": {
+        "source": "Колмыкова Анастасия Михайловна",
+        "live": ""
+      },
+      "phone_mismatch": {
+        "source": "000004008159",
+        "live": "4008159"
+      }
+    },
+    "same_name_source_clients": [],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_stolitsa_active.csv",
+    "csv_row": 657,
+    "client_id": "000066805",
+    "client_fio": "Гравченкова Елизавета Денисовна",
+    "_xlsx_row": "7493",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (921) 8057810",
+        "live": "79116657810"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000052825",
+        "phone": "+7 (911) 6657810",
+        "client_fio": "Гравченкова Елизавета Денисовна"
+      },
+      {
+        "client_id": "000066805",
+        "phone": "+7 (921) 8057810",
+        "client_fio": "Гравченкова Елизавета Денисовна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000052825",
+        "phone": "+7 (911) 6657810",
+        "client_fio": "Гравченкова Елизавета Денисовна"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_active.csv",
+    "csv_row": 670,
+    "client_id": "000066663",
+    "client_fio": "Смирнова Екатерина Анатольевна",
+    "_xlsx_row": "7467",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (900) 4552636",
+        "live": "79114208510"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000029532",
+        "phone": "+7 (911) 4208510",
+        "client_fio": "Смирнова Екатерина Анатольевна"
+      },
+      {
+        "client_id": "000066663",
+        "phone": "+7 (900) 4552636",
+        "client_fio": "Смирнова Екатерина Анатольевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000029532",
+        "phone": "+7 (911) 4208510",
+        "client_fio": "Смирнова Екатерина Анатольевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_active.csv",
+    "csv_row": 949,
+    "client_id": "000057546",
+    "client_fio": "Фомина Наталья Александровна",
+    "_xlsx_row": "5926",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (921) 4660084",
+        "live": "79535463539"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000044396",
+        "phone": "+7 (953) 5463539",
+        "client_fio": "Фомина Наталья Александровна"
+      },
+      {
+        "client_id": "000057546",
+        "phone": "+7 (921) 4660084",
+        "client_fio": "Фомина Наталья Александровна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000044396",
+        "phone": "+7 (953) 5463539",
+        "client_fio": "Фомина Наталья Александровна"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_active.csv",
+    "csv_row": 1350,
+    "client_id": "000033951",
+    "client_fio": "Дроздов Андрей Александрович",
+    "_xlsx_row": "3562",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4046009",
+        "live": "79602154327"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000028685",
+        "phone": "+7 (960) 2154327",
+        "client_fio": "Дроздов Андрей Александрович"
+      },
+      {
+        "client_id": "000033951",
+        "phone": "+7 (911) 4046009",
+        "client_fio": "Дроздов Андрей Александрович"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000028685",
+        "phone": "+7 (960) 2154327",
+        "client_fio": "Дроздов Андрей Александрович"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_active.csv",
+    "csv_row": 1495,
+    "client_id": "000007453",
+    "client_fio": "Ким Анастасия Владимировна",
+    "_xlsx_row": "602",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (909) 5721171, +7 (911) 6679004",
+        "live": "79114283719"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000007453",
+        "phone": "+7 (909) 5721171, +7 (911) 6679004",
+        "client_fio": "Ким Анастасия Владимировна"
+      },
+      {
+        "client_id": "000059137",
+        "phone": "+7 (911) 4283719",
+        "client_fio": "Ким Анастасия Владимировна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000059137",
+        "phone": "+7 (911) 4283719",
+        "client_fio": "Ким Анастасия Владимировна"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 333,
+    "client_id": "000066714",
+    "client_fio": "Долгов Владислав Витальевич",
+    "_xlsx_row": "38706",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (999) 8691135",
+        "live": "79536295911"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000041034",
+        "phone": "+7 (953) 6295911",
+        "client_fio": "Долгов Владислав Витальевич"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000041034",
+        "phone": "+7 (953) 6295911",
+        "client_fio": "Долгов Владислав Витальевич"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 353,
+    "client_id": "000066365",
+    "client_fio": "Васильева Анна Сергеевна",
+    "_xlsx_row": "38592",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (995) 1047050",
+        "live": "79114103768"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000037729",
+        "phone": "+7 (911) 4103768",
+        "client_fio": "Васильева Анна Сергеевна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000037729",
+        "phone": "+7 (911) 4103768",
+        "client_fio": "Васильева Анна Сергеевна"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 358,
+    "client_id": "000066343",
+    "client_fio": "Старкова Светлана Владимировна",
+    "_xlsx_row": "38579",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (921) 5200202",
+        "live": "79110535300"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000017033",
+        "phone": "+7 (911) 0535300",
+        "client_fio": "Старкова Светлана Владимировна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000017033",
+        "phone": "+7 (911) 0535300",
+        "client_fio": "Старкова Светлана Владимировна"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 1624,
+    "client_id": "000041594",
+    "client_fio": "Виноградова Ирина Александровна",
+    "_xlsx_row": "28922",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4266300",
+        "live": "79114014450"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000002917",
+        "phone": "+7 (911) 4014450, 891174266300",
+        "client_fio": "Виноградова Ирина Александровна"
+      },
+      {
+        "client_id": "000041594",
+        "phone": "+7 (911) 4266300",
+        "client_fio": "Виноградова Ирина Александровна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000002917",
+        "phone": "+7 (911) 4014450, 891174266300",
+        "client_fio": "Виноградова Ирина Александровна"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 1907,
+    "client_id": "000045976",
+    "client_fio": "Иванова Ольга Викторовна",
+    "_xlsx_row": "30491",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4205106",
+        "live": "79214590556"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000027673",
+        "phone": "+7 (981) 4012328",
+        "client_fio": "Иванова Ольга Викторовна"
+      },
+      {
+        "client_id": "000045976",
+        "phone": "+7 (911) 4205106",
+        "client_fio": "Иванова Ольга Викторовна"
+      },
+      {
+        "client_id": "000051969",
+        "phone": "+7 (921) 4590556",
+        "client_fio": "Иванова Ольга Викторовна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000051969",
+        "phone": "+7 (921) 4590556",
+        "client_fio": "Иванова Ольга Викторовна"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 2170,
+    "client_id": "000041546",
+    "client_fio": "Кузнецова Ирина Александровна",
+    "_xlsx_row": "28903",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 6600360",
+        "live": "79116627816"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000009149",
+        "phone": "+7 (953) 5442571",
+        "client_fio": "Кузнецова Ирина Александровна"
+      },
+      {
+        "client_id": "000041546",
+        "phone": "+7 (911) 6600360",
+        "client_fio": "Кузнецова Ирина Александровна"
+      },
+      {
+        "client_id": "000051988",
+        "phone": "+7 (900) 4555636",
+        "client_fio": "Кузнецова Ирина Александровна"
+      },
+      {
+        "client_id": "000054890",
+        "phone": "+7 (911) 4052760",
+        "client_fio": "Кузнецова Ирина Александровна"
+      },
+      {
+        "client_id": "000071585",
+        "phone": "+7 (911) 6627816",
+        "client_fio": "Кузнецова Ирина Александровна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000071585",
+        "phone": "+7 (911) 6627816",
+        "client_fio": "Кузнецова Ирина Александровна"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 2264,
+    "client_id": "000039947",
+    "client_fio": "Столяров Евгений Сергеевич",
+    "_xlsx_row": "28378",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (981) 4066370",
+        "live": "79637483237"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000039947",
+        "phone": "+7 (981) 4066370",
+        "client_fio": "Столяров Евгений Сергеевич"
+      },
+      {
+        "client_id": "000059345",
+        "phone": "+7 (963) 7483237",
+        "client_fio": "Столяров Евгений Сергеевич"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000059345",
+        "phone": "+7 (963) 7483237",
+        "client_fio": "Столяров Евгений Сергеевич"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 2329,
+    "client_id": "000038671",
+    "client_fio": "Торопова Юлия Сергеевна",
+    "_xlsx_row": "27825",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+0",
+        "live": ""
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000038671",
+        "phone": "+0",
+        "client_fio": "Торопова Юлия Сергеевна"
+      }
+    ],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 2837,
+    "client_id": "000017551",
+    "client_fio": "Таренкова Марина Александровна",
+    "_xlsx_row": "17029",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4081153",
+        "live": "79114039884"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000017551",
+        "phone": "+7 (911) 4081153",
+        "client_fio": "Таренкова Марина Александровна"
+      },
+      {
+        "client_id": "000072812",
+        "phone": "+7 (911) 4039884",
+        "client_fio": "Таренкова Марина Александровна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000072812",
+        "phone": "+7 (911) 4039884",
+        "client_fio": "Таренкова Марина Александровна"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 3130,
+    "client_id": "000000620",
+    "client_fio": "Андреева Юлия Александровна",
+    "_xlsx_row": "11337",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (921) 0181833, +7 (960) 2147913",
+        "live": "79637495316"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000000620",
+        "phone": "+7 (921) 0181833, +7 (960) 2147913",
+        "client_fio": "Андреева Юлия Александровна"
+      },
+      {
+        "client_id": "000075328",
+        "phone": "+7 (963) 7495316",
+        "client_fio": "Андреева Юлия Александровна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000075328",
+        "phone": "+7 (963) 7495316",
+        "client_fio": "Андреева Юлия Александровна"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 3279,
+    "client_id": "000011301",
+    "client_fio": "Мельников Никита Михайлович",
+    "_xlsx_row": "14939",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (963) 4737749, +7 (996) 1122094",
+        "live": "79114108354"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000011301",
+        "phone": "+7 (963) 4737749, +7 (996) 1122094",
+        "client_fio": "Мельников Никита Михайлович"
+      },
+      {
+        "client_id": "000065439",
+        "phone": "+7 (911) 4108354",
+        "client_fio": "Мельников Никита Михайлович"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000065439",
+        "phone": "+7 (911) 4108354",
+        "client_fio": "Мельников Никита Михайлович"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 3293,
+    "client_id": "000012323",
+    "client_fio": "Невзоров Всеволод Петрович",
+    "_xlsx_row": "15302",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (996) 9632581",
+        "live": "79969630581"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000012323",
+        "phone": "+7 (996) 9632581",
+        "client_fio": "Невзоров Всеволод Петрович"
+      },
+      {
+        "client_id": "000043321",
+        "phone": "+7 (996) 9630581",
+        "client_fio": "Невзоров Всеволод Петрович"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000043321",
+        "phone": "+7 (996) 9630581",
+        "client_fio": "Невзоров Всеволод Петрович"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 3351,
+    "client_id": "000016672",
+    "client_fio": "Смурага Анна Леонидовна",
+    "_xlsx_row": "16733",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (960) 2113813",
+        "live": "79116635714"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000016672",
+        "phone": "+7 (960) 2113813",
+        "client_fio": "Смурага Анна Леонидовна"
+      },
+      {
+        "client_id": "000041941",
+        "phone": "+7 (911) 6635714",
+        "client_fio": "Смурага Анна Леонидовна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000041941",
+        "phone": "+7 (911) 6635714",
+        "client_fio": "Смурага Анна Леонидовна"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 3403,
+    "client_id": "000020917",
+    "client_fio": "Абрамовский Дмитрий Владимирович",
+    "_xlsx_row": "18183",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 4337748",
+        "live": "79114337747"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000020917",
+        "phone": "+7 (911) 4337748",
+        "client_fio": "Абрамовский Дмитрий Владимирович"
+      },
+      {
+        "client_id": "000035336",
+        "phone": "+7 (911) 4337747",
+        "client_fio": "Абрамовский Дмитрий Владимирович"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000035336",
+        "phone": "+7 (911) 4337747",
+        "client_fio": "Абрамовский Дмитрий Владимирович"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 3417,
+    "client_id": "000021444",
+    "client_fio": "Иванова Анна Викторовна",
+    "_xlsx_row": "18572",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (909) 5675832",
+        "live": "79114166528"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000021444",
+        "phone": "+7 (909) 5675832",
+        "client_fio": "Иванова Анна Викторовна"
+      },
+      {
+        "client_id": "000064177",
+        "phone": "+7 (911) 4166528",
+        "client_fio": "Иванова Анна Викторовна"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000064177",
+        "phone": "+7 (911) 4166528",
+        "client_fio": "Иванова Анна Викторовна"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 3519,
+    "client_id": "000024451",
+    "client_fio": "Комаров Александр Павлович",
+    "_xlsx_row": "20507",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "+7 (911) 6671757",
+        "live": "79535402241"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000024451",
+        "phone": "+7 (911) 6671757",
+        "client_fio": "Комаров Александр Павлович"
+      },
+      {
+        "client_id": "000055979",
+        "phone": "+7 (953) 5402241",
+        "client_fio": "Комаров Александр Павлович"
+      }
+    ],
+    "live_phone_source_clients": [
+      {
+        "client_id": "000055979",
+        "phone": "+7 (953) 5402241",
+        "client_fio": "Комаров Александр Павлович"
+      }
+    ]
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 3671,
+    "client_id": "000028533",
+    "client_fio": "Евдокимова Татьяна Анатольевна",
+    "_xlsx_row": "22918",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "921457281389004600822",
+        "live": "921457281389004587008"
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000028533",
+        "phone": "921457281389004600822",
+        "client_fio": "Евдокимова Татьяна Анатольевна"
+      }
+    ],
+    "live_phone_source_clients": []
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "csv_row": 4371,
+    "client_id": "000029568",
+    "client_fio": "Васюнова Алина Романовна",
+    "_xlsx_row": "23682",
+    "match_basis": "name_date_manager",
+    "differences": {
+      "phone_mismatch": {
+        "source": "000000000000000",
+        "live": ""
+      }
+    },
+    "same_name_source_clients": [
+      {
+        "client_id": "000029568",
+        "phone": "000000000000000",
+        "client_fio": "Васюнова Алина Романовна"
+      },
+      {
+        "client_id": "000054159",
+        "phone": "+7 (981) 4050291, +7 (981) 4059251",
+        "client_fio": "Васюнова Алина Романовна"
+      }
+    ],
+    "live_phone_source_clients": []
+  }
+]

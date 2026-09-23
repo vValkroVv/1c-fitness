@@ -1,0 +1,17 @@
+[
+  {
+    "table_name": "_AccumRg3305",
+    "june_rows": 783690,
+    "september_rows": 799437,
+    "retained": 783666,
+    "removed": 24,
+    "added": 15771,
+    "changed_Period": 0,
+    "changed_Active": 0,
+    "changed_RecordKind": 0,
+    "changed_Fld3307_RRRef": 0,
+    "changed_Fld3308_RRRef": 0,
+    "changed_Fld3311": 0,
+    "changed_Fld3312": 0
+  }
+]

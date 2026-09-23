@@ -1,0 +1,52 @@
+[
+  {
+    "path": "output/20260922_fitbase_live_audit/price_parsing/all_comparisons.json",
+    "bytes": 399902,
+    "sha256": "3fc5a36ab827ea810776e5820b0304d1355717afaffacabcdb9226c92a3c20ed"
+  },
+  {
+    "path": "output/20260922_fitbase_live_audit/price_parsing/browser_price_evidence.json",
+    "bytes": 123525,
+    "sha256": "6a5f7cc11d66733b884f0d4d45245bb847e7e382154acf6d0cb090c7672048a0"
+  },
+  {
+    "path": "output/20260922_fitbase_live_audit/price_parsing/cross_club_truncation.json",
+    "bytes": 38456,
+    "sha256": "c3b8900c09fd6b95d301b2b5d89f1e89f9fbd631c342a9cf0a5c8ab48a605556"
+  },
+  {
+    "path": "output/20260922_fitbase_live_audit/price_parsing/membership_all_prices.csv",
+    "bytes": 117048,
+    "sha256": "6a45784f27eed69a9959c26a0ea1da0ddba36eab7824cb20c229318344436ee4"
+  },
+  {
+    "path": "output/20260922_fitbase_live_audit/price_parsing/service_all_prices.csv",
+    "bytes": 38179,
+    "sha256": "5e8f3d366b5c0aa0e10d61e5c96c3ada0741b80b2bc078625fab3603269dcce6"
+  },
+  {
+    "path": "output/20260922_fitbase_live_audit/price_parsing/source_cells.json",
+    "bytes": 62058,
+    "sha256": "1006d063022659f69e5bdb479e2a7e4465c1df2ac3186a804d2b9e6a9daeee78"
+  },
+  {
+    "path": "output/20260922_fitbase_live_audit/price_parsing/summary.json",
+    "bytes": 2664,
+    "sha256": "7c8319c1114a1757349d16c1e88cf2c3da0f999aef373c20f6d0795a0948efd4"
+  },
+  {
+    "path": "output/20260922_fitbase_live_audit/price_parsing/verification.json",
+    "bytes": 306,
+    "sha256": "a5e833dfbfbc074814a5c2071583db6ac902118eb17649fb21e72fa2f1c1e37a"
+  },
+  {
+    "path": "docs/20260922_fitbase_template_price_separator_audit.md",
+    "bytes": 43387,
+    "sha256": "ebd4d8cf586e598df27c659da9472c982309dd54561e74736048606a498ecbf5"
+  },
+  {
+    "path": "scripts/audit_20260922_template_price_parsing.py",
+    "bytes": 10154,
+    "sha256": "961a63bd08de6ee3d67fa39358764f29f282643e23fd12ed2d9afd6f605f1c10"
+  }
+]

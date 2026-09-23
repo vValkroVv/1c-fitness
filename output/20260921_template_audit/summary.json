@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "accepted_rows": 7,
+  "resolutions": 7,
+  "new_anchor_count": 3,
+  "historical_anchor_count": 4,
+  "cutoff_at": "2026-09-21 20:12:12",
+  "sources_read_only": true
+}

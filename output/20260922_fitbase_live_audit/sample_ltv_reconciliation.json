@@ -1,0 +1,137 @@
+[
+  {
+    "client_fio": "Рахманен Наталья Анатольевна",
+    "client_id": "000067749",
+    "source_sum_paid": 10990.0,
+    "live_ltv": 10990.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 144
+  },
+  {
+    "client_fio": "Гайдэу Леон Романович",
+    "client_id": "000075116",
+    "source_sum_paid": 7425.0,
+    "live_ltv": 7425.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence.json",
+    "observation_index": 8
+  },
+  {
+    "client_fio": "Агапитов Юрий Юрьевич",
+    "client_id": "000000148",
+    "source_sum_paid": 25788.0,
+    "live_ltv": 25788.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence.json",
+    "observation_index": 16
+  },
+  {
+    "client_fio": "Капитонова Вероника Владимировна",
+    "client_id": "000068078",
+    "source_sum_paid": 28980.0,
+    "live_ltv": 28980.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence.json",
+    "observation_index": 20
+  },
+  {
+    "client_fio": "Береснев Денис Сергеевич",
+    "client_id": "000041039",
+    "source_sum_paid": 70478.0,
+    "live_ltv": 70478.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 44
+  },
+  {
+    "client_fio": "Таразевич Дарья Владимировна",
+    "client_id": "000000048",
+    "source_sum_paid": 53728.0,
+    "live_ltv": 53728.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence.json",
+    "observation_index": 37
+  },
+  {
+    "client_fio": "Авдеев Сергей Александрович",
+    "client_id": "000000103",
+    "source_sum_paid": 71729.0,
+    "live_ltv": 71729.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence.json",
+    "observation_index": 38
+  },
+  {
+    "client_fio": "Акимова Татьяна Владимировна",
+    "client_id": "000000248",
+    "source_sum_paid": 16689.0,
+    "live_ltv": 16689.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 87
+  },
+  {
+    "client_fio": "Елина Валентина Леонидовна",
+    "client_id": "000005344",
+    "source_sum_paid": 67368.0,
+    "live_ltv": 67368.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence.json",
+    "observation_index": 53
+  },
+  {
+    "client_fio": "Дьяченко Екатерина Григорьевна",
+    "client_id": "000074882",
+    "source_sum_paid": 4100.0,
+    "live_ltv": 4100.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 96
+  },
+  {
+    "client_fio": "Казурова Екатерина Юрьевна",
+    "client_id": "000061610",
+    "source_sum_paid": 54880.0,
+    "live_ltv": 54880.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 146
+  },
+  {
+    "client_fio": "Шипулова Вероника (Тренер)",
+    "client_id": "000036376",
+    "source_sum_paid": 955500.0,
+    "live_ltv": 955500.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 5
+  },
+  {
+    "client_fio": "Щербакова Алина Игоревна",
+    "client_id": "000051181",
+    "source_sum_paid": 10990.0,
+    "live_ltv": 10990.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 58
+  },
+  {
+    "client_fio": "Беланина Елена Юрьевна",
+    "client_id": "000001417",
+    "source_sum_paid": 28919.0,
+    "live_ltv": 28919.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 65
+  },
+  {
+    "client_fio": "Годоев Олег Николаевич",
+    "client_id": "000003761",
+    "source_sum_paid": 23494.0,
+    "live_ltv": 23494.0,
+    "difference": 0.0,
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 81
+  }
+]

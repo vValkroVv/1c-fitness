@@ -1,0 +1,713 @@
+[
+  {
+    "current_name": "Абонемент МУЛЬТИКАРТА 12 месяцев (3 месяца заморозки в подарок)",
+    "accepted_name": "Абонемент МУЛЬТИКАРТА 12 месяцев (3 месяца заморозки в подарок)",
+    "accepted_workbook_range": "A17:L17",
+    "accepted_attributes": {
+      "price": 11990,
+      "duration": 12,
+      "visits": null,
+      "freeze": 90,
+      "branches_access": "Все"
+    },
+    "source_contract_id": "00000138863",
+    "source_contract_ref": "961FD7436FB7465C429550D3C80A45F0",
+    "selection": "preserve_existing_historical_anchor",
+    "matching_current_contracts": [
+      "00000136412",
+      "00000136640"
+    ],
+    "source_present_in_june": true,
+    "current_candidate": {
+      "name": "Абонемент МУЛЬТИКАРТА 12 месяцев (3 месяца заморозки в подарок)",
+      "contract_id": "00000138863",
+      "contract_ref": "961FD7436FB7465C429550D3C80A45F0",
+      "product_ref": "B07D000C29D830FD11F024ECA950807E",
+      "price": 11990,
+      "price_source": "info_rg3060_fld3070",
+      "duration": 12,
+      "duration_source": "document163_fld1481",
+      "visits": null,
+      "freeze": 66,
+      "branches_access": "Все"
+    },
+    "june_source": {
+      "contract_ref": "961FD7436FB7465C429550D3C80A45F0",
+      "contract_id": "00000138863",
+      "product_ref": "B07D000C29D830FD11F024ECA950807E",
+      "product_code": "00000001599",
+      "product_name": "Абонемент МУЛЬТИКАРТА 12 месяцев (3 месяца заморозки в подарок)",
+      "document_date_raw": "4025-08-15 11:04:51",
+      "document_date": "2025-08-15 11:04:51",
+      "posted": 1,
+      "marked": 0,
+      "document_duration": "12",
+      "register_3062_raw": "4025-08-15 11:04:51",
+      "register_start_raw": "4026-04-22 00:00:00",
+      "register_end_raw": "4027-04-21 23:59:59",
+      "register_start": "2026-04-22 00:00:00",
+      "register_end": "2027-04-21 23:59:59",
+      "interval_days": 365,
+      "register_duration_days": "356",
+      "register_freeze_days": "90",
+      "register_guests": "0",
+      "register_price": "11990",
+      "register_debt_candidate": "0",
+      "status": null
+    },
+    "september_source": {
+      "contract_ref": "961FD7436FB7465C429550D3C80A45F0",
+      "contract_id": "00000138863",
+      "product_ref": "B07D000C29D830FD11F024ECA950807E",
+      "product_code": "00000001599",
+      "product_name": "Абонемент МУЛЬТИКАРТА 12 месяцев (3 месяца заморозки в подарок)",
+      "document_date_raw": "4025-08-15 11:04:51",
+      "document_date": "2025-08-15 11:04:51",
+      "posted": 1,
+      "marked": 0,
+      "document_duration": "12",
+      "register_3062_raw": "4025-08-15 11:04:51",
+      "register_start_raw": "4026-04-22 00:00:00",
+      "register_end_raw": "4027-05-15 23:59:59",
+      "register_start": "2026-04-22 00:00:00",
+      "register_end": "2027-05-15 23:59:59",
+      "interval_days": 389,
+      "register_duration_days": "293",
+      "register_freeze_days": "66",
+      "register_guests": "0",
+      "register_price": "11990",
+      "register_debt_candidate": "0",
+      "status": "Успех"
+    },
+    "source_changes": {
+      "register_end_raw": {
+        "june": "4027-04-21 23:59:59",
+        "september": "4027-05-15 23:59:59"
+      },
+      "register_end": {
+        "june": "2027-04-21 23:59:59",
+        "september": "2027-05-15 23:59:59"
+      },
+      "interval_days": {
+        "june": 365,
+        "september": 389
+      },
+      "register_duration_days": {
+        "june": "356",
+        "september": "293"
+      },
+      "register_freeze_days": {
+        "june": "90",
+        "september": "66"
+      },
+      "status": {
+        "june": null,
+        "september": "Успех"
+      }
+    }
+  },
+  {
+    "current_name": "Абонемент МУЛЬТИКАРТА 12 месяцев (рассрочка)",
+    "accepted_name": "Абонемент МУЛЬТИКАРТА 12 месяцев (рассрочка)",
+    "accepted_workbook_range": "A19:L19",
+    "accepted_attributes": {
+      "price": 14990,
+      "duration": 12,
+      "visits": null,
+      "freeze": null,
+      "branches_access": "Все"
+    },
+    "source_contract_id": "00000151391",
+    "source_contract_ref": "A98AF9E0C59F62B8498879961CF1F0EA",
+    "selection": "exact_variant_existing_in_june_preferred",
+    "matching_current_contracts": [
+      "00000151391",
+      "00000153074"
+    ],
+    "source_present_in_june": true,
+    "current_candidate": {
+      "name": "Абонемент МУЛЬТИКАРТА 12 месяцев (рассрочка)",
+      "contract_id": "00000151391",
+      "contract_ref": "A98AF9E0C59F62B8498879961CF1F0EA",
+      "product_ref": "B21C000C29D830FD11F15676DA7A3787",
+      "price": 14990,
+      "price_source": "info_rg3060_fld3070",
+      "duration": 12,
+      "duration_source": "document163_fld1481",
+      "visits": null,
+      "freeze": null,
+      "branches_access": "Все"
+    },
+    "june_source": {
+      "contract_ref": "A98AF9E0C59F62B8498879961CF1F0EA",
+      "contract_id": "00000151391",
+      "product_ref": "B21C000C29D830FD11F15676DA7A3787",
+      "product_code": "00000001744",
+      "product_name": "Абонемент МУЛЬТИКАРТА 12 месяцев (рассрочка)",
+      "document_date_raw": "4026-06-04 18:22:02",
+      "document_date": "2026-06-04 18:22:02",
+      "posted": 1,
+      "marked": 0,
+      "document_duration": "12",
+      "register_3062_raw": "4026-06-04 18:22:02",
+      "register_start_raw": "4026-06-04 00:00:00",
+      "register_end_raw": "4027-06-03 23:59:59",
+      "register_start": "2026-06-04 00:00:00",
+      "register_end": "2027-06-03 23:59:59",
+      "interval_days": 365,
+      "register_duration_days": "356",
+      "register_freeze_days": "0",
+      "register_guests": "0",
+      "register_price": "14990",
+      "register_debt_candidate": "7495",
+      "status": null
+    },
+    "september_source": {
+      "contract_ref": "A98AF9E0C59F62B8498879961CF1F0EA",
+      "contract_id": "00000151391",
+      "product_ref": "B21C000C29D830FD11F15676DA7A3787",
+      "product_code": "00000001744",
+      "product_name": "Абонемент МУЛЬТИКАРТА 12 месяцев (рассрочка)",
+      "document_date_raw": "4026-06-04 18:22:02",
+      "document_date": "2026-06-04 18:22:02",
+      "posted": 1,
+      "marked": 0,
+      "document_duration": "12",
+      "register_3062_raw": "4026-06-04 18:22:02",
+      "register_start_raw": "4026-06-04 00:00:00",
+      "register_end_raw": "4027-06-03 23:59:59",
+      "register_start": "2026-06-04 00:00:00",
+      "register_end": "2027-06-03 23:59:59",
+      "interval_days": 365,
+      "register_duration_days": "356",
+      "register_freeze_days": "0",
+      "register_guests": "0",
+      "register_price": "14990",
+      "register_debt_candidate": "7495",
+      "status": null
+    },
+    "source_changes": {}
+  },
+  {
+    "current_name": "Абонемент МУЛЬТИКАРТА 12 месяцев (Спецпредложение) рассрочка",
+    "accepted_name": "Абонемент МУЛЬТИКАРТА 12 месяцев + подарок (Спецпредложение) рассрочка",
+    "accepted_workbook_range": "A26:L26",
+    "accepted_attributes": {
+      "price": 10990,
+      "duration": 12,
+      "visits": null,
+      "freeze": null,
+      "branches_access": "Все"
+    },
+    "source_contract_id": "00000151890",
+    "source_contract_ref": "99D14A90B94A2DD14DDE8DB7AD9B9F77",
+    "selection": "exact_variant_existing_in_june_preferred",
+    "matching_current_contracts": [
+      "00000151890",
+      "00000151949",
+      "00000151962",
+      "00000151981",
+      "00000152005",
+      "00000152006",
+      "00000152014",
+      "00000152069",
+      "00000152091",
+      "00000152160",
+      "00000152173",
+      "00000152213",
+      "00000152216",
+      "00000152285",
+      "00000152328",
+      "00000152336",
+      "00000152391",
+      "00000152427",
+      "00000152445",
+      "00000152448",
+      "00000152457",
+      "00000152636",
+      "00000152638",
+      "00000152658",
+      "00000152711",
+      "00000152729",
+      "00000152758",
+      "00000152761",
+      "00000152984",
+      "00000154651",
+      "00000154740",
+      "00000154746",
+      "00000154816",
+      "00000154883"
+    ],
+    "source_present_in_june": true,
+    "current_candidate": {
+      "name": "Абонемент МУЛЬТИКАРТА 12 месяцев (Спецпредложение) рассрочка",
+      "contract_id": "00000151890",
+      "contract_ref": "99D14A90B94A2DD14DDE8DB7AD9B9F77",
+      "product_ref": "B23B000C29D830FD11F16AF5D14C6538",
+      "price": 10990,
+      "price_source": "info_rg3060_fld3070",
+      "duration": 12,
+      "duration_source": "document163_fld1481",
+      "visits": null,
+      "freeze": null,
+      "branches_access": "Все"
+    },
+    "june_source": {
+      "contract_ref": "99D14A90B94A2DD14DDE8DB7AD9B9F77",
+      "contract_id": "00000151890",
+      "product_ref": "B23B000C29D830FD11F16AF5D14C6538",
+      "product_code": "00000001753",
+      "product_name": "Абонемент МУЛЬТИКАРТА 12 месяцев + подарок (Спецпредложение) рассрочка",
+      "document_date_raw": "4026-06-18 12:17:13",
+      "document_date": "2026-06-18 12:17:13",
+      "posted": 1,
+      "marked": 0,
+      "document_duration": "12",
+      "register_3062_raw": "4026-06-18 12:17:13",
+      "register_start_raw": "4026-07-09 00:00:00",
+      "register_end_raw": "4027-07-08 23:59:59",
+      "register_start": "2026-07-09 00:00:00",
+      "register_end": "2027-07-08 23:59:59",
+      "interval_days": 365,
+      "register_duration_days": "365",
+      "register_freeze_days": "0",
+      "register_guests": "0",
+      "register_price": "10990",
+      "register_debt_candidate": "5495",
+      "status": null
+    },
+    "september_source": {
+      "contract_ref": "99D14A90B94A2DD14DDE8DB7AD9B9F77",
+      "contract_id": "00000151890",
+      "product_ref": "B23B000C29D830FD11F16AF5D14C6538",
+      "product_code": "00000001753",
+      "product_name": "Абонемент МУЛЬТИКАРТА 12 месяцев (Спецпредложение) рассрочка",
+      "document_date_raw": "4026-06-18 12:17:13",
+      "document_date": "2026-06-18 12:17:13",
+      "posted": 1,
+      "marked": 0,
+      "document_duration": "12",
+      "register_3062_raw": "4026-06-18 12:17:13",
+      "register_start_raw": "4026-07-09 00:00:00",
+      "register_end_raw": "4027-07-08 23:59:59",
+      "register_start": "2026-07-09 00:00:00",
+      "register_end": "2027-07-08 23:59:59",
+      "interval_days": 365,
+      "register_duration_days": "337",
+      "register_freeze_days": "0",
+      "register_guests": "0",
+      "register_price": "10990",
+      "register_debt_candidate": "0",
+      "status": null
+    },
+    "source_changes": {
+      "product_name": {
+        "june": "Абонемент МУЛЬТИКАРТА 12 месяцев + подарок (Спецпредложение) рассрочка",
+        "september": "Абонемент МУЛЬТИКАРТА 12 месяцев (Спецпредложение) рассрочка"
+      },
+      "register_duration_days": {
+        "june": "365",
+        "september": "337"
+      },
+      "register_debt_candidate": {
+        "june": "5495",
+        "september": "0"
+      }
+    }
+  },
+  {
+    "current_name": "АБОНЕМЕНТ САЙКЛ 12 пос без клубной карты",
+    "accepted_name": "АБОНЕМЕНТ САЙКЛ 12 пос без клубной карты",
+    "accepted_workbook_range": "A49:L49",
+    "accepted_attributes": {
+      "price": 6450,
+      "duration": 12,
+      "visits": 12,
+      "freeze": null,
+      "branches_access": "Продажа"
+    },
+    "source_contract_id": "00000151241",
+    "source_contract_ref": "B9D2B2C07BA374034F131CB6AE13CBA4",
+    "selection": "preserve_existing_historical_anchor",
+    "matching_current_contracts": [
+      "00000141600",
+      "00000144816",
+      "00000145361",
+      "00000147786",
+      "00000147787",
+      "00000153784"
+    ],
+    "source_present_in_june": true,
+    "current_candidate": {
+      "name": "АБОНЕМЕНТ САЙКЛ 12 пос без клубной карты",
+      "contract_id": "00000151241",
+      "contract_ref": "B9D2B2C07BA374034F131CB6AE13CBA4",
+      "product_ref": "AFA0000C29D830FD11EF7CC5E212F861",
+      "price": 6450,
+      "price_source": "info_rg3060_fld3070",
+      "duration": 2,
+      "duration_source": "duration_days_rounded_to_months",
+      "visits": 12,
+      "freeze": null,
+      "branches_access": "Продажа"
+    },
+    "june_source": {
+      "contract_ref": "B9D2B2C07BA374034F131CB6AE13CBA4",
+      "contract_id": "00000151241",
+      "product_ref": "AFA0000C29D830FD11EF7CC5E212F861",
+      "product_code": "00000001456",
+      "product_name": "АБОНЕМЕНТ САЙКЛ 12 пос без клубной карты",
+      "document_date_raw": "4026-06-02 10:13:41",
+      "document_date": "2026-06-02 10:13:41",
+      "posted": 1,
+      "marked": 0,
+      "document_duration": "365",
+      "register_3062_raw": "4026-06-02 10:13:41",
+      "register_start_raw": "4026-06-02 00:00:00",
+      "register_end_raw": "4027-06-01 23:59:59",
+      "register_start": "2026-06-02 00:00:00",
+      "register_end": "2027-06-01 23:59:59",
+      "interval_days": 365,
+      "register_duration_days": "337",
+      "register_freeze_days": "0",
+      "register_guests": "0",
+      "register_price": "6450",
+      "register_debt_candidate": "0",
+      "status": null
+    },
+    "september_source": {
+      "contract_ref": "B9D2B2C07BA374034F131CB6AE13CBA4",
+      "contract_id": "00000151241",
+      "product_ref": "AFA0000C29D830FD11EF7CC5E212F861",
+      "product_code": "00000001456",
+      "product_name": "АБОНЕМЕНТ САЙКЛ 12 пос без клубной карты",
+      "document_date_raw": "4026-06-02 10:13:41",
+      "document_date": "2026-06-02 10:13:41",
+      "posted": 1,
+      "marked": 0,
+      "document_duration": "365",
+      "register_3062_raw": "4026-06-02 10:13:41",
+      "register_start_raw": "4026-06-02 00:00:00",
+      "register_end_raw": "4026-08-04 23:59:59",
+      "register_start": "2026-06-02 00:00:00",
+      "register_end": "2026-08-04 23:59:59",
+      "interval_days": 64,
+      "register_duration_days": "0",
+      "register_freeze_days": "0",
+      "register_guests": "0",
+      "register_price": "6450",
+      "register_debt_candidate": "0",
+      "status": null
+    },
+    "source_changes": {
+      "register_end_raw": {
+        "june": "4027-06-01 23:59:59",
+        "september": "4026-08-04 23:59:59"
+      },
+      "register_end": {
+        "june": "2027-06-01 23:59:59",
+        "september": "2026-08-04 23:59:59"
+      },
+      "interval_days": {
+        "june": 365,
+        "september": 64
+      },
+      "register_duration_days": {
+        "june": "337",
+        "september": "0"
+      }
+    }
+  },
+  {
+    "current_name": "Абонемент УЛЬТРА 15 месяцев + 3 месяца заморозки в подарок(Ровио)",
+    "accepted_name": "Абонемент УЛЬТРА 15 месяцев + 3 месяца заморозки в подарок(Ровио)",
+    "accepted_workbook_range": "A80:L80",
+    "accepted_attributes": {
+      "price": 14990,
+      "duration": 15,
+      "visits": null,
+      "freeze": 71,
+      "branches_access": "Продажа"
+    },
+    "source_contract_id": "00000135266",
+    "source_contract_ref": "89A5C7E394033A2840EAD540C6B06101",
+    "selection": "preserve_existing_historical_anchor",
+    "matching_current_contracts": [],
+    "source_present_in_june": true,
+    "current_candidate": {
+      "name": "Абонемент УЛЬТРА 15 месяцев + 3 месяца заморозки в подарок(Ровио)",
+      "contract_id": "00000135266",
+      "contract_ref": "89A5C7E394033A2840EAD540C6B06101",
+      "product_ref": "B07F000C29D830FD11F026949FF4A862",
+      "price": 14990,
+      "price_source": "info_rg3060_fld3070",
+      "duration": 15,
+      "duration_source": "document163_fld1481",
+      "visits": null,
+      "freeze": null,
+      "branches_access": "Продажа"
+    },
+    "june_source": {
+      "contract_ref": "89A5C7E394033A2840EAD540C6B06101",
+      "contract_id": "00000135266",
+      "product_ref": "B07F000C29D830FD11F026949FF4A862",
+      "product_code": "00000001603",
+      "product_name": "Абонемент УЛЬТРА 15 месяцев + 3 месяца заморозки в подарок(Ровио)",
+      "document_date_raw": "4025-05-17 00:00:00",
+      "document_date": "2025-05-17 00:00:00",
+      "posted": 1,
+      "marked": 0,
+      "document_duration": "15",
+      "register_3062_raw": "4025-05-17 10:50:56",
+      "register_start_raw": "4025-05-17 00:00:00",
+      "register_end_raw": "4026-09-04 23:59:59",
+      "register_start": "2025-05-17 00:00:00",
+      "register_end": "2026-09-04 23:59:59",
+      "interval_days": 476,
+      "register_duration_days": "309",
+      "register_freeze_days": "71",
+      "register_guests": "0",
+      "register_price": "14990",
+      "register_debt_candidate": "0",
+      "status": null
+    },
+    "september_source": {
+      "contract_ref": "89A5C7E394033A2840EAD540C6B06101",
+      "contract_id": "00000135266",
+      "product_ref": "B07F000C29D830FD11F026949FF4A862",
+      "product_code": "00000001603",
+      "product_name": "Абонемент УЛЬТРА 15 месяцев + 3 месяца заморозки в подарок(Ровио)",
+      "document_date_raw": "4025-05-17 00:00:00",
+      "document_date": "2025-05-17 00:00:00",
+      "posted": 1,
+      "marked": 0,
+      "document_duration": "15",
+      "register_3062_raw": "4025-05-17 10:50:56",
+      "register_start_raw": "4025-05-17 00:00:00",
+      "register_end_raw": "4026-09-04 23:59:59",
+      "register_start": "2025-05-17 00:00:00",
+      "register_end": "2026-09-04 23:59:59",
+      "interval_days": 476,
+      "register_duration_days": "0",
+      "register_freeze_days": "0",
+      "register_guests": "0",
+      "register_price": "14990",
+      "register_debt_candidate": "0",
+      "status": "Успех"
+    },
+    "source_changes": {
+      "register_duration_days": {
+        "june": "309",
+        "september": "0"
+      },
+      "register_freeze_days": {
+        "june": "71",
+        "september": "0"
+      },
+      "status": {
+        "june": null,
+        "september": "Успех"
+      }
+    }
+  },
+  {
+    "current_name": "Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок)",
+    "accepted_name": "Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок)",
+    "accepted_workbook_range": "A86:L86",
+    "accepted_attributes": {
+      "price": 13990,
+      "duration": 9,
+      "visits": null,
+      "freeze": 30,
+      "branches_access": "Продажа"
+    },
+    "source_contract_id": "00000141540",
+    "source_contract_ref": "B4787D96CE4C96BD48419816D68C6D57",
+    "selection": "preserve_existing_historical_anchor",
+    "matching_current_contracts": [],
+    "source_present_in_june": true,
+    "current_candidate": {
+      "name": "Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок)",
+      "contract_id": "00000141540",
+      "contract_ref": "B4787D96CE4C96BD48419816D68C6D57",
+      "product_ref": "B086000C29D830FD11F02BCC649B1DE5",
+      "price": 13990,
+      "price_source": "info_rg3060_fld3070",
+      "duration": 9,
+      "duration_source": "document163_fld1481",
+      "visits": null,
+      "freeze": null,
+      "branches_access": "Продажа"
+    },
+    "june_source": {
+      "contract_ref": "B4787D96CE4C96BD48419816D68C6D57",
+      "contract_id": "00000141540",
+      "product_ref": "B086000C29D830FD11F02BCC649B1DE5",
+      "product_code": "00000001605",
+      "product_name": "Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок)",
+      "document_date_raw": "4025-10-17 10:47:16",
+      "document_date": "2025-10-17 10:47:16",
+      "posted": 1,
+      "marked": 0,
+      "document_duration": "9",
+      "register_3062_raw": "4025-10-17 10:47:16",
+      "register_start_raw": "4025-10-18 00:00:00",
+      "register_end_raw": "4026-09-15 23:59:59",
+      "register_start": "2025-10-18 00:00:00",
+      "register_end": "2026-09-15 23:59:59",
+      "interval_days": 333,
+      "register_duration_days": "78",
+      "register_freeze_days": "30",
+      "register_guests": "0",
+      "register_price": "13990",
+      "register_debt_candidate": "0",
+      "status": "Успех"
+    },
+    "september_source": {
+      "contract_ref": "B4787D96CE4C96BD48419816D68C6D57",
+      "contract_id": "00000141540",
+      "product_ref": "B086000C29D830FD11F02BCC649B1DE5",
+      "product_code": "00000001605",
+      "product_name": "Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок)",
+      "document_date_raw": "4025-10-17 10:47:16",
+      "document_date": "2025-10-17 10:47:16",
+      "posted": 1,
+      "marked": 0,
+      "document_duration": "9",
+      "register_3062_raw": "4025-10-17 10:47:16",
+      "register_start_raw": "4025-10-18 00:00:00",
+      "register_end_raw": "4026-10-15 23:59:59",
+      "register_start": "2025-10-18 00:00:00",
+      "register_end": "2026-10-15 23:59:59",
+      "interval_days": 363,
+      "register_duration_days": "40",
+      "register_freeze_days": "0",
+      "register_guests": "0",
+      "register_price": "13990",
+      "register_debt_candidate": "0",
+      "status": "Успех"
+    },
+    "source_changes": {
+      "register_end_raw": {
+        "june": "4026-09-15 23:59:59",
+        "september": "4026-10-15 23:59:59"
+      },
+      "register_end": {
+        "june": "2026-09-15 23:59:59",
+        "september": "2026-10-15 23:59:59"
+      },
+      "interval_days": {
+        "june": 333,
+        "september": 363
+      },
+      "register_duration_days": {
+        "june": "78",
+        "september": "40"
+      },
+      "register_freeze_days": {
+        "june": "30",
+        "september": "0"
+      }
+    }
+  },
+  {
+    "current_name": "УЛЬТРА 12 месяцев (рассрочка)",
+    "accepted_name": "УЛЬТРА 12 месяцев (рассрочка)",
+    "accepted_workbook_range": "A112:L112",
+    "accepted_attributes": {
+      "price": 11990,
+      "duration": 12,
+      "visits": null,
+      "freeze": null,
+      "branches_access": "Продажа"
+    },
+    "source_contract_id": "00000150700",
+    "source_contract_ref": "88A5A17DDA2921194095CA1F97817073",
+    "selection": "exact_variant_existing_in_june_preferred",
+    "matching_current_contracts": [
+      "00000150700",
+      "00000151427",
+      "00000151474",
+      "00000151527",
+      "00000151535",
+      "00000151618",
+      "00000152059",
+      "00000152741",
+      "00000152820",
+      "00000152826",
+      "00000152849"
+    ],
+    "source_present_in_june": true,
+    "current_candidate": {
+      "name": "УЛЬТРА 12 месяцев (рассрочка)",
+      "contract_id": "00000150700",
+      "contract_ref": "88A5A17DDA2921194095CA1F97817073",
+      "product_ref": "B21C000C29D830FD11F156769717F181",
+      "price": 11990,
+      "price_source": "info_rg3060_fld3070",
+      "duration": 12,
+      "duration_source": "document163_fld1481",
+      "visits": null,
+      "freeze": null,
+      "branches_access": "Продажа"
+    },
+    "june_source": {
+      "contract_ref": "88A5A17DDA2921194095CA1F97817073",
+      "contract_id": "00000150700",
+      "product_ref": "B21C000C29D830FD11F156769717F181",
+      "product_code": "00000001743",
+      "product_name": "УЛЬТРА 12 месяцев (рассрочка)",
+      "document_date_raw": "4026-05-26 15:34:48",
+      "document_date": "2026-05-26 15:34:48",
+      "posted": 1,
+      "marked": 0,
+      "document_duration": "12",
+      "register_3062_raw": "4026-05-26 15:34:48",
+      "register_start_raw": "4026-05-26 00:00:00",
+      "register_end_raw": "4027-05-25 23:59:59",
+      "register_start": "2026-05-26 00:00:00",
+      "register_end": "2027-05-25 23:59:59",
+      "interval_days": 365,
+      "register_duration_days": "356",
+      "register_freeze_days": "0",
+      "register_guests": "0",
+      "register_price": "11990",
+      "register_debt_candidate": "5995",
+      "status": null
+    },
+    "september_source": {
+      "contract_ref": "88A5A17DDA2921194095CA1F97817073",
+      "contract_id": "00000150700",
+      "product_ref": "B21C000C29D830FD11F156769717F181",
+      "product_code": "00000001743",
+      "product_name": "УЛЬТРА 12 месяцев (рассрочка)",
+      "document_date_raw": "4026-05-26 15:34:48",
+      "document_date": "2026-05-26 15:34:48",
+      "posted": 1,
+      "marked": 0,
+      "document_duration": "12",
+      "register_3062_raw": "4026-05-26 15:34:48",
+      "register_start_raw": "4026-05-26 00:00:00",
+      "register_end_raw": "4027-05-25 23:59:59",
+      "register_start": "2026-05-26 00:00:00",
+      "register_end": "2027-05-25 23:59:59",
+      "interval_days": 365,
+      "register_duration_days": "292",
+      "register_freeze_days": "0",
+      "register_guests": "0",
+      "register_price": "11990",
+      "register_debt_candidate": "0",
+      "status": null
+    },
+    "source_changes": {
+      "register_duration_days": {
+        "june": "356",
+        "september": "292"
+      },
+      "register_debt_candidate": {
+        "june": "5995",
+        "september": "0"
+      }
+    }
+  }
+]

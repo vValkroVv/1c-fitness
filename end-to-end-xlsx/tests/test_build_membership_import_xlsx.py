@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import importlib.util
+import csv
 import sys
+import tempfile
 import unittest
+from dataclasses import replace
 from datetime import date
 from decimal import Decimal
 from pathlib import Path
@@ -410,7 +413,175 @@ class MembershipBuildTests(unittest.TestCase):
         decisions = builder.read_template_canonicalizations(
             ROOT / "config" / "membership_template_canonicalization.csv"
         )
-        self.assertEqual(len(decisions), 93)
+        self.assertGreaterEqual(len(decisions), 93)
+        self.assertIn(
+            builder.normalize_key("Абонемент УЛЬТРА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ"),
+            decisions,
+        )
+
+
+class HistoricalTemplateTests(unittest.TestCase):
+    def decision(self, **changes):
+        return replace(
+            builder.TemplateCanonicalization(
+                canonical_name="Тестовый абонемент",
+                branches_access="Продажа",
+                price=12990,
+                duration=12,
+                visits=None,
+                freeze=30,
+                source_contract_id="SOURCE",
+                decision_basis="accepted_june_delivery",
+                review_status="accepted_delivery_preserved",
+                note="Historical template confirmed against the accepted workbook",
+            ),
+            **changes,
+        )
+
+    def current_fact(self, contract_id="SOURCE", *, duration_days="457", freeze="5", price="14990"):
+        current = fact(
+            client_id="CLIENT",
+            contract_id=contract_id,
+            name="Тестовый абонемент",
+            sale_date="2025-09-23",
+            duration_days=duration_days,
+            price=price,
+            active="1",
+        )
+        current["rg_freeze_days"] = freeze
+        return current
+
+    def build(self, facts, decision):
+        return builder.build_rows(
+            {"CLIENT": source("CLIENT")},
+            {},
+            facts,
+            {decision.normalized_name: decision},
+        )
+
+    def test_absent_variant_is_rejected_by_default(self) -> None:
+        decision = self.decision()
+        self.assertFalse(decision.allow_historical_variant)
+        with self.assertRaisesRegex(ValueError, "variant is not present in staging"):
+            self.build([self.current_fact()], decision)
+
+    def test_changed_source_is_rejected_even_when_variant_still_exists(self) -> None:
+        with self.assertRaisesRegex(ValueError, "source contract no longer has"):
+            self.build(
+                [
+                    self.current_fact(),
+                    self.current_fact("OTHER", duration_days="365", freeze="30", price="12990"),
+                ],
+                self.decision(),
+            )
+
+    def test_historical_opt_in_preserves_template_and_current_client_values(self) -> None:
+        decision = self.decision(allow_historical_variant=True)
+        rows, templates, uncertainties, _, counters = self.build(
+            [self.current_fact()], decision
+        )
+        self.assertEqual(builder.template_variant(templates[0]), decision.variant)
+        self.assertEqual((rows[0]["duration"], rows[0]["freeze"], rows[0]["price"]), (15, 5, 14990))
+        self.assertEqual(rows[0]["amount_of_payments"], 14990)
+        self.assertEqual(rows[0]["create_date"], date(2025, 9, 23))
+        issue_type = "configured_historical_template_variant_preserved"
+        self.assertEqual(counters["template_canonicalization"][issue_type], 1)
+        issue = next(item for item in uncertainties if item["issue_type"] == issue_type)
+        self.assertEqual(issue["contract_id"], "SOURCE")
+        for detail in (
+            "allow_historical_variant=1",
+            "configured=(12990, 12, None, 30, 'Продажа')",
+            "observed=",
+            "(14990, 15, None, 5, 'Продажа')",
+            "source_contract_id='SOURCE'",
+            "source_observed=",
+            "decision_basis=accepted_june_delivery",
+        ):
+            self.assertIn(detail, issue["details"])
+
+    def test_historical_opt_in_also_audits_source_change_with_matching_variant(self) -> None:
+        rows, templates, _, _, counters = self.build(
+            [
+                self.current_fact(),
+                self.current_fact("OTHER", duration_days="365", freeze="30", price="12990"),
+            ],
+            self.decision(allow_historical_variant=True),
+        )
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(templates[0]["freeze"], 30)
+        self.assertEqual(
+            counters["template_canonicalization"]["configured_historical_template_variant_preserved"],
+            1,
+        )
+
+    def test_historical_opt_in_with_unchanged_variant_needs_no_exception(self) -> None:
+        _, _, uncertainties, _, counters = self.build(
+            [self.current_fact(duration_days="365", freeze="30", price="12990")],
+            self.decision(allow_historical_variant=True),
+        )
+        self.assertEqual(
+            counters["template_canonicalization"]["configured_historical_template_variant_preserved"],
+            0,
+        )
+        self.assertFalse(any(
+            issue["issue_type"] == "configured_historical_template_variant_preserved"
+            for issue in uncertainties
+        ))
+
+    def test_price_only_exception_does_not_require_historical_opt_in(self) -> None:
+        rows, templates, uncertainties, _, counters = self.build(
+            [self.current_fact(duration_days="365", freeze="30")],
+            self.decision(),
+        )
+        self.assertEqual(rows[0]["price"], 14990)
+        self.assertEqual(templates[0]["price"], 12990)
+        issue_type = "configured_template_price_preserved_after_transaction_rebuild"
+        self.assertEqual(counters["template_canonicalization"][issue_type], 1)
+        self.assertTrue(any(issue["issue_type"] == issue_type for issue in uncertainties))
+        self.assertEqual(
+            counters["template_canonicalization"]["configured_historical_template_variant_preserved"],
+            0,
+        )
+
+    def test_missing_source_with_present_variant_keeps_existing_behavior(self) -> None:
+        _, templates, _, _, counters = self.build(
+            [self.current_fact("OTHER", duration_days="365", freeze="30", price="12990")],
+            self.decision(),
+        )
+        self.assertEqual(builder.template_variant(templates[0]), self.decision().variant)
+        self.assertEqual(counters["template_canonicalization"]["configured_source_contract_absent"], 1)
+
+    def read_config(self, flag):
+        row = {
+            "canonical_name": "Тестовый абонемент",
+            "branches_access": "Продажа",
+            "price": "12990",
+            "duration": "12",
+            "visits": "",
+            "freeze": "30",
+            "source_contract_id": "SOURCE",
+            "decision_basis": "accepted_june_delivery",
+            "review_status": "accepted_delivery_preserved",
+            "note": "test",
+        }
+        if flag is not None:
+            row["allow_historical_variant"] = flag
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "decisions.csv"
+            with path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=list(row))
+                writer.writeheader()
+                writer.writerow(row)
+            return next(iter(builder.read_template_canonicalizations(path).values()))
+
+    def test_historical_flag_is_optional_and_strict(self) -> None:
+        for flag, expected in ((None, False), ("", False), ("0", False), ("1", True)):
+            with self.subTest(flag=flag):
+                self.assertIs(self.read_config(flag).allow_historical_variant, expected)
+        for flag in ("true", "false", "yes", "2", "1.0"):
+            with self.subTest(flag=flag):
+                with self.assertRaisesRegex(ValueError, "invalid allow_historical_variant"):
+                    self.read_config(flag)
 
 
 if __name__ == "__main__":

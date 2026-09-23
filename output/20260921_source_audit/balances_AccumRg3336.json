@@ -1,0 +1,22 @@
+[
+  {
+    "snapshot": "june_at_june",
+    "active_rows": 4987454,
+    "signed_amount_or_quantity": 2592612.501
+  },
+  {
+    "snapshot": "september_at_june",
+    "active_rows": 4229744,
+    "signed_amount_or_quantity": 2592624.501
+  },
+  {
+    "snapshot": "september_at_effective",
+    "active_rows": 5079132,
+    "signed_amount_or_quantity": 2592351.501
+  },
+  {
+    "snapshot": "september_at_backup",
+    "active_rows": 5067694,
+    "signed_amount_or_quantity": 2592351.501
+  }
+]

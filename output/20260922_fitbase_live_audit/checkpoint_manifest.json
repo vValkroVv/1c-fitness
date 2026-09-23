@@ -1,0 +1,111 @@
+{
+  "created_at": "2026-09-22T10:13:28.850033+00:00",
+  "status": "CHECKPOINT_SAVED_AUDIT_IN_PROGRESS",
+  "files": [
+    {
+      "path": "docs/20260922_fitbase_live_audit_checkpoint.md",
+      "bytes": 47269,
+      "sha256": "d73e21400796c8303a89f84e8d0511d14cef52e66cc05e055c6285e75911fe55"
+    },
+    {
+      "path": "docs/20260922_fitbase_live_audit_worklog.md",
+      "bytes": 4850,
+      "sha256": "c006cb06d26167d240199a0196307ca9d294f96df1828054f1261ca68ba7504a"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/browser_evidence.json",
+      "bytes": 1255949,
+      "sha256": "f55f6cac71a5c7afa04fd0b88b74d1c5541ca51e7f61cac9d0ce7b2bc1995ffb"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/client_sample_evidence.json",
+      "bytes": 242851,
+      "sha256": "84f2724229639050c0e4e3d830ce787efe6f311caa51b925c84aa25f96b0e4b6"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_gogolevsky_active.csv",
+      "bytes": 1542367,
+      "sha256": "08153bc6b6bea827e27d24ca96f6ca5737be5f345dc377d358f32c2c72dc102a"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_gogolevsky_reactivation_peuna.csv",
+      "bytes": 1429700,
+      "sha256": "5157a59c5aa9c6516c4d3602571c0a550d31aae2a05892a38a31bc2a18fc5275"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_gogolevsky_reactivation_pilia.csv",
+      "bytes": 1396590,
+      "sha256": "575df1e8fba91e7fe0ff6799d0261291427054a9e9664397dcc390342dd70dc5"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_industrial_active.csv",
+      "bytes": 368683,
+      "sha256": "998b0f4d766a541205830b95f4af22b3217c41b87f0d65f8eabf58e91ebcc6a5"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_industrial_reactivation.csv",
+      "bytes": 792047,
+      "sha256": "53e6ed6461d4560eee7ea4896304a0836ced5e08189df1e087a70bfef3149f4a"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_industrial_reactivation.xlsx",
+      "bytes": 229999,
+      "sha256": "9cf1865c6290dfc518ad46207c82f09ff8b52b65bfde0a05fe7d3faa454a1d1b"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/lead_differences.json",
+      "bytes": 573072,
+      "sha256": "33bdf5f19d5469ce1d8da9bb349ff18224c4919c718beb9b3628ca5d9fa6a094"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/lead_reconciliation.json",
+      "bytes": 7626,
+      "sha256": "8268fdce987131731b0697f69ac087ef0ba939c9fe88688675dc237ebc26152a"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/membership_catalog_comparison.json",
+      "bytes": 152062,
+      "sha256": "8153a963106dc093d07183a7d82f235a1d9dbc4db149e04eab06e1f34b942450"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/membership_catalog_observed.json",
+      "bytes": 275032,
+      "sha256": "79ad337a988bd5ffee9fa3b1f92d1062a826a294e3b65ef37d374c00d742995b"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/sample_candidates.json",
+      "bytes": 19685,
+      "sha256": "51fc3b9ee47e3ea29ae37d0f566005db6a3cc29717965bd560e5d95f0753310c"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/sample_source_rows.json",
+      "bytes": 138519,
+      "sha256": "98b31cf7f73f84da07ab37f910c604e2b9b23e54dd732f5d56c32f3d8286e924"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/service_catalog_observed.json",
+      "bytes": 82350,
+      "sha256": "9a44047c8a5fa5db438f0bc795469690e6a7a4936e722a549df1bd088d5bd79e"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/source.sqlite",
+      "bytes": 57487360,
+      "sha256": "fcce1c347df2df921ee940bcb25c2756778147c79ba0d4d5f82bc123ce3878fd"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/source_summary.json",
+      "bytes": 4058,
+      "sha256": "255b459ba89aae227aafc8408cd93f8e114f9bf4b7fcd3aa9d926ae514dc1d6e"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/ui_counts.json",
+      "bytes": 298,
+      "sha256": "f11a415eecc99439ebc33e68704d4b2ea52648893c8156eeb749a3b5a66eff33"
+    },
+    {
+      "path": "scripts/audit_20260922_fitbase_live.py",
+      "bytes": 9253,
+      "sha256": "0e5931b067c9a698344ee65e0ede890ef90ab18f3e1abd06bb3ee86556a7ed0d"
+    }
+  ]
+}

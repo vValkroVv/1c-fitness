@@ -1,0 +1,848 @@
+[
+  {
+    "snapshot": "june",
+    "recorder_type": "00000081",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 4439,
+    "quantity": 4515.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000081",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 4439,
+    "quantity": 4515.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000081",
+    "record_kind": 1,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000048",
+    "rows_count": 30,
+    "quantity": 30.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "00000083",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 884,
+    "quantity": -936.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000083",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 884,
+    "quantity": -936.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "00000083",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 932,
+    "quantity": -163256.348
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000083",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 932,
+    "quantity": -163256.348
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "00000083",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 1247,
+    "quantity": -828.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000083",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 1247,
+    "quantity": -828.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "00000083",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 546,
+    "quantity": -50986.849
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000083",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 546,
+    "quantity": -50986.849
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "00000083",
+    "record_kind": 0,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000000",
+    "rows_count": 2,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000083",
+    "record_kind": 0,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000000",
+    "rows_count": 77,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000083",
+    "record_kind": 0,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000048",
+    "rows_count": 5,
+    "quantity": -4.637
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "00000083",
+    "record_kind": 0,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "0000005C",
+    "rows_count": 4,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000083",
+    "record_kind": 0,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "0000005C",
+    "rows_count": 154,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000083",
+    "record_kind": 1,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000048",
+    "rows_count": 5,
+    "quantity": -4.637
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "00000087",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 110,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000087",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 110,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "00000087",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 63418,
+    "quantity": 38027.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000087",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 63418,
+    "quantity": 38027.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "00000087",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 5785,
+    "quantity": 127374.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000087",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 5785,
+    "quantity": 127374.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "00000087",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 170442,
+    "quantity": 36494441.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000087",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 170436,
+    "quantity": 36494441.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000087",
+    "record_kind": 0,
+    "period_bucket": "extra_effective_day",
+    "dimension_type": "00000000",
+    "rows_count": 2,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000087",
+    "record_kind": 0,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000000",
+    "rows_count": 22,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000087",
+    "record_kind": 1,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000000",
+    "rows_count": 1514,
+    "quantity": 31.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000087",
+    "record_kind": 1,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000048",
+    "rows_count": 153,
+    "quantity": 6577.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000087",
+    "record_kind": 1,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "0000005C",
+    "rows_count": 5146,
+    "quantity": 676.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "00000089",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 21,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000089",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 21,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "00000089",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 141104,
+    "quantity": 268127.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000089",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 141104,
+    "quantity": 268127.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "00000089",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 65310,
+    "quantity": 65416.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000089",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 65310,
+    "quantity": 65416.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000008A",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 50672,
+    "quantity": 1614.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000008A",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 50671,
+    "quantity": 1614.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000008A",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 118,
+    "quantity": 836.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000008A",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 118,
+    "quantity": 836.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000008A",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 154,
+    "quantity": -9216.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000008A",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 154,
+    "quantity": -9216.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000008A",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 2649,
+    "quantity": -3800.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000008A",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 2649,
+    "quantity": -3800.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000008A",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 708,
+    "quantity": -6526.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000008A",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 708,
+    "quantity": -6526.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000008A",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 4782,
+    "quantity": -3775551.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000008A",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 4782,
+    "quantity": -3775551.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000008A",
+    "record_kind": 0,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000000",
+    "rows_count": 178,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000008F",
+    "record_kind": 0,
+    "period_bucket": "after_effective",
+    "dimension_type": "00000000",
+    "rows_count": 1,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000008F",
+    "record_kind": 1,
+    "period_bucket": "after_effective",
+    "dimension_type": "00000000",
+    "rows_count": 1,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000008F",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 17259,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000008F",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 17617,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000008F",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 17233,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000008F",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 17589,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000008F",
+    "record_kind": 0,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000000",
+    "rows_count": 22,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000008F",
+    "record_kind": 0,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000000",
+    "rows_count": 671,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000008F",
+    "record_kind": 1,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000000",
+    "rows_count": 22,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000008F",
+    "record_kind": 1,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000000",
+    "rows_count": 668,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "00000096",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 93607,
+    "quantity": 93607.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000096",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 93606,
+    "quantity": 93606.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "00000096",
+    "record_kind": 1,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000000",
+    "rows_count": 533,
+    "quantity": 533.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000009A",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 54286,
+    "quantity": 2925832.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000009A",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 54285,
+    "quantity": 2925831.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000009A",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 10893,
+    "quantity": 2809738.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000009A",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 10893,
+    "quantity": 2809738.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000009A",
+    "record_kind": 0,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000048",
+    "rows_count": 1182,
+    "quantity": 16638.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000009A",
+    "record_kind": 1,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000048",
+    "rows_count": 258,
+    "quantity": 15490.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "000000A3",
+    "record_kind": 1,
+    "period_bucket": "after_effective",
+    "dimension_type": "00000000",
+    "rows_count": 1589147,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "000000A3",
+    "record_kind": 1,
+    "period_bucket": "after_effective",
+    "dimension_type": "00000000",
+    "rows_count": 2604304,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "000000A3",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 117521,
+    "quantity": 127814.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "000000A3",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 117524,
+    "quantity": 127814.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "000000A3",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 13863,
+    "quantity": 312989.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "000000A3",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 13864,
+    "quantity": 313001.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "000000A3",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 196344,
+    "quantity": 35494123.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "000000A3",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 196348,
+    "quantity": 35494123.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "000000A3",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 3933060,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "000000A3",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000000",
+    "rows_count": 3174654,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "000000A3",
+    "record_kind": 1,
+    "period_bucket": "extra_effective_day",
+    "dimension_type": "00000000",
+    "rows_count": 8968,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "000000A3",
+    "record_kind": 1,
+    "period_bucket": "extra_effective_day",
+    "dimension_type": "00000000",
+    "rows_count": 11436,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "000000A3",
+    "record_kind": 0,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000000",
+    "rows_count": 3383,
+    "quantity": 589.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "000000A3",
+    "record_kind": 0,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000048",
+    "rows_count": 113,
+    "quantity": 6579.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "000000A3",
+    "record_kind": 0,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "0000005C",
+    "rows_count": 6485,
+    "quantity": 636.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "000000A3",
+    "record_kind": 1,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000000",
+    "rows_count": 848908,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "000000A3",
+    "record_kind": 1,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000000",
+    "rows_count": 816938,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000240E",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 20,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000240E",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 3,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000240E",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 5,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000240E",
+    "record_kind": 0,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 5,
+    "quantity": 0.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000240E",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 6785,
+    "quantity": 18721.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000240E",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "00000048",
+    "rows_count": 6785,
+    "quantity": 18721.0
+  },
+  {
+    "snapshot": "june",
+    "recorder_type": "0000240E",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 13257,
+    "quantity": 13257.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000240E",
+    "record_kind": 1,
+    "period_bucket": "at_or_before_june",
+    "dimension_type": "0000005C",
+    "rows_count": 13257,
+    "quantity": 13257.0
+  },
+  {
+    "snapshot": "september",
+    "recorder_type": "0000240E",
+    "record_kind": 1,
+    "period_bucket": "july_to_september_backup",
+    "dimension_type": "00000048",
+    "rows_count": 435,
+    "quantity": 1378.0
+  }
+]

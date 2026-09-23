@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Таразевич Дарья Владимировна",
+    "client_id": "000000048",
+    "expected_photo": {
+      "filename": "79114296824.jpg",
+      "client_id": "000000048",
+      "funnel": "Действующие абонементы",
+      "assigned_phone": "79114296824",
+      "exported_phone": "+7 (911) 4296824",
+      "raw_phone": "+7 (911) 4296824",
+      "naming_status": "exact_primary_phone",
+      "photo_source": "Reference115_copy",
+      "metadata_extension": "jpg",
+      "detected_extension": "jpg",
+      "output_extension": "jpg",
+      "bytes": "13095",
+      "sha256": "6074e51eda24a4c34a9709173862564130ca56da315b94633968d2ce9da32648"
+    },
+    "live_images": [
+      "/css/images/logo_site-.png",
+      "/css/images/icons/doping.svg",
+      "/css/images/question.svg",
+      "/css/images/default_avatar_male.jpg",
+      "/css/images/avatar_male.jpg",
+      "/assets/8a677926/icons/chat.svg"
+    ],
+    "observation_index": 37
+  },
+  {
+    "name": "Авдеев Сергей Александрович",
+    "client_id": "000000103",
+    "expected_photo": {
+      "filename": "79095678382.jpg",
+      "client_id": "000000103",
+      "funnel": "Действующие абонементы",
+      "assigned_phone": "79095678382",
+      "exported_phone": "+7 (909) 5678382",
+      "raw_phone": "+7 (909) 5678382",
+      "naming_status": "exact_primary_phone",
+      "photo_source": "Reference115_copy",
+      "metadata_extension": "jpg",
+      "detected_extension": "jpg",
+      "output_extension": "jpg",
+      "bytes": "11655",
+      "sha256": "9f4a35cc68d997dcb44af2ac2f5aa6887ddebc3d695c120bd1cf70883751b773"
+    },
+    "live_images": [
+      "/css/images/logo_site-.png",
+      "/css/images/icons/doping.svg",
+      "/css/images/question.svg",
+      "/css/images/default_avatar_male.jpg",
+      "/css/images/avatar_male.jpg",
+      "/assets/8a677926/icons/chat.svg"
+    ],
+    "observation_index": 38
+  },
+  {
+    "name": "Елина Валентина Леонидовна",
+    "client_id": "000005344",
+    "expected_photo": {
+      "filename": "79114073619.jpg",
+      "client_id": "000005344",
+      "funnel": "Реактивация",
+      "assigned_phone": "79114073619",
+      "exported_phone": "+7 (911) 4073619",
+      "raw_phone": "+7 (911) 4073619",
+      "naming_status": "exact_primary_phone",
+      "photo_source": "Reference115_copy",
+      "metadata_extension": "jpg",
+      "detected_extension": "jpg",
+      "output_extension": "jpg",
+      "bytes": "4754",
+      "sha256": "0486492117a6b01d1de295b87a4290eea95fafe21e92a5afafe152069a99d8fc"
+    },
+    "live_images": [
+      "/css/images/logo_site-.png",
+      "/css/images/icons/doping.svg",
+      "/css/images/question.svg",
+      "/css/images/default_avatar_male.jpg",
+      "/css/images/avatar_male.jpg",
+      "/assets/8a677926/icons/chat.svg"
+    ],
+    "observation_index": 53
+  },
+  {
+    "name": "Дьяченко Екатерина Григорьевна",
+    "client_id": "000074882",
+    "expected_photo": {
+      "filename": "79600206108.jpg",
+      "client_id": "000074882",
+      "funnel": "Реактивация",
+      "assigned_phone": "79600206108",
+      "exported_phone": "+7 (960) 0206108",
+      "raw_phone": "+7 (960) 0206108",
+      "naming_status": "exact_primary_phone",
+      "photo_source": "Reference65_main",
+      "metadata_extension": "jpg",
+      "detected_extension": "jpg",
+      "output_extension": "jpg",
+      "bytes": "34871",
+      "sha256": "51b2a409930d47315e96f7a9decaed85ed90833331d1db5867a2ea5b7bd344d5"
+    },
+    "live_images": [
+      "/css/images/logo_site-.png",
+      "/css/images/icons/doping.svg",
+      "/css/images/question.svg",
+      "/css/images/default_avatar_male.jpg",
+      "/css/images/avatar_male.jpg",
+      "/assets/8a677926/icons/chat.svg"
+    ],
+    "observation_index": 56
+  },
+  {
+    "name": "Казурова Екатерина Юрьевна",
+    "client_id": "000061610",
+    "expected_photo": {
+      "filename": "79216229541.jpg",
+      "client_id": "000061610",
+      "funnel": "Действующие абонементы",
+      "assigned_phone": "79216229541",
+      "exported_phone": "+7 (921) 6229541",
+      "raw_phone": "+7 (921) 6229541",
+      "naming_status": "exact_primary_phone",
+      "photo_source": "Reference65_main",
+      "metadata_extension": "jpg",
+      "detected_extension": "jpg",
+      "output_extension": "jpg",
+      "bytes": "27887",
+      "sha256": "13850177896179da8cef835ffb17847f728ca456c6509d2eb799a709672d5a98"
+    },
+    "live_images": [
+      "/css/images/logo_site-.png",
+      "/css/images/icons/doping.svg",
+      "/css/images/question.svg",
+      "/css/images/default_avatar_male.jpg",
+      "/css/images/avatar_male.jpg",
+      "/assets/8a677926/icons/chat.svg"
+    ],
+    "observation_index": 57
+  }
+]

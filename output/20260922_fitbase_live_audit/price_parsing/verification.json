@@ -1,0 +1,11 @@
+{
+  "source_sha256_unchanged": true,
+  "numeric_source_values_without_whitespace": true,
+  "membership_unique_ids": 436,
+  "service_unique_ids": 177,
+  "cross_club_names": 62,
+  "cross_club_low_price_ids": 124,
+  "browser_observations": 8,
+  "local_report_links_exist": true,
+  "read_only_fitbase": true
+}

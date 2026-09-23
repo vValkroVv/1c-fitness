@@ -37,3 +37,17 @@ output/20260920_rehearsal*/
 # Python cache
 __pycache__/
 *.py[cod]
+
+# Customer delivery bundles contain client photo archives; keep local.
+output/20260921_fitbase_customer_delivery.zip
+output/20260921_fitbase_customer_delivery_without_excluded_history.zip
+output/20260921_fitbase_for_customer.zip
+output/20260922_fitbase_for_customer.zip
+# Resumable backup download runtime.
+data/*.bak.parts/
+# Intermediate LaTeX output and rendered review pages.
+output/20260923_fitbase_five_cases/*.aux
+output/20260923_fitbase_five_cases/*.log
+output/20260923_fitbase_five_cases/*.out
+output/20260923_fitbase_five_cases/*.png
+output/20260923_fitbase_five_cases/body.tex

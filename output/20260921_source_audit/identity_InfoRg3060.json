@@ -1,0 +1,18 @@
+[
+  {
+    "table_name": "_InfoRg3060",
+    "june_rows": 119234,
+    "september_rows": 123101,
+    "retained": 119234,
+    "removed": 0,
+    "added": 3867,
+    "changed_Fld3063": 147,
+    "changed_Fld3064": 989,
+    "changed_Fld5960RRef": 2946,
+    "changed_Fld3070": 70,
+    "changed_Fld3072": 137,
+    "changed_Fld8007": 2430,
+    "changed_Fld8008": 2433,
+    "changed_Fld8009": 1891
+  }
+]

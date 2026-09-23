@@ -1,0 +1,298 @@
+{
+  "basis": "Source funnel at cutoff 2026-09-21 20:12:12, saved live observations on 2026-09-22; no new live inspection",
+  "confirmed_wrong_active_contracts": {
+    "contracts": 3,
+    "cases": 3,
+    "source_owners_split": {
+      "active": 3
+    },
+    "affected_card_source_ids": [
+      "000066663",
+      "000029532",
+      "000035464",
+      "000061300",
+      "000068456",
+      "000055372"
+    ],
+    "affected_cards_split": {
+      "active": 4,
+      "outside_leads": 2
+    }
+  },
+  "homonym_phone_diagnostics": {
+    "individual_rows": 76,
+    "additional_vasilyeva_group_affected_rows": 1,
+    "total_affected_source_leads": 77,
+    "active": 14,
+    "reactivation": 63,
+    "contract_ownership_of_all_77": "not_checked"
+  },
+  "prices": {
+    "all_membership_price_differences": {
+      "template_ids": 164,
+      "distinct_names": 76,
+      "templates_with_active_purchases": 74,
+      "templates_without_active_purchases": 90,
+      "catalog_active_purchases_sum": 5386,
+      "catalog_other_purchases_sum": 31565
+    },
+    "severe_membership_prices": {
+      "template_ids": 146,
+      "distinct_names": 68,
+      "templates_with_active_purchases": 59,
+      "templates_without_active_purchases": 87,
+      "catalog_active_purchases_sum": 1367,
+      "catalog_other_purchases_sum": 16366
+    }
+  },
+  "export_fields": {
+    "phone_subset": {
+      "rows": 2633,
+      "split": {
+        "active": 869,
+        "reactivation": 1764
+      }
+    },
+    "phone_mismatch": {
+      "rows": 93,
+      "split": {
+        "reactivation": 79,
+        "active": 14
+      }
+    },
+    "email": {
+      "rows": 30,
+      "split": {
+        "active": 13,
+        "reactivation": 17
+      },
+      "empty": {
+        "rows": 28,
+        "split": {
+          "active": 11,
+          "reactivation": 17
+        }
+      }
+    },
+    "client_fio": {
+      "rows": 769,
+      "split": {
+        "active": 14,
+        "reactivation": 755
+      },
+      "empty": {
+        "rows": 767,
+        "split": {
+          "active": 14,
+          "reactivation": 753
+        }
+      }
+    }
+  },
+  "confirmed_missing_service_end_dates": {
+    "rows": 4,
+    "clients": 2,
+    "split": {
+      "active": 4
+    }
+  },
+  "confirmed_service_rename": {
+    "rows": 5,
+    "clients": 5,
+    "active": 0,
+    "reactivation": 5
+  },
+  "confirmed_wrong_service_owner": {
+    "rows": 1,
+    "source_client_id": "000068456",
+    "active": 1
+  },
+  "confirmed_manager_card_differences": {
+    "cards": 11,
+    "split": {
+      "active": 7,
+      "reactivation": 2,
+      "outside_leads": 2
+    },
+    "records": [
+      {
+        "live_id": "128925",
+        "name": "Гайдэу Леон Романович",
+        "phone": "+7 911 434-41-74",
+        "live_manager": "Admin Fitbase",
+        "evidence_file": "browser_evidence.json",
+        "observation_index": 8,
+        "label": "profile",
+        "source_id": "000075116",
+        "expected_managers": [
+          "Пилия Анастасия Артуровна"
+        ],
+        "mismatch": true
+      },
+      {
+        "live_id": "111053",
+        "name": "Береснев Денис Сергеевич",
+        "phone": "+7 960 210-39-60",
+        "live_manager": "Admin Fitbase",
+        "evidence_file": "browser_evidence_part2.json",
+        "observation_index": 44,
+        "label": "service3_loaded",
+        "source_id": "000041039",
+        "expected_managers": [
+          "Пилия Анастасия Артуровна"
+        ],
+        "mismatch": true
+      },
+      {
+        "live_id": "115515",
+        "name": "Акимова Татьяна Владимировна",
+        "phone": "+7 911 434-93-22",
+        "live_manager": "Admin Fitbase",
+        "evidence_file": "browser_evidence_part2.json",
+        "observation_index": 87,
+        "label": "akimova_closed_expanded",
+        "source_id": "000000248",
+        "expected_managers": [
+          "Ефремова Алена"
+        ],
+        "mismatch": true
+      },
+      {
+        "live_id": "115417",
+        "name": "Дьяченко Екатерина Григорьевна",
+        "phone": "+7 960 020-61-08",
+        "live_manager": "Admin Fitbase",
+        "evidence_file": "browser_evidence_part2.json",
+        "observation_index": 96,
+        "label": "dyachenko_closed_expanded",
+        "source_id": "000074882",
+        "expected_managers": [
+          "Пеуна Анастасия Ивановна"
+        ],
+        "mismatch": true
+      },
+      {
+        "live_id": "125501",
+        "name": "Щербакова Алина Игоревна",
+        "phone": "+7 900 935-35-45",
+        "live_manager": "Admin Fitbase",
+        "evidence_file": "browser_evidence_part2.json",
+        "observation_index": 58,
+        "label": "shcherbakova_installment_loaded",
+        "source_id": "000051181",
+        "expected_managers": [
+          "Ефремова Алена"
+        ],
+        "mismatch": true
+      },
+      {
+        "live_id": "115523",
+        "name": "Беланина Елена Юрьевна",
+        "phone": "+7 911 408-22-33",
+        "live_manager": "Admin Fitbase",
+        "evidence_file": "browser_evidence_part2.json",
+        "observation_index": 65,
+        "label": "belanina_leads_loaded",
+        "source_id": "000001417",
+        "expected_managers": [
+          "Ефремова Алена"
+        ],
+        "mismatch": true
+      },
+      {
+        "live_id": "108824",
+        "name": "Годоев Олег Николаевич",
+        "phone": "+7 953 534-01-28",
+        "live_manager": "Admin Fitbase",
+        "evidence_file": "browser_evidence_part2.json",
+        "observation_index": 81,
+        "label": "godoev_installment_loaded",
+        "source_id": "000003761",
+        "expected_managers": [
+          "Ефремова Алена"
+        ],
+        "mismatch": true
+      },
+      {
+        "live_id": "122788",
+        "name": "Васильева Мария Александровна",
+        "phone": "+7 911 434-72-77",
+        "live_manager": "Admin Fitbase",
+        "evidence_file": "browser_evidence_part2.json",
+        "observation_index": 114,
+        "label": "vasilyeva_two_leads",
+        "source_id": "000029130",
+        "expected_managers": [
+          "Ефремова Алена"
+        ],
+        "mismatch": true
+      },
+      {
+        "live_id": "123106",
+        "name": "Смирнова Екатерина Анатольевна",
+        "phone": "+7 911 420-85-10",
+        "live_manager": "Admin Fitbase",
+        "evidence_file": "browser_evidence_part2.json",
+        "observation_index": 123,
+        "label": "smirnova123106_wrong_contract",
+        "source_id": "000029532",
+        "expected_managers": [
+          "Пилия Анастасия Артуровна"
+        ],
+        "mismatch": true
+      },
+      {
+        "live_id": "113663",
+        "name": "Анхимова Елена Александровна",
+        "phone": "+7 911 406-35-25",
+        "live_manager": "Admin Fitbase",
+        "evidence_file": "browser_evidence_part2.json",
+        "observation_index": 131,
+        "label": "ankhimova_wrong_contract",
+        "source_id": "000061300",
+        "expected_managers": [
+          "Пилия Анастасия Артуровна"
+        ],
+        "mismatch": true
+      },
+      {
+        "live_id": "119169",
+        "name": "Михеева Наталья Александровна",
+        "phone": "+7 902 771-19-59",
+        "live_manager": "Admin Fitbase",
+        "evidence_file": "browser_evidence_part2.json",
+        "observation_index": 155,
+        "label": "mikheeva_wrong_service_detail_loaded",
+        "source_id": "000055372",
+        "expected_managers": [
+          "Пеуна Анастасия Ивановна"
+        ],
+        "mismatch": true
+      }
+    ]
+  },
+  "confirmed_missing_photos": {
+    "cards": 6,
+    "active": 4,
+    "reactivation": 2
+  },
+  "missing_leads": {
+    "rows": 11,
+    "split": {
+      "reactivation": 11
+    }
+  },
+  "future_installments_reviewed": {
+    "cases": 2,
+    "split": {
+      "active": 2
+    }
+  },
+  "limits": "Sample counts are lower bounds. Catalog purchase counters count contracts, not unique clients. Categories overlap and must not be added.",
+  "all_phone_export_differences_including_group": {
+    "source_leads": 2727,
+    "active": 883,
+    "reactivation": 1844,
+    "note": "Includes one affected source lead from the Vasilyeva group. Subsets and other differences are disjoint."
+  }
+}

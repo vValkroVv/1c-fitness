@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "cutoff_at": "2026-09-21 20:12:12",
+  "delivered_clients": 40508,
+  "jpeg_files": 35422,
+  "photo_funnels": {
+    "Реактивация": 24542,
+    "Действующие абонементы": 10880
+  },
+  "delivered_clients_without_photo": 5086,
+  "delivered_exclusion_reasons": {
+    "missing_phone": 485,
+    "missing_or_unsupported_photo": 4444,
+    "invalid_phone": 157
+  },
+  "non_delivered_clients_excluded": 6278,
+  "phone_suffix_filenames": 0,
+  "checks": "All JPEG member sets, IDs, funnels, phones, filenames, bytes, SHA-256, CRC and complete client partition"
+}

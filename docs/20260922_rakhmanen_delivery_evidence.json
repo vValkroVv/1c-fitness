@@ -1,0 +1,29 @@
+{
+  "fitbase_client_photos_20260921/_reports/manifest.csv": [
+    {
+      "filename": "79214505389.jpg",
+      "client_id": "000067749",
+      "funnel": "Действующие абонементы",
+      "assigned_phone": "79214505389",
+      "exported_phone": "+7 (921) 4505389",
+      "raw_phone": "+7 (921) 4505389",
+      "naming_status": "exact_primary_phone",
+      "photo_source": "Reference65_main",
+      "metadata_extension": "jpg",
+      "detected_extension": "jpg",
+      "output_extension": "jpg",
+      "bytes": "21788",
+      "sha256": "f47146d05514018c54c6b861676dd5101648959eb3bdef120410f5a924cfdba0"
+    }
+  ],
+  "cards_xlsx": [
+    {
+      "row": "7712",
+      "values": {
+        "A": "+7 (921) 4505389",
+        "B": "Рахманен Наталья Анатольевна",
+        "C": "115000294578"
+      }
+    }
+  ]
+}

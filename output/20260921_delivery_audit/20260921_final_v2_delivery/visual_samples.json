@@ -1,0 +1,68 @@
+[
+  {
+    "source": "fitbase_active_clients_import_zayavki_20260921_all_funnels.xlsx",
+    "sheet": "Лист1",
+    "range": "E1:J7",
+    "image": "fitbase_active_clients_import_zayavki_E1-J7.png"
+  },
+  {
+    "source": "fitbase_active_clients_plastic_cards_20260921_all_funnels.xlsx",
+    "sheet": "Лист1",
+    "range": "A1:C1",
+    "image": "fitbase_active_clients_plastic_cards_A1-C1.png"
+  },
+  {
+    "source": "fitbase_import_abonementy_clientov_20260921.xlsx",
+    "sheet": "Лист1",
+    "range": "F1:M7",
+    "image": "fitbase_import_abonementy_clientov_F1-M7.png"
+  },
+  {
+    "source": "fitbase_import_abonementy_clientov_20260921.xlsx",
+    "sheet": "Лист1",
+    "range": "N1:V7",
+    "image": "fitbase_import_abonementy_clientov_N1-V7.png"
+  },
+  {
+    "source": "fitbase_import_shablony_abonementov_20260921.xlsx",
+    "sheet": "Лист1",
+    "range": "A1:F7",
+    "image": "fitbase_import_shablony_abonementov_A1-F7.png"
+  },
+  {
+    "source": "fitbase_import_shablony_abonementov_20260921.xlsx",
+    "sheet": "Лист1",
+    "range": "G1:L7",
+    "image": "fitbase_import_shablony_abonementov_G1-L7.png"
+  },
+  {
+    "source": "fitbase_import_uslugi_clientov_20260921.xlsx",
+    "sheet": "Лист1",
+    "range": "E1:K7",
+    "image": "fitbase_import_uslugi_clientov_E1-K7.png"
+  },
+  {
+    "source": "fitbase_import_uslugi_clientov_20260921.xlsx",
+    "sheet": "Лист1",
+    "range": "L1:Q7",
+    "image": "fitbase_import_uslugi_clientov_L1-Q7.png"
+  },
+  {
+    "source": "fitbase_import_shablony_uslug_20260921.xlsx",
+    "sheet": "Лист1",
+    "range": "A1:I7",
+    "image": "fitbase_import_shablony_uslug_A1-I7.png"
+  },
+  {
+    "source": "problem_4_subrent_visits_left_contract_151350_1_case_20260921.xlsx",
+    "sheet": "Импорт_абонементы",
+    "range": "F1:M2",
+    "image": "problem_4_F1-M2.png"
+  },
+  {
+    "source": "problem_4_subrent_visits_left_contract_151350_1_case_20260921.xlsx",
+    "sheet": "Импорт_абонементы",
+    "range": "N1:V2",
+    "image": "problem_4_N1-V2.png"
+  }
+]

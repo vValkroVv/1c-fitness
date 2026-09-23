@@ -1,0 +1,6 @@
+# Final transfer: one shared pool for every club and every exported funnel.
+# Order is part of the deterministic client_id assignment; keep it stable.
+managers:
+  - "Пеуна Анастасия Ивановна"
+  - "Пилия Анастасия Артуровна"
+  - "Ефремова Алена"

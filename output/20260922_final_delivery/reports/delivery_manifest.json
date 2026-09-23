@@ -1,0 +1,110 @@
+{
+  "verdict": "PASS",
+  "cutoff_contract": {
+    "source": "run.effective_at",
+    "backup_finish_at": "2026-09-20 20:12:12",
+    "cutoff_at": "2026-09-22 20:12:12",
+    "cutoff_date": "2026-09-22",
+    "date_stamp": "20260922",
+    "effective_shift_seconds": "172800"
+  },
+  "backup": {
+    "file_name": "Fitnes-20-09-26.fast.bak",
+    "source_path": "/Users/valerii.kropotin/Папа-работа/1c-preprocess/data/Fitnes-20-09-26.fast.bak",
+    "sql_path": "/backup/Fitnes-20-09-26.fast.bak",
+    "size_bytes": 13604230144,
+    "sha256": "a65f21760209e60ac3b2ffc49a15a9a308e02dd75ffeb5829c342c9d98170f52",
+    "database_name_in_backup": "Fitness",
+    "backup_finish_at": "2026-09-20 20:12:12",
+    "backup_set_uuid": "8e76ec9f-004f-4291-9842-92017c8e9f53",
+    "position": 1,
+    "header_metadata_path": "work/prepared/20260922_final/backup_metadata.json"
+  },
+  "files": [
+    {
+      "name": "fitbase_active_clients_import_zayavki_20260922_all_funnels.xlsx",
+      "size_bytes": 2696917,
+      "sha256": "efb30a953a0bbb4b88191c7a2889a4c100844bd30ddb304fc3540db8972ffc91"
+    },
+    {
+      "name": "fitbase_active_clients_plastic_cards_20260922_all_funnels.xlsx",
+      "size_bytes": 421042,
+      "sha256": "b8ed82f4ad29c37de9e09b5a74535a4a22ae2cd56ccd0d2b72203f88587feb2e"
+    },
+    {
+      "name": "fitbase_client_photos_20260922.zip",
+      "size_bytes": 847391504,
+      "sha256": "05835ef6c596703b5705ca30201dbf63cb8cd32ad29dabf0689a141c17567665"
+    },
+    {
+      "name": "fitbase_import_abonementy_clientov_20260922.xlsx",
+      "size_bytes": 12314586,
+      "sha256": "21e08c7f1a7cdf4ec751bc69cceabb3b922dad15fb143b844094f48fa127971b"
+    },
+    {
+      "name": "fitbase_import_shablony_abonementov_20260922.xlsx",
+      "size_bytes": 11991,
+      "sha256": "c84d0b5aa568eb78cdc4fa7f7be00c90c21231bc663a774428ddad8db9b60d8c"
+    },
+    {
+      "name": "fitbase_import_shablony_uslug_20260922.xlsx",
+      "size_bytes": 9585,
+      "sha256": "7a1589983b596e2dde30abfb57ddb20f69b92567507ba8819567c6ce7d16e904"
+    },
+    {
+      "name": "fitbase_import_uslugi_clientov_20260922.xlsx",
+      "size_bytes": 57848,
+      "sha256": "aa1c88dffb9b1a754cead9f10b5bd90cea9ba3a855806a8750cb87c62d8d53b4"
+    },
+    {
+      "name": "problem_4_subrent_visits_left_contract_151350_1_case_20260922.xlsx",
+      "size_bytes": 5879,
+      "sha256": "ebd72c40e26c415d81b9ee2777a1a29f286fa7fadf11b29f8f339af48ea2e1b2"
+    }
+  ],
+  "config_signature": "920c203093b4732339fb3e94e8f2f7b3d336e1f418149c27ab4cd959bd176d57",
+  "input_hashes": {
+    "/Users/valerii.kropotin/Папа-работа/1c-preprocess/end-to-end-xlsx/config/managers_by_club.yml": "dc135e80122684dc491283569b6503e4786a09690a2fe86e8e8f7f73bbcc22ea",
+    "/Users/valerii.kropotin/Папа-работа/1c-preprocess/end-to-end-xlsx/config/branches_by_club.yml": "500ed9ed86d6e79e7338381613520f08e607963b9a845253aeeb476c0524628e",
+    "/Users/valerii.kropotin/Папа-работа/1c-preprocess/end-to-end-xlsx/config/product_reclassification_decisions.csv": "fb901279042a19819b0c780d34ba45ddc1c31d7a09363ddacb0bf4b459ef9dd1",
+    "/Users/valerii.kropotin/Папа-работа/1c-preprocess/end-to-end-xlsx/config/membership_template_canonicalization.csv": "c7b122c9360587a882af920423c7869170ee2b1aa73a82e219f464637c35cb63",
+    "/Users/valerii.kropotin/Папа-работа/1c-preprocess/end-to-end-xlsx/scripts/19_build_membership_import_xlsx.py": "baac9c58dca2b298316e77f3c208ba4839b41e76843a48b5bae56d396bc9a58b",
+    "/Users/valerii.kropotin/Папа-работа/1c-preprocess/end-to-end-xlsx/work/prepared/20260922_final/expected.yml": "aac9c700024f3d676902055405ee07d1afc1c7be3bb1ce1b07f736afd1a227e7"
+  },
+  "cutoff_checks": {
+    "owner_stage": {
+      "rows": 1,
+      "cutoff_date": "2026-09-22",
+      "cutoff_at": "2026-09-22 20:12:12",
+      "backup_finish_at": "2026-09-20 20:12:12",
+      "verdict": "PASS"
+    },
+    "membership_facts": {
+      "rows": 104787,
+      "non_null_cutoff_rows": 104787,
+      "minimum_cutoff_at": "2026-09-22 20:12:12",
+      "maximum_cutoff_at": "2026-09-22 20:12:12",
+      "maximum_source_datetimes": {
+        "sale_datetime": "2026-09-20 18:39:17",
+        "financial_sale_document_datetime": "2026-09-20 18:39:17",
+        "matched_payment_datetime": "2026-09-20 18:42:35",
+        "financial_register_last_movement_datetime": "2026-09-20 18:42:35"
+      },
+      "expected_cutoff_at": "2026-09-22 20:12:12",
+      "verdict": "PASS"
+    },
+    "services_facts": {
+      "rows": 51926,
+      "non_null_cutoff_rows": 51926,
+      "minimum_cutoff_at": "2026-09-22 20:12:12",
+      "maximum_cutoff_at": "2026-09-22 20:12:12",
+      "maximum_source_datetimes": {
+        "sale_datetime": "2026-09-20 17:49:45",
+        "payment_datetime": "2026-09-20 17:49:48"
+      },
+      "expected_cutoff_at": "2026-09-22 20:12:12",
+      "verdict": "PASS"
+    }
+  },
+  "photos_enabled": true
+}

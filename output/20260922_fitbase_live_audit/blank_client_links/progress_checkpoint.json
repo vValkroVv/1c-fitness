@@ -1,0 +1,39 @@
+{
+  "status": "in_progress",
+  "cohort_rows": 767,
+  "phone_queries_completed": 765,
+  "short_phone_cases": [
+    "000060762",
+    "000032461"
+  ],
+  "exact_name_phone_card_matches": 50,
+  "foreign_search_candidate": "000057291",
+  "name_queries_completed": 50,
+  "name_candidate": "000011233",
+  "source_queue_sha256": "6aafaa52a397b42050b764692bc47c681af6fb136744807983cb81c7774821c8",
+  "live_lead_fields_sha256": "fba3d66afe32bce49c91fa639d16bca0e424814043e8b879321645db14791050",
+  "source_lead_fields_sha256": "fba3d66afe32bce49c91fa639d16bca0e424814043e8b879321645db14791050",
+  "lead_fields": [
+    "source_id",
+    "csv_phone",
+    "fio",
+    "create_date",
+    "manager_short"
+  ],
+  "live_unlinked_filter_confirmed": 767,
+  "browser_protocol_in_cua_memory": [
+    "cardChecks",
+    "unlinkedPages",
+    "uniqueUnlinked",
+    "blankQueue",
+    "nameQueue",
+    "belaninaFreshEvidence"
+  ],
+  "pending": [
+    "name searches for remaining 667 source records",
+    "global archives in other clubs",
+    "foreign phone match Gyбina/Osipova detail",
+    "classify name candidates",
+    "save lead IDs and final evidence/report"
+  ]
+}

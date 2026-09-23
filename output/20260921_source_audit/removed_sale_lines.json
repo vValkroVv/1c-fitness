@@ -1,0 +1,46 @@
+[
+  {
+    "sale_date": "2026-06-13T10:09:31",
+    "june_posted": 1,
+    "september_posted": 0,
+    "june_marked": 0,
+    "september_marked": 1,
+    "old_quantity": 1.0,
+    "old_unit_amount": 50.0,
+    "june_document_lines": 1,
+    "september_document_lines": 1
+  },
+  {
+    "sale_date": "2025-03-22T15:35:04",
+    "june_posted": 1,
+    "september_posted": 0,
+    "june_marked": 0,
+    "september_marked": 1,
+    "old_quantity": 1.0,
+    "old_unit_amount": 800.0,
+    "june_document_lines": 1,
+    "september_document_lines": 1
+  },
+  {
+    "sale_date": "2026-01-23T00:00:00",
+    "june_posted": 1,
+    "september_posted": 1,
+    "june_marked": 0,
+    "september_marked": 0,
+    "old_quantity": 1.0,
+    "old_unit_amount": 300.0,
+    "june_document_lines": 1,
+    "september_document_lines": 1
+  },
+  {
+    "sale_date": "2025-03-12T18:17:20",
+    "june_posted": 1,
+    "september_posted": 1,
+    "june_marked": 0,
+    "september_marked": 0,
+    "old_quantity": 1.0,
+    "old_unit_amount": 14990.0,
+    "june_document_lines": 1,
+    "september_document_lines": 1
+  }
+]

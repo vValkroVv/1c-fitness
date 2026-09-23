@@ -1,0 +1,122 @@
+{
+  "membership": {
+    "source_rows": 122,
+    "live_template_ids": 436,
+    "classification": {
+      "other": 17,
+      "equal": 222,
+      "unmatched_name": 42,
+      "zero": 10,
+      "thousands_prefix": 118,
+      "one": 27
+    },
+    "matched_source_names": 120,
+    "by_match_basis": {
+      "exact_name": {
+        "other": 17,
+        "equal": 215,
+        "zero": 10,
+        "thousands_prefix": 112,
+        "one": 25
+      },
+      "unique_short_truncated_suffix": {
+        "thousands_prefix": 6,
+        "equal": 7,
+        "one": 2
+      },
+      "null": {
+        "unmatched_name": 42
+      }
+    },
+    "multiple_catalog_prices": 0,
+    "severe_below_100": 152,
+    "affected_catalog_counts": {
+      "template_ids": 172,
+      "with_active_purchases": 78,
+      "without_active_purchases": 94,
+      "active_purchases": 5390,
+      "other_purchases": 31575
+    },
+    "by_club": {
+      "Гоголевский": {
+        "other": 8,
+        "equal": 100,
+        "unmatched_name": 24,
+        "zero": 4,
+        "one": 7
+      },
+      "Промышленная": {
+        "other": 8,
+        "equal": 40,
+        "unmatched_name": 22,
+        "zero": 4,
+        "thousands_prefix": 59,
+        "one": 7
+      },
+      "Ровио": {
+        "other": 8,
+        "equal": 99,
+        "unmatched_name": 22,
+        "zero": 4,
+        "one": 7
+      },
+      "Столица": {
+        "other": 8,
+        "equal": 40,
+        "unmatched_name": 22,
+        "zero": 4,
+        "thousands_prefix": 59,
+        "one": 6
+      }
+    }
+  },
+  "service": {
+    "source_rows": 51,
+    "live_template_ids": 177,
+    "classification": {
+      "unmatched_name": 5,
+      "equal": 124,
+      "zero": 45,
+      "other": 2,
+      "one": 1
+    },
+    "matched_source_names": 51,
+    "by_match_basis": {
+      "exact_name": {
+        "equal": 124,
+        "zero": 45,
+        "other": 2,
+        "one": 1
+      },
+      "unique_short_truncated_suffix": {},
+      "null": {
+        "unmatched_name": 5
+      }
+    },
+    "multiple_catalog_prices": 2,
+    "severe_below_100": 33,
+    "affected_catalog_counts": {
+      "template_ids": 48,
+      "with_active_purchases": 0,
+      "without_active_purchases": 48,
+      "active_purchases": 0,
+      "other_purchases": 88
+    }
+  },
+  "cross_club_truncation": {
+    "names": 62,
+    "low_price_template_ids": 124,
+    "low_clubs": [
+      "Промышленная",
+      "Столица"
+    ],
+    "full_price_clubs": [
+      "Гоголевский",
+      "Ровио"
+    ],
+    "with_active_purchases": 39,
+    "without_active_purchases": 85,
+    "active_purchases": 975,
+    "other_purchases": 15128
+  }
+}

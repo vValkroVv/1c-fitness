@@ -1,0 +1,24 @@
+[
+  {
+    "name": "FitnessRestored_20260630_macos",
+    "state_desc": "ONLINE",
+    "user_access_desc": "MULTI_USER",
+    "restore_date": "2026-09-20T21:37:45.290",
+    "backup_start_date": "2026-09-20T20:10:44",
+    "backup_finish_date": "2026-09-20T20:12:12",
+    "backup_set_uuid": "8E76EC9F-004F-4291-9842-92017C8E9F53",
+    "family_guid": "33FE63FD-15ED-498F-9A00-6226FB41A671",
+    "original_database": "Fitness"
+  },
+  {
+    "name": "FitnessRestored_20260630_original",
+    "state_desc": "ONLINE",
+    "user_access_desc": "MULTI_USER",
+    "restore_date": "2026-09-20T21:56:28.987",
+    "backup_start_date": "2026-06-30T23:25:54",
+    "backup_finish_date": "2026-06-30T23:27:03",
+    "backup_set_uuid": "0C28175B-E208-4768-99F7-8B50A1687D3A",
+    "family_guid": "33FE63FD-15ED-498F-9A00-6226FB41A671",
+    "original_database": "Fitness"
+  }
+]

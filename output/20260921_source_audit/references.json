@@ -1,0 +1,82 @@
+[
+  {
+    "snapshot": "june",
+    "check_name": "card_client_missing",
+    "n": 0
+  },
+  {
+    "snapshot": "september",
+    "check_name": "card_client_missing",
+    "n": 0
+  },
+  {
+    "snapshot": "june",
+    "check_name": "client_code_duplicate_groups",
+    "n": 0
+  },
+  {
+    "snapshot": "september",
+    "check_name": "client_code_duplicate_groups",
+    "n": 0
+  },
+  {
+    "snapshot": "june",
+    "check_name": "contract_holder_missing",
+    "n": 0
+  },
+  {
+    "snapshot": "september",
+    "check_name": "contract_holder_missing",
+    "n": 0
+  },
+  {
+    "snapshot": "june",
+    "check_name": "contract_product_missing",
+    "n": 0
+  },
+  {
+    "snapshot": "september",
+    "check_name": "contract_product_missing",
+    "n": 0
+  },
+  {
+    "snapshot": "june",
+    "check_name": "payment_line_document_missing",
+    "n": 0
+  },
+  {
+    "snapshot": "september",
+    "check_name": "payment_line_document_missing",
+    "n": 0
+  },
+  {
+    "snapshot": "june",
+    "check_name": "register_contract_missing",
+    "n": 0
+  },
+  {
+    "snapshot": "september",
+    "check_name": "register_contract_missing",
+    "n": 0
+  },
+  {
+    "snapshot": "june",
+    "check_name": "sales_client_missing",
+    "n": 0
+  },
+  {
+    "snapshot": "september",
+    "check_name": "sales_client_missing",
+    "n": 0
+  },
+  {
+    "snapshot": "june",
+    "check_name": "sales_line_document_missing",
+    "n": 0
+  },
+  {
+    "snapshot": "september",
+    "check_name": "sales_line_document_missing",
+    "n": 0
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "product_code": "00000001754",
+    "june_name": null,
+    "september_name": "Абонемент МУЛЬТИКАРТА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ (рассрочка)",
+    "change_kind": "added",
+    "september_contract_count": 59
+  },
+  {
+    "product_code": "00000001755",
+    "june_name": null,
+    "september_name": "Заморозка абонемента 14 дней",
+    "change_kind": "added",
+    "september_contract_count": 0
+  },
+  {
+    "product_code": "00000001756",
+    "june_name": null,
+    "september_name": "Заморозка абонемента 2 месяца",
+    "change_kind": "added",
+    "september_contract_count": 0
+  },
+  {
+    "product_code": "00000001757",
+    "june_name": null,
+    "september_name": "Заморозка абонемента 3 месяца",
+    "change_kind": "added",
+    "september_contract_count": 0
+  },
+  {
+    "product_code": "00000001758",
+    "june_name": null,
+    "september_name": "Абонемент 2 недели бесплатно",
+    "change_kind": "added",
+    "september_contract_count": 13
+  },
+  {
+    "product_code": "00000001759",
+    "june_name": null,
+    "september_name": "Биоимпедансометрия (анализ состава тела)",
+    "change_kind": "added",
+    "september_contract_count": 0
+  },
+  {
+    "product_code": "00000001760",
+    "june_name": null,
+    "september_name": "Переоформление платное",
+    "change_kind": "added",
+    "september_contract_count": 0
+  },
+  {
+    "product_code": "00000001761",
+    "june_name": null,
+    "september_name": "Переоформление",
+    "change_kind": "added",
+    "september_contract_count": 0
+  },
+  {
+    "product_code": "00000001762",
+    "june_name": null,
+    "september_name": "Абонемент УЛЬТРА 2 МЕСЯЦА БЕЗЛИМИТ",
+    "change_kind": "added",
+    "september_contract_count": 1
+  },
+  {
+    "product_code": "00000001763",
+    "june_name": null,
+    "september_name": "Аренда трех рекламных мест сроком на 3 месяца",
+    "change_kind": "added",
+    "september_contract_count": 0
+  },
+  {
+    "product_code": "00000000896",
+    "june_name": "Услуги физкультурно-оздоровительного хараткера",
+    "september_name": "Доплата до года",
+    "change_kind": "renamed",
+    "september_contract_count": 0
+  },
+  {
+    "product_code": "00000001333",
+    "june_name": "Заморозка абонемента",
+    "september_name": "Заморозка абонемента 30 дней",
+    "change_kind": "renamed",
+    "september_contract_count": 0
+  },
+  {
+    "product_code": "00000001753",
+    "june_name": "Абонемент МУЛЬТИКАРТА 12 месяцев + подарок (Спецпредложение) рассрочка",
+    "september_name": "Абонемент МУЛЬТИКАРТА 12 месяцев (Спецпредложение) рассрочка",
+    "change_kind": "renamed",
+    "september_contract_count": 57
+  }
+]

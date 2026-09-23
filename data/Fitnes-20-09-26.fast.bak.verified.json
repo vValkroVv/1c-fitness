@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "host": "192.168.2.36",
+  "remote": "/home/linuxadmin/Fitnes.bak",
+  "identity": {
+    "size": 13604230144,
+    "mtime_ns": 1789924332000000000,
+    "inode": 1704219,
+    "device": 64512
+  },
+  "part_bytes": 67108864,
+  "sha256": "a65f21760209e60ac3b2ffc49a15a9a308e02dd75ffeb5829c342c9d98170f52",
+  "output": "/Users/valerii.kropotin/\u041f\u0430\u043f\u0430-\u0440\u0430\u0431\u043e\u0442\u0430/1c-preprocess/data/Fitnes-20-09-26.fast.bak"
+}

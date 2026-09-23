@@ -1,0 +1,132 @@
+{
+  "path": "output/20260630_delivery_funnel_labels_20260820/fitbase_import_shablony_abonementov_20260630.xlsx",
+  "sha256": "9847915bf5c01e90c5808b2469120242e18b43c6e5530b3d3c021a12255bd719",
+  "rows": [
+    {
+      "sheet": "Лист1",
+      "range": "A17:L17",
+      "values": {
+        "branches_access": "Все",
+        "name": "Абонемент МУЛЬТИКАРТА 12 месяцев (3 месяца заморозки в подарок)",
+        "price": 11990,
+        "duration": 12,
+        "duration_type": "месяц",
+        "visits": null,
+        "guests": null,
+        "freeze": 90,
+        "first_visit_activation": null,
+        "archive": null,
+        "category": null,
+        "legal_entity": null
+      }
+    },
+    {
+      "sheet": "Лист1",
+      "range": "A19:L19",
+      "values": {
+        "branches_access": "Все",
+        "name": "Абонемент МУЛЬТИКАРТА 12 месяцев (рассрочка)",
+        "price": 14990,
+        "duration": 12,
+        "duration_type": "месяц",
+        "visits": null,
+        "guests": null,
+        "freeze": null,
+        "first_visit_activation": null,
+        "archive": null,
+        "category": null,
+        "legal_entity": null
+      }
+    },
+    {
+      "sheet": "Лист1",
+      "range": "A26:L26",
+      "values": {
+        "branches_access": "Все",
+        "name": "Абонемент МУЛЬТИКАРТА 12 месяцев + подарок (Спецпредложение) рассрочка",
+        "price": 10990,
+        "duration": 12,
+        "duration_type": "месяц",
+        "visits": null,
+        "guests": null,
+        "freeze": null,
+        "first_visit_activation": null,
+        "archive": null,
+        "category": null,
+        "legal_entity": null
+      }
+    },
+    {
+      "sheet": "Лист1",
+      "range": "A49:L49",
+      "values": {
+        "branches_access": "Продажа",
+        "name": "АБОНЕМЕНТ САЙКЛ 12 пос без клубной карты",
+        "price": 6450,
+        "duration": 12,
+        "duration_type": "месяц",
+        "visits": 12,
+        "guests": null,
+        "freeze": null,
+        "first_visit_activation": null,
+        "archive": null,
+        "category": null,
+        "legal_entity": null
+      }
+    },
+    {
+      "sheet": "Лист1",
+      "range": "A80:L80",
+      "values": {
+        "branches_access": "Продажа",
+        "name": "Абонемент УЛЬТРА 15 месяцев + 3 месяца заморозки в подарок(Ровио)",
+        "price": 14990,
+        "duration": 15,
+        "duration_type": "месяц",
+        "visits": null,
+        "guests": null,
+        "freeze": 71,
+        "first_visit_activation": null,
+        "archive": null,
+        "category": null,
+        "legal_entity": null
+      }
+    },
+    {
+      "sheet": "Лист1",
+      "range": "A86:L86",
+      "values": {
+        "branches_access": "Продажа",
+        "name": "Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок)",
+        "price": 13990,
+        "duration": 9,
+        "duration_type": "месяц",
+        "visits": null,
+        "guests": null,
+        "freeze": 30,
+        "first_visit_activation": null,
+        "archive": null,
+        "category": null,
+        "legal_entity": null
+      }
+    },
+    {
+      "sheet": "Лист1",
+      "range": "A112:L112",
+      "values": {
+        "branches_access": "Продажа",
+        "name": "УЛЬТРА 12 месяцев (рассрочка)",
+        "price": 11990,
+        "duration": 12,
+        "duration_type": "месяц",
+        "visits": null,
+        "guests": null,
+        "freeze": null,
+        "first_visit_activation": null,
+        "archive": null,
+        "category": null,
+        "legal_entity": null
+      }
+    }
+  ]
+}

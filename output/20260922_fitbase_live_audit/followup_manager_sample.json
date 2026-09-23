@@ -1,0 +1,394 @@
+[
+  {
+    "live_id": "104837",
+    "name": "Рахманен Наталья Анатольевна",
+    "phone": "+7 921 450-53-89",
+    "live_manager": "Пеуна Анастасия Ивановна",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 144,
+    "label": "rakhmanen_photo_loaded",
+    "source_id": "000067749",
+    "expected_managers": [
+      "Пеуна Анастасия Ивановна"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "128925",
+    "name": "Гайдэу Леон Романович",
+    "phone": "+7 911 434-41-74",
+    "live_manager": "Admin Fitbase",
+    "evidence_file": "browser_evidence.json",
+    "observation_index": 8,
+    "label": "profile",
+    "source_id": "000075116",
+    "expected_managers": [
+      "Пилия Анастасия Артуровна"
+    ],
+    "mismatch": true
+  },
+  {
+    "live_id": "63468",
+    "name": "Агапитов Юрий Юрьевич",
+    "phone": "+7 953 547-21-46",
+    "live_manager": "Пеуна Анастасия Ивановна",
+    "evidence_file": "browser_evidence.json",
+    "observation_index": 16,
+    "label": "profile",
+    "source_id": "000000148",
+    "expected_managers": [
+      "Пеуна Анастасия Ивановна"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "104986",
+    "name": "Капитонова Вероника Владимировна",
+    "phone": "+7 911 428-83-84",
+    "live_manager": "Пеуна Анастасия Ивановна",
+    "evidence_file": "browser_evidence.json",
+    "observation_index": 20,
+    "label": "profile_purchases",
+    "source_id": "000068078",
+    "expected_managers": [
+      "Пеуна Анастасия Ивановна"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "111053",
+    "name": "Береснев Денис Сергеевич",
+    "phone": "+7 960 210-39-60",
+    "live_manager": "Admin Fitbase",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 44,
+    "label": "service3_loaded",
+    "source_id": "000041039",
+    "expected_managers": [
+      "Пилия Анастасия Артуровна"
+    ],
+    "mismatch": true
+  },
+  {
+    "live_id": "63388",
+    "name": "Таразевич Дарья Владимировна",
+    "phone": "+7 911 429-68-24",
+    "live_manager": "Пеуна Анастасия Ивановна",
+    "evidence_file": "browser_evidence.json",
+    "observation_index": 37,
+    "label": "profile",
+    "source_id": "000000048",
+    "expected_managers": [
+      "Пеуна Анастасия Ивановна"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "63428",
+    "name": "Авдеев Сергей Александрович",
+    "phone": "+7 909 567-83-82",
+    "live_manager": "Пилия Анастасия Артуровна",
+    "evidence_file": "browser_evidence.json",
+    "observation_index": 38,
+    "label": "profile",
+    "source_id": "000000103",
+    "expected_managers": [
+      "Пилия Анастасия Артуровна"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "115515",
+    "name": "Акимова Татьяна Владимировна",
+    "phone": "+7 911 434-93-22",
+    "live_manager": "Admin Fitbase",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 87,
+    "label": "akimova_closed_expanded",
+    "source_id": "000000248",
+    "expected_managers": [
+      "Ефремова Алена"
+    ],
+    "mismatch": true
+  },
+  {
+    "live_id": "67691",
+    "name": "Елина Валентина Леонидовна",
+    "phone": "+7 911 407-36-19",
+    "live_manager": "Пилия Анастасия Артуровна",
+    "evidence_file": "browser_evidence.json",
+    "observation_index": 53,
+    "label": "profile",
+    "source_id": "000005344",
+    "expected_managers": [
+      "Пилия Анастасия Артуровна"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "115417",
+    "name": "Дьяченко Екатерина Григорьевна",
+    "phone": "+7 960 020-61-08",
+    "live_manager": "Admin Fitbase",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 96,
+    "label": "dyachenko_closed_expanded",
+    "source_id": "000074882",
+    "expected_managers": [
+      "Пеуна Анастасия Ивановна"
+    ],
+    "mismatch": true
+  },
+  {
+    "live_id": "101502",
+    "name": "Казурова Екатерина Юрьевна",
+    "phone": "+7 921 622-95-41",
+    "live_manager": "Пеуна Анастасия Ивановна",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 146,
+    "label": "kazurova_service_detail_retry",
+    "source_id": "000061610",
+    "expected_managers": [
+      "Пеуна Анастасия Ивановна"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "89523",
+    "name": "Шипулова Вероника (Тренер)",
+    "phone": "+7 911 409-30-61",
+    "live_manager": "Пеуна Анастасия Ивановна",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 5,
+    "label": "shipulova_memberships_loaded",
+    "source_id": "000036376",
+    "expected_managers": [
+      "Пеуна Анастасия Ивановна"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "125501",
+    "name": "Щербакова Алина Игоревна",
+    "phone": "+7 900 935-35-45",
+    "live_manager": "Admin Fitbase",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 58,
+    "label": "shcherbakova_installment_loaded",
+    "source_id": "000051181",
+    "expected_managers": [
+      "Ефремова Алена"
+    ],
+    "mismatch": true
+  },
+  {
+    "live_id": "115523",
+    "name": "Беланина Елена Юрьевна",
+    "phone": "+7 911 408-22-33",
+    "live_manager": "Admin Fitbase",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 65,
+    "label": "belanina_leads_loaded",
+    "source_id": "000001417",
+    "expected_managers": [
+      "Ефремова Алена"
+    ],
+    "mismatch": true
+  },
+  {
+    "live_id": "108824",
+    "name": "Годоев Олег Николаевич",
+    "phone": "+7 953 534-01-28",
+    "live_manager": "Admin Fitbase",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 81,
+    "label": "godoev_installment_loaded",
+    "source_id": "000003761",
+    "expected_managers": [
+      "Ефремова Алена"
+    ],
+    "mismatch": true
+  },
+  {
+    "live_id": "122788",
+    "name": "Васильева Мария Александровна",
+    "phone": "+7 911 434-72-77",
+    "live_manager": "Admin Fitbase",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 114,
+    "label": "vasilyeva_two_leads",
+    "source_id": "000029130",
+    "expected_managers": [
+      "Ефремова Алена"
+    ],
+    "mismatch": true
+  },
+  {
+    "live_id": "65489",
+    "name": "Васильева Мария Александровна",
+    "phone": "+7 900 460-08-98",
+    "live_manager": "Ефремова Алена",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 117,
+    "label": "vasilyeva65489_loaded",
+    "source_id": "000002642",
+    "expected_managers": [
+      "Ефремова Алена"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "123106",
+    "name": "Смирнова Екатерина Анатольевна",
+    "phone": "+7 911 420-85-10",
+    "live_manager": "Admin Fitbase",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 123,
+    "label": "smirnova123106_wrong_contract",
+    "source_id": "000029532",
+    "expected_managers": [
+      "Пилия Анастасия Артуровна"
+    ],
+    "mismatch": true
+  },
+  {
+    "live_id": "104290",
+    "name": "Смирнова Екатерина Анатольевна",
+    "phone": "+7 900 455-26-36",
+    "live_manager": "Пеуна Анастасия Ивановна",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 125,
+    "label": "smirnova104290_loaded",
+    "source_id": "000066663",
+    "expected_managers": [
+      "Пеуна Анастасия Ивановна"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "113663",
+    "name": "Анхимова Елена Александровна",
+    "phone": "+7 911 406-35-25",
+    "live_manager": "Admin Fitbase",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 131,
+    "label": "ankhimova_wrong_contract",
+    "source_id": "000061300",
+    "expected_managers": [
+      "Пилия Анастасия Артуровна"
+    ],
+    "mismatch": true
+  },
+  {
+    "live_id": "119169",
+    "name": "Михеева Наталья Александровна",
+    "phone": "+7 902 771-19-59",
+    "live_manager": "Admin Fitbase",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 155,
+    "label": "mikheeva_wrong_service_detail_loaded",
+    "source_id": "000055372",
+    "expected_managers": [
+      "Пеуна Анастасия Ивановна"
+    ],
+    "mismatch": true
+  },
+  {
+    "live_id": "89068",
+    "name": "Анхимова Елена Александровна",
+    "phone": "+7 953 544-43-79",
+    "live_manager": "Ефремова Алена",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 136,
+    "label": "ankhimova_original_closed",
+    "source_id": "000035464",
+    "expected_managers": [
+      "Ефремова Алена"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "105145",
+    "name": "Михеева Наталья Александровна",
+    "phone": "+7 911 035-37-17",
+    "live_manager": "Ефремова Алена",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 150,
+    "label": "mikheeva_original_services_loaded",
+    "source_id": "000068456",
+    "expected_managers": [
+      "Ефремова Алена"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "66672",
+    "name": "Григорьев Алексей Станиславович",
+    "phone": "+7 921 523-25-81",
+    "live_manager": "Ефремова Алена",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 162,
+    "label": "one_time_services_Григорьев Алексей Станиславович",
+    "source_id": "000004111",
+    "expected_managers": [
+      "Ефремова Алена"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "83767",
+    "name": "Чередниченко Татьяна Алексеевна",
+    "phone": "",
+    "live_manager": "Пилия Анастасия Артуровна",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 164,
+    "label": "one_time_services_Чередниченко Татьяна Алексеевна",
+    "source_id": "000024801",
+    "expected_managers": [
+      "Пилия Анастасия Артуровна"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "91177",
+    "name": "Чистякова Алена Игоревна",
+    "phone": "+7 953 535-47-00",
+    "live_manager": "Ефремова Алена",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 168,
+    "label": "one_time_services_Чистякова Алена Игоревна",
+    "source_id": "000039809",
+    "expected_managers": [
+      "Ефремова Алена"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "96850",
+    "name": "Борисова Дана Геннадьевна",
+    "phone": "+7 911 422-32-96",
+    "live_manager": "Пилия Анастасия Артуровна",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 170,
+    "label": "one_time_services_Борисова Дана Геннадьевна",
+    "source_id": "000051882",
+    "expected_managers": [
+      "Пилия Анастасия Артуровна"
+    ],
+    "mismatch": false
+  },
+  {
+    "live_id": "108340",
+    "name": "Денисенко Полина Николаевна",
+    "phone": "+7 953 526-89-34",
+    "live_manager": "Ефремова Алена",
+    "evidence_file": "browser_evidence_part2.json",
+    "observation_index": 174,
+    "label": "denisenko_one_time_detail_loaded",
+    "source_id": "000074822",
+    "expected_managers": [
+      "Ефремова Алена"
+    ],
+    "mismatch": false
+  }
+]

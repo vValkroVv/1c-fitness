@@ -1,0 +1,24 @@
+{
+  "checked_at": "2026-09-22T11:08:47.518624+00:00",
+  "result": "passed",
+  "source_xlsx_hashes_unchanged": 7,
+  "source_leads": 40508,
+  "live_leads": 40497,
+  "one_to_one_matches": 40495,
+  "group_matches": 2,
+  "missing_leads": 11,
+  "part1_observations": 62,
+  "part2_observations": 175,
+  "checks": [
+    "JSON parse",
+    "local report links",
+    "source XLSX SHA256",
+    "one-to-one mapping uniqueness in finalize script",
+    "lead count identities",
+    "service count reconciliation",
+    "critical-case evidence labels",
+    "15 exact LTV comparisons",
+    "Python syntax",
+    "no U+2014 in final report"
+  ]
+}

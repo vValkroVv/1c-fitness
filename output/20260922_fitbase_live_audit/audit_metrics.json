@@ -1,0 +1,47 @@
+{
+  "source_leads": 40508,
+  "live_leads": 40497,
+  "one_to_one_matches": 40495,
+  "group_matched_rows": 2,
+  "missing_leads": 11,
+  "field_counts": {
+    "all_exported_fields_equal": 37092,
+    "phone_subset": 2633,
+    "email": 30,
+    "client_fio": 769,
+    "phone_mismatch": 93
+  },
+  "blank_client_name_rows": 767,
+  "blank_client_name_by_export": {
+    "leads_gogolevsky_active.csv": 13,
+    "leads_gogolevsky_reactivation_peuna.csv": 30,
+    "leads_gogolevsky_reactivation_pilia.csv": 33,
+    "leads_gogolevsky_reactivation_efremova.csv": 32,
+    "leads_industrial_reactivation.csv": 16,
+    "leads_rovio_active.csv": 1,
+    "leads_rovio_reactivation.csv": 629,
+    "leads_stolitsa_reactivation.csv": 13
+  },
+  "homonym_phone_risk_rows": 76,
+  "homonym_phone_risk_active_rows": 14,
+  "email_missing_in_export": 28,
+  "membership_template_ids": 436,
+  "membership_catalog_purchases": 102399,
+  "service_template_ids": 177,
+  "service_catalog_purchases": 518,
+  "membership_price_differences": 164,
+  "membership_price_under_100_instead_of_at_least_1000": 146,
+  "service_price_differences": 48,
+  "test_service_purchases": 2,
+  "service_purchases_excluding_test": 516,
+  "missing_exact_membership_names": [
+    "Абонемент МУЛЬТИКАРТА 12 месяцев + 2 месяца заморозки в подарок (СПЕЦПРЕДЛОЖЕНИЕ)",
+    "Абонемент МУЛЬТИКАРТА 12 месяцев + 3 месяца заморозки в подарок СПЕЦПРЕДЛОЖЕНИЕ",
+    "Абонемент МУЛЬТИКАРТА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ(Промышленная,10)",
+    "Абонемент УЛЬТРА 12 месяцев + 3 месяца заморозки в подарок (Ровио)",
+    "Абонемент УЛЬТРА 15 месяцев + 3 месяца заморозки в подарок(Ровио)",
+    "Студенческий дневной абонемент 9 месяцев (посещение клуба до 17:00)"
+  ],
+  "missing_exact_service_names": [],
+  "problem4_imported": false
+}

@@ -31,6 +31,12 @@ class PipelineSafetyTests(unittest.TestCase):
         self.managers.write_text("assignment_mode: global\nmanagers: [Manager One]\n", encoding="utf-8")
         (self.config_dir / "branches_by_club.yml").write_text("branches: {}\n", encoding="utf-8")
         (self.config_dir / "product_reclassification_decisions.csv").write_text("product_id,decision\n", encoding="utf-8")
+        self.template_decisions = self.config_dir / "membership_template_canonicalization.csv"
+        self.template_decisions.write_text("canonical_name,price\nExample,100\n", encoding="utf-8")
+        self.scripts_dir = self.root / "scripts"
+        self.scripts_dir.mkdir()
+        self.membership_builder = self.scripts_dir / "19_build_membership_import_xlsx.py"
+        self.membership_builder.write_text("# original builder\n", encoding="utf-8")
         self.expected = self.config_dir / "expected.yml"
         self.expected.write_text("{}\n", encoding="utf-8")
         self.config = {
@@ -49,7 +55,7 @@ class PipelineSafetyTests(unittest.TestCase):
             password_env=None, password_file=None, resume=False, skip_reference_counts=False,
             start_at="preflight", stop_after="manifest",
         )
-        self.enterContext(patch.multiple(runner, ROOT=self.root, CONFIG=self.config_dir))
+        self.enterContext(patch.multiple(runner, ROOT=self.root, CONFIG=self.config_dir, SCRIPTS=self.scripts_dir))
         self.enterContext(patch.dict("os.environ", {"FITBASE_GUARDRAIL_TEST_PASSWORD": "unused-test-password"}))
         self.database = self.enterContext(patch.object(runner, "DatabaseClient", side_effect=AssertionError("Test attempted live SQL")))
         self.enterContext(contextlib.redirect_stdout(io.StringIO()))
@@ -145,6 +151,20 @@ class PipelineSafetyTests(unittest.TestCase):
         saved = json.loads(pipeline.status_path.read_text(encoding="utf-8"))
         self.assertEqual(saved["completed_steps"], [*prior, "main_xlsx"])
         self.assertFalse((pipeline.delivery_root / "READY.txt").exists())
+        self.database.assert_not_called()
+
+    def test_resume_rejects_changed_template_decisions_or_builder(self):
+        pipeline = self.pipeline()
+        pipeline.prepare_directories()
+        self.args.resume = True
+        for path in (self.template_decisions, self.membership_builder):
+            with self.subTest(path=path.name):
+                original = path.read_bytes()
+                path.write_bytes(original + b"changed\n")
+                with self.assertRaisesRegex(ValueError, "Cannot resume with changed configuration or cutoff"):
+                    self.pipeline()
+                path.write_bytes(original)
+        self.assertEqual(self.pipeline().status["config_signature"], pipeline.status["config_signature"])
         self.database.assert_not_called()
 
 

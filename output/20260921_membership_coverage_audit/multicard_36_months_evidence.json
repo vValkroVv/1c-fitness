@@ -1,0 +1,249 @@
+{
+  "name": "Абонемент МУЛЬТИКАРТА 36 месяцев",
+  "runs": {
+    "20260920_rehearsal_plus1": {
+      "facts_count": 1,
+      "rows_count": 1,
+      "facts": [
+        {
+          "subscription_ref": "B811C51A58A1984341A484F562689656",
+          "document_number": "00000144499",
+          "client_id": "000004747",
+          "product_ref": "B179000C29D830FD11F0DD95636F8ABB",
+          "product_code": "00000001697",
+          "subscription_name": "Абонемент МУЛЬТИКАРТА 36 месяцев",
+          "product_class": "trial_or_guest",
+          "sale_date": "2025-12-20",
+          "sale_datetime": "2025-12-20 15:48:33",
+          "start_date": "2001-01-01",
+          "end_date": "2001-01-01",
+          "duration_days": "1",
+          "register_duration_days": "365",
+          "doc_duration_value": "12",
+          "rg_duration_days": "365",
+          "rg_freeze_days": "0",
+          "rg_price": "38970",
+          "membership_sale_line_amount": "38970",
+          "doc_posted": "01",
+          "doc_marked": "00",
+          "recomputed_duration": [
+            0,
+            "duration_days<28"
+          ]
+        }
+      ],
+      "rows": [
+        {
+          "contract_id": "00000144499",
+          "client_id": "000004747",
+          "contract_name": "Абонемент МУЛЬТИКАРТА 36 месяцев",
+          "duration": "0",
+          "duration_type": "месяц",
+          "create_date": "2025-12-20",
+          "payment_date": "2025-12-20",
+          "activation_date": "",
+          "end_date": "",
+          "freeze": "",
+          "price": "38970",
+          "_subscription_ref": "B811C51A58A1984341A484F562689656",
+          "_product_ref": "B179000C29D830FD11F0DD95636F8ABB",
+          "_duration_source": "duration_days<28",
+          "_money_source": "accumrg3305_sale_balance__info_rg3060_fld3070",
+          "_business_override": ""
+        }
+      ],
+      "templates": [
+        {
+          "branches_access": "Все",
+          "name": "Абонемент МУЛЬТИКАРТА 36 месяцев",
+          "price": "38970",
+          "duration": "0",
+          "duration_type": "месяц",
+          "visits": "",
+          "guests": "",
+          "freeze": "",
+          "first_visit_activation": "",
+          "archive": "",
+          "category": "",
+          "legal_entity": ""
+        }
+      ]
+    },
+    "20260921_final_v2": {
+      "facts_count": 1,
+      "rows_count": 1,
+      "facts": [
+        {
+          "subscription_ref": "B811C51A58A1984341A484F562689656",
+          "document_number": "00000144499",
+          "client_id": "000004747",
+          "product_ref": "B179000C29D830FD11F0DD95636F8ABB",
+          "product_code": "00000001697",
+          "subscription_name": "Абонемент МУЛЬТИКАРТА 36 месяцев",
+          "product_class": "full_subscription",
+          "sale_date": "2025-12-20",
+          "sale_datetime": "2025-12-20 15:48:33",
+          "start_date": "2026-07-07",
+          "end_date": "2027-07-06",
+          "duration_days": "365",
+          "register_duration_days": "356",
+          "doc_duration_value": "12",
+          "rg_duration_days": "356",
+          "rg_freeze_days": "0",
+          "rg_price": "38970",
+          "membership_sale_line_amount": "38970",
+          "doc_posted": "01",
+          "doc_marked": "00",
+          "recomputed_duration": [
+            12,
+            "document163_fld1481"
+          ]
+        }
+      ],
+      "rows": [
+        {
+          "contract_id": "00000144499",
+          "client_id": "000004747",
+          "contract_name": "Абонемент МУЛЬТИКАРТА 36 месяцев",
+          "duration": "12",
+          "duration_type": "месяц",
+          "create_date": "2025-12-20",
+          "payment_date": "2025-12-20",
+          "activation_date": "2026-07-07",
+          "end_date": "2027-07-06",
+          "freeze": "",
+          "price": "38970",
+          "_subscription_ref": "B811C51A58A1984341A484F562689656",
+          "_product_ref": "B179000C29D830FD11F0DD95636F8ABB",
+          "_duration_source": "document163_fld1481",
+          "_money_source": "accumrg3305_sale_balance__info_rg3060_fld3070",
+          "_business_override": ""
+        }
+      ],
+      "templates": [
+        {
+          "branches_access": "Все",
+          "name": "Абонемент МУЛЬТИКАРТА 36 месяцев",
+          "price": "38970",
+          "duration": "12",
+          "duration_type": "месяц",
+          "visits": "",
+          "guests": "",
+          "freeze": "",
+          "first_visit_activation": "",
+          "archive": "",
+          "category": "",
+          "legal_entity": ""
+        }
+      ]
+    }
+  },
+  "accepted_june_template_xlsx": {
+    "path": "output/20260630_delivery_funnel_labels_20260820/fitbase_import_shablony_abonementov_20260630.xlsx",
+    "matches": [
+      {
+        "member": "xl/worksheets/sheet1.xml",
+        "rows": [
+          {
+            "row": 1,
+            "cells": {
+              "A1": "branches_access",
+              "B1": "name",
+              "C1": "price",
+              "D1": "duration",
+              "E1": "duration_type",
+              "F1": "visits",
+              "G1": "guests",
+              "H1": "freeze",
+              "I1": "first_visit_activation",
+              "J1": "archive",
+              "K1": "category",
+              "L1": "legal_entity"
+            }
+          },
+          {
+            "row": 2,
+            "cells": {
+              "A2": "Доступ в филиалах",
+              "B2": "Название абонемента *",
+              "C2": "Стоимость *",
+              "D2": "Продолжительность  *",
+              "E2": "Тип продолжительности *",
+              "F2": "Посещений ",
+              "G2": "Гостевые визиты",
+              "H2": "Дни для заморозки",
+              "I2": "Активация с первого посещения?",
+              "J2": "В архиве?",
+              "K2": "Категория в структуре",
+              "L2": "Юр.лицо"
+            }
+          },
+          {
+            "row": 36,
+            "cells": {
+              "A36": "Все",
+              "B36": "Абонемент МУЛЬТИКАРТА 36 месяцев",
+              "C36": "38970",
+              "D36": "0",
+              "E36": "месяц"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "matching_config_rows": [],
+  "compute_duration_months_matches_accepted_commit_5863388": true,
+  "raw_source_queries": {
+    "FitnessRestored_20260630_original": {
+      "sql_file": "output/20260921_membership_coverage_audit/multicard_36_months_source.sql",
+      "row_count": 1,
+      "rows": [
+        {
+          "subscription_ref": "B811C51A58A1984341A484F562689656",
+          "document_number": "00000144499",
+          "sale_datetime": "2025-12-20 15:48:33",
+          "product_ref": "B179000C29D830FD11F0DD95636F8ABB",
+          "product_code": "00000001697",
+          "subscription_name": "Абонемент МУЛЬТИКАРТА 36 месяцев",
+          "doc_duration_value": "12",
+          "doc_posted": "01",
+          "doc_marked": "00",
+          "raw_start_datetime": "2001-01-01 00:00:00",
+          "raw_end_datetime": "2001-01-01 00:00:00",
+          "start_datetime": "2001-01-01 00:00:00",
+          "end_datetime": "2001-01-01 00:00:00",
+          "duration_days": 1,
+          "rg_duration_days": "365",
+          "rg_freeze_days": "0",
+          "rg_price": "38970"
+        }
+      ]
+    },
+    "FitnessRestored_20260630_macos": {
+      "sql_file": "output/20260921_membership_coverage_audit/multicard_36_months_source.sql",
+      "row_count": 1,
+      "rows": [
+        {
+          "subscription_ref": "B811C51A58A1984341A484F562689656",
+          "document_number": "00000144499",
+          "sale_datetime": "2025-12-20 15:48:33",
+          "product_ref": "B179000C29D830FD11F0DD95636F8ABB",
+          "product_code": "00000001697",
+          "subscription_name": "Абонемент МУЛЬТИКАРТА 36 месяцев",
+          "doc_duration_value": "12",
+          "doc_posted": "01",
+          "doc_marked": "00",
+          "raw_start_datetime": "4026-07-07 00:00:00",
+          "raw_end_datetime": "4027-07-06 23:59:59",
+          "start_datetime": "2026-07-07 00:00:00",
+          "end_datetime": "2027-07-06 23:59:59",
+          "duration_days": 365,
+          "rg_duration_days": "356",
+          "rg_freeze_days": "0",
+          "rg_price": "38970"
+        }
+      ]
+    }
+  }
+}

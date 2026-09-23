@@ -1,0 +1,67 @@
+{
+  "delivery": "output/20260921_final_v2_delivery",
+  "files": {
+    "fitbase_import_abonementy_clientov_20260921.xlsx": {
+      "sha256": "84ec5b2686ab5bf2343eae555173abc166dc29783e96824ac2d4a876edeafd73",
+      "reviewed_ranges": [
+        "F1:M7",
+        "N1:V7"
+      ]
+    },
+    "fitbase_import_shablony_abonementov_20260921.xlsx": {
+      "sha256": "cca3740e930f9cc8d82d9112f721d85f84fc6bd89ba71a3a17510f1c21fec47c",
+      "reviewed_ranges": [
+        "A1:F7",
+        "G1:L7"
+      ]
+    },
+    "fitbase_active_clients_import_zayavki_20260921_all_funnels.xlsx": {
+      "sha256": "6e4102abc5e0d180ccde6d77e50f719583ba8a6bedca1ea5d9b847fa71071853",
+      "reviewed_ranges": [
+        "E1:J7"
+      ]
+    },
+    "problem_4_subrent_visits_left_contract_151350_1_case_20260921.xlsx": {
+      "sha256": "bac74026f314a5490697b07da15a34374bebdd781a6ffc9cd830aaaaaf89bbc6",
+      "reviewed_ranges": [
+        "F1:M2",
+        "N1:V2"
+      ]
+    },
+    "fitbase_active_clients_plastic_cards_20260921_all_funnels.xlsx": {
+      "sha256": "3794d553bfdac400b49845d322f048dea2a0bf74022ef39859ccac3eed76eb72",
+      "reviewed_ranges": [
+        "A1:C1"
+      ]
+    },
+    "fitbase_import_shablony_uslug_20260921.xlsx": {
+      "sha256": "7098e5fbbffee21ff61d9416f5368a61decc328cd3263819c062602f4bcb12ac",
+      "reviewed_ranges": [
+        "A1:I7"
+      ]
+    },
+    "fitbase_import_uslugi_clientov_20260921.xlsx": {
+      "sha256": "2fa3c3b7ab40ad4e22a389a05b2b91d6d68eaabccfdfc305f4b6a52c28719e71",
+      "reviewed_ranges": [
+        "E1:K7",
+        "L1:Q7"
+      ]
+    }
+  },
+  "reviewed_workbooks": 7,
+  "reviewed_ranges": 11,
+  "saved_card_identifiers_remain_13_digit_strings": true,
+  "observations": [
+    "Узкие столбцы обрезают длинные заголовки и названия; то же присутствует в принятой июньской поставке.",
+    "Данные, листы и форматирование XLSX при просмотре не изменялись.",
+    "На preview Artifact Tool номера карт показаны экспонентой; сохранённые XLSX содержат полные строковые идентификаторы.",
+    "Просмотрены представительные диапазоны всех семи файлов. Построчная сохранность данных проверяется отдельно программно."
+  ],
+  "final_xlsx_hashes_match_visual_inputs": true,
+  "problem4_layout_difference": {
+    "column": "U (manager)",
+    "june_width": 27,
+    "september_width": 26,
+    "review": "Полное имя помещается; строки и закрепление не изменены."
+  }
+}

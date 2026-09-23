@@ -1,0 +1,16 @@
+[
+  {
+    "table_name": "_Reference59",
+    "june_rows": 107129,
+    "september_rows": 109289,
+    "retained": 107129,
+    "removed": 0,
+    "added": 2160,
+    "changed_Code": 0,
+    "changed_Marked": 849,
+    "changed_Fld3750_RRRef": 5,
+    "changed_Fld3753": 10,
+    "changed_Fld3756": 0,
+    "changed_Fld3751": 0
+  }
+]

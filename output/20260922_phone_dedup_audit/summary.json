@@ -1,0 +1,26 @@
+{
+  "20260921_final_v2": {
+    "excluded": 2388,
+    "active": 68,
+    "reactivation": 303,
+    "new": 2017,
+    "groups": 2174,
+    "involved_clients": 4562,
+    "excluded_different_names": 2174,
+    "active_different_names": 68,
+    "active_winner_active": 64,
+    "active_winner_reactivation": 4
+  },
+  "20260922_final": {
+    "excluded": 2388,
+    "active": 66,
+    "reactivation": 305,
+    "new": 2017,
+    "groups": 2174,
+    "involved_clients": 4562,
+    "excluded_different_names": 2174,
+    "active_different_names": 66,
+    "active_winner_active": 62,
+    "active_winner_reactivation": 4
+  }
+}

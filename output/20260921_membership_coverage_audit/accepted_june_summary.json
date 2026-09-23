@@ -1,0 +1,62 @@
+{
+  "source": "accepted_june",
+  "application_xlsx": "output/20260630_delivery_funnel_labels_20260820/fitbase_active_clients_import_zayavki_20260630_all_funnels.xlsx",
+  "raw_source_csv": "end-to-end-xlsx/work/20260630_full_cutoff/raw/staging/stg_subscriptions_all.csv",
+  "application_clients": 39550,
+  "application_rows": 39550,
+  "membership_clients": 64455,
+  "membership_rows": 121461,
+  "missing_clients": 771,
+  "all_missing_clients_in_owner_csv": true,
+  "missing_by_funnel": {
+    "Реактивация": 771
+  },
+  "missing_by_stage": {
+    "более 90 дней": 769,
+    "7-29 дней": 1,
+    "1-6 дней": 1
+  },
+  "missing_by_application_xlsx_funnel": {
+    "Реактивация": 771
+  },
+  "missing_by_application_xlsx_stage": {
+    "Закрытые годовые абонементы": 771
+  },
+  "missing_by_selected_product": {
+    "АКВА 40 посещений": 188,
+    "АКВА 36 посещений": 51,
+    "АКВА 18 посещений": 93,
+    "АКВА 4 посещения": 39,
+    "Подарочный сертификат 1 месяц безлимитного фитнеса": 77,
+    "АКВА 30 посещений": 50,
+    "АКВА 26 посещений": 18,
+    "АКВА 46 посещений": 50,
+    "АКВА 24 посещения": 69,
+    "АКВА 32 посещения": 23,
+    "АКВА 8 посещений": 65,
+    "Пакет 12 (персональные тренировки)": 5,
+    "АКВА 38 посещений": 11,
+    "АКВА 10 посещений": 10,
+    "АКВА 48 посещений": 3,
+    "АКВА 40 посещений САЙТ": 10,
+    "АКВА 22 посещения": 4,
+    "АКВА 35 посещений": 4,
+    "АКВА 6 посещений": 1
+  },
+  "missing_by_selected_raw_class": {
+    "unknown_review_required": 770,
+    "null": 1
+  },
+  "missing_by_selected_owner_class": {
+    "full_subscription": 771
+  },
+  "source_contracts_for_missing_clients": 1819,
+  "source_contracts_by_class": {
+    "unknown_review_required": 1819
+  },
+  "source_contracts_admitted_by_membership_class_filter": 0,
+  "missing_clients_with_facts": null,
+  "all_selected_names_akva": false,
+  "all_source_contract_dates_ended_before_cutoff": true,
+  "missing_selected_raw_rows": 1
+}

@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "source_folder": "output/20260921_fitbase_for_customer",
+  "output_folder": "output/20260921_fitbase_templates_plain_numbers",
+  "files": [
+    {
+      "file": "fitbase_import_shablony_abonementov_20260921.xlsx",
+      "rows": 122,
+      "numeric_cells": 265,
+      "number_format": "General",
+      "changed_formats": 122,
+      "all_values_and_types_unchanged": true,
+      "other_styles_and_native_features_unchanged": true,
+      "changed_zip_parts": [
+        "xl/worksheets/sheet1.xml",
+        "xl/styles.xml"
+      ],
+      "sha256": "e35efde77971b2257bf03c9b5f54956ecd0515c5a75de89ccd993fc70a698319",
+      "source_sha256": "cca3740e930f9cc8d82d9112f721d85f84fc6bd89ba71a3a17510f1c21fec47c"
+    },
+    {
+      "file": "fitbase_import_shablony_uslug_20260921.xlsx",
+      "rows": 51,
+      "numeric_cells": 213,
+      "number_format": "General",
+      "changed_formats": 0,
+      "all_values_and_types_unchanged": true,
+      "other_styles_and_native_features_unchanged": true,
+      "changed_zip_parts": [],
+      "sha256": "7098e5fbbffee21ff61d9416f5368a61decc328cd3263819c062602f4bcb12ac",
+      "source_sha256": "7098e5fbbffee21ff61d9416f5368a61decc328cd3263819c062602f4bcb12ac"
+    }
+  ],
+  "tests": {
+    "membership": 21,
+    "services": 8,
+    "pipeline_safety": 4,
+    "numeric_format_regression": 1
+  },
+  "full_sql_pipeline_rerun": false
+}

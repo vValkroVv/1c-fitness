@@ -1,0 +1,1124 @@
+[
+  {
+    "observation_index": 58,
+    "type": "service_catalog",
+    "archived": false,
+    "rows": [
+      {
+        "cells": [],
+        "links": [
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=type",
+            "text": "Тип"
+          },
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=category_new",
+            "text": "Категория"
+          },
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=name",
+            "text": "Название"
+          },
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=count",
+            "text": "Количество"
+          },
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=trainer",
+            "text": "Тренер"
+          },
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=price",
+            "text": "Стоимость"
+          },
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=legal_entity",
+            "text": "Юр. лицо"
+          },
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=ordering",
+            "text": "Приоритет"
+          }
+        ]
+      },
+      {
+        "cells": [
+          " ",
+          "Персональные тренировки\nГрупповые занятия\nАренда оборудования\nАренда зала\nДополнительная услуга\nЗаморозка\nРазовое посещение\nОтдел продаж",
+          "Выбрать...",
+          "",
+          "",
+          "",
+          "",
+          " ",
+          "ООО Клуб\nИндивидуальный предприниматель Иконников Андрей Анатольевич\nЮр.лицо",
+          " ",
+          " "
+        ],
+        "links": []
+      },
+      {
+        "cells": [
+          "1",
+          "Заморозка",
+          "Заморозка на 7 дней",
+          "Заморозка на 7 дней",
+          "7",
+          "-",
+          "200.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=35",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=35",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "2",
+          "Заморозка на 30 дней",
+          "Заморозка на 30 дней",
+          "30",
+          "-",
+          "600.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=36",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=36",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "3",
+          "Разовое посещение",
+          "Услуги",
+          "Step-1 разовое посещение без клубной карты",
+          "1",
+          "-",
+          "300.00",
+          "Действующие: 0 шт.\nВсего: 6 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=129",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=129",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "4",
+          "Йога (персональная тренировка) 12 пос. (группа до 4 человек)",
+          "12",
+          "-",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=130",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=130",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "5",
+          "Йога (персональная тренировка) 12 пос. VIP (1 человек)",
+          "12",
+          "-",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=131",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=131",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "6",
+          "Йога (персональная тренировка) 8 пос. (группа до 4 человек)",
+          "8",
+          "-",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=132",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=132",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "7",
+          "Йога (персональная тренировка) 8 пос. VIP (1 человек)",
+          "8",
+          "-",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=133",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=133",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "8",
+          "Йога в гамаках(при наличии клубной карты)",
+          "1",
+          "-",
+          "400.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=134",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=134",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "9",
+          "Сайкл для начинающих без клубной карты",
+          "1",
+          "-",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=135",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=135",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "10",
+          "Сайкл для начинающих при наличии клубной карты",
+          "1",
+          "-",
+          "300.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=136",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=136",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "11",
+          "Сайкл разовое без клубной карты",
+          "1",
+          "-",
+          "1100.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=137",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=137",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "12",
+          "Сайкл разовое при наличии клубной карты",
+          "1",
+          "-",
+          "300.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=138",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=138",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "13",
+          "Стрип-пластика",
+          "1",
+          "-",
+          "4500.00",
+          "Действующие: 0 шт.\nВсего: 5 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=139",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=139",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "14",
+          "Пакет 10 (персональные тренировки)",
+          "10",
+          "-",
+          "6000.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=140",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=140",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "15",
+          "Пакет 10 ВИП (персональные тренировки)",
+          "10",
+          "-",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=141",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=141",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "16",
+          "Пакет 12 (персональные тренировки)",
+          "12",
+          "-",
+          "6000.00",
+          "Действующие: 0 шт.\nВсего: 42 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=142",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=142",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "17",
+          "Пакет 12 ВИП (персональные тренировки)",
+          "12",
+          "-",
+          "9500.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=143",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=143",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "18",
+          "Пакет 4 (персональные тренировки)",
+          "4",
+          "-",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=144",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=144",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "19",
+          "Пакет 8",
+          "8",
+          "-",
+          "5000.00",
+          "Действующие: 0 шт.\nВсего: 16 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=145",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=145",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "20",
+          "Пакет 8 ВИП",
+          "8",
+          "-",
+          "8700.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=146",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=146",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "21",
+          "Пробная П/Т",
+          "1",
+          "-",
+          "270.00",
+          "Действующие: 0 шт.\nВсего: 2 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=147",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=147",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "22",
+          "Разовая",
+          "1",
+          "-",
+          "1200.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=148",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=148",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "23",
+          "Разовая ВИП",
+          "1",
+          "-",
+          "1300.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=149",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=149",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "24",
+          "Субаренда 1 посещение",
+          "1",
+          "-",
+          "2000.00",
+          "Действующие: 0 шт.\nВсего: 4 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=150",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=150",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "25",
+          "Разовое посещение",
+          "1",
+          "-",
+          "800.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=151",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=151",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "26",
+          "Медленный класс (10 посещений) двойное предложение",
+          "10",
+          "-",
+          "13000.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=152",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=152",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "27",
+          "Пакет 6",
+          "6",
+          "-",
+          "6700.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=153",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=153",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "28",
+          "Солярий 1 минута",
+          "1",
+          "-",
+          "30.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=154",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=154",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "29",
+          "Солярий 5 минут",
+          "5",
+          "-",
+          "150.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=155",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=155",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "30",
+          "Step-1 разовое посещение при наличии клубной карты",
+          "1",
+          "-",
+          "300.00",
+          "Действующие: 0 шт.\nВсего: 5 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=156",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=156",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "31",
+          "Йога (персональная тренировка) VIP",
+          "1",
+          "-",
+          "1200.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=157",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=157",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "32",
+          "Персональная тренировка VIP",
+          "1",
+          "-",
+          "1000.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=158",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=158",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "33",
+          "Аренда рекламного места А2",
+          "1",
+          "Admin Fitbase",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 1 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=159",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=159",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "34",
+          "Восстановление пластиковой карты",
+          "1",
+          "Admin Fitbase",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 0 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=160",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=160",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "35",
+          "Заморозка абонемента 90 дней",
+          "1",
+          "Admin Fitbase",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 2 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=161",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=161",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "36",
+          "Переоформление платное абонемента на фитнес",
+          "1",
+          "Admin Fitbase",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 1 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=162",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=162",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "37",
+          "Подарочный сертификат на сумму 1500",
+          "1",
+          "Admin Fitbase",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 1 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=163",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=163",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "38",
+          "Подарочный сертификат на сумму 2000",
+          "1",
+          "Admin Fitbase",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 2 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=164",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=164",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "39",
+          "Подарочный сертификат на сумму 3000",
+          "1",
+          "Admin Fitbase",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 2 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=165",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=165",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "40",
+          "Доплата",
+          "1",
+          "Admin Fitbase",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 1 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=173",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=173",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "41",
+          "Заморозка абонемента 14 дней",
+          "1",
+          "Admin Fitbase",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 2 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=174",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=174",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "42",
+          "Перевод из клуба в клуб",
+          "1",
+          "Admin Fitbase",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 1 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=175",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=175",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "cells": [
+          "43",
+          "Утеря ключа от шкафчика",
+          "1",
+          "Admin Fitbase",
+          "0.00",
+          "Действующие: 0 шт.\nВсего: 2 шт.",
+          "ООО Клуб",
+          "",
+          " "
+        ],
+        "links": [
+          {
+            "href": "/services/update?id=176",
+            "text": ""
+          },
+          {
+            "href": "/services/archive?id=176",
+            "text": ""
+          }
+        ]
+      }
+    ],
+    "snapshot": "- text: \n- link \"Fitbase\":\n  - /url: /site\n  - img \"Fitbase\"\n- text:    \n- list:\n  - link \" Рабочий стол\":\n    - /url: /\n    - generic: \n    - text: Рабочий стол\n  - link \" Заявки 7\":\n    - /url: /leads/index\n    - generic: \n    - generic: Заявки\n    - generic \"Всего неразобранных заявок\": \"7\"\n  - link \"ФитБейс Чат -\":\n    - /url: javascript:;\n    - text: ФитБейс Чат\n    - generic \"Пропущенных сообщений\": \"-\"\n  - link \" Клиенты\":\n    - /url: /clients/index\n    - generic: \n    - text: Клиенты\n  - link \" Задачи 29\":\n    - /url: /task/manage/index\n    - generic: \n    - generic: Задачи\n    - generic: \"29\"\n  - link \" График и расписание 0\":\n    - /url: javascript:;\n    - generic: \n    - generic: График и расписание\n    - generic \"Неподтвержденных записей за сегодня\": \"0\"\n    - text: \n  - link \" Сотрудники\":\n    - /url: /staff\n    - generic: \n    - text: Сотрудники\n  - link \" Отчёты и аналитика\":\n    - /url: /statistics\n    - generic: \n    - text: Отчёты и аналитика\n  - link \" Касса 0\":\n    - /url: /paymaster\n    - generic: \n    - generic: Касса\n    - generic: \"0\"\n  - link \" Ресепшен\":\n    - /url: /reception\n    - generic: \n    - text: Ресепшен\n  - link \" Настройки\":\n    - /url: javascript:;\n    - generic: \n    - text: Настройки \n  - text:              \n  - link \" Мобильное приложение 0\":\n    - /url: javascript:;\n    - generic: \n    - generic: Мобильное приложение\n    - generic \"Всего неразобранных отзывов\": \"0\"\n    - text: \n  - text:     \n- link:\n  - /url: /site\n- textbox\n- combobox \"Поиск...\"\n- status\n- button \"\":\n  - generic: \n- link \"Пошли на Допинг\":\n  - /url: https://fitbase.io/doping26?utm_source=adminka\n  - generic: Пошли на\n  - img \"Допинг\"\n- list:\n  - generic: Помощь 1\n  - combobox \"Фитнес Империя (Столица)\":\n    - textbox \"Фитнес Империя (Столица)\"\n  - link \" ... Кропотин Леонид\":\n    - /url: \"javascript:\"\n    - generic: \n    - img \"...\"\n    - text: Кропотин Леонид\n  - text:   \n- text: \n- main:\n  - heading \"Услуги\" [level=3]\n  - list:\n    - link \"Главная\":\n      - /url: /\n    - text: /\n    - link \"Настройки\":\n      - /url: /services/index\n    - listitem: / Доступные услуги\n  - form:\n    - combobox \"Действующие\":\n      - textbox \"Действующие\"\n    - combobox \"Выберите значение\":\n      - textbox\n    - button \"Применить\"\n    - link \"Сбросить\":\n      - /url: /services/index\n  - generic: Всего 43 записи.\n  - heading [level=3]\n  - heading \" Услуги\" [level=3]:\n    - generic: \n    - text: Услуги\n  - link \" Страница\":\n    - /url: /services/index?_tog8e2d8802=page&_pjax=%23pjax-grid-service-block\n    - generic: \n    - text: Страница\n  - button \"\":\n    - generic: \n  - text:   \n  - link \"+ Добавить новую услугу\":\n    - /url: /services/create\n    - generic: +\n    - text: Добавить новую услугу\n  - table:\n    - rowgroup:\n      - row \"# Тип Категория Название Количество Тренер Стоимость Куплено Юр. лицо Приоритет \":\n        - columnheader \"#\"\n        - columnheader \"Тип\":\n          - link \"Тип\":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=type\n        - columnheader \"Категория\":\n          - link \"Категория\":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=category_new\n        - columnheader \"Название\":\n          - link \"Название\":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=name\n        - columnheader \"Количество\":\n          - link \"Количество\":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=count\n        - columnheader \"Тренер\":\n          - link \"Тренер\":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=trainer\n        - columnheader \"Стоимость\":\n          - link \"Стоимость\":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=price\n        - columnheader \"Куплено\"\n        - columnheader \"Юр. лицо\":\n          - link \"Юр. лицо\":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=legal_entity\n        - columnheader \"Приоритет \":\n          - link \"Приоритет \":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&sort=ordering\n        - columnheader\n      - row \"Выбрать...\":\n        - cell\n        - cell:\n          - combobox:\n            - option [selected]\n            - option \"Персональные тренировки\"\n            - option \"Групповые занятия\"\n            - option \"Аренда оборудования\"\n            - option \"Аренда зала\"\n            - option \"Дополнительная услуга\"\n            - option \"Заморозка\"\n            - option \"Разовое посещение\"\n            - option \"Отдел продаж\"\n        - cell \"Выбрать...\":\n          - generic: Выбрать...\n          - text:                                               \n        - cell:\n          - textbox\n        - cell:\n          - textbox\n        - cell:\n          - textbox\n        - cell:\n          - textbox\n        - cell\n        - cell:\n          - combobox:\n            - option [selected]\n            - option \"ООО Клуб\"\n            - option \"Индивидуальный предприниматель Иконников Андрей Анатольевич\"\n            - option \"Юр.лицо\"\n        - cell\n        - cell\n    - rowgroup:\n      - 'row \"1 Заморозка Заморозка на 7 дней Заморозка на 7 дней 7 - 200.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"1\"\n        - cell \"Заморозка\"\n        - cell \"Заморозка на 7 дней\"\n        - cell \"Заморозка на 7 дней\"\n        - cell \"7\"\n        - cell \"-\"\n        - cell \"200.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=35\n          - link \"В архив\":\n            - /url: /services/archive?id=35\n            - generic: \n      - 'row \"2 Заморозка на 30 дней Заморозка на 30 дней 30 - 600.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"2\"\n        - cell \"Заморозка на 30 дней\"\n        - cell \"Заморозка на 30 дней\"\n        - cell \"30\"\n        - cell \"-\"\n        - cell \"600.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=36\n          - link \"В архив\":\n            - /url: /services/archive?id=36\n            - generic: \n      - 'row \"3 Разовое посещение Услуги Step-1 разовое посещение без клубной карты 1 - 300.00 Действующие: 0 шт. Всего: 6 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"3\"\n        - cell \"Разовое посещение\"\n        - cell \"Услуги\"\n        - cell \"Step-1 разовое посещение без клубной карты\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"300.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 6 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 6 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=129\n          - link \"В архив\":\n            - /url: /services/archive?id=129\n            - generic: \n      - 'row \"4 Йога (персональная тренировка) 12 пос. (группа до 4 человек) 12 - 0.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"4\"\n        - cell \"Йога (персональная тренировка) 12 пос. (группа до 4 человек)\"\n        - cell \"12\"\n        - cell \"-\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=130\n          - link \"В архив\":\n            - /url: /services/archive?id=130\n            - generic: \n      - 'row \"5 Йога (персональная тренировка) 12 пос. VIP (1 человек) 12 - 0.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"5\"\n        - cell \"Йога (персональная тренировка) 12 пос. VIP (1 человек)\"\n        - cell \"12\"\n        - cell \"-\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=131\n          - link \"В архив\":\n            - /url: /services/archive?id=131\n            - generic: \n      - 'row \"6 Йога (персональная тренировка) 8 пос. (группа до 4 человек) 8 - 0.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"6\"\n        - cell \"Йога (персональная тренировка) 8 пос. (группа до 4 человек)\"\n        - cell \"8\"\n        - cell \"-\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=132\n          - link \"В архив\":\n            - /url: /services/archive?id=132\n            - generic: \n      - 'row \"7 Йога (персональная тренировка) 8 пос. VIP (1 человек) 8 - 0.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"7\"\n        - cell \"Йога (персональная тренировка) 8 пос. VIP (1 человек)\"\n        - cell \"8\"\n        - cell \"-\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=133\n          - link \"В архив\":\n            - /url: /services/archive?id=133\n            - generic: \n      - 'row \"8 Йога в гамаках(при наличии клубной карты) 1 - 400.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"8\"\n        - cell \"Йога в гамаках(при наличии клубной карты)\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"400.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=134\n          - link \"В архив\":\n            - /url: /services/archive?id=134\n            - generic: \n      - 'row \"9 Сайкл для начинающих без клубной карты 1 - 0.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"9\"\n        - cell \"Сайкл для начинающих без клубной карты\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=135\n          - link \"В архив\":\n            - /url: /services/archive?id=135\n            - generic: \n      - 'row \"10 Сайкл для начинающих при наличии клубной карты 1 - 300.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"10\"\n        - cell \"Сайкл для начинающих при наличии клубной карты\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"300.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=136\n          - link \"В архив\":\n            - /url: /services/archive?id=136\n            - generic: \n      - 'row \"11 Сайкл разовое без клубной карты 1 - 1100.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"11\"\n        - cell \"Сайкл разовое без клубной карты\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"1100.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=137\n          - link \"В архив\":\n            - /url: /services/archive?id=137\n            - generic: \n      - 'row \"12 Сайкл разовое при наличии клубной карты 1 - 300.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"12\"\n        - cell \"Сайкл разовое при наличии клубной карты\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"300.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=138\n          - link \"В архив\":\n            - /url: /services/archive?id=138\n            - generic: \n      - 'row \"13 Стрип-пластика 1 - 4500.00 Действующие: 0 шт. Всего: 5 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"13\"\n        - cell \"Стрип-пластика\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"4500.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 5 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 5 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=139\n          - link \"В архив\":\n            - /url: /services/archive?id=139\n            - generic: \n      - 'row \"14 Пакет 10 (персональные тренировки) 10 - 6000.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"14\"\n        - cell \"Пакет 10 (персональные тренировки)\"\n        - cell \"10\"\n        - cell \"-\"\n        - cell \"6000.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=140\n          - link \"В архив\":\n            - /url: /services/archive?id=140\n            - generic: \n      - 'row \"15 Пакет 10 ВИП (персональные тренировки) 10 - 0.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"15\"\n        - cell \"Пакет 10 ВИП (персональные тренировки)\"\n        - cell \"10\"\n        - cell \"-\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=141\n          - link \"В архив\":\n            - /url: /services/archive?id=141\n            - generic: \n      - 'row \"16 Пакет 12 (персональные тренировки) 12 - 6000.00 Действующие: 0 шт. Всего: 42 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"16\"\n        - cell \"Пакет 12 (персональные тренировки)\"\n        - cell \"12\"\n        - cell \"-\"\n        - cell \"6000.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 42 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 42 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=142\n          - link \"В архив\":\n            - /url: /services/archive?id=142\n            - generic: \n      - 'row \"17 Пакет 12 ВИП (персональные тренировки) 12 - 9500.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"17\"\n        - cell \"Пакет 12 ВИП (персональные тренировки)\"\n        - cell \"12\"\n        - cell \"-\"\n        - cell \"9500.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=143\n          - link \"В архив\":\n            - /url: /services/archive?id=143\n            - generic: \n      - 'row \"18 Пакет 4 (персональные тренировки) 4 - 0.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"18\"\n        - cell \"Пакет 4 (персональные тренировки)\"\n        - cell \"4\"\n        - cell \"-\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=144\n          - link \"В архив\":\n            - /url: /services/archive?id=144\n            - generic: \n      - 'row \"19 Пакет 8 8 - 5000.00 Действующие: 0 шт. Всего: 16 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"19\"\n        - cell \"Пакет 8\"\n        - cell \"8\"\n        - cell \"-\"\n        - cell \"5000.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 16 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 16 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=145\n          - link \"В архив\":\n            - /url: /services/archive?id=145\n            - generic: \n      - 'row \"20 Пакет 8 ВИП 8 - 8700.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"20\"\n        - cell \"Пакет 8 ВИП\"\n        - cell \"8\"\n        - cell \"-\"\n        - cell \"8700.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=146\n          - link \"В архив\":\n            - /url: /services/archive?id=146\n            - generic: \n      - 'row \"21 Пробная П/Т 1 - 270.00 Действующие: 0 шт. Всего: 2 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"21\"\n        - cell \"Пробная П/Т\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"270.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 2 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 2 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=147\n          - link \"В архив\":\n            - /url: /services/archive?id=147\n            - generic: \n      - 'row \"22 Разовая 1 - 1200.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"22\"\n        - cell \"Разовая\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"1200.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=148\n          - link \"В архив\":\n            - /url: /services/archive?id=148\n            - generic: \n      - 'row \"23 Разовая ВИП 1 - 1300.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"23\"\n        - cell \"Разовая ВИП\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"1300.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=149\n          - link \"В архив\":\n            - /url: /services/archive?id=149\n            - generic: \n      - 'row \"24 Субаренда 1 посещение 1 - 2000.00 Действующие: 0 шт. Всего: 4 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"24\"\n        - cell \"Субаренда 1 посещение\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"2000.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 4 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 4 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=150\n          - link \"В архив\":\n            - /url: /services/archive?id=150\n            - generic: \n      - 'row \"25 Разовое посещение 1 - 800.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"25\"\n        - cell \"Разовое посещение\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"800.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=151\n          - link \"В архив\":\n            - /url: /services/archive?id=151\n            - generic: \n      - 'row \"26 Медленный класс (10 посещений) двойное предложение 10 - 13000.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"26\"\n        - cell \"Медленный класс (10 посещений) двойное предложение\"\n        - cell \"10\"\n        - cell \"-\"\n        - cell \"13000.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=152\n          - link \"В архив\":\n            - /url: /services/archive?id=152\n            - generic: \n      - 'row \"27 Пакет 6 6 - 6700.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"27\"\n        - cell \"Пакет 6\"\n        - cell \"6\"\n        - cell \"-\"\n        - cell \"6700.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=153\n          - link \"В архив\":\n            - /url: /services/archive?id=153\n            - generic: \n      - 'row \"28 Солярий 1 минута 1 - 30.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"28\"\n        - cell \"Солярий 1 минута\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"30.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=154\n          - link \"В архив\":\n            - /url: /services/archive?id=154\n            - generic: \n      - 'row \"29 Солярий 5 минут 5 - 150.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"29\"\n        - cell \"Солярий 5 минут\"\n        - cell \"5\"\n        - cell \"-\"\n        - cell \"150.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=155\n          - link \"В архив\":\n            - /url: /services/archive?id=155\n            - generic: \n      - 'row \"30 Step-1 разовое посещение при наличии клубной карты 1 - 300.00 Действующие: 0 шт. Всего: 5 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"30\"\n        - cell \"Step-1 разовое посещение при наличии клубной карты\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"300.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 5 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 5 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=156\n          - link \"В архив\":\n            - /url: /services/archive?id=156\n            - generic: \n      - 'row \"31 Йога (персональная тренировка) VIP 1 - 1200.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"31\"\n        - cell \"Йога (персональная тренировка) VIP\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"1200.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=157\n          - link \"В архив\":\n            - /url: /services/archive?id=157\n            - generic: \n      - 'row \"32 Персональная тренировка VIP 1 - 1000.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"32\"\n        - cell \"Персональная тренировка VIP\"\n        - cell \"1\"\n        - cell \"-\"\n        - cell \"1000.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=158\n          - link \"В архив\":\n            - /url: /services/archive?id=158\n            - generic: \n      - 'row \"33 Аренда рекламного места А2 1 Admin Fitbase 0.00 Действующие: 0 шт. Всего: 1 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"33\"\n        - cell \"Аренда рекламного места А2\"\n        - cell \"1\"\n        - cell \"Admin Fitbase\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 1 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 1 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=159\n          - link \"В архив\":\n            - /url: /services/archive?id=159\n            - generic: \n      - 'row \"34 Восстановление пластиковой карты 1 Admin Fitbase 0.00 Действующие: 0 шт. Всего: 0 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"34\"\n        - cell \"Восстановление пластиковой карты\"\n        - cell \"1\"\n        - cell \"Admin Fitbase\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 0 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 0 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=160\n          - link \"В архив\":\n            - /url: /services/archive?id=160\n            - generic: \n      - 'row \"35 Заморозка абонемента 90 дней 1 Admin Fitbase 0.00 Действующие: 0 шт. Всего: 2 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"35\"\n        - cell \"Заморозка абонемента 90 дней\"\n        - cell \"1\"\n        - cell \"Admin Fitbase\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 2 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 2 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=161\n          - link \"В архив\":\n            - /url: /services/archive?id=161\n            - generic: \n      - 'row \"36 Переоформление платное абонемента на фитнес 1 Admin Fitbase 0.00 Действующие: 0 шт. Всего: 1 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"36\"\n        - cell \"Переоформление платное абонемента на фитнес\"\n        - cell \"1\"\n        - cell \"Admin Fitbase\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 1 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 1 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=162\n          - link \"В архив\":\n            - /url: /services/archive?id=162\n            - generic: \n      - 'row \"37 Подарочный сертификат на сумму 1500 1 Admin Fitbase 0.00 Действующие: 0 шт. Всего: 1 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"37\"\n        - cell \"Подарочный сертификат на сумму 1500\"\n        - cell \"1\"\n        - cell \"Admin Fitbase\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 1 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 1 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=163\n          - link \"В архив\":\n            - /url: /services/archive?id=163\n            - generic: \n      - 'row \"38 Подарочный сертификат на сумму 2000 1 Admin Fitbase 0.00 Действующие: 0 шт. Всего: 2 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"38\"\n        - cell \"Подарочный сертификат на сумму 2000\"\n        - cell \"1\"\n        - cell \"Admin Fitbase\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 2 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 2 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=164\n          - link \"В архив\":\n            - /url: /services/archive?id=164\n            - generic: \n      - 'row \"39 Подарочный сертификат на сумму 3000 1 Admin Fitbase 0.00 Действующие: 0 шт. Всего: 2 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"39\"\n        - cell \"Подарочный сертификат на сумму 3000\"\n        - cell \"1\"\n        - cell \"Admin Fitbase\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 2 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 2 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=165\n          - link \"В архив\":\n            - /url: /services/archive?id=165\n            - generic: \n      - 'row \"40 Доплата 1 Admin Fitbase 0.00 Действующие: 0 шт. Всего: 1 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"40\"\n        - cell \"Доплата\"\n        - cell \"1\"\n        - cell \"Admin Fitbase\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 1 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 1 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=173\n          - link \"В архив\":\n            - /url: /services/archive?id=173\n            - generic: \n      - 'row \"41 Заморозка абонемента 14 дней 1 Admin Fitbase 0.00 Действующие: 0 шт. Всего: 2 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"41\"\n        - cell \"Заморозка абонемента 14 дней\"\n        - cell \"1\"\n        - cell \"Admin Fitbase\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 2 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 2 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=174\n          - link \"В архив\":\n            - /url: /services/archive?id=174\n            - generic: \n      - 'row \"42 Перевод из клуба в клуб 1 Admin Fitbase 0.00 Действующие: 0 шт. Всего: 1 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"42\"\n        - cell \"Перевод из клуба в клуб\"\n        - cell \"1\"\n        - cell \"Admin Fitbase\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 1 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 1 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=175\n          - link \"В архив\":\n            - /url: /services/archive?id=175\n            - generic: \n      - 'row \"43 Утеря ключа от шкафчика 1 Admin Fitbase 0.00 Действующие: 0 шт. Всего: 2 шт. ООО Клуб 0 Редактировать В архив\"':\n        - cell \"43\"\n        - cell \"Утеря ключа от шкафчика\"\n        - cell \"1\"\n        - cell \"Admin Fitbase\"\n        - cell \"0.00\"\n        - 'cell \"Действующие: 0 шт. Всего: 2 шт.\"':\n          - text: \"Действующие: 0 шт.\"\n          - text: \"Всего: 2 шт.\"\n        - cell \"ООО Клуб\"\n        - cell \"0\":\n          - spinbutton: \"0\"\n        - cell \"Редактировать В архив\":\n          - link \"Редактировать\":\n            - /url: /services/update?id=176\n          - link \"В архив\":\n            - /url: /services/archive?id=176\n            - generic: \n- contentinfo:\n  - text: \"© 2017-2026 «Fitbase». Все права защищены | AppBuild: 1.5.4a |\"\n  - link \" Статус сервисов\":\n    - /url: https://status.fitbase.io/\n    - generic: \n    - text: Статус сервисов\n- text:   \n- iframe [id=\"carrot-messenger-collapsed-frame\"] [name=\"carrot-messenger-collapsed-frame\"]"
+  },
+  {
+    "observation_index": 60,
+    "type": "service_catalog",
+    "archived": true,
+    "rows": [
+      {
+        "cells": [],
+        "links": [
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=type",
+            "text": "Тип"
+          },
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=category_new",
+            "text": "Категория"
+          },
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=name",
+            "text": "Название"
+          },
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=count",
+            "text": "Количество"
+          },
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=trainer",
+            "text": "Тренер"
+          },
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=price",
+            "text": "Стоимость"
+          },
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=legal_entity",
+            "text": "Юр. лицо"
+          },
+          {
+            "href": "/services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=ordering",
+            "text": "Приоритет"
+          }
+        ]
+      },
+      {
+        "cells": [
+          " ",
+          "Персональные тренировки\nГрупповые занятия\nАренда оборудования\nАренда зала\nДополнительная услуга\nЗаморозка\nРазовое посещение\nОтдел продаж",
+          "Выбрать...",
+          "",
+          "",
+          "",
+          "",
+          " ",
+          "ООО Клуб\nИндивидуальный предприниматель Иконников Андрей Анатольевич\nЮр.лицо",
+          " ",
+          " "
+        ],
+        "links": []
+      },
+      {
+        "cells": [
+          "Ничего не найдено."
+        ],
+        "links": []
+      }
+    ],
+    "snapshot": "- text: \n- link \"Fitbase\":\n  - /url: /site\n  - img \"Fitbase\"\n- text:    \n- list:\n  - link \" Рабочий стол\":\n    - /url: /\n    - generic: \n    - text: Рабочий стол\n  - link \" Заявки 7\":\n    - /url: /leads/index\n    - generic: \n    - generic: Заявки\n    - generic \"Всего неразобранных заявок\": \"7\"\n  - link \"ФитБейс Чат -\":\n    - /url: javascript:;\n    - text: ФитБейс Чат\n    - generic \"Пропущенных сообщений\": \"-\"\n  - link \" Клиенты\":\n    - /url: /clients/index\n    - generic: \n    - text: Клиенты\n  - link \" Задачи 29\":\n    - /url: /task/manage/index\n    - generic: \n    - generic: Задачи\n    - generic: \"29\"\n  - link \" График и расписание 0\":\n    - /url: javascript:;\n    - generic: \n    - generic: График и расписание\n    - generic \"Неподтвержденных записей за сегодня\": \"0\"\n    - text: \n  - link \" Сотрудники\":\n    - /url: /staff\n    - generic: \n    - text: Сотрудники\n  - link \" Отчёты и аналитика\":\n    - /url: /statistics\n    - generic: \n    - text: Отчёты и аналитика\n  - link \" Касса 0\":\n    - /url: /paymaster\n    - generic: \n    - generic: Касса\n    - generic: \"0\"\n  - link \" Ресепшен\":\n    - /url: /reception\n    - generic: \n    - text: Ресепшен\n  - link \" Настройки\":\n    - /url: javascript:;\n    - generic: \n    - text: Настройки \n  - text:              \n  - link \" Мобильное приложение 0\":\n    - /url: javascript:;\n    - generic: \n    - generic: Мобильное приложение\n    - generic \"Всего неразобранных отзывов\": \"0\"\n    - text: \n  - text:     \n- link:\n  - /url: /site\n- textbox\n- combobox \"Поиск...\"\n- status\n- button \"\":\n  - generic: \n- link \"Пошли на Допинг\":\n  - /url: https://fitbase.io/doping26?utm_source=adminka\n  - generic: Пошли на\n  - img \"Допинг\"\n- list:\n  - generic: Помощь 1\n  - combobox \"Фитнес Империя (Столица)\":\n    - textbox \"Фитнес Империя (Столица)\"\n  - link \" ... Кропотин Леонид\":\n    - /url: \"javascript:\"\n    - generic: \n    - img \"...\"\n    - text: Кропотин Леонид\n  - text:   \n- text: \n- main:\n  - heading \"Услуги\" [level=3]\n  - list:\n    - link \"Главная\":\n      - /url: /\n    - text: /\n    - link \"Настройки\":\n      - /url: /services/index\n    - listitem: / Доступные услуги\n  - form:\n    - combobox \"В архиве\":\n      - textbox \"В архиве\"\n    - combobox \"Выберите значение\":\n      - textbox\n    - button \"Применить\"\n    - link \"Сбросить\":\n      - /url: /services/index\n  - heading [level=3]\n  - heading \" Услуги\" [level=3]:\n    - generic: \n    - text: Услуги\n  - link \" Страница\":\n    - /url: /services/index?_tog8e2d8802=page&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=\n    - generic: \n    - text: Страница\n  - button \"\":\n    - generic: \n  - text:   \n  - link \"+ Добавить новую услугу\":\n    - /url: /services/create\n    - generic: +\n    - text: Добавить новую услугу\n  - table:\n    - rowgroup:\n      - row \"# Тип Категория Название Количество Тренер Стоимость Куплено Юр. лицо Приоритет \":\n        - columnheader \"#\"\n        - columnheader \"Тип\":\n          - link \"Тип\":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=type\n        - columnheader \"Категория\":\n          - link \"Категория\":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=category_new\n        - columnheader \"Название\":\n          - link \"Название\":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=name\n        - columnheader \"Количество\":\n          - link \"Количество\":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=count\n        - columnheader \"Тренер\":\n          - link \"Тренер\":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=trainer\n        - columnheader \"Стоимость\":\n          - link \"Стоимость\":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=price\n        - columnheader \"Куплено\"\n        - columnheader \"Юр. лицо\":\n          - link \"Юр. лицо\":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=legal_entity\n        - columnheader \"Приоритет \":\n          - link \"Приоритет \":\n            - /url: /services/index?_tog8e2d8802=all&_pjax=%23pjax-grid-service-block&ServicesSearch%5Barchive%5D=1&ServicesSearch%5Bis_public%5D=&sort=ordering\n        - columnheader\n      - row \"Выбрать...\":\n        - cell\n        - cell:\n          - combobox:\n            - option [selected]\n            - option \"Персональные тренировки\"\n            - option \"Групповые занятия\"\n            - option \"Аренда оборудования\"\n            - option \"Аренда зала\"\n            - option \"Дополнительная услуга\"\n            - option \"Заморозка\"\n            - option \"Разовое посещение\"\n            - option \"Отдел продаж\"\n        - cell \"Выбрать...\":\n          - generic: Выбрать...\n          - text:                                               \n        - cell:\n          - textbox\n        - cell:\n          - textbox\n        - cell:\n          - textbox\n        - cell:\n          - textbox\n        - cell\n        - cell:\n          - combobox:\n            - option [selected]\n            - option \"ООО Клуб\"\n            - option \"Индивидуальный предприниматель Иконников Андрей Анатольевич\"\n            - option \"Юр.лицо\"\n        - cell\n        - cell\n    - rowgroup:\n      - row \"Ничего не найдено.\":\n        - cell \"Ничего не найдено.\":\n          - generic: Ничего не найдено.\n- contentinfo:\n  - text: \"© 2017-2026 «Fitbase». Все права защищены | AppBuild: 1.5.4a |\"\n  - link \" Статус сервисов\":\n    - /url: https://status.fitbase.io/\n    - generic: \n    - text: Статус сервисов\n- text:   \n- iframe [id=\"carrot-messenger-collapsed-frame\"] [name=\"carrot-messenger-collapsed-frame\"]"
+  }
+]

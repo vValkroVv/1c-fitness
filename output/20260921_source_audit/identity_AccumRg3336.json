@@ -1,0 +1,16 @@
+[
+  {
+    "table_name": "_AccumRg3336",
+    "june_rows": 7434527,
+    "september_rows": 7683438,
+    "retained": 6550174,
+    "removed": 884353,
+    "added": 1133264,
+    "changed_Period": 57074,
+    "changed_Active": 0,
+    "changed_RecordKind": 15,
+    "changed_Fld3337_RRRef": 66,
+    "changed_Fld3338_RRRef": 42,
+    "changed_Fld3339": 19
+  }
+]

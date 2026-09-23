@@ -1,0 +1,40 @@
+run:
+  effective_at: '2026-09-22 20:12:12'
+  cutoff_at: '2026-09-22 20:12:12'
+  cutoff_date: '2026-09-22'
+  date_stamp: '20260922'
+  backup_finish_at: '2026-09-20 20:12:12'
+  work_name: 20260922_final
+  delivery_name: 20260922_final_delivery
+sql:
+  server: 127.0.0.1
+  port: 11435
+  database: FitnessRestored_20260630_macos
+  user: sa
+  password_env: FITNESS_SQL_PASSWORD
+  login_timeout_seconds: 30
+  query_timeout_seconds: 0
+  encrypt_login: true
+  tls_ca_file: ''
+  tls_validate_host: true
+validation:
+  expected_manifest: work/prepared/20260922_final/expected.yml
+  enforce_reference_counts: false
+delivery:
+  output_base: ../output
+  financial_problem_groups_resolved: true
+  problem4_contract_id: '151350'
+photos:
+  enabled: true
+  container: mssql-fitness-2022
+backup:
+  file_name: Fitnes-20-09-26.fast.bak
+  source_path: /Users/valerii.kropotin/Папа-работа/1c-preprocess/data/Fitnes-20-09-26.fast.bak
+  sql_path: /backup/Fitnes-20-09-26.fast.bak
+  size_bytes: 13604230144
+  sha256: a65f21760209e60ac3b2ffc49a15a9a308e02dd75ffeb5829c342c9d98170f52
+  database_name_in_backup: Fitness
+  backup_finish_at: '2026-09-20 20:12:12'
+  backup_set_uuid: 8e76ec9f-004f-4291-9842-92017c8e9f53
+  position: 1
+  header_metadata_path: work/prepared/20260922_final/backup_metadata.json

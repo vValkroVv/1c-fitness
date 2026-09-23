@@ -1,0 +1,68 @@
+[
+  {
+    "prior": "accepted_june",
+    "common_missing_count": 764,
+    "new_missing_ids": [
+      "000012532",
+      "000067319"
+    ],
+    "no_longer_missing_ids": [
+      "000003582",
+      "000019620",
+      "000053973",
+      "000064434",
+      "000065031",
+      "000066232",
+      "000067736"
+    ],
+    "prior_missing_now_has_membership": [
+      "000003582",
+      "000019620",
+      "000053973",
+      "000064434",
+      "000065031",
+      "000066232",
+      "000067736"
+    ],
+    "prior_missing_no_longer_in_applications": [],
+    "current_missing_previously_had_membership": [
+      "000067319"
+    ],
+    "current_missing_previously_absent_from_applications": [
+      "000012532"
+    ]
+  },
+  {
+    "prior": "rehearsal_june_plus1",
+    "common_missing_count": 764,
+    "new_missing_ids": [
+      "000012532",
+      "000067319"
+    ],
+    "no_longer_missing_ids": [
+      "000003582",
+      "000019620",
+      "000053973",
+      "000064434",
+      "000065031",
+      "000066232",
+      "000067736"
+    ],
+    "prior_missing_now_has_membership": [
+      "000003582",
+      "000019620",
+      "000053973",
+      "000064434",
+      "000065031",
+      "000066232",
+      "000067736"
+    ],
+    "prior_missing_no_longer_in_applications": [],
+    "current_missing_previously_had_membership": [
+      "000067319"
+    ],
+    "current_missing_previously_absent_from_applications": [
+      "000012532"
+    ]
+  }
+]

@@ -1,0 +1,941 @@
+{
+  "verdict": "PASS",
+  "delivery": "output/20260922_final_delivery",
+  "baseline": "/Users/valerii.kropotin/Папа-работа/1c-preprocess/output/20260630_delivery_funnel_labels_20260820",
+  "cutoff_at": "2026-09-22 20:12:12",
+  "backup_finish_at": "2026-09-20 20:12:12",
+  "checks": [
+    {
+      "check": "Фактическое время backup",
+      "pass": true,
+      "actual": "2026-09-20 20:12:12"
+    },
+    {
+      "check": "Согласованный единый срез",
+      "pass": true,
+      "actual": "2026-09-22 20:12:12",
+      "expected": "2026-09-22 20:12:12"
+    },
+    {
+      "check": "READY и manifest имеют PASS",
+      "pass": true
+    },
+    {
+      "check": "Manifest охватывает все передаваемые файлы",
+      "pass": true,
+      "files": 8
+    },
+    {
+      "check": "SHA-256 и размер: fitbase_active_clients_import_zayavki_20260922_all_funnels.xlsx",
+      "pass": true
+    },
+    {
+      "check": "SHA-256 и размер: fitbase_active_clients_plastic_cards_20260922_all_funnels.xlsx",
+      "pass": true
+    },
+    {
+      "check": "SHA-256 и размер: fitbase_client_photos_20260922.zip",
+      "pass": true
+    },
+    {
+      "check": "SHA-256 и размер: fitbase_import_abonementy_clientov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "SHA-256 и размер: fitbase_import_shablony_abonementov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "SHA-256 и размер: fitbase_import_shablony_uslug_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "SHA-256 и размер: fitbase_import_uslugi_clientov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "SHA-256 и размер: problem_4_subrent_visits_left_contract_151350_1_case_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Структура и заголовки как в июне: fitbase_active_clients_import_zayavki_20260922_all_funnels.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Нет формул, Excel-ошибок и пустых строк: fitbase_active_clients_import_zayavki_20260922_all_funnels.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Структура и заголовки как в июне: fitbase_active_clients_plastic_cards_20260922_all_funnels.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Нет формул, Excel-ошибок и пустых строк: fitbase_active_clients_plastic_cards_20260922_all_funnels.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Структура и заголовки как в июне: fitbase_import_abonementy_clientov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Нет формул, Excel-ошибок и пустых строк: fitbase_import_abonementy_clientov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Структура и заголовки как в июне: fitbase_import_shablony_abonementov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Нет формул, Excel-ошибок и пустых строк: fitbase_import_shablony_abonementov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Структура и заголовки как в июне: fitbase_import_shablony_uslug_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Нет формул, Excel-ошибок и пустых строк: fitbase_import_shablony_uslug_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Структура и заголовки как в июне: fitbase_import_uslugi_clientov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Нет формул, Excel-ошибок и пустых строк: fitbase_import_uslugi_clientov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Структура и заголовки как в июне: problem_4_subrent_visits_left_contract_151350_1_case_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Нет формул, Excel-ошибок и пустых строк: problem_4_subrent_visits_left_contract_151350_1_case_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Ровно семь ожидаемых XLSX",
+      "pass": true
+    },
+    {
+      "check": "problem4 содержит только договор 151350",
+      "pass": true
+    },
+    {
+      "check": "Заявки: уникальные client_id",
+      "pass": true,
+      "rows_with_id": 40508,
+      "unique_ids": 40508
+    },
+    {
+      "check": "Заявки: детерминированный общий пул менеджеров",
+      "pass": true,
+      "checked_rows": 40508,
+      "mismatches": 0
+    },
+    {
+      "check": "Заявки: только допустимые филиалы",
+      "pass": true
+    },
+    {
+      "check": "Абонементы и problem4: уникальные contract_id",
+      "pass": true,
+      "rows_with_id": 103735,
+      "unique_ids": 103735
+    },
+    {
+      "check": "Абонементы и problem4: детерминированный общий пул менеджеров",
+      "pass": true,
+      "checked_rows": 124989,
+      "mismatches": 0
+    },
+    {
+      "check": "Абонементы и problem4: только допустимые филиалы",
+      "pass": true
+    },
+    {
+      "check": "Услуги: уникальные service_id",
+      "pass": true,
+      "rows_with_id": 516,
+      "unique_ids": 516
+    },
+    {
+      "check": "Услуги: детерминированный общий пул менеджеров",
+      "pass": true,
+      "checked_rows": 516,
+      "mismatches": 0
+    },
+    {
+      "check": "Услуги: только допустимые филиалы",
+      "pass": true
+    },
+    {
+      "check": "Менеджер каждого клиента одинаков во всех слоях",
+      "pass": true,
+      "clients": 66349
+    },
+    {
+      "check": "Нет повторов нормализованных телефонов заявок",
+      "pass": true,
+      "duplicate_phones": 0
+    },
+    {
+      "check": "Согласованные подписи воронок",
+      "pass": true
+    },
+    {
+      "check": "Абонементы: все названия есть в шаблонах",
+      "pass": true,
+      "missing_names": [],
+      "templates": 122
+    },
+    {
+      "check": "Абонементы: имена шаблонов уникальны",
+      "pass": true
+    },
+    {
+      "check": "Услуги: все названия есть в шаблонах",
+      "pass": true,
+      "missing_names": [],
+      "templates": 51
+    },
+    {
+      "check": "Услуги: имена шаблонов уникальны",
+      "pass": true
+    },
+    {
+      "check": "Шаблоны: все явные canonical attrs сохранены",
+      "pass": true,
+      "configured": 96,
+      "delivered": 96,
+      "mismatched_names": []
+    },
+    {
+      "check": "Шаблоны: общие явные решения совпадают с принятой июньской поставкой",
+      "pass": true,
+      "common_templates": 95,
+      "mismatched_names": []
+    },
+    {
+      "check": "Все ячейки main + problem4 совпадают с полным staging без потерь",
+      "pass": true,
+      "actual_rows": 124989,
+      "expected_rows": 124989,
+      "missing_rows": 0,
+      "unexpected_rows": 0
+    },
+    {
+      "check": "Абонементы: сумма price совпадает с staging",
+      "pass": true,
+      "delivery": "643447775.04",
+      "source": "643447775.04"
+    },
+    {
+      "check": "Абонементы: сумма amount_of_payments совпадает с staging",
+      "pass": true,
+      "delivery": "636762641.30",
+      "source": "636762641.30"
+    },
+    {
+      "check": "Абонементы: сумма payment_left совпадает с staging",
+      "pass": true,
+      "delivery": "5907639.10",
+      "source": "5907639.10"
+    },
+    {
+      "check": "Финальная копия совпадает с проверенным imports: fitbase_import_shablony_abonementov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Финальная копия совпадает с проверенным imports: fitbase_import_shablony_uslug_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Финальная копия совпадает с проверенным imports: fitbase_import_uslugi_clientov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Все ожидаемые заявки переданы после известных исключений",
+      "pass": true,
+      "expected": 40508,
+      "actual": 40508,
+      "removed_phone_duplicates": 2388,
+      "transferred_refusers": 25840
+    },
+    {
+      "check": "Все отказники присутствуют в абонементах",
+      "pass": true
+    },
+    {
+      "check": "Все поля заявок совпадают с актуальным owner CSV",
+      "pass": true,
+      "actual_rows": 40508,
+      "expected_rows": 40508,
+      "missing_rows": 0,
+      "unexpected_rows": 0
+    },
+    {
+      "check": "Карты соответствуют только передаваемым действующим клиентам",
+      "pass": true,
+      "actual_rows": 11095,
+      "expected_rows": 11095,
+      "missing_rows": 0,
+      "unexpected_rows": 0
+    },
+    {
+      "check": "Граница 2026-09-21/2026-09-22: предыдущий день истёк, текущий действует",
+      "pass": true,
+      "checked_clients": 64
+    },
+    {
+      "check": "Единый cutoff: raw/staging/staging_run_metadata.csv",
+      "pass": true
+    },
+    {
+      "check": "Единый cutoff: owner/staging/staging_run_metadata.csv",
+      "pass": true
+    },
+    {
+      "check": "Каждый клиент owner имеет дату единого среза",
+      "pass": true
+    },
+    {
+      "check": "membership: каждый SQL fact имеет единый cutoff",
+      "pass": true,
+      "rows": 104787,
+      "mismatches": 0
+    },
+    {
+      "check": "membership: операции не позже cutoff",
+      "pass": true,
+      "future_rows": {
+        "sale_datetime": 0,
+        "financial_sale_document_datetime": 0,
+        "matched_payment_datetime": 0,
+        "financial_register_last_movement_datetime": 0
+      },
+      "maximum_source_datetimes": {
+        "sale_datetime": "2026-09-20 18:39:17",
+        "financial_sale_document_datetime": "2026-09-20 18:39:17",
+        "matched_payment_datetime": "2026-09-20 18:42:35",
+        "financial_register_last_movement_datetime": "2026-09-20 18:42:35"
+      }
+    },
+    {
+      "check": "services: каждый SQL fact имеет единый cutoff",
+      "pass": true,
+      "rows": 51926,
+      "mismatches": 0
+    },
+    {
+      "check": "services: операции не позже cutoff",
+      "pass": true,
+      "future_rows": {
+        "sale_datetime": 0,
+        "payment_datetime": 0,
+        "service_doc_datetime": 0
+      },
+      "maximum_source_datetimes": {
+        "sale_datetime": "2026-09-20 17:49:45",
+        "payment_datetime": "2026-09-20 17:49:48",
+        "service_doc_datetime": "2026-09-17 16:56:11"
+      }
+    },
+    {
+      "check": "Даты каждой услуги совпадают с поштучным аудитом источника",
+      "pass": true,
+      "actual_rows": 516,
+      "expected_rows": 516,
+      "missing_rows": 0,
+      "unexpected_rows": 0
+    },
+    {
+      "check": "Цена и остатки каждой услуги совпадают с поштучным аудитом",
+      "pass": true,
+      "actual_rows": 516,
+      "expected_rows": 516,
+      "missing_rows": 0,
+      "unexpected_rows": 0
+    }
+  ],
+  "warnings": [
+    "problem_4_subrent_visits_left_contract_151350_1_case_20260922.xlsx: ширины столбцов, высоты первых строк или закрепление областей отличаются от июня; требуется просмотр.",
+    "Заявки сохраняют согласованные исключения телефонов: пустых 441, непустых без валидного номера 201. Это не ошибка XLSX; такие телефоны не подходят для фото."
+  ],
+  "details": {
+    "file_counts": [
+      {
+        "file": "fitbase_active_clients_import_zayavki_20260922_all_funnels.xlsx",
+        "june_rows": 39550,
+        "september_rows": 40508,
+        "columns": 10,
+        "sheets": [
+          "Лист1"
+        ]
+      },
+      {
+        "file": "fitbase_active_clients_plastic_cards_20260922_all_funnels.xlsx",
+        "june_rows": 11024,
+        "september_rows": 11095,
+        "columns": 3,
+        "sheets": [
+          "Лист1"
+        ]
+      },
+      {
+        "file": "fitbase_import_abonementy_clientov_20260922.xlsx",
+        "june_rows": 121461,
+        "september_rows": 124988,
+        "columns": 22,
+        "sheets": [
+          "Лист1"
+        ]
+      },
+      {
+        "file": "fitbase_import_shablony_abonementov_20260922.xlsx",
+        "june_rows": 119,
+        "september_rows": 122,
+        "columns": 12,
+        "sheets": [
+          "Лист1"
+        ]
+      },
+      {
+        "file": "fitbase_import_shablony_uslug_20260922.xlsx",
+        "june_rows": 51,
+        "september_rows": 51,
+        "columns": 9,
+        "sheets": [
+          "Лист1"
+        ]
+      },
+      {
+        "file": "fitbase_import_uslugi_clientov_20260922.xlsx",
+        "june_rows": 522,
+        "september_rows": 516,
+        "columns": 17,
+        "sheets": [
+          "Лист1"
+        ]
+      },
+      {
+        "file": "problem_4_subrent_visits_left_contract_151350_1_case_20260922.xlsx",
+        "june_rows": 1,
+        "september_rows": 1,
+        "columns": 22,
+        "sheets": [
+          "Импорт_абонементы"
+        ]
+      }
+    ],
+    "Заявки: managers": {
+      "Ефремова Алена": 13551,
+      "Пеуна Анастасия Ивановна": 13489,
+      "Пилия Анастасия Артуровна": 13468
+    },
+    "Абонементы и problem4: managers": {
+      "Пеуна Анастасия Ивановна": 41102,
+      "Ефремова Алена": 42019,
+      "Пилия Анастасия Артуровна": 41868
+    },
+    "Услуги: managers": {
+      "Пеуна Анастасия Ивановна": 154,
+      "Ефремова Алена": 161,
+      "Пилия Анастасия Артуровна": 201
+    },
+    "application_phone_coverage": {
+      "empty": 441,
+      "nonempty_without_valid_phone": 201,
+      "multiple_valid_phones": 2588
+    },
+    "funnels": {
+      "Действующие абонементы": 11095,
+      "Реактивация": 29413
+    },
+    "canonical_templates": {
+      "configured": 96,
+      "delivered": 96,
+      "common_with_june": 95,
+      "new_configured_names": [
+        "Абонемент МУЛЬТИКАРТА 12 месяцев (Спецпредложение) рассрочка"
+      ],
+      "unconfigured_source_changes": [
+        {
+          "name": "Абонемент МУЛЬТИКАРТА 36 месяцев",
+          "differences": {
+            "duration": {
+              "june": "0",
+              "september": "12"
+            }
+          }
+        }
+      ]
+    },
+    "membership_totals": {
+      "price": "643447775.04",
+      "amount_of_payments": "636762641.30",
+      "payment_left": "5907639.10"
+    },
+    "boundary_clients": [
+      {
+        "client_id": "000002543",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000008658",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000009498",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000010242",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000015897",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000029514",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000041052",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000042369",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000044676",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000052709",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000053767",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000054063",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000062028",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "",
+        "excluded_by_phone_dedup": true
+      },
+      {
+        "client_id": "000062573",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000063620",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000063726",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000064240",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000065342",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000068218",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000069028",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000069065",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000069109",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000069113",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000069374",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000069647",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000074271",
+        "end_date": "2026-09-22",
+        "internal_funnel": "Действующие клиенты",
+        "delivered_funnel": "Действующие абонементы",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000000248",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000004527",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000006664",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000011802",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000017272",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "",
+        "excluded_by_phone_dedup": true
+      },
+      {
+        "client_id": "000018969",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000021484",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000021722",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000021794",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000022054",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000025218",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000027784",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000029589",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000037091",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000039999",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000042415",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000043599",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000046115",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000047849",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000050457",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000052864",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000057748",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000058143",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000058470",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000059070",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000061759",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "",
+        "excluded_by_phone_dedup": true
+      },
+      {
+        "client_id": "000062401",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000064394",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000064738",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000065096",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000067047",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000067674",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000069415",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000069463",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000069803",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000069992",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000070284",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      },
+      {
+        "client_id": "000070286",
+        "end_date": "2026-09-21",
+        "internal_funnel": "Реактивация",
+        "delivered_funnel": "Реактивация",
+        "excluded_by_phone_dedup": false
+      }
+    ],
+    "services_end_date_sources": {
+      "dbo._InfoRg3060._Fld3064": 338,
+      "sale_date_conservative_fallback": 178
+    },
+    "service_totals": {
+      "price": "1877145",
+      "amount_of_payment": "1877145",
+      "payment_left": "0",
+      "visits_left": "1710"
+    },
+    "service_boundary_rows": []
+  }
+}

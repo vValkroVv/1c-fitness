@@ -224,6 +224,7 @@ class TemplateCanonicalization:
     decision_basis: str
     review_status: str
     note: str
+    allow_historical_variant: bool = False
 
     @property
     def normalized_name(self) -> str:
@@ -379,6 +380,12 @@ def read_template_canonicalizations(
                     f"Template canonicalization row {row_number}: source_contract_id, "
                     "decision_basis and review_status are required"
                 )
+            historical_flag = (row.get("allow_historical_variant") or "").strip()
+            if historical_flag not in {"", "0", "1"}:
+                raise ValueError(
+                    f"Template canonicalization row {row_number}: invalid "
+                    f"allow_historical_variant={historical_flag!r}; expected blank, 0 or 1"
+                )
             decisions[key] = TemplateCanonicalization(
                 canonical_name=canonical_name,
                 branches_access=branches_access,
@@ -410,6 +417,7 @@ def read_template_canonicalizations(
                 decision_basis=decision_basis,
                 review_status=review_status,
                 note=(row.get("note") or "").strip(),
+                allow_historical_variant=historical_flag == "1",
             )
     return decisions
 
@@ -989,6 +997,7 @@ def canonicalize_template_candidates(
             )
 
         if decision is not None:
+            historical_override = False
             configured_price_only_override = (
                 decision.variant not in variants
                 and any(
@@ -997,12 +1006,14 @@ def canonicalize_template_candidates(
                 )
             )
             if decision.variant not in variants and not configured_price_only_override:
-                rendered_variants = "; ".join(sorted((repr(item) for item in variants)))
-                raise ValueError(
-                    "Configured membership template variant is not present in staging: "
-                    f"name={decision.canonical_name!r}; configured={decision.variant!r}; "
-                    f"observed={rendered_variants}"
-                )
+                if not decision.allow_historical_variant:
+                    rendered_variants = "; ".join(sorted((repr(item) for item in variants)))
+                    raise ValueError(
+                        "Configured membership template variant is not present in staging: "
+                        f"name={decision.canonical_name!r}; configured={decision.variant!r}; "
+                        f"observed={rendered_variants}"
+                    )
+                historical_override = True
             source_candidates = [
                 candidate
                 for candidate in candidates
@@ -1018,19 +1029,22 @@ def canonicalize_template_candidates(
                     for candidate in source_candidates
                 )
                 if not source_nonprice_match:
-                    raise ValueError(
-                        "Configured source contract no longer has the configured "
-                        "template variant: "
-                        f"name={decision.canonical_name!r}; "
-                        f"source_contract_id={decision.source_contract_id!r}"
-                    )
-                configured_price_only_override = True
+                    if not decision.allow_historical_variant:
+                        raise ValueError(
+                            "Configured source contract no longer has the configured "
+                            "template variant: "
+                            f"name={decision.canonical_name!r}; "
+                            f"source_contract_id={decision.source_contract_id!r}"
+                        )
+                    historical_override = True
+                else:
+                    configured_price_only_override = True
             source_contract_present = bool(source_candidates)
             if not source_contract_present:
                 # The configured values remain authoritative for later backups
                 # even if the audit/provenance contract is no longer selected
-                # into the current client population. The variant itself was
-                # already required to exist above.
+                # into the current client population. A missing variant needs
+                # the explicit historical opt-in (or the existing price exception).
                 counters["template_canonicalization"][
                     "configured_source_contract_absent"
                 ] += 1
@@ -1051,6 +1065,31 @@ def canonicalize_template_candidates(
                 "_source_contract_id": decision.source_contract_id,
             }
             counters["template_canonicalization"]["checked_in_config"] += 1
+            if historical_override:
+                issue_type = "configured_historical_template_variant_preserved"
+                counters["template_canonicalization"][issue_type] += 1
+                source_variants = {template_variant(row) for row in source_candidates}
+                uncertainties.append(
+                    {
+                        "issue_type": issue_type,
+                        "contract_id": decision.source_contract_id,
+                        "client_id": "",
+                        "client_fio": "",
+                        "contract_name": decision.canonical_name,
+                        "details": (
+                            "allow_historical_variant=1; "
+                            f"configured={decision.variant!r}; "
+                            f"observed={sorted(repr(item) for item in variants)!r}; "
+                            f"source_contract_id={decision.source_contract_id!r}; "
+                            f"source_contract_present={source_contract_present}; "
+                            f"source_observed={sorted(repr(item) for item in source_variants)!r}; "
+                            f"decision_basis={decision.decision_basis}; "
+                            f"review_status={decision.review_status}; note={decision.note}. "
+                            "Only the template uses the accepted historical values; "
+                            "client contracts retain their current values."
+                        ),
+                    }
+                )
             if configured_price_only_override:
                 counters["template_canonicalization"][
                     "configured_template_price_preserved_after_transaction_rebuild"
@@ -1545,6 +1584,13 @@ def write_workbook(
     for row_idx in range(3, 3 + len(rows)):
         for col_idx, number_format in format_cols.items():
             ws.cell(row_idx, col_idx).number_format = number_format
+
+    if headers == TEMPLATE_HEADERS:
+        # Fitbase must read plain numbers, without formatted thousands separators.
+        for row in ws.iter_rows(min_row=3):
+            for cell in row:
+                if cell.data_type == "n" and cell.value is not None:
+                    cell.number_format = "General"
 
     ws.freeze_panes = "A3"
     for col_idx in range(1, width + 1):

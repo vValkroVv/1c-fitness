@@ -1,0 +1,9 @@
+﻿layer,event_column,present_rows,between_finish_and_cutoff,after_cutoff,latest_event
+membership_import_facts,sale_datetime,104787,0,0,2026-09-20 18:39:17
+membership_import_facts,owner_change_datetime,5215,0,0,2026-09-20 14:54:54
+membership_import_facts,matched_payment_datetime,79777,0,0,2026-09-20 18:42:35
+membership_import_facts,financial_sale_document_datetime,84539,0,0,2026-09-20 18:39:17
+membership_import_facts,financial_register_last_movement_datetime,75192,0,0,2026-09-20 18:42:35
+services_import_facts,sale_datetime,51926,0,0,2026-09-20 17:49:45
+services_import_facts,service_doc_datetime,11330,0,0,2026-09-17 16:56:11
+services_import_facts,payment_datetime,50790,0,0,2026-09-20 17:49:48

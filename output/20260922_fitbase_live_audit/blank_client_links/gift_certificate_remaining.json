@@ -1,0 +1,1391 @@
+{
+  "observation_start_utc": "2026-09-22T14:43:50.471Z",
+  "observation_last_gift_page_utc": "2026-09-22T14:45:26.902Z",
+  "method": "Read-only Chrome DOM: all pages of reactivation funnels 9,11,27 and first four pages of funnel29; all 72 expected gift-certificate clients positively found by exact phone with Create client button. Overall remaining counts read from live UI counters; not a complete per-record reconciliation of 716.",
+  "gift_clients": 72,
+  "counts_by_club": {
+    "Гоголевский": 35,
+    "Промышленная": 13,
+    "Ровио": 12,
+    "Столица": 12
+  },
+  "live_reactivation_unlinked_counters": {
+    "Гоголевский": 73,
+    "Промышленная": 15,
+    "Ровио": 615,
+    "Столица": 13
+  },
+  "live_reactivation_unlinked_total": 716,
+  "active_funnels_7_and_13_empty": true,
+  "reported_710_cohort_not_identified": true,
+  "rows": [
+    {
+      "client_id": "000068085",
+      "client_fio": "Быстревская Ирина Владимировна",
+      "phone": "79114043317",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "62025",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133590",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-30",
+          "end_date": "2025-04-29"
+        }
+      ]
+    },
+    {
+      "client_id": "000068087",
+      "client_fio": "Смирнов Данил Вадимович",
+      "phone": "79214513351",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "62027",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133601",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-30",
+          "end_date": "2025-04-29"
+        }
+      ]
+    },
+    {
+      "client_id": "000067985",
+      "client_fio": "Жигар Дмитрий Евгеньевич",
+      "phone": "79210163722",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "62012",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133298",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-23",
+          "end_date": "2025-04-22"
+        }
+      ]
+    },
+    {
+      "client_id": "000067968",
+      "client_fio": "Сафиуллин Александр Александрович",
+      "phone": "79214514393",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "62009",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133242",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-21",
+          "end_date": "2025-04-20"
+        }
+      ]
+    },
+    {
+      "client_id": "000067955",
+      "client_fio": "Малеева Арина Александровна",
+      "phone": "79114255898",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "62006",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133180",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-20",
+          "end_date": "2025-04-19"
+        }
+      ]
+    },
+    {
+      "client_id": "000067835",
+      "client_fio": "Митроев Роман Александрович",
+      "phone": "79995283785",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61982",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000132702",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-10",
+          "end_date": "2025-04-09"
+        }
+      ]
+    },
+    {
+      "client_id": "000067052",
+      "client_fio": "Кофлер Олег Дмитриевич",
+      "phone": "79216216697",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61830",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000130833",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-01-19",
+          "end_date": "2025-02-18"
+        }
+      ]
+    },
+    {
+      "client_id": "000066349",
+      "client_fio": "Амосков Виталий Сергеевич",
+      "phone": "79110545661",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61705",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128998",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-30",
+          "end_date": "2024-12-29"
+        }
+      ]
+    },
+    {
+      "client_id": "000066367",
+      "client_fio": "Леванчук Татьяна Александровна",
+      "phone": "79814075251",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61712",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000129065",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-30",
+          "end_date": "2024-12-29"
+        }
+      ]
+    },
+    {
+      "client_id": "000066313",
+      "client_fio": "Скачкова Влада Вадимовна",
+      "phone": "79214552323",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61701",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128871",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-28",
+          "end_date": "2024-12-27"
+        }
+      ]
+    },
+    {
+      "client_id": "000066216",
+      "client_fio": "Стельмух Ксения Александровна",
+      "phone": "79114358121",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61683",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128782",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-21",
+          "end_date": "2024-12-20"
+        }
+      ]
+    },
+    {
+      "client_id": "000065746",
+      "client_fio": "Вежина Анна Яковлевна",
+      "phone": "79095695918",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61573",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128476",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-14",
+          "end_date": "2024-12-13"
+        }
+      ]
+    },
+    {
+      "client_id": "000065789",
+      "client_fio": "Роганин Павел Леонидович",
+      "phone": "79114206432",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61580",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000127593",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-10-23",
+          "end_date": "2024-11-22"
+        }
+      ]
+    },
+    {
+      "client_id": "000068121",
+      "client_fio": "Новикова Инна Ивановна",
+      "phone": "79004594948",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "62034",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133709",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-31",
+          "end_date": "2025-04-29"
+        }
+      ]
+    },
+    {
+      "client_id": "000068071",
+      "client_fio": "Афанасьева Галина Анатольевна",
+      "phone": "79027709203",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "62022",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133577",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-29",
+          "end_date": "2025-04-28"
+        }
+      ]
+    },
+    {
+      "client_id": "000055364",
+      "client_fio": "Санников Илья Александрович",
+      "phone": "79535314055",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "59485",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133480",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-27",
+          "end_date": "2025-04-26"
+        }
+      ]
+    },
+    {
+      "client_id": "000067867",
+      "client_fio": "Запаранюк София Константиновна",
+      "phone": "79210184651",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61987",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000132878",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-13",
+          "end_date": "2025-04-12"
+        }
+      ]
+    },
+    {
+      "client_id": "000067819",
+      "client_fio": "Пашкова Виктория Витальевна",
+      "phone": "79116654219",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61978",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000132664",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-09",
+          "end_date": "2025-04-08"
+        }
+      ]
+    },
+    {
+      "client_id": "000067251",
+      "client_fio": "Редькин Олег Михайлович",
+      "phone": "79114069074",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61871",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000131274",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-01-30",
+          "end_date": "2025-02-27"
+        }
+      ]
+    },
+    {
+      "client_id": "000066360",
+      "client_fio": "Жукова Вера Дмитриевна",
+      "phone": "79214628114",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61709",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000129031",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-30",
+          "end_date": "2024-12-29"
+        }
+      ]
+    },
+    {
+      "client_id": "000066362",
+      "client_fio": "Васькин Дмитрий Александрович",
+      "phone": "79313860568",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61711",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000129053",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-30",
+          "end_date": "2024-12-29"
+        }
+      ]
+    },
+    {
+      "client_id": "000003217",
+      "client_fio": "Воротилов Алексей Сергеевич",
+      "phone": "79212226107",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "46182",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128918",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-29",
+          "end_date": "2024-12-28"
+        }
+      ]
+    },
+    {
+      "client_id": "000066276",
+      "client_fio": "Толкачев Вадим Валерьевич",
+      "phone": "79114356404",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61692",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128795",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-26",
+          "end_date": "2024-12-25"
+        }
+      ]
+    },
+    {
+      "client_id": "000066124",
+      "client_fio": "Кузнецов Константин Андреевич",
+      "phone": "79004637957",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61660",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128444",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-13",
+          "end_date": "2024-12-12"
+        }
+      ]
+    },
+    {
+      "client_id": "000066066",
+      "client_fio": "Судьина Виктория Геннадьевна",
+      "phone": "79004611846",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61644",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128261",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-10",
+          "end_date": "2024-12-09"
+        }
+      ]
+    },
+    {
+      "client_id": "000065881",
+      "client_fio": "Фролов Николай Алексеевич",
+      "phone": "79535469323",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61596",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000127758",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-10-28",
+          "end_date": "2024-11-27"
+        }
+      ]
+    },
+    {
+      "client_id": "000068094",
+      "client_fio": "Косточко Михаил Викторович",
+      "phone": "79535470066",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "62028",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133618",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-31",
+          "end_date": "2025-04-29"
+        }
+      ]
+    },
+    {
+      "client_id": "000068067",
+      "client_fio": "Белянцев Тимофей Маркович",
+      "phone": "79114140572",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "62020",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133572",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-04-01",
+          "end_date": "2025-04-30"
+        }
+      ]
+    },
+    {
+      "client_id": "000067756",
+      "client_fio": "Паласелова Элеонора Андреевна",
+      "phone": "79212244083",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61968",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000132471",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-04",
+          "end_date": "2025-04-03"
+        }
+      ]
+    },
+    {
+      "client_id": "000067654",
+      "client_fio": "Морозова Алена Константиновна",
+      "phone": "79961121456",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61949",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000132248",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-02-25",
+          "end_date": "2025-03-24"
+        }
+      ]
+    },
+    {
+      "client_id": "000066350",
+      "client_fio": "Селин Роман Леонидович",
+      "phone": "79114352956",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61706",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128999",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-30",
+          "end_date": "2024-12-29"
+        }
+      ]
+    },
+    {
+      "client_id": "000004081",
+      "client_fio": "Грехнёва Анна Геннадьевна",
+      "phone": "79114246520",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "46427",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128769",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-25",
+          "end_date": "2024-12-24"
+        }
+      ]
+    },
+    {
+      "client_id": "000066095",
+      "client_fio": "Буторина Елена Виталиевна",
+      "phone": "79027710300",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61653",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128651",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-21",
+          "end_date": "2024-12-20"
+        }
+      ]
+    },
+    {
+      "client_id": "000065802",
+      "client_fio": "Саночкина Вера Алексеевна",
+      "phone": "79027711485",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "61583",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000127623",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-10-24",
+          "end_date": "2024-11-23"
+        }
+      ]
+    },
+    {
+      "client_id": "000012532",
+      "client_fio": "Николаев Виталий Николаевич",
+      "phone": "79114019298",
+      "club": "Гоголевский",
+      "source_funnel": "Реактивация",
+      "lead_id": "48748",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000132609",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-07",
+          "end_date": "2025-04-06"
+        }
+      ]
+    },
+    {
+      "client_id": "000057668",
+      "client_fio": "Ганина Анастасия Владимировна",
+      "phone": "79114186140",
+      "club": "Промышленная",
+      "source_funnel": "Реактивация",
+      "lead_id": "66988",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133710",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-04-06",
+          "end_date": "2025-05-05"
+        }
+      ]
+    },
+    {
+      "client_id": "000068109",
+      "client_fio": "Филонова Анна Николаевна",
+      "phone": "79535499018",
+      "club": "Промышленная",
+      "source_funnel": "Реактивация",
+      "lead_id": "67615",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133664",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-04-02",
+          "end_date": "2025-05-01"
+        }
+      ]
+    },
+    {
+      "client_id": "000068069",
+      "client_fio": "Полховская Вера Иосифовна",
+      "phone": "79004644737",
+      "club": "Промышленная",
+      "source_funnel": "Реактивация",
+      "lead_id": "67613",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133574",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-04-01",
+          "end_date": "2025-04-30"
+        }
+      ]
+    },
+    {
+      "client_id": "000067402",
+      "client_fio": "Гусейнов Рэнат",
+      "phone": "79114121380",
+      "club": "Промышленная",
+      "source_funnel": "Реактивация",
+      "lead_id": "67560",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000132715",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-10",
+          "end_date": "2025-04-09"
+        }
+      ]
+    },
+    {
+      "client_id": "000067627",
+      "client_fio": "Кошелев Анатолий Вадимович",
+      "phone": "79535492962",
+      "club": "Промышленная",
+      "source_funnel": "Реактивация",
+      "lead_id": "67585",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000132247",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-02-25",
+          "end_date": "2025-03-24"
+        }
+      ]
+    },
+    {
+      "client_id": "000067571",
+      "client_fio": "Козлов Данил Андреевич",
+      "phone": "79114235748",
+      "club": "Промышленная",
+      "source_funnel": "Реактивация",
+      "lead_id": "67581",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000132003",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-02-19",
+          "end_date": "2025-03-18"
+        }
+      ]
+    },
+    {
+      "client_id": "000067453",
+      "client_fio": "Шамовцева Екатерина Владимировна",
+      "phone": "79217284661",
+      "club": "Промышленная",
+      "source_funnel": "Реактивация",
+      "lead_id": "67568",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000131702",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-02-12",
+          "end_date": "2025-03-11"
+        }
+      ]
+    },
+    {
+      "client_id": "000067451",
+      "client_fio": "Мацола Иван Александрович",
+      "phone": "79535359090",
+      "club": "Промышленная",
+      "source_funnel": "Реактивация",
+      "lead_id": "67567",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000131697",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-02-11",
+          "end_date": "2025-03-10"
+        }
+      ]
+    },
+    {
+      "client_id": "000064416",
+      "client_fio": "Старшова Алина Андреевна",
+      "phone": "79114217907",
+      "club": "Промышленная",
+      "source_funnel": "Реактивация",
+      "lead_id": "67408",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000129048",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-12-02",
+          "end_date": "2025-01-01"
+        }
+      ]
+    },
+    {
+      "client_id": "000065885",
+      "client_fio": "Голубина Анна Александровна",
+      "phone": "79110522540",
+      "club": "Промышленная",
+      "source_funnel": "Реактивация",
+      "lead_id": "67482",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000127773",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-10-28",
+          "end_date": "2024-11-27"
+        }
+      ]
+    },
+    {
+      "client_id": "000065756",
+      "client_fio": "Смирнов Григорий Артемович",
+      "phone": "79114089026",
+      "club": "Промышленная",
+      "source_funnel": "Реактивация",
+      "lead_id": "67475",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000127517",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-10-21",
+          "end_date": "2024-11-20"
+        }
+      ]
+    },
+    {
+      "client_id": "000065649",
+      "client_fio": "Курпис Надежда Михайловна",
+      "phone": "79214605584",
+      "club": "Промышленная",
+      "source_funnel": "Реактивация",
+      "lead_id": "67470",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000127295",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-10-14",
+          "end_date": "2024-11-13"
+        }
+      ]
+    },
+    {
+      "client_id": "000065576",
+      "client_fio": "Шевченко Екатерина Владимировна",
+      "phone": "79814061502",
+      "club": "Промышленная",
+      "source_funnel": "Реактивация",
+      "lead_id": "67467",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000127097",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-10-07",
+          "end_date": "2024-11-06"
+        }
+      ]
+    },
+    {
+      "client_id": "000068282",
+      "client_fio": "Лукина Анна Леонидовна",
+      "phone": "79214660580",
+      "club": "Ровио",
+      "source_funnel": "Реактивация",
+      "lead_id": "73269",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000150387",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2026-05-17",
+          "end_date": "2026-06-16"
+        }
+      ]
+    },
+    {
+      "client_id": "000068101",
+      "client_fio": "Яковенко Валерия Романовна",
+      "phone": "79525256437",
+      "club": "Ровио",
+      "source_funnel": "Реактивация",
+      "lead_id": "73243",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133641",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-31",
+          "end_date": "2025-04-29"
+        }
+      ]
+    },
+    {
+      "client_id": "000068103",
+      "client_fio": "Мартынова Любовь Александровна",
+      "phone": "79637433300",
+      "club": "Ровио",
+      "source_funnel": "Реактивация",
+      "lead_id": "73244",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133653",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-31",
+          "end_date": "2025-04-29"
+        }
+      ]
+    },
+    {
+      "client_id": "000068124",
+      "client_fio": "Алешина Кристина Андреевна",
+      "phone": "79214567806",
+      "club": "Ровио",
+      "source_funnel": "Реактивация",
+      "lead_id": "73247",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133714",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-31",
+          "end_date": "2025-04-29"
+        }
+      ]
+    },
+    {
+      "client_id": "000060787",
+      "client_fio": "Бровина Екатерина Сергеевна",
+      "phone": "79114023356",
+      "club": "Ровио",
+      "source_funnel": "Реактивация",
+      "lead_id": "72820",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133151",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-20",
+          "end_date": "2025-04-19"
+        }
+      ]
+    },
+    {
+      "client_id": "000067853",
+      "client_fio": "Запольских Кирилл Михайлович",
+      "phone": "79643992964",
+      "club": "Ровио",
+      "source_funnel": "Реактивация",
+      "lead_id": "73230",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000132781",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-12",
+          "end_date": "2025-04-11"
+        }
+      ]
+    },
+    {
+      "client_id": "000067219",
+      "client_fio": "Пустошкина Анна Ильинична",
+      "phone": "79116625529",
+      "club": "Ровио",
+      "source_funnel": "Реактивация",
+      "lead_id": "73172",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000132288",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-02-26",
+          "end_date": "2025-03-25"
+        }
+      ]
+    },
+    {
+      "client_id": "000067673",
+      "client_fio": "Поташев Сергей Юрьевич",
+      "phone": "79062087565",
+      "club": "Ровио",
+      "source_funnel": "Реактивация",
+      "lead_id": "73215",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000132289",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-02-26",
+          "end_date": "2025-03-25"
+        }
+      ]
+    },
+    {
+      "client_id": "000066860",
+      "client_fio": "Прудников Иван Алексеевич",
+      "phone": "79535315573",
+      "club": "Ровио",
+      "source_funnel": "Реактивация",
+      "lead_id": "73145",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000130400",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-01-09",
+          "end_date": "2025-02-08"
+        }
+      ]
+    },
+    {
+      "client_id": "000066336",
+      "client_fio": "Давидян Диана Маратовна",
+      "phone": "79110540409",
+      "club": "Ровио",
+      "source_funnel": "Реактивация",
+      "lead_id": "73121",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128939",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-30",
+          "end_date": "2024-12-29"
+        }
+      ]
+    },
+    {
+      "client_id": "000040919",
+      "client_fio": "Беленкова Екатерина Александровна",
+      "phone": "79212280087",
+      "club": "Ровио",
+      "source_funnel": "Реактивация",
+      "lead_id": "71675",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128879",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-28",
+          "end_date": "2024-12-27"
+        }
+      ]
+    },
+    {
+      "client_id": "000065772",
+      "client_fio": "Логинова Ирина Михайловна",
+      "phone": "79215752354",
+      "club": "Ровио",
+      "source_funnel": "Реактивация",
+      "lead_id": "73090",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000127539",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-10-22",
+          "end_date": "2024-11-21"
+        }
+      ]
+    },
+    {
+      "client_id": "000074072",
+      "client_fio": "Нечаев Александр Дмитриевич",
+      "phone": "79114287241",
+      "club": "Столица",
+      "source_funnel": "Реактивация",
+      "lead_id": "79728",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000151050",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2026-05-30",
+          "end_date": "2026-06-29"
+        }
+      ]
+    },
+    {
+      "client_id": "000067907",
+      "client_fio": "Иванова Лолита Альбертовна",
+      "phone": "79535398557",
+      "club": "Столица",
+      "source_funnel": "Реактивация",
+      "lead_id": "79524",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000133015",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-19",
+          "end_date": "2025-04-18"
+        }
+      ]
+    },
+    {
+      "client_id": "000067834",
+      "client_fio": "Аманов Абдумалик Низомиддинович",
+      "phone": "79997969286",
+      "club": "Столица",
+      "source_funnel": "Реактивация",
+      "lead_id": "79520",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000132700",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-10",
+          "end_date": "2025-04-09"
+        }
+      ]
+    },
+    {
+      "client_id": "000067319",
+      "client_fio": "Пискун Ксения Николаевна",
+      "phone": "79535268816",
+      "club": "Столица",
+      "source_funnel": "Реактивация",
+      "lead_id": "79481",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000132522",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2025-03-06",
+          "end_date": "2025-04-05"
+        }
+      ]
+    },
+    {
+      "client_id": "000066353",
+      "client_fio": "Бабенко Галина Григорьевна",
+      "phone": "79114272679",
+      "club": "Столица",
+      "source_funnel": "Реактивация",
+      "lead_id": "79417",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000129016",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-12-01",
+          "end_date": "2024-12-31"
+        }
+      ]
+    },
+    {
+      "client_id": "000066356",
+      "client_fio": "Марин Евгений Константинович",
+      "phone": "79535346544",
+      "club": "Столица",
+      "source_funnel": "Реактивация",
+      "lead_id": "79418",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000129025",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-12-01",
+          "end_date": "2024-12-31"
+        }
+      ]
+    },
+    {
+      "client_id": "000066327",
+      "client_fio": "Суворова Бирута Андреевна",
+      "phone": "79535479788",
+      "club": "Столица",
+      "source_funnel": "Реактивация",
+      "lead_id": "79413",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128915",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-12-01",
+          "end_date": "2024-12-31"
+        }
+      ]
+    },
+    {
+      "client_id": "000066335",
+      "client_fio": "Балан Дарья Игоревна",
+      "phone": "79317019270",
+      "club": "Столица",
+      "source_funnel": "Реактивация",
+      "lead_id": "79414",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128937",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-29",
+          "end_date": "2024-12-28"
+        }
+      ]
+    },
+    {
+      "client_id": "000066126",
+      "client_fio": "Байгулин Валентин Александрович",
+      "phone": "79110529677",
+      "club": "Столица",
+      "source_funnel": "Реактивация",
+      "lead_id": "79404",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128455",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-14",
+          "end_date": "2024-12-13"
+        }
+      ]
+    },
+    {
+      "client_id": "000066100",
+      "client_fio": "Шаройко Никита Алексеевич",
+      "phone": "79535363916",
+      "club": "Столица",
+      "source_funnel": "Реактивация",
+      "lead_id": "79402",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128343",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-12",
+          "end_date": "2024-12-11"
+        }
+      ]
+    },
+    {
+      "client_id": "000066084",
+      "client_fio": "Васильева Дарья Михайловна",
+      "phone": "79643174575",
+      "club": "Столица",
+      "source_funnel": "Реактивация",
+      "lead_id": "79398",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128307",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-11",
+          "end_date": "2024-12-10"
+        }
+      ]
+    },
+    {
+      "client_id": "000065997",
+      "client_fio": "Александров Василий Маратович",
+      "phone": "79210196543",
+      "club": "Столица",
+      "source_funnel": "Реактивация",
+      "lead_id": "79391",
+      "live_unlinked_filter": "no",
+      "live_create_client_button": true,
+      "match_basis": "exact_phone_unique_among_collected_live_rows",
+      "contracts": [
+        {
+          "contract_id": "00000128084",
+          "name": "Подарочный сертификат 1 месяц безлимитного фитнеса",
+          "start_date": "2024-11-04",
+          "end_date": "2024-12-03"
+        }
+      ]
+    }
+  ]
+}

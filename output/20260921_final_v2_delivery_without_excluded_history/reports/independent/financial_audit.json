@@ -1,0 +1,11 @@
+{
+  "checked_facts": 104787,
+  "movement_count_mismatches": 0,
+  "charge_mismatches": 0,
+  "paid_mismatches": 0,
+  "debt_mismatches": 0,
+  "unambiguous_with_register": 74568,
+  "negative_register_debt_cases": 22,
+  "status": "PASS",
+  "cutoff_at": "2026-09-21 20:12:12"
+}

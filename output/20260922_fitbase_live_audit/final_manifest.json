@@ -1,0 +1,244 @@
+{
+  "status": "READ_ONLY_AUDIT_REPORT_COMPLETE_WITH_UNRESOLVED_CONTROLS",
+  "source_archive": "output/20260921_fitbase_for_customer.zip",
+  "problem4_imported": false,
+  "report": "docs/20260922_fitbase_live_audit_final.md",
+  "created_at": "2026-09-22T11:08:47.518624+00:00",
+  "files": [
+    {
+      "path": "docs/20260922_fitbase_live_audit_checkpoint.md",
+      "bytes": 47773,
+      "sha256": "e9354690030192f62242256862d93869e836d1f541834b00e3706f22274efaa5"
+    },
+    {
+      "path": "docs/20260922_fitbase_live_audit_final.md",
+      "bytes": 72710,
+      "sha256": "b9e539947c0c357cd56dfacd0614311247880c8c1266f02ead29fe98362aa1c4"
+    },
+    {
+      "path": "docs/20260922_fitbase_live_audit_worklog.md",
+      "bytes": 10733,
+      "sha256": "97961f3df07097b65dd3a56a7862064f327dc23435bbe737cae970d30ba88ff6"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/audit_metrics.json",
+      "bytes": 2091,
+      "sha256": "7045a47ea906c8492d71a83922878aae2a527bfb81ebc35ef770cd15a0bddc2b"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/browser_evidence.json",
+      "bytes": 1255949,
+      "sha256": "f55f6cac71a5c7afa04fd0b88b74d1c5541ca51e7f61cac9d0ce7b2bc1995ffb"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/browser_evidence_part2.json",
+      "bytes": 5264438,
+      "sha256": "4cc20e4112688c2b60d70882a731672527766dd4fce82f09a8d3ee3840caa583"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/catalog_price_differences_final.csv",
+      "bytes": 31293,
+      "sha256": "b9a4fc7ea7f951d88906b427711196c22b528905aef51da10f29e18934da6072"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/catalog_reconciliation_final.json",
+      "bytes": 431108,
+      "sha256": "1ae9fa633e7ec62f776a4cde28510ef06d3d99d02adba27bea8577097fcab395"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/checkpoint_manifest.json",
+      "bytes": 4286,
+      "sha256": "c30560d2e322de73f699274ba2c9f079eff1d9ccd63f079f87945cbdfdfdbd3f"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/client_sample_evidence.json",
+      "bytes": 242851,
+      "sha256": "84f2724229639050c0e4e3d830ce787efe6f311caa51b925c84aa25f96b0e4b6"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/contact_identity_diagnostics.json",
+      "bytes": 101095,
+      "sha256": "b92ae711d91a3f4eb0a845edeb891ebcb361247b535813becc8a9f86e94c77f9"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_gogolevsky_active.csv",
+      "bytes": 1542367,
+      "sha256": "08153bc6b6bea827e27d24ca96f6ca5737be5f345dc377d358f32c2c72dc102a"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_gogolevsky_reactivation_efremova.csv",
+      "bytes": 1287472,
+      "sha256": "a5b7c3b43d8d1081111eea302e73b125fa1d7eba813279a67d1762d5dffd929f"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_gogolevsky_reactivation_peuna.csv",
+      "bytes": 1429700,
+      "sha256": "5157a59c5aa9c6516c4d3602571c0a550d31aae2a05892a38a31bc2a18fc5275"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_gogolevsky_reactivation_pilia.csv",
+      "bytes": 1396590,
+      "sha256": "575df1e8fba91e7fe0ff6799d0261291427054a9e9664397dcc390342dd70dc5"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_industrial_active.csv",
+      "bytes": 368683,
+      "sha256": "998b0f4d766a541205830b95f4af22b3217c41b87f0d65f8eabf58e91ebcc6a5"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_industrial_reactivation.csv",
+      "bytes": 792047,
+      "sha256": "53e6ed6461d4560eee7ea4896304a0836ced5e08189df1e087a70bfef3149f4a"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_industrial_reactivation.xlsx",
+      "bytes": 229999,
+      "sha256": "9cf1865c6290dfc518ad46207c82f09ff8b52b65bfde0a05fe7d3faa454a1d1b"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_rovio_active.csv",
+      "bytes": 471512,
+      "sha256": "4eda65cc075f809260bef5cd96f91a760585b2569189b6717ea0995783c2e0ff"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_rovio_reactivation.csv",
+      "bytes": 891187,
+      "sha256": "8ed87771294812957fdf15a4b17e5a2f151089d696d5e13ec4b900e540000c96"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_stolitsa_active.csv",
+      "bytes": 466750,
+      "sha256": "cfafc7aa4b83b716dd16e62d24f71cf38f99caaa717e5f4ff503cff805801d69"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/downloads/leads_stolitsa_reactivation.csv",
+      "bytes": 1046213,
+      "sha256": "1b6d83751d10ba61fc99ab1d9c2891c0e1c070dd5e977008e34856864cd06743"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/final_verification.json",
+      "bytes": 627,
+      "sha256": "715c9a1cafc59408aef8397ee2c12ba02246610ed7fa70a6b6236aaed008cd81"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/homonym_contact_risks.csv",
+      "bytes": 10978,
+      "sha256": "1ec6883ce2363852d118bf1e2784f34636d96089c179f89114fe9442d8c90a5f"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/homonym_source_rows.json",
+      "bytes": 30692,
+      "sha256": "1785a2e007d319c492c50b8248eefa5566456ea8ff2b39eacabfb3e7fb19bef1"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/lead_differences.json",
+      "bytes": 1211214,
+      "sha256": "45b82ec7385bcad08343624500eae1b801ac15992f7894372a89eb4429839b1c"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/lead_differences_final.json",
+      "bytes": 1364185,
+      "sha256": "5d6aca2bff4bbf19cf16731ff38312957b079678b4c8440ad16d043c9d75028a"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/lead_field_differences_final.csv",
+      "bytes": 673018,
+      "sha256": "33b27d60fb000adf64eb5dcd430f9e4597c6bc2673a23a8d8cdd89bcde788075"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/lead_mapping_final.json",
+      "bytes": 10182729,
+      "sha256": "9c0cc1cbe0d3f62d7b59ce77c14fb773fbacc48a7c8789cda7e942076742e9ce"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/lead_reconciliation.json",
+      "bytes": 32806,
+      "sha256": "6e984ca2aa1d94570d2a6ef29a053eeafc39b2dd940903ab524c7cd88fc752b1"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/lead_reconciliation_final.json",
+      "bytes": 13520,
+      "sha256": "c4632b42a530ece5357dd9bb13d7e18be1e4f87476eccd7fd9fe5fe9a13df5ec"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/membership_catalog_comparison.json",
+      "bytes": 152062,
+      "sha256": "8153a963106dc093d07183a7d82f235a1d9dbc4db149e04eab06e1f34b942450"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/membership_catalog_observed.json",
+      "bytes": 275032,
+      "sha256": "79ad337a988bd5ffee9fa3b1f92d1062a826a294e3b65ef37d374c00d742995b"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/missing_leads_final.csv",
+      "bytes": 3118,
+      "sha256": "f300579b237a25be6fa7d82a6bf5b73481d1f3cb4e432f13e69be5bd829b20d8"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/photo_manifest.csv",
+      "bytes": 7965279,
+      "sha256": "5e1e7c51b8d86d86e8eaa66cb5afbc2ccc237ed9765e3602364e97cb2bdd465e"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/photo_sample_comparison.json",
+      "bytes": 4846,
+      "sha256": "7ab63cf535e746321bb4c7e4aa6a0628568ce107502c6d49c4d62f045e140142"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/sample_candidates.json",
+      "bytes": 19685,
+      "sha256": "51fc3b9ee47e3ea29ae37d0f566005db6a3cc29717965bd560e5d95f0753310c"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/sample_ltv_reconciliation.json",
+      "bytes": 4017,
+      "sha256": "41307ba328073f53a267e132f11cc7c5c6f38d5db89c950e5c99bc67fc6df7b7"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/sample_source_rows.json",
+      "bytes": 138519,
+      "sha256": "98b31cf7f73f84da07ab37f910c604e2b9b23e54dd732f5d56c32f3d8286e924"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/service_catalog_observed.json",
+      "bytes": 82350,
+      "sha256": "9a44047c8a5fa5db438f0bc795469690e6a7a4936e722a549df1bd088d5bd79e"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/service_count_reconciliation.json",
+      "bytes": 10156,
+      "sha256": "b316319fbeb52ca66a7b28ce60046a5f2288976aebf47a6ebe373e092496f7fc"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/source.sqlite",
+      "bytes": 57487360,
+      "sha256": "fcce1c347df2df921ee940bcb25c2756778147c79ba0d4d5f82bc123ce3878fd"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/source_summary.json",
+      "bytes": 4058,
+      "sha256": "255b459ba89aae227aafc8408cd93f8e114f9bf4b7fcd3aa9d926ae514dc1d6e"
+    },
+    {
+      "path": "output/20260922_fitbase_live_audit/ui_counts.json",
+      "bytes": 298,
+      "sha256": "f11a415eecc99439ebc33e68704d4b2ea52648893c8156eeb749a3b5a66eff33"
+    },
+    {
+      "path": "scripts/audit_20260922_fitbase_finalize.py",
+      "bytes": 7211,
+      "sha256": "fa72f3bc4550677b12ce8f4b2f3ca84a364501bbf9b296ab45d3ff4104dad56c"
+    },
+    {
+      "path": "scripts/audit_20260922_fitbase_live.py",
+      "bytes": 9253,
+      "sha256": "0e5931b067c9a698344ee65e0ede890ef90ab18f3e1abd06bb3ee86556a7ed0d"
+    },
+    {
+      "path": "scripts/audit_20260922_fitbase_reconcile.py",
+      "bytes": 6767,
+      "sha256": "6c6bb603f78cd83fd8d4e16a0c986ae8173ee97403bdb86d8636fe785a4020f8"
+    }
+  ]
+}

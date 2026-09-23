@@ -1015,6 +1015,13 @@ def write_workbook(
         for col_idx, number_format in format_cols.items():
             ws.cell(row_idx, col_idx).number_format = number_format
 
+    if headers == TEMPLATE_HEADERS:
+        # Fitbase must read plain numbers, without formatted thousands separators.
+        for row in ws.iter_rows(min_row=3):
+            for cell in row:
+                if cell.data_type == "n" and cell.value is not None:
+                    cell.number_format = "General"
+
     ws.freeze_panes = "A3"
     for col_idx in range(1, width + 1):
         letter = get_column_letter(col_idx)

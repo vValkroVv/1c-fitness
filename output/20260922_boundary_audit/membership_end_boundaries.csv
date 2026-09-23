@@ -1,0 +1,5 @@
+﻿end_date,is_full_subscription,is_active_on_cutoff,is_finished_before_cutoff,contract_rows,unique_clients
+2026-09-21,0,0,0,3,3
+2026-09-21,1,0,1,57,57
+2026-09-22,0,0,0,3,3
+2026-09-22,1,1,0,44,44

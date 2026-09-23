@@ -1,0 +1,424 @@
+[
+  {
+    "file": "leads_gogolevsky_active.csv",
+    "club": "Гоголевский",
+    "funnel": "Действующие абонементы",
+    "source_rows": 6012,
+    "live_rows": 6012,
+    "matched_one_to_one": 6012,
+    "match_basis": {
+      "name_phone_date_manager": 5972,
+      "name_date_manager": 27,
+      "phone_date_manager": 13
+    },
+    "counts": {
+      "all_exported_fields_equal": 5491,
+      "phone_subset": 505,
+      "email": 5,
+      "client_fio": 13
+    },
+    "unmatched_source": [],
+    "unmatched_live": []
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_peuna.csv",
+    "club": "Гоголевский",
+    "funnel": "Реактивация",
+    "source_rows": 5871,
+    "live_rows": 5870,
+    "matched_one_to_one": 5870,
+    "match_basis": {
+      "name_phone_date_manager": 5756,
+      "name_date_manager": 84,
+      "phone_date_manager": 30
+    },
+    "counts": {
+      "all_exported_fields_equal": 5473,
+      "phone_subset": 360,
+      "email": 5,
+      "phone_mismatch": 5,
+      "client_fio": 30
+    },
+    "unmatched_source": [
+      {
+        "client_id": "000030534",
+        "phone": "",
+        "client_fio": "Сизова Татьяна Владиставовна",
+        "email": "",
+        "funnel": "Реактивация",
+        "funnel_step": "Закрытые годовые абонементы",
+        "budget": "0",
+        "create_date": "2019-08-12",
+        "manager": "Пеуна Анастасия Ивановна",
+        "филиал": "Фитнес Империя (Гоголевский)",
+        "_xlsx_row": "24280"
+      }
+    ],
+    "unmatched_live": []
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_pilia.csv",
+    "club": "Гоголевский",
+    "funnel": "Реактивация",
+    "source_rows": 5737,
+    "live_rows": 5736,
+    "matched_one_to_one": 5736,
+    "match_basis": {
+      "name_phone_date_manager": 5611,
+      "name_date_manager": 92,
+      "phone_date_manager": 33
+    },
+    "counts": {
+      "all_exported_fields_equal": 5358,
+      "phone_subset": 338,
+      "email": 3,
+      "phone_mismatch": 7,
+      "client_fio": 33
+    },
+    "unmatched_source": [
+      {
+        "client_id": "000043973",
+        "phone": "",
+        "client_fio": "Тикка Виктория Витальевна",
+        "email": "",
+        "funnel": "Реактивация",
+        "funnel_step": "Закрытые годовые абонементы",
+        "budget": "0",
+        "create_date": "2021-02-02",
+        "manager": "Пилия Анастасия Артуровна",
+        "филиал": "Фитнес Империя (Гоголевский)",
+        "_xlsx_row": "29733"
+      }
+    ],
+    "unmatched_live": []
+  },
+  {
+    "file": "leads_gogolevsky_reactivation_efremova.csv",
+    "club": "Гоголевский",
+    "funnel": "Реактивация",
+    "source_rows": 5785,
+    "live_rows": 5785,
+    "matched_one_to_one": 5785,
+    "match_basis": {
+      "name_phone_date_manager": 5678,
+      "name_date_manager": 75,
+      "phone_date_manager": 32
+    },
+    "counts": {
+      "all_exported_fields_equal": 5409,
+      "phone_subset": 341,
+      "email": 1,
+      "phone_mismatch": 4,
+      "client_fio": 32
+    },
+    "unmatched_source": [],
+    "unmatched_live": []
+  },
+  {
+    "file": "leads_industrial_active.csv",
+    "club": "Промышленная",
+    "funnel": "Действующие абонементы",
+    "source_rows": 1458,
+    "live_rows": 1458,
+    "matched_one_to_one": 1458,
+    "match_basis": {
+      "name_phone_date_manager": 1448,
+      "name_date_manager": 10
+    },
+    "counts": {
+      "all_exported_fields_equal": 1359,
+      "phone_subset": 94,
+      "email": 4,
+      "phone_mismatch": 1
+    },
+    "unmatched_source": [],
+    "unmatched_live": []
+  },
+  {
+    "file": "leads_industrial_reactivation.csv",
+    "club": "Промышленная",
+    "funnel": "Реактивация",
+    "source_rows": 3686,
+    "live_rows": 3685,
+    "matched_one_to_one": 3685,
+    "match_basis": {
+      "name_phone_date_manager": 3608,
+      "name_date_manager": 61,
+      "phone_date_manager": 16
+    },
+    "counts": {
+      "all_exported_fields_equal": 3457,
+      "phone_subset": 204,
+      "email": 3,
+      "phone_mismatch": 7,
+      "client_fio": 16
+    },
+    "unmatched_source": [
+      {
+        "client_id": "000030271",
+        "phone": "",
+        "client_fio": "Тарвонен Надежда Сергеевна",
+        "email": "",
+        "funnel": "Реактивация",
+        "funnel_step": "Закрытые годовые абонементы",
+        "budget": "0",
+        "create_date": "2019-08-25",
+        "manager": "Пеуна Анастасия Ивановна",
+        "филиал": "Фитнес Империя (Промышленная)",
+        "_xlsx_row": "24107"
+      }
+    ],
+    "unmatched_live": []
+  },
+  {
+    "file": "leads_rovio_active.csv",
+    "club": "Ровио",
+    "funnel": "Действующие абонементы",
+    "source_rows": 1841,
+    "live_rows": 1841,
+    "matched_one_to_one": 1841,
+    "match_basis": {
+      "name_phone_date_manager": 1817,
+      "name_date_manager": 23,
+      "phone_date_manager": 1
+    },
+    "counts": {
+      "all_exported_fields_equal": 1703,
+      "phone_subset": 127,
+      "email": 3,
+      "phone_mismatch": 8,
+      "client_fio": 1
+    },
+    "unmatched_source": [],
+    "unmatched_live": []
+  },
+  {
+    "file": "leads_rovio_reactivation.csv",
+    "club": "Ровио",
+    "funnel": "Реактивация",
+    "source_rows": 3898,
+    "live_rows": 3890,
+    "matched_one_to_one": 3890,
+    "match_basis": {
+      "name_phone_date_manager": 3184,
+      "name_date_manager": 75,
+      "phone_date_manager": 628,
+      "name_yo_date_manager": 2,
+      "phone_leading_zero_date_manager": 1
+    },
+    "counts": {
+      "all_exported_fields_equal": 3012,
+      "email": 4,
+      "phone_subset": 314,
+      "phone_mismatch": 38,
+      "client_fio": 631
+    },
+    "unmatched_source": [
+      {
+        "client_id": "000027867",
+        "phone": "",
+        "client_fio": "Пробный Клиент Аквы2",
+        "email": "",
+        "funnel": "Реактивация",
+        "funnel_step": "Закрытые годовые абонементы",
+        "budget": "0",
+        "create_date": "2019-06-01",
+        "manager": "Пилия Анастасия Артуровна",
+        "филиал": "Фитнес Империя (Ровио)",
+        "_xlsx_row": "22512"
+      },
+      {
+        "client_id": "000027868",
+        "phone": "",
+        "client_fio": "Пробный Клиент Аквы3",
+        "email": "",
+        "funnel": "Реактивация",
+        "funnel_step": "Закрытые годовые абонементы",
+        "budget": "0",
+        "create_date": "2019-06-01",
+        "manager": "Пеуна Анастасия Ивановна",
+        "филиал": "Фитнес Империя (Ровио)",
+        "_xlsx_row": "22513"
+      },
+      {
+        "client_id": "000028209",
+        "phone": "",
+        "client_fio": "Подарочная карта №707",
+        "email": "",
+        "funnel": "Реактивация",
+        "funnel_step": "Закрытые годовые абонементы",
+        "budget": "0",
+        "create_date": "2019-07-11",
+        "manager": "Пилия Анастасия Артуровна",
+        "филиал": "Фитнес Империя (Ровио)",
+        "_xlsx_row": "22709"
+      },
+      {
+        "client_id": "000035909",
+        "phone": "",
+        "client_fio": "подарочная карта №1202к",
+        "email": "",
+        "funnel": "Реактивация",
+        "funnel_step": "Закрытые годовые абонементы",
+        "budget": "0",
+        "create_date": "2020-02-12",
+        "manager": "Ефремова Алена",
+        "филиал": "Фитнес Империя (Ровио)",
+        "_xlsx_row": "26674"
+      },
+      {
+        "client_id": "000037604",
+        "phone": "",
+        "client_fio": "подарочная карта №0507",
+        "email": "",
+        "funnel": "Реактивация",
+        "funnel_step": "Закрытые годовые абонементы",
+        "budget": "0",
+        "create_date": "2020-07-05",
+        "manager": "Пилия Анастасия Артуровна",
+        "филиал": "Фитнес Империя (Ровио)",
+        "_xlsx_row": "27382"
+      },
+      {
+        "client_id": "000054334",
+        "phone": "",
+        "client_fio": "Подарочная карта № 7768",
+        "email": "",
+        "funnel": "Реактивация",
+        "funnel_step": "Закрытые годовые абонементы",
+        "budget": "0",
+        "create_date": "2022-10-14",
+        "manager": "Пилия Анастасия Артуровна",
+        "филиал": "Фитнес Империя (Ровио)",
+        "_xlsx_row": "33877"
+      },
+      {
+        "client_id": "000055511",
+        "phone": "",
+        "client_fio": "Подарочная карта №2525",
+        "email": "",
+        "funnel": "Реактивация",
+        "funnel_step": "Закрытые годовые абонементы",
+        "budget": "0",
+        "create_date": "2022-12-28",
+        "manager": "Пеуна Анастасия Ивановна",
+        "филиал": "Фитнес Империя (Ровио)",
+        "_xlsx_row": "34325"
+      },
+      {
+        "client_id": "000058192",
+        "phone": "",
+        "client_fio": "Подарочная карта № 4446",
+        "email": "",
+        "funnel": "Реактивация",
+        "funnel_step": "Закрытые годовые абонементы",
+        "budget": "0",
+        "create_date": "2023-05-20",
+        "manager": "Пеуна Анастасия Ивановна",
+        "филиал": "Фитнес Империя (Ровио)",
+        "_xlsx_row": "35363"
+      }
+    ],
+    "unmatched_live": []
+  },
+  {
+    "file": "leads_stolitsa_active.csv",
+    "club": "Столица",
+    "funnel": "Действующие абонементы",
+    "source_rows": 1820,
+    "live_rows": 1820,
+    "matched_one_to_one": 1820,
+    "match_basis": {
+      "name_phone_date_manager": 1810,
+      "name_date_manager": 10
+    },
+    "counts": {
+      "all_exported_fields_equal": 1671,
+      "phone_subset": 143,
+      "email": 1,
+      "phone_mismatch": 5
+    },
+    "unmatched_source": [],
+    "unmatched_live": []
+  },
+  {
+    "file": "leads_stolitsa_reactivation.csv",
+    "club": "Столица",
+    "funnel": "Реактивация",
+    "source_rows": 4400,
+    "live_rows": 4400,
+    "matched_one_to_one": 4398,
+    "match_basis": {
+      "name_phone_date_manager": 4280,
+      "name_date_manager": 105,
+      "phone_date_manager": 13
+    },
+    "counts": {
+      "all_exported_fields_equal": 4159,
+      "phone_subset": 207,
+      "email": 1,
+      "phone_mismatch": 18,
+      "client_fio": 13
+    },
+    "unmatched_source": [
+      {
+        "client_id": "000002642",
+        "phone": "+7 (900) 4600898",
+        "client_fio": "Васильева Мария Александровна",
+        "email": "",
+        "funnel": "Реактивация",
+        "funnel_step": "Закрытые годовые абонементы",
+        "budget": "0",
+        "create_date": "2018-01-01",
+        "manager": "Ефремова Алена",
+        "филиал": "Фитнес Империя (Столица)",
+        "_xlsx_row": "12029"
+      },
+      {
+        "client_id": "000029130",
+        "phone": "+7 (911) 4347277",
+        "client_fio": "Васильева Мария Александровна",
+        "email": "",
+        "funnel": "Реактивация",
+        "funnel_step": "Закрытые годовые абонементы",
+        "budget": "0",
+        "create_date": "2018-01-01",
+        "manager": "Ефремова Алена",
+        "филиал": "Фитнес Империя (Столица)",
+        "_xlsx_row": "23371"
+      }
+    ],
+    "unmatched_live": [
+      {
+        "csv_row": 3151,
+        "Дата создания": "01.01.2018 00:00",
+        "Название": "-",
+        "Бюджет": "0",
+        "Этап воронки": "Закрытые годовые абонементы",
+        "Клиент": "Васильева Мария Александровна",
+        "Телефон": "79114347277",
+        "Email": "",
+        "Источник": "Сайт",
+        "Менеджер": "Ефремова Алена ",
+        "Описание": "-",
+        "Название воронки": "Реактивация ",
+        "_date": "2018-01-01"
+      },
+      {
+        "csv_row": 4084,
+        "Дата создания": "01.01.2018 00:00",
+        "Название": "-",
+        "Бюджет": "0",
+        "Этап воронки": "Закрытые годовые абонементы",
+        "Клиент": "Васильева Мария Александровна",
+        "Телефон": "79114347277",
+        "Email": "",
+        "Источник": "Сайт",
+        "Менеджер": "Ефремова Алена ",
+        "Описание": "-",
+        "Название воронки": "Реактивация ",
+        "_date": "2018-01-01"
+      }
+    ]
+  }
+]

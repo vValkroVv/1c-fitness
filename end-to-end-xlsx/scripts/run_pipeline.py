@@ -193,6 +193,8 @@ class Pipeline:
             str(path): hashlib.sha256(path.read_bytes()).hexdigest()
             for path in [CONFIG / "managers_by_club.yml", CONFIG / "branches_by_club.yml",
                          CONFIG / "product_reclassification_decisions.csv",
+                         CONFIG / "membership_template_canonicalization.csv",
+                         SCRIPTS / "19_build_membership_import_xlsx.py",
                          as_abs(self.validation_config["expected_manifest"])]
         }
         config_signature = hashlib.sha256(json.dumps(

@@ -1,0 +1,42 @@
+{
+  "clients": 766,
+  "history_rows": 1806,
+  "unique_contracts": 1806,
+  "all_contract_numbers_resolved_in_source": true,
+  "raw_classes": {
+    "unknown_review_required": 1806
+  },
+  "final_classes": {
+    "full_subscription": 1799,
+    "other_sale": 7
+  },
+  "final_active_rows": 0,
+  "final_finished_rows": 1799,
+  "history_by_product": {
+    "АКВА 24 посещения": 147,
+    "АКВА 40 посещений": 545,
+    "АКВА 36 посещений": 131,
+    "АКВА 18 посещений": 190,
+    "АКВА 4 посещения": 68,
+    "Подарочный сертификат 1 месяц безлимитного фитнеса": 77,
+    "АКВА 30 посещений": 139,
+    "АКВА 26 посещений": 36,
+    "АКВА 46 посещений": 143,
+    "АКВА 32 посещения": 58,
+    "АКВА 8 посещений": 116,
+    "Пакет 12 (персональные тренировки)": 10,
+    "АКВА 40 посещений САЙТ": 21,
+    "АКВА 35 посещений": 23,
+    "АКВА 38 посещений": 38,
+    "АКВА 48 посещений": 24,
+    "АКВА 10 посещений": 18,
+    "АКВА 46 посещений САЙТ": 1,
+    "АКВА 22 посещения": 14,
+    "Пакет 8": 6,
+    "АКВА 6 посещений": 1
+  },
+  "decision_date": "2026-09-21",
+  "decision": "User confirmed: preserve June rules and attach excluded history as a separate report.",
+  "report_is_import_workbook": false,
+  "amounts_invented": false
+}

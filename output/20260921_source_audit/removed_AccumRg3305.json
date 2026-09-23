@@ -1,0 +1,24 @@
+[
+  {
+    "recorder_type": "00000098",
+    "removed_rows": 10,
+    "removed_recorders": 10,
+    "min_period": "2026-05-19T12:57:35",
+    "max_period": "2026-06-27T13:28:17",
+    "record_kind": 0,
+    "removed_amount_or_quantity": 13105.0,
+    "september_recorder_posted": 0,
+    "september_recorder_marked": 1
+  },
+  {
+    "recorder_type": "0000009A",
+    "removed_rows": 14,
+    "removed_recorders": 14,
+    "min_period": "2025-03-22T15:35:04",
+    "max_period": "2026-06-30T16:37:27",
+    "record_kind": 1,
+    "removed_amount_or_quantity": 133730.0,
+    "september_recorder_posted": 0,
+    "september_recorder_marked": 1
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "snapshot": "june",
+    "tables_count": 2503,
+    "columns_count": 19421
+  },
+  {
+    "snapshot": "september",
+    "tables_count": 2503,
+    "columns_count": 19421
+  }
+]

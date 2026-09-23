@@ -1,0 +1,932 @@
+[
+  {
+    "name": "Абонемент в солярий на 100 минут",
+    "prices": {
+      "Столица": 2.0,
+      "Гоголевский": 2000.0,
+      "Ровио": 2000.0,
+      "Промышленная": 2.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=287",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=3",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=202",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=116"
+    }
+  },
+  {
+    "name": "Абонемент в солярий на 100+50 минут",
+    "prices": {
+      "Столица": 1.0,
+      "Гоголевский": 1200.0,
+      "Ровио": 1200.0,
+      "Промышленная": 1.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=288",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=4",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=203",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=117"
+    }
+  },
+  {
+    "name": "Абонемент в солярий на 50 минут",
+    "prices": {
+      "Столица": 1.0,
+      "Гоголевский": 1500.0,
+      "Ровио": 1500.0,
+      "Промышленная": 1.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=290",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=6",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=205",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=119"
+    }
+  },
+  {
+    "name": "АБОНЕМЕНТ ДЖАМПИНГ 12 пос",
+    "prices": {
+      "Столица": 3.0,
+      "Гоголевский": 3600.0,
+      "Ровио": 3600.0,
+      "Промышленная": 3.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=292",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=8",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=207",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=121"
+    }
+  },
+  {
+    "name": "АБОНЕМЕНТ ДЖАМПИНГ 8 пос",
+    "prices": {
+      "Столица": 3.0,
+      "Гоголевский": 3480.0,
+      "Ровио": 3480.0,
+      "Промышленная": 3.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=293",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=9",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=208",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=122"
+    }
+  },
+  {
+    "name": "АБОНЕМЕНТ лимфодренажная тренировка (10 посещений),1 мес.",
+    "prices": {
+      "Столица": 7.0,
+      "Гоголевский": 7500.0,
+      "Ровио": 7500.0,
+      "Промышленная": 7.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=294",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=10",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=209",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=123"
+    }
+  },
+  {
+    "name": "Абонемент МУЛЬТИ 24 месяцев",
+    "prices": {
+      "Столица": 23.0,
+      "Гоголевский": 23980.0,
+      "Ровио": 23980.0,
+      "Промышленная": 23.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=295",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=11",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=210",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=124"
+    }
+  },
+  {
+    "name": "Абонемент МУЛЬТИ 6+6 месяцев",
+    "prices": {
+      "Столица": 13.0,
+      "Гоголевский": 13990.0,
+      "Ровио": 13990.0,
+      "Промышленная": 13.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=296",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=12",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=211",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=125"
+    }
+  },
+  {
+    "name": "Абонемент Неделя Фитнес",
+    "prices": {
+      "Столица": 2.0,
+      "Гоголевский": 2500.0,
+      "Ровио": 2500.0,
+      "Промышленная": 2.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=302",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=37",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=217",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=131"
+    }
+  },
+  {
+    "name": "АБОНЕМЕНТ САЙКЛ 12 пос без клубной карты",
+    "prices": {
+      "Столица": 6.0,
+      "Гоголевский": 6450.0,
+      "Ровио": 6450.0,
+      "Промышленная": 6.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=308",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=43",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=223",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=137"
+    }
+  },
+  {
+    "name": "АБОНЕМЕНТ САЙКЛ 12 пос при наличии клубной карты",
+    "prices": {
+      "Столица": 3.0,
+      "Гоголевский": 3600.0,
+      "Ровио": 3600.0,
+      "Промышленная": 3.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=309",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=44",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=224",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=138"
+    }
+  },
+  {
+    "name": "АБОНЕМЕНТ САЙКЛ 8 пос без клубной карты",
+    "prices": {
+      "Столица": 5.0,
+      "Гоголевский": 5400.0,
+      "Ровио": 5400.0,
+      "Промышленная": 5.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=310",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=45",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=225",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=139"
+    }
+  },
+  {
+    "name": "АБОНЕМЕНТ САЙКЛ 8 пос при наличии клубной карты",
+    "prices": {
+      "Столица": 3.0,
+      "Гоголевский": 3000.0,
+      "Ровио": 3000.0,
+      "Промышленная": 3.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=311",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=46",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=226",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=140"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 1 МЕСЯЦ 12 посещений",
+    "prices": {
+      "Столица": 3.0,
+      "Гоголевский": 3500.0,
+      "Ровио": 3500.0,
+      "Промышленная": 3.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=312",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=47",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=227",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=141"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 1 МЕСЯЦ 8 посещений",
+    "prices": {
+      "Столица": 3.0,
+      "Гоголевский": 3400.0,
+      "Ровио": 3400.0,
+      "Промышленная": 3.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=313",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=48",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=228",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=142"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 1 МЕСЯЦ БЕЗЛИМИТ",
+    "prices": {
+      "Столица": 4.0,
+      "Гоголевский": 4100.0,
+      "Ровио": 4100.0,
+      "Промышленная": 4.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=315",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=50",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=230",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=144"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12 + 2 лета в подарок",
+    "prices": {
+      "Столица": 11.0,
+      "Гоголевский": 11990.0,
+      "Ровио": 11990.0,
+      "Промышленная": 11.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=317",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=52",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=232",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=146"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12 месяцев",
+    "prices": {
+      "Столица": 11.0,
+      "Гоголевский": 11990.0,
+      "Ровио": 11990.0,
+      "Промышленная": 11.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=318",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=53",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=233",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=147"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12 месяцев (акция 2 мес. в подарок)",
+    "prices": {
+      "Столица": 15.0,
+      "Гоголевский": 15990.0,
+      "Ровио": 15990.0,
+      "Промышленная": 15.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=319",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=54",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=234",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=148"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12 месяцев (акция 2 мес. в подарок) Ровио,3",
+    "prices": {
+      "Столица": 13.0,
+      "Гоголевский": 13990.0,
+      "Ровио": 13990.0,
+      "Промышленная": 13.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=320",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=55",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=235",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=149"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12 месяцев (акция 3 мес. в подарок)",
+    "prices": {
+      "Столица": 11.0,
+      "Гоголевский": 11990.0,
+      "Ровио": 11990.0,
+      "Промышленная": 11.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=321",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=56",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=236",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=150"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12 месяцев (акция 3 мес. в подарок) Ровио,3",
+    "prices": {
+      "Столица": 15.0,
+      "Гоголевский": 15990.0,
+      "Ровио": 15990.0,
+      "Промышленная": 15.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=322",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=57",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=237",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=151"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12 месяцев (акция 6 мес. в подарок)",
+    "prices": {
+      "Столица": 15.0,
+      "Гоголевский": 15990.0,
+      "Ровио": 15990.0,
+      "Промышленная": 15.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=323",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=58",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=238",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=152"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12 месяцев (акция 6 мес. в подарок) Ровио,3",
+    "prices": {
+      "Столица": 17.0,
+      "Гоголевский": 17990.0,
+      "Ровио": 17990.0,
+      "Промышленная": 17.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=324",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=59",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=239",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=153"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12 месяцев (Ровио,3)",
+    "prices": {
+      "Столица": 15.0,
+      "Гоголевский": 15990.0,
+      "Ровио": 15990.0,
+      "Промышленная": 15.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=325",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=60",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=240",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=154"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12 месяцев + 3 месяца заморозки в подарок (Рови",
+    "prices": {
+      "Столица": 13.0,
+      "Гоголевский": 13990.0,
+      "Ровио": 13990.0,
+      "Промышленная": 13.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=327",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=62",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=242",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=156"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12 месяцев ДВОЙНОЕ / СЕМЕЙНЫЙ",
+    "prices": {
+      "Столица": 4.0,
+      "Гоголевский": 4035.0,
+      "Ровио": 4035.0,
+      "Промышленная": 4.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=328",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=63",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=243",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=157"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ (вип)",
+    "prices": {
+      "Столица": 10.0,
+      "Гоголевский": 10990.0,
+      "Ровио": 10990.0,
+      "Промышленная": 10.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=330",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=65",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=245",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=159"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ (Промышленная,10)",
+    "prices": {
+      "Столица": 7.0,
+      "Гоголевский": 7989.0,
+      "Ровио": 7989.0,
+      "Промышленная": 7.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=331",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=66",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=246",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=160"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ+подарок",
+    "prices": {
+      "Столица": 11.0,
+      "Гоголевский": 11990.0,
+      "Ровио": 11990.0,
+      "Промышленная": 11.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=332",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=67",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=247",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=161"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12+2 месяца в подарок",
+    "prices": {
+      "Столица": 11.0,
+      "Гоголевский": 11990.0,
+      "Ровио": 11990.0,
+      "Промышленная": 11.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=333",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=68",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=248",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=162"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12+2 месяца в подарок (Ровио)",
+    "prices": {
+      "Столица": 13.0,
+      "Гоголевский": 13990.0,
+      "Ровио": 13990.0,
+      "Промышленная": 13.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=334",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=69",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=249",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=163"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 12+6 месяцев",
+    "prices": {
+      "Столица": 14.0,
+      "Гоголевский": 14991.0,
+      "Ровио": 14991.0,
+      "Промышленная": 14.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=335",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=70",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=250",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=164"
+    }
+  },
+  {
+    "name": "Абонемент Ультра 15 месяцев (подарок)",
+    "prices": {
+      "Столица": 12.0,
+      "Гоголевский": 12990.0,
+      "Ровио": 12990.0,
+      "Промышленная": 12.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=337",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=72",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=252",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=166"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 15 месяцев (рассрочка)",
+    "prices": {
+      "Столица": 12.0,
+      "Гоголевский": 12990.0,
+      "Ровио": 12990.0,
+      "Промышленная": 12.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=338",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=73",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=253",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=167"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 15 месяцев + 3 месяца заморозки в подарок(Ровио",
+    "prices": {
+      "Столица": 14.0,
+      "Гоголевский": 14990.0,
+      "Ровио": 14990.0,
+      "Промышленная": 14.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=339",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=74",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=254",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=168"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 24 месяца",
+    "prices": {
+      "Столица": 23.0,
+      "Гоголевский": 23000.0,
+      "Ровио": 23000.0,
+      "Промышленная": 23.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=340",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=75",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=255",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=169"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 3 месяца",
+    "prices": {
+      "Столица": 8.0,
+      "Гоголевский": 8000.0,
+      "Ровио": 8000.0,
+      "Промышленная": 8.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=341",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=76",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=256",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=170"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 6 месяцев СПЕЦПРЕДЛОЖЕНИЕ",
+    "prices": {
+      "Столица": 7.0,
+      "Гоголевский": 7000.0,
+      "Ровио": 7000.0,
+      "Промышленная": 7.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=342",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=77",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=257",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=171"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 6+6 месяцев",
+    "prices": {
+      "Столица": 13.0,
+      "Гоголевский": 13991.0,
+      "Ровио": 13991.0,
+      "Промышленная": 13.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=343",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=78",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=258",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=172"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 9 месяцев",
+    "prices": {
+      "Столица": 14.0,
+      "Гоголевский": 14990.0,
+      "Ровио": 14990.0,
+      "Промышленная": 14.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=344",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=79",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=259",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=173"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок)",
+    "prices": {
+      "Столица": 13.0,
+      "Гоголевский": 13990.0,
+      "Ровио": 13990.0,
+      "Промышленная": 13.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=345",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=80",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=260",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=174"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 9 месяцев (3 месяца заморозки в подарок) Ровио",
+    "prices": {
+      "Столица": 12.0,
+      "Гоголевский": 12990.0,
+      "Ровио": 12990.0,
+      "Промышленная": 12.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=346",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=81",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=261",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=175"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 9 месяцев СПЕЦПРЕДЛОЖЕНИЕ",
+    "prices": {
+      "Столица": 9.0,
+      "Гоголевский": 9900.0,
+      "Ровио": 9900.0,
+      "Промышленная": 9.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=348",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=83",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=263",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=177"
+    }
+  },
+  {
+    "name": "Абонемент УЛЬТРА 9 месяцев+3 месяца в подарок (Ровио)",
+    "prices": {
+      "Столица": 12.0,
+      "Гоголевский": 12990.0,
+      "Ровио": 12990.0,
+      "Промышленная": 12.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=349",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=84",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=264",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=178"
+    }
+  },
+  {
+    "name": "Студенческий абонемент 4 месяца 6 900,00",
+    "prices": {
+      "Столица": 6.0,
+      "Гоголевский": 6900.0,
+      "Ровио": 6900.0,
+      "Промышленная": 6.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=352",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=95",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=267",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=181"
+    }
+  },
+  {
+    "name": "Студенческий дневной абонемент 9 месяцев",
+    "prices": {
+      "Столица": 8.0,
+      "Гоголевский": 8900.0,
+      "Ровио": 8900.0,
+      "Промышленная": 8.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=353",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=96",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=268",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=182"
+    }
+  },
+  {
+    "name": "Студенческий дневной абонемент 9 месяцев (посещение клуба до 17:",
+    "prices": {
+      "Столица": 8.0,
+      "Гоголевский": 8900.0,
+      "Ровио": 8900.0,
+      "Промышленная": 8.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=354",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=97",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=269",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=183"
+    }
+  },
+  {
+    "name": "СУБАРЕНДА 10 посещений",
+    "prices": {
+      "Столица": 13.0,
+      "Гоголевский": 13000.0,
+      "Ровио": 13000.0,
+      "Промышленная": 13.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=355",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=98",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=270",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=184"
+    }
+  },
+  {
+    "name": "СУБАРЕНДА 12 посещений",
+    "prices": {
+      "Столица": 20.0,
+      "Гоголевский": 20000.0,
+      "Ровио": 20000.0,
+      "Промышленная": 20.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=356",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=99",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=271",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=185"
+    }
+  },
+  {
+    "name": "СУБАРЕНДА 15 посещений",
+    "prices": {
+      "Столица": 22.0,
+      "Гоголевский": 22000.0,
+      "Ровио": 22000.0,
+      "Промышленная": 22.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=357",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=100",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=272",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=186"
+    }
+  },
+  {
+    "name": "СУБАРЕНДА 20 посещений",
+    "prices": {
+      "Столица": 22.0,
+      "Гоголевский": 22500.0,
+      "Ровио": 22500.0,
+      "Промышленная": 22.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=358",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=101",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=273",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=187"
+    }
+  },
+  {
+    "name": "СУБАРЕНДА 8 посещений",
+    "prices": {
+      "Столица": 15.0,
+      "Гоголевский": 15000.0,
+      "Ровио": 15000.0,
+      "Промышленная": 15.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=359",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=102",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=274",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=188"
+    }
+  },
+  {
+    "name": "СУБАРЕНДА безлимит",
+    "prices": {
+      "Столица": 28.0,
+      "Гоголевский": 28000.0,
+      "Ровио": 28000.0,
+      "Промышленная": 28.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=360",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=103",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=275",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=189"
+    }
+  },
+  {
+    "name": "СУБАРЕНДА безлимит неделя Савостьянова Ксения",
+    "prices": {
+      "Столица": 3.0,
+      "Гоголевский": 3000.0,
+      "Ровио": 3000.0,
+      "Промышленная": 3.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=361",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=104",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=276",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=190"
+    }
+  },
+  {
+    "name": "СУБАРЕНДА безлимит Савостьянова Ксения",
+    "prices": {
+      "Столица": 10.0,
+      "Гоголевский": 10000.0,
+      "Ровио": 10000.0,
+      "Промышленная": 10.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=362",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=105",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=277",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=191"
+    }
+  },
+  {
+    "name": "УЛЬТРА 12 месяцев + 2 месяца заморозки в подарок (Ровио)",
+    "prices": {
+      "Столица": 14.0,
+      "Гоголевский": 14990.0,
+      "Ровио": 14990.0,
+      "Промышленная": 14.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=363",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=106",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=278",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=192"
+    }
+  },
+  {
+    "name": "УЛЬТРА 12 месяцев + подарок",
+    "prices": {
+      "Столица": 11.0,
+      "Гоголевский": 11990.0,
+      "Ровио": 11990.0,
+      "Промышленная": 11.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=364",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=107",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=279",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=193"
+    }
+  },
+  {
+    "name": "УЛЬТРА 6 месяцев + 3 месяца в подарок",
+    "prices": {
+      "Столица": 14.0,
+      "Гоголевский": 14990.0,
+      "Ровио": 14990.0,
+      "Промышленная": 14.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=365",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=108",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=280",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=194"
+    }
+  },
+  {
+    "name": "УЛЬТРА 9 месяцев (подарок)",
+    "prices": {
+      "Столица": 14.0,
+      "Гоголевский": 14990.0,
+      "Ровио": 14990.0,
+      "Промышленная": 14.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=366",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=109",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=281",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=195"
+    }
+  },
+  {
+    "name": "Холодные 13 900,00 МУЛЬТИ 24 месяца",
+    "prices": {
+      "Столица": 13.0,
+      "Гоголевский": 13900.0,
+      "Ровио": 13900.0,
+      "Промышленная": 13.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=367",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=110",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=282",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=196"
+    }
+  },
+  {
+    "name": "Холодные 9 900,00 УЛЬТРА 12 месяцев",
+    "prices": {
+      "Столица": 9.0,
+      "Гоголевский": 9900.0,
+      "Ровио": 9900.0,
+      "Промышленная": 9.0
+    },
+    "urls": {
+      "Столица": "https://fitnes-imperiya.fitbase.io/ticket/update?id=368",
+      "Гоголевский": "https://fitnes-imperiya.fitbase.io/ticket/update?id=112",
+      "Ровио": "https://fitnes-imperiya.fitbase.io/ticket/update?id=283",
+      "Промышленная": "https://fitnes-imperiya.fitbase.io/ticket/update?id=197"
+    }
+  }
+]

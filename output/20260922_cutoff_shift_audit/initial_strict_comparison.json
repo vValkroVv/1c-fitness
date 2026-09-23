@@ -1,0 +1,2510 @@
+{
+  "status": "FAIL",
+  "checks": [
+    {
+      "check": "Same actual backup; new cutoff is +48 hours from backup and +24 hours from previous delivery",
+      "pass": true
+    },
+    {
+      "check": "All signed business inputs and membership builder unchanged",
+      "pass": true,
+      "input_hashes": [
+        {
+          "managers_by_club.yml": "dc135e80122684dc491283569b6503e4786a09690a2fe86e8e8f7f73bbcc22ea",
+          "branches_by_club.yml": "500ed9ed86d6e79e7338381613520f08e607963b9a845253aeeb476c0524628e",
+          "product_reclassification_decisions.csv": "fb901279042a19819b0c780d34ba45ddc1c31d7a09363ddacb0bf4b459ef9dd1",
+          "membership_template_canonicalization.csv": "c7b122c9360587a882af920423c7869170ee2b1aa73a82e219f464637c35cb63",
+          "19_build_membership_import_xlsx.py": "baac9c58dca2b298316e77f3c208ba4839b41e76843a48b5bae56d396bc9a58b"
+        },
+        {
+          "managers_by_club.yml": "dc135e80122684dc491283569b6503e4786a09690a2fe86e8e8f7f73bbcc22ea",
+          "branches_by_club.yml": "500ed9ed86d6e79e7338381613520f08e607963b9a845253aeeb476c0524628e",
+          "product_reclassification_decisions.csv": "fb901279042a19819b0c780d34ba45ddc1c31d7a09363ddacb0bf4b459ef9dd1",
+          "membership_template_canonicalization.csv": "c7b122c9360587a882af920423c7869170ee2b1aa73a82e219f464637c35cb63",
+          "19_build_membership_import_xlsx.py": "baac9c58dca2b298316e77f3c208ba4839b41e76843a48b5bae56d396bc9a58b"
+        }
+      ]
+    },
+    {
+      "check": "Expected manifest changes only cutoff, date stamps and run name",
+      "pass": true
+    },
+    {
+      "check": "Configuration differs only by requested cutoff and new output paths",
+      "pass": true
+    },
+    {
+      "check": "previous: exactly eight data files match manifest",
+      "pass": true
+    },
+    {
+      "check": "previous: every saved data file retains verified SHA-256 and size",
+      "pass": true
+    },
+    {
+      "check": "current: exactly eight data files match manifest",
+      "pass": true
+    },
+    {
+      "check": "current: every saved data file retains verified SHA-256 and size",
+      "pass": true
+    },
+    {
+      "check": "All source client IDs retained",
+      "pass": true,
+      "clients": 74453
+    },
+    {
+      "check": "Every source funnel transition is a membership expiring September 21",
+      "pass": true,
+      "changed_clients": 38
+    },
+    {
+      "check": "Same headers and layout: fitbase_active_clients_import_zayavki_20260922_all_funnels.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Same saved Excel styles: fitbase_active_clients_import_zayavki_20260922_all_funnels.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Same headers and layout: fitbase_active_clients_plastic_cards_20260922_all_funnels.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Same saved Excel styles: fitbase_active_clients_plastic_cards_20260922_all_funnels.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Same headers and layout: fitbase_import_abonementy_clientov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Same saved Excel styles: fitbase_import_abonementy_clientov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Same headers and layout: fitbase_import_shablony_abonementov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Same saved Excel styles: fitbase_import_shablony_abonementov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Same headers and layout: fitbase_import_shablony_uslug_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Same saved Excel styles: fitbase_import_shablony_uslug_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Same headers and layout: fitbase_import_uslugi_clientov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Same saved Excel styles: fitbase_import_uslugi_clientov_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Same headers and layout: problem_4_subrent_visits_left_contract_151350_1_case_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "Same saved Excel styles: problem_4_subrent_visits_left_contract_151350_1_case_20260922.xlsx",
+      "pass": true
+    },
+    {
+      "check": "applications: no IDs added or lost",
+      "pass": true
+    },
+    {
+      "check": "memberships: no IDs added or lost",
+      "pass": true
+    },
+    {
+      "check": "membership_templates: no IDs added or lost",
+      "pass": true
+    },
+    {
+      "check": "service_templates: no IDs added or lost",
+      "pass": true
+    },
+    {
+      "check": "problem4: no IDs added or lost",
+      "pass": true
+    },
+    {
+      "check": "membership_templates: every saved cell unchanged",
+      "pass": true
+    },
+    {
+      "check": "service_templates: every saved cell unchanged",
+      "pass": true
+    },
+    {
+      "check": "problem4: every saved cell unchanged",
+      "pass": true
+    },
+    {
+      "check": "Applications change only funnel labels for expired memberships",
+      "pass": true
+    },
+    {
+      "check": "Cards removed only for the delivered clients who moved to reactivation",
+      "pass": true,
+      "removed_cards": 36
+    },
+    {
+      "check": "Membership cells change only expired visit limits or existing no-source-date fallback",
+      "pass": true
+    },
+    {
+      "check": "Services: only expired rows removed; surviving cells unchanged",
+      "pass": true
+    },
+    {
+      "check": "Previously discussed contracts retained without changes",
+      "pass": true
+    },
+    {
+      "check": "membership: all source facts unchanged except cutoff-dependent states",
+      "pass": false,
+      "checked_rows": 104787,
+      "changed_fields": {
+        "days_to_end": 104787,
+        "days_since_end": 104787,
+        "cutoff_at": 104787,
+        "is_active_on_cutoff": 57,
+        "is_finished_before_cutoff": 57,
+        "matched_payment_ref": 4,
+        "subrent_active_by_dates_on_cutoff": 1,
+        "subrent_finished_by_dates_before_cutoff": 1
+      }
+    },
+    {
+      "check": "services: all source facts unchanged except cutoff-dependent states",
+      "pass": true,
+      "checked_rows": 51926,
+      "changed_fields": {
+        "cutoff_at": 51926
+      }
+    },
+    {
+      "check": "Photo clients retained",
+      "pass": true,
+      "jpeg_files": 35422
+    },
+    {
+      "check": "Photo bytes, filenames, phones and IDs unchanged; only expired clients change funnel",
+      "pass": true
+    }
+  ],
+  "details": {
+    "owner_funnel_transitions": [
+      {
+        "client_id": "000000248",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000004527",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000006664",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000011802",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000017272",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000018969",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000021484",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000021722",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000021794",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000022054",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000025218",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000027784",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000029589",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000037091",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000039999",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000042415",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000043599",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000046115",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000047849",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000050457",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000052864",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000057748",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000058143",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000058470",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000059070",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000061759",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000062401",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000064394",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000064738",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000065096",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000067047",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000067674",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000069415",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000069463",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000069803",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000069992",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000070284",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      },
+      {
+        "client_id": "000070286",
+        "before": "Действующие клиенты",
+        "after": "Реактивация",
+        "last_end": "2026-09-21"
+      }
+    ],
+    "delivered_funnel_transitions": [
+      "000000248",
+      "000004527",
+      "000006664",
+      "000011802",
+      "000018969",
+      "000021484",
+      "000021722",
+      "000021794",
+      "000022054",
+      "000025218",
+      "000027784",
+      "000029589",
+      "000037091",
+      "000039999",
+      "000042415",
+      "000043599",
+      "000046115",
+      "000047849",
+      "000050457",
+      "000052864",
+      "000057748",
+      "000058143",
+      "000058470",
+      "000059070",
+      "000062401",
+      "000064394",
+      "000064738",
+      "000065096",
+      "000067047",
+      "000067674",
+      "000069415",
+      "000069463",
+      "000069803",
+      "000069992",
+      "000070284",
+      "000070286"
+    ],
+    "funnels": [
+      {
+        "Действующие абонементы": 11131,
+        "Реактивация": 29377
+      },
+      {
+        "Действующие абонементы": 11095,
+        "Реактивация": 29413
+      }
+    ],
+    "open_cases": {
+      "00000154220": {
+        "tag": null,
+        "contract_id": "00000154220",
+        "client_id": "000061310",
+        "phone": "+7 (981) 4066912",
+        "client_fio": "Иванова Карина Сергеевна",
+        "contract_name": "АБОНЕМЕНТ САЙКЛ 12 пос при наличии клубной карты",
+        "card": "1111111150986",
+        "duration": 12,
+        "duration_type": "месяц",
+        "create_date": "2026-08-05 00:00:00",
+        "payment_date": "2026-08-05 00:00:00",
+        "activation_date": "2026-08-05 00:00:00",
+        "end_date": "2027-08-04 00:00:00",
+        "freeze": null,
+        "guests": null,
+        "visits_left": null,
+        "price": 4300,
+        "amount_of_payments": 4300,
+        "payment_left": 0,
+        "type_of_payment": "безналичные",
+        "manager": "Пилия Анастасия Артуровна",
+        "филиал": "Фитнес Империя (Гоголевский)"
+      },
+      "00000144499": {
+        "tag": null,
+        "contract_id": "00000144499",
+        "client_id": "000004747",
+        "phone": "+7 (921) 4536483",
+        "client_fio": "Дергач Дмитрий Винальевич",
+        "contract_name": "Абонемент МУЛЬТИКАРТА 36 месяцев",
+        "card": "115000246539",
+        "duration": 12,
+        "duration_type": "месяц",
+        "create_date": "2025-12-20 00:00:00",
+        "payment_date": "2025-12-20 00:00:00",
+        "activation_date": "2026-07-07 00:00:00",
+        "end_date": "2027-07-06 00:00:00",
+        "freeze": null,
+        "guests": null,
+        "visits_left": null,
+        "price": 38970,
+        "amount_of_payments": 38970,
+        "payment_left": 0,
+        "type_of_payment": "безналичные",
+        "manager": "Пилия Анастасия Артуровна",
+        "филиал": "Фитнес Империя (Гоголевский)"
+      }
+    },
+    "workbook_counts": [
+      {
+        "file": "fitbase_active_clients_import_zayavki_20260922_all_funnels.xlsx",
+        "before": 40508,
+        "after": 40508
+      },
+      {
+        "file": "fitbase_active_clients_plastic_cards_20260922_all_funnels.xlsx",
+        "before": 11131,
+        "after": 11095
+      },
+      {
+        "file": "fitbase_import_abonementy_clientov_20260922.xlsx",
+        "before": 124988,
+        "after": 124988
+      },
+      {
+        "file": "fitbase_import_shablony_abonementov_20260922.xlsx",
+        "before": 122,
+        "after": 122
+      },
+      {
+        "file": "fitbase_import_shablony_uslug_20260922.xlsx",
+        "before": 51,
+        "after": 51
+      },
+      {
+        "file": "fitbase_import_uslugi_clientov_20260922.xlsx",
+        "before": 516,
+        "after": 516
+      },
+      {
+        "file": "problem_4_subrent_visits_left_contract_151350_1_case_20260922.xlsx",
+        "before": 1,
+        "after": 1
+      }
+    ],
+    "workbook_changes": {
+      "applications": {
+        "added": [],
+        "removed": [],
+        "changed": [
+          {
+            "key": "000000248",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000004527",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000006664",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000011802",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000018969",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000021484",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000021722",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000021794",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000022054",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000025218",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000027784",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000029589",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000037091",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000039999",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000042415",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000043599",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000046115",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000047849",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000050457",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000052864",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000057748",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000058143",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000058470",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000059070",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000062401",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000064394",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000064738",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000065096",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000067047",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000067674",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000069415",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000069463",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000069803",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000069992",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000070284",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          },
+          {
+            "key": "000070286",
+            "changes": {
+              "funnel": {
+                "before": "Действующие абонементы",
+                "after": "Реактивация"
+              },
+              "funnel_step": {
+                "before": "Все действующие абонементы",
+                "after": "Закрытые годовые абонементы"
+              }
+            }
+          }
+        ],
+        "changed_fields": {
+          "funnel": 36,
+          "funnel_step": 36
+        }
+      },
+      "cards": {
+        "removed": [
+          [
+            "+7 (911) 4349322",
+            "Акимова Татьяна Владимировна",
+            "115000211230"
+          ],
+          [
+            "+7 (953) 5258968",
+            "Данилов Евгений Владимирович",
+            "115000211247"
+          ],
+          [
+            "+7 (953) 5389063",
+            "Ильин Игорь Альбертович",
+            "115000517561"
+          ],
+          [
+            "+7 (985) 5639220",
+            "Мойсиев Демис Гимзериевич",
+            "115000267640"
+          ],
+          [
+            "+7 (981) 4074180",
+            "Фурсина Елена Александровна",
+            "115000253698"
+          ],
+          [
+            "+7 (921) 4595529",
+            "Казакова Мария Владимировна",
+            "115000245013"
+          ],
+          [
+            "+7 (953) 5314443",
+            "Лейбонен Дарья Андреевна",
+            "115000182875"
+          ],
+          [
+            "+7 (921) 4620216",
+            "Малевич Егор Андреевич",
+            "115000298491"
+          ],
+          [
+            "+7 (911) 4217577",
+            "Плавейская Алена Игоревна",
+            "1111111124758"
+          ],
+          [
+            "+7 (953) 5285445",
+            "Завадский Дмитрий Геннадьевич",
+            "115000529489"
+          ],
+          [
+            "+7 (911) 4210997",
+            "Бычков Антон Юрьевич",
+            "115000202443"
+          ],
+          [
+            "+7 (953) 5406801, +7 (911) 6677863",
+            "Андреева Дарья Леонидовна",
+            "115000226210"
+          ],
+          [
+            "+7 (953) 5330426",
+            "Андреева Екатерина Александровна",
+            "115000238435"
+          ],
+          [
+            "+7 (911) 4256119",
+            "Сакович Роман Сергеевич",
+            "1111111129654"
+          ],
+          [
+            "+7 (953) 5477378",
+            "Мелентьева Виктория Васильевна",
+            "115000211292"
+          ],
+          [
+            "+7 (911) 6641940",
+            "Нестерова Милана Александровна",
+            "115000228122"
+          ],
+          [
+            "+7 (953) 5252720",
+            "Курбанкадиева Елизавета Муслимовна",
+            "1111111129630"
+          ],
+          [
+            "+7 (953) 5448339",
+            "Калистратова Олеся Александровна",
+            "115000214033"
+          ],
+          [
+            "+7 (911) 4114694",
+            "Полькина Мария Александровна",
+            "9111111117837"
+          ],
+          [
+            "+7 (911) 6664200",
+            "Громова Варвара Тамара Юрьевна",
+            "115000217768"
+          ],
+          [
+            "+7 (900) 4624086",
+            "Круглополова Валентина Андреевна",
+            "1111111124710"
+          ],
+          [
+            "+7 (906) 2078927",
+            "Лежнева Александра Алексеевна",
+            "115000225725"
+          ],
+          [
+            "+7 (900) 4614498",
+            "Филипенко Алексей Игоревич",
+            "115000227057"
+          ],
+          [
+            "+7 (919) 5005566",
+            "Солодянкин Дмитрий Андреевич",
+            "1111111127254"
+          ],
+          [
+            "+7 (911) 4317611",
+            "Горшков Денис Дмитриевич",
+            "115000218024"
+          ],
+          [
+            "+7 (911) 4215390",
+            "Тимкова Валерия Михайловна",
+            "115000264519"
+          ],
+          [
+            "+7 (921) 5260401",
+            "Лай Макар Олегович",
+            "115000522596"
+          ],
+          [
+            "+7 (910) 2220242",
+            "Селезнева Анастасия Алексеевна",
+            "8811111114300"
+          ],
+          [
+            "+7 (999) 2900322",
+            "Аршит",
+            "909150119689"
+          ],
+          [
+            "+7 (921) 5293084",
+            "Стасевич Ольга Игоревна",
+            "115000227651"
+          ],
+          [
+            "+7 (981) 4080632",
+            "Вилаева Ксения Анатольевна",
+            "115000221659"
+          ],
+          [
+            "+7 (909) 5689606",
+            "Зубкова Мария Николаевна",
+            "115000227828"
+          ],
+          [
+            "+7 (996) 7997058",
+            "Идрисов Салават Ганиевич",
+            "8211111117750"
+          ],
+          [
+            "+7 (921) 4615049",
+            "Лёвшина Карина Евгеньевна",
+            "115000230514"
+          ],
+          [
+            "+7 (953) 5299048",
+            "Ершова Лариса Анатольевна",
+            "1111111127292"
+          ],
+          [
+            "+7 (911) 0530029",
+            "Исмаилов Максим Русланович",
+            "4111111122195"
+          ]
+        ],
+        "added": []
+      },
+      "memberships": {
+        "added": [],
+        "removed": [],
+        "changed": [],
+        "changed_fields": {}
+      },
+      "membership_templates": {
+        "added": [],
+        "removed": [],
+        "changed": [],
+        "changed_fields": {}
+      },
+      "service_templates": {
+        "added": [],
+        "removed": [],
+        "changed": [],
+        "changed_fields": {}
+      },
+      "services": {
+        "added": [],
+        "removed": [],
+        "changed": [],
+        "changed_fields": {}
+      },
+      "problem4": {
+        "added": [],
+        "removed": [],
+        "changed": [],
+        "changed_fields": {}
+      }
+    },
+    "membership_fact_changes": [
+      {
+        "key": "979D70479D84B5614042E4B08CC5693F",
+        "document_number": "00000136759",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "8CC591DD442ED1214479F2B720B2849A",
+        "document_number": "00000138467",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "ACA2D131B831B20D4A49BDA55D7A42F8",
+        "document_number": "00000136743",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "AD463B048527591843E81EE70C4FF83A",
+        "document_number": "00000138952",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "A4FB9BE4DACDB60446A51E408DE9FB13",
+        "document_number": "00000138372",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "AC11597968CB85D948DCFDA802E3504D",
+        "document_number": "00000133227",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "AE8A81904ACC69164D9B83AC60633374",
+        "document_number": "00000134931",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "BCA7F24FBCCB38A2483DEB723D7BC96F",
+        "document_number": "00000140608",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "AFC9A4F3CE7E946045C3BD934A89721B",
+        "document_number": "00000140614",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "AFA6C48C53C0F36E41995ECDC20B244F",
+        "document_number": "00000139551",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "9C9D515A41E47AA249B8E09C5473C730",
+        "document_number": "00000134900",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "BE3675F4778251E24CD78A6C419F4086",
+        "document_number": "00000138012",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "A63A47A70E3A5C014BA13558DE27E52E",
+        "document_number": "00000137944",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "88F51A5D154B35F0479EB2BAF51B080C",
+        "document_number": "00000124855",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "B5C3842A76F2432343A4E0160574DD59",
+        "document_number": "00000136735",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "A8F35F1E1961B3D74E3508CA1CE21AAD",
+        "document_number": "00000133207",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "8C539CF034923FB44064C43AFC73E298",
+        "document_number": "00000138826",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "8B22D49AD061AEBD4F7321C620673290",
+        "document_number": "00000125855",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "B0C3F0017F469C81406551E87CA11E78",
+        "document_number": "00000145146",
+        "end_date": "2026-02-06",
+        "changes": {
+          "matched_payment_ref": {
+            "before": "B18C000C29D830FD11F0EB9895468426",
+            "after": "B18C000C29D830FD11F0EB9895468481"
+          }
+        }
+      },
+      {
+        "key": "BDF6FE231D072AE140142AFC7C0125C4",
+        "document_number": "00000130057",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "B718C6376D9801E243299AA87BAD8B5E",
+        "document_number": "00000154767",
+        "end_date": "2026-09-21",
+        "changes": {
+          "subrent_active_by_dates_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "subrent_finished_by_dates_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "B3F48AF1788F728F41C36D301EB9FADD",
+        "document_number": "00000138920",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "A69390DA4BCE213A49F0D0EB8BFFB931",
+        "document_number": "00000137921",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "8EA72BB1883BDDDE40D2EA75AFFE591D",
+        "document_number": "00000137913",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "8CEA932D876557464652622C4AA83E05",
+        "document_number": "00000134974",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "A3BD0C2A86E2AB4249BCC958F34C1B31",
+        "document_number": "00000138060",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "A007386923A626FC4A70D80C9CEFC3E9",
+        "document_number": "00000136669",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "877624AFC3BFC1154F82C063F5FF91C7",
+        "document_number": "00000136768",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "BDBE5012E963E5A84041A00E1B8AA1F9",
+        "document_number": "00000139183",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "8C94F7514110A8A54177C444BC2DC583",
+        "document_number": "00000136665",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "BD9A34A0108CD2544B73FF7D0B0F2347",
+        "document_number": "00000135830",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "8B2A3565197B6CD048A9783A80BA5636",
+        "document_number": "00000117131",
+        "end_date": "2024-11-28",
+        "changes": {
+          "matched_payment_ref": {
+            "before": "AE60000C29D830FD11EE8DF2CEE3B478",
+            "after": "AE60000C29D830FD11EE8DF2CEE3B477"
+          }
+        }
+      },
+      {
+        "key": "8458C3F091CE864C4DF5D92ABE4C4B43",
+        "document_number": "00000137956",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "9753E0A1BB721E5D4B1B646F01FCFB5B",
+        "document_number": "00000133403",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "9D75779A9AFD0CDD4611D2462C1BF7DF",
+        "document_number": "00000137582",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "A87055539384F7AE411562C58B0EC319",
+        "document_number": "00000138278",
+        "end_date": "2025-08-29",
+        "changes": {
+          "matched_payment_ref": {
+            "before": "B0E3000C29D830FD11F06D1C7EAEDCF7",
+            "after": "B0E3000C29D830FD11F06D1C7EAEDC9C"
+          }
+        }
+      },
+      {
+        "key": "9504AAB80865D1EC48B8195B1788C687",
+        "document_number": "00000137951",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "A6A6E8B4E2B7DB0E46E307F30D188B83",
+        "document_number": "00000128916",
+        "end_date": "2025-12-01",
+        "changes": {
+          "matched_payment_ref": {
+            "before": "AFE2000C29D830FD11EFAE401055B53B",
+            "after": "AFE2000C29D830FD11EFAE401055B4E0"
+          }
+        }
+      },
+      {
+        "key": "B22579613E7580604B251252AD0AA09F",
+        "document_number": "00000133415",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "AA3376FD9DB5C6E24EE2ECF3F2B42FD4",
+        "document_number": "00000138906",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "8F405DA61C6515CE4D7C0A4488E7B633",
+        "document_number": "00000138935",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "847B1B83B1198B60495A863EEA700442",
+        "document_number": "00000140612",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "BF0501519088F1A8450C4162252F9D21",
+        "document_number": "00000138135",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "B9CE3879919A82FE48DE0443AABEFBC7",
+        "document_number": "00000136771",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "966D8B3EBA11030D4E94A53069BB66C0",
+        "document_number": "00000137859",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "B0886E3D92C655664CD4A41321E4D44E",
+        "document_number": "00000135465",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "81145B1D7C23E4DB4A502146D451C6F2",
+        "document_number": "00000136298",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "A8810270AF2C011546A1AE321D863486",
+        "document_number": "00000137806",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "AFC191A4AC790E6B4B256BC2D4100D6B",
+        "document_number": "00000140631",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "86A97A7046555055428E15F1DCF072CB",
+        "document_number": "00000138810",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "A081AC71C63E1DF74AF283ACD5D3A6E7",
+        "document_number": "00000130960",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "9CBD879D868EBD3843932AED44374833",
+        "document_number": "00000137963",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "AF75D100A3515E454314B797F5BCB09A",
+        "document_number": "00000136755",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "82544AB04AF3EF524678CB0F2F749409",
+        "document_number": "00000138021",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "9C763F55A5919B504132D6053C50508B",
+        "document_number": "00000138023",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "AB49EA236C58DCCE45E9A669AA44086A",
+        "document_number": "00000138438",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "AA8506F3B319BC0444471F9357D9A41E",
+        "document_number": "00000140651",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "BAC4E75B1441A8F14783F4970EA4EAB4",
+        "document_number": "00000140015",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "8A868D5C376FE42444A00F0A06339EBC",
+        "document_number": "00000140615",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "919110B16A8C69C441776DE8FE4942D2",
+        "document_number": "00000140628",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "B1CEBF68952F9BEA4F39E5067D500896",
+        "document_number": "00000140636",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      },
+      {
+        "key": "B57B1062353000F84670C956C90B9D33",
+        "document_number": "00000140652",
+        "end_date": "2026-09-21",
+        "changes": {
+          "is_active_on_cutoff": {
+            "before": "1",
+            "after": "0"
+          },
+          "is_finished_before_cutoff": {
+            "before": "0",
+            "after": "1"
+          }
+        }
+      }
+    ],
+    "services_fact_changes": [],
+    "photo_changes": [
+      {
+        "client_id": "000069803",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000011802",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000070286",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000069415",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000058143",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000000248",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000021484",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000025218",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000065096",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000027784",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000064738",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000058470",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000067047",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000043599",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000042415",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000018969",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000046115",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000006664",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000057748",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000069992",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000070284",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000047849",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000064394",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000022054",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000039999",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000021722",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000037091",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000021794",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000050457",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000029589",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000069463",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000052864",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000062401",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000059070",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      },
+      {
+        "client_id": "000004527",
+        "changes": {
+          "funnel": {
+            "before": "Действующие абонементы",
+            "after": "Реактивация"
+          }
+        }
+      }
+    ],
+    "photo_funnels": [
+      {
+        "Реактивация": 24542,
+        "Действующие абонементы": 10880
+      },
+      {
+        "Реактивация": 24577,
+        "Действующие абонементы": 10845
+      }
+    ]
+  }
+}

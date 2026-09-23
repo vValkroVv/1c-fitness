@@ -1,0 +1,4 @@
+PASS
+backup_finish_at=2026-09-20 20:12:12
+effective_at=2026-09-22 20:12:12
+See reports/delivery_manifest.json for file hashes and provenance.

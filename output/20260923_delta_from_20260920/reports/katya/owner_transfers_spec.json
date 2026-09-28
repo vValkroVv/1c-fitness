@@ -1,0 +1,38 @@
+{
+  "rows": [
+    {
+      "review_status": "Проверить вручную в Fitbase",
+      "old_client_id": "000029301",
+      "old_client_fio": "Потапова Ольга Владимировна",
+      "new_client_id": "000075587",
+      "new_client_fio": "Фепонов Михаил Юрьевич",
+      "contract_id": "00000155853",
+      "contract_name": "Абонемент УЛЬТРА 12 месяцев",
+      "subscription_ref": "AD2D16ADB0C1D6174D88C6E609AADB89",
+      "original_sale_date": "2026-09-10",
+      "transfer_datetime": "2026-09-21 18:01:25",
+      "price": 11990.0,
+      "paid_before": 11990.0,
+      "old_card": "125010131343",
+      "new_lead_funnel": "Действующие абонементы",
+      "action": "Сверить текущего владельца договора; не загружать его как новую покупку"
+    },
+    {
+      "review_status": "Проверить вручную в Fitbase",
+      "old_client_id": "000073719",
+      "old_client_fio": "Усенко Мария Геннадьевна",
+      "new_client_id": "000075620",
+      "new_client_fio": "Усенко Иван Дмитриевич",
+      "contract_id": "00000155962",
+      "contract_name": "Абонемент МУЛЬТИКАРТА 12 месяцев СПЕЦПРЕДЛОЖЕНИЕ",
+      "subscription_ref": "A0253AB477D9F19A45BCD90A10676028",
+      "original_sale_date": "2026-09-11",
+      "transfer_datetime": "2026-09-22 19:40:55",
+      "price": 11990.0,
+      "paid_before": 11990.0,
+      "old_card": "4111111125929",
+      "new_lead_funnel": "Действующие абонементы",
+      "action": "Сверить текущего владельца договора; не загружать его как новую покупку"
+    }
+  ]
+}

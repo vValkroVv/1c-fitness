@@ -1,0 +1,12 @@
+{
+  "baseline_status": "prepared_prior_supplement_upload_unconfirmed",
+  "backup_finish_at": "2026-09-20 20:12:12",
+  "effective_cutoff_at": "2026-09-21 20:12:12",
+  "supplement_leads": 371,
+  "supplement_memberships": 879,
+  "supplement_services": 10,
+  "delta_lead_client_id_or_ref_overlaps": 0,
+  "delta_membership_contract_id_overlaps": 0,
+  "delta_service_id_overlaps": 0,
+  "shared_phone_across_distinct_buyer_and_supplement_clients": 1
+}

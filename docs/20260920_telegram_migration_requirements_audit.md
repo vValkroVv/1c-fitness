@@ -6,9 +6,9 @@
 
 ## Источники и полнота
 
-Экспорт Telegram перенесён из Downloads в
-`data/private/telegram_papa_2026-09-20/`. Папка исключена из Git локальным правилом
-`/data/private/` в `.git/info/exclude`.
+Экспорт Telegram 20.09 перенесён из Downloads в `data/private/`, а 24.09
+при уборке `data/` перемещён в `tmp/private/telegram_papa_2026-09-20/`.
+Каталог `tmp/` исключён из Git через `.gitignore`.
 
 Последовательно прочитаны все 1614 сообщений из `messages.html` и
 `messages2.html`: от 01.08.2026 10:07:23 до 19.09.2026 17:27:46, UTC+03:00.
@@ -35,7 +35,7 @@
 > 2. Этапы
 > «Все закрытые абонементы» на «Закрытые годовые абонементы»
 
-Источник: [message769742](../data/private/telegram_papa_2026-09-20/messages.html#message769742).
+Источник: [message769742](../tmp/private/telegram_papa_2026-09-20/messages.html#message769742).
 Перед этим, в 17:11, приложен
 `fitbase_active_clients_import_zayavki_20260630_all_funnels.xlsx`.
 В 20:03 папа напомнил об исправленном файле; 21 августа в 00:03 пользователь
@@ -62,8 +62,8 @@
 
 **18:52:14, пользователь:** «Да».
 
-Источники: [message771697](../data/private/telegram_papa_2026-09-20/messages.html#message771697)
-и [message771700](../data/private/telegram_papa_2026-09-20/messages.html#message771700).
+Источники: [message771697](../tmp/private/telegram_papa_2026-09-20/messages.html#message771697)
+и [message771700](../tmp/private/telegram_papa_2026-09-20/messages.html#message771700).
 
 Это отдельное согласованное пожелание, которое нельзя потерять. Оно привязано
 к файлу заявок. В переписке не уточнено, означает ли «актуальными» пересчёт
@@ -102,8 +102,8 @@ SQL-слоёв. Контракт введён в принятую июньску
 
 **15:52:19, папа:** «Т.е название фото-это телефон клиента».
 
-Источники: [message773018](../data/private/telegram_papa_2026-09-20/messages2.html#message773018),
-[message773022](../data/private/telegram_papa_2026-09-20/messages2.html#message773022).
+Источники: [message773018](../tmp/private/telegram_papa_2026-09-20/messages2.html#message773018),
+[message773022](../tmp/private/telegram_papa_2026-09-20/messages2.html#message773022).
 
 В 18:02 папа уточнил, включена ли реактивация; в 18:05 согласовал для проверки
 **только действующих**: «Давай только действующих. В понедельник я проверю»
@@ -124,8 +124,8 @@ SQL-слоёв. Контракт введён в принятую июньску
 - таких случаев с общим телефоном — 13.
 
 Источники: `message773641`–`message773669` в `messages2.html`;
-[скриншот INVALID_PHONE](../data/private/telegram_papa_2026-09-20/photos/photo_1326@31-08-2026_14-22-04.jpg)
-и его [увеличенный фрагмент](../data/private/telegram_papa_2026-09-20/photos/photo_1327@31-08-2026_14-26-02.jpg).
+[скриншот INVALID_PHONE](../tmp/private/telegram_papa_2026-09-20/photos/photo_1326@31-08-2026_14-22-04.jpg)
+и его [увеличенный фрагмент](../tmp/private/telegram_papa_2026-09-20/photos/photo_1327@31-08-2026_14-26-02.jpg).
 
 Папа написал, что уточнит у тех, кто переносит. Отдельного письменного запрета
 суффиксов `__ID` или команды удалять клиентов с общими валидными телефонами нет.
@@ -158,9 +158,9 @@ SQL-слоёв. Контракт введён в принятую июньску
 
 > Лучше потом с нового бэка
 
-Источники: [message775816](../data/private/telegram_papa_2026-09-20/messages2.html#message775816),
-[message775818](../data/private/telegram_papa_2026-09-20/messages2.html#message775818),
-[message775820](../data/private/telegram_papa_2026-09-20/messages2.html#message775820).
+Источники: [message775816](../tmp/private/telegram_papa_2026-09-20/messages2.html#message775816),
+[message775818](../tmp/private/telegram_papa_2026-09-20/messages2.html#message775818),
+[message775820](../tmp/private/telegram_papa_2026-09-20/messages2.html#message775820).
 
 С учётом обсуждения 31 августа «инвалид» относится к `INVALID_PHONE`, а не к
 состоянию здоровья клиента. Исключение относится к архиву фотографий;
@@ -213,11 +213,11 @@ SQL-слоёв. Контракт введён в принятую июньску
 > Да.
 > Вне зависимости от клуба
 
-Источники: [message776820](../data/private/telegram_papa_2026-09-20/messages2.html#message776820),
-[message776822](../data/private/telegram_papa_2026-09-20/messages2.html#message776822),
-[message776835](../data/private/telegram_papa_2026-09-20/messages2.html#message776835).
+Источники: [message776820](../tmp/private/telegram_papa_2026-09-20/messages2.html#message776820),
+[message776822](../tmp/private/telegram_papa_2026-09-20/messages2.html#message776822),
+[message776835](../tmp/private/telegram_papa_2026-09-20/messages2.html#message776835).
 
-Приложенный [скриншот](../data/private/telegram_papa_2026-09-20/photos/photo_1377@11-09-2026_16-13-27.jpg)
+Приложенный [скриншот](../tmp/private/telegram_papa_2026-09-20/photos/photo_1377@11-09-2026_16-13-27.jpg)
 содержит **старый список по клубам**, который заменяется последующим уточнением.
 Из него известны полные имена первых двух: Пеуна Анастасия Ивановна и
 Пилия Анастасия Артуровна. Отчество Ефремовой Алены в доступной переписке отсутствует.
@@ -251,7 +251,7 @@ SQL-слоёв. Контракт введён в принятую июньску
 | 7 сентября, 18:15–18:21 | Backup вечером 20 сентября, импорт 21 сентября; фотографии из нового backup | Действующий план |
 | 19 сентября, 15:28 | «Помнишь завтра 20 сентября. Бэкап вечером сделают. Буду ждать от тебя файлы» | Последнее напоминание; пользователь подтвердил |
 
-Последний источник: [message779079](../data/private/telegram_papa_2026-09-20/messages2.html#message779079).
+Последний источник: [message779079](../tmp/private/telegram_papa_2026-09-20/messages2.html#message779079).
 День подготовки файлов и день загрузки в Fitbase различаются.
 
 ## С какой принятой версии продолжать

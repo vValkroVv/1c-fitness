@@ -29,6 +29,8 @@ output/test_active_client_photos_20260630.zip
 output/*/fitbase_client_photos_*.zip
 output/*/reports/photos.json
 output/20260920_rehearsal*/
+# Live photo audit contains customer contacts, API snapshots, and JPEG evidence.
+output/20260923_fitbase_photo_audit/
 *.tar.gz
 
 # macOS metadata

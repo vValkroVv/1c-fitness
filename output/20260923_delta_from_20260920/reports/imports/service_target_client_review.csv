@@ -1,0 +1,2 @@
+﻿service_id,client_id,phone,client_fio,service_name,create_date,payment_date,activation_date,end_date,count,visits_left,price,amount_of_payment,payment_left,type_of_payment,manager,филиал,_sale_doc_ref,_sale_line_no,_sale_datetime,_review_reason
+00000043914-1,000020906,-,Розничный клиент,Аренда рекламного места,2026-09-21,2026-09-21,,2026-09-21,1,,1500,1500,0,сбп,Пилия Анастасия Артуровна,Фитнес Империя (Гоголевский),BA4962D44F92D318417F67F0716D5AB4,1,2026-09-21 11:06:29,missing_valid_phone_or_retail_placeholder

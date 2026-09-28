@@ -1,0 +1,24 @@
+{
+  "old_backup_finish_at": "2026-09-20 20:12:12",
+  "old_published_effective_at": "2026-09-22 20:12:12",
+  "supplement_published_effective_at": "2026-09-21 20:12:12",
+  "previous_delivered_contracts_by_source": {
+    "main_20260922": 103735,
+    "supplement_371_20260921": 879
+  },
+  "previous_sources": "Main 2026-09-22 and supplement 371 2026-09-21; upload status of supplement unconfirmed.",
+  "new_backup_finish_at": "2026-09-23 23:36:39",
+  "previous_contracts_reviewed": 1242,
+  "contracts_absent_from_new_facts": 7,
+  "absent_contracts_old_unpaid_total": 71950.0,
+  "linked_register_movements": 7,
+  "statuses": {
+    "AMBIGUOUS_REGISTER_ALLOCATION": 3,
+    "CONTRACT_ABSENT_FROM_NEW_FACTS": 7,
+    "MOVEMENTS_MATCH_DELTA__OLD_SNAPSHOT_NOT_ROW_VERIFIED": 7,
+    "NO_PAYMENT_CHANGE": 1225
+  },
+  "total_paid_delta": 31972.0,
+  "movement_payment_sum": 31972.0,
+  "limitation": "Old SQL row-level register snapshot unavailable; movement membership in old snapshot cannot be independently proven."
+}

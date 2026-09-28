@@ -1,0 +1,230 @@
+{
+  "backup_set_uuid": "98038663-5828-4efe-80e4-327dbff24e3e",
+  "backup_finish_at": "2026-09-23 23:36:39",
+  "cutoff_at": "2026-09-23 23:36:39",
+  "cutoff_date": "2026-09-23",
+  "date_stamp": "20260923",
+  "database": "FitnessRestored_20260923_macos",
+  "container": "mssql-fitness-2022",
+  "restorehistory": {
+    "backup_set_uuid": "98038663-5828-4EFE-80E4-327DBFF24E3E",
+    "backup_finish_at": "2026-09-23 23:36:39",
+    "restore_date": "2026-09-24T17:22:20.437",
+    "destination_database_name": "FitnessRestored_20260923_macos"
+  },
+  "target_source_counts": {
+    "new_lead_manifest_rows": 50,
+    "new_lead_clients": 50,
+    "tagged_refuser_contract_rows": 28,
+    "qualified_refuser_contract_rows": 28,
+    "prior_refuser_new_membership_buyers": 25,
+    "target_clients": 75
+  },
+  "membership_workbook_checks": {
+    "membership_manifest_rows": 213,
+    "membership_workbook_rows": 213,
+    "target_ids_in_final_membership_rows": 75
+  },
+  "target_counts_by_group": {
+    "new_membership_buyer": 50,
+    "prior_refuser_new_membership_buyer": 25
+  },
+  "valid_phone_targets": 75,
+  "valid_phone_targets_by_group": {
+    "new_membership_buyer": 50,
+    "prior_refuser_new_membership_buyer": 25
+  },
+  "photos_exported": 57,
+  "photos_exported_by_group": {
+    "new_membership_buyer": 37,
+    "prior_refuser_new_membership_buyer": 20
+  },
+  "photos_missing": 18,
+  "photos_missing_by_group": {
+    "new_membership_buyer": 13,
+    "prior_refuser_new_membership_buyer": 5
+  },
+  "missing_reason_counts": {
+    "no_source_photo": 18
+  },
+  "excluded_ids_and_reasons": [
+    {
+      "group": "prior_refuser_new_membership_buyer",
+      "client_id": "000065046",
+      "client_fio": "Булатова Жанна Валерьевна",
+      "phone": "+7 (921) 4573461",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "prior_refuser_new_membership_buyer",
+      "client_id": "000075014",
+      "client_fio": "Ильена Арина Сергеевна",
+      "phone": "+7 (953) 5339080",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "prior_refuser_new_membership_buyer",
+      "client_id": "000075254",
+      "client_fio": "Килакова Олеся",
+      "phone": "+7 (911) 4201388",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "prior_refuser_new_membership_buyer",
+      "client_id": "000075397",
+      "client_fio": "Кириленко Людмила",
+      "phone": "+7 (921) 5231993",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "prior_refuser_new_membership_buyer",
+      "client_id": "000075537",
+      "client_fio": "Кристина",
+      "phone": "+7 (900) 4583803",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "new_membership_buyer",
+      "client_id": "000075567",
+      "client_fio": "Костюнин Лев",
+      "phone": "+7 (921) 6236746",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "new_membership_buyer",
+      "client_id": "000075571",
+      "client_fio": "Соколова Варя",
+      "phone": "+7 (921) 4557620",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "new_membership_buyer",
+      "client_id": "000075573",
+      "client_fio": "Шафоростова Маргарита",
+      "phone": "+7 (953) 5402566",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "new_membership_buyer",
+      "client_id": "000075577",
+      "client_fio": "Кристина",
+      "phone": "+7 (983) 2592989",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "new_membership_buyer",
+      "client_id": "000075579",
+      "client_fio": "Котегова Юлия",
+      "phone": "+7 (953) 5376711",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "new_membership_buyer",
+      "client_id": "000075602",
+      "client_fio": "Ларюшкина Александра",
+      "phone": "+7 (900) 4615490",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "new_membership_buyer",
+      "client_id": "000075605",
+      "client_fio": "Николаева Эйла Александровна",
+      "phone": "+7 (900) 4605683",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "new_membership_buyer",
+      "client_id": "000075608",
+      "client_fio": "Тикко Анна",
+      "phone": "+7 (911) 4371701",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "new_membership_buyer",
+      "client_id": "000075616",
+      "client_fio": "Герда",
+      "phone": "+7 (911) 4141862",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "new_membership_buyer",
+      "client_id": "000075627",
+      "client_fio": "Галина",
+      "phone": "+7 (911) 4111817",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "new_membership_buyer",
+      "client_id": "000075632",
+      "client_fio": "Штырова Алина Валерьевна",
+      "phone": "+7 (911) 0534522",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "new_membership_buyer",
+      "client_id": "000075639",
+      "client_fio": "Наталья",
+      "phone": "+7 (911) 6678781",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    },
+    {
+      "group": "new_membership_buyer",
+      "client_id": "000075641",
+      "client_fio": "Вадим",
+      "phone": "+7 (991) 4766132",
+      "reason": "no_source_photo",
+      "source_photo_errors": ""
+    }
+  ],
+  "shared_primary_phones": {},
+  "source_candidate_rows": 57,
+  "source_candidate_ids": 57,
+  "source_candidate_errors": [],
+  "selected_photo_sources": {
+    "Reference115_copy": 1,
+    "Reference65_main": 56
+  },
+  "archive_manifest_rows": 57,
+  "archive_validation": {
+    "zip_bytes": 1803452,
+    "zip_sha256": "9a6b9ffae78864138c1fb58980b4e0e2e681e64d1c1cb25c55cf8b238b600b2b",
+    "photo_entries": 57,
+    "manifest_rows": 57,
+    "missing_photo_rows": 18,
+    "photo_uncompressed_bytes": 1847193,
+    "crc_check": "PASS",
+    "unique_paths_check": "PASS",
+    "decoded_jpegs_check": "PASS",
+    "manifest_ids_hashes_check": "PASS"
+  },
+  "outputs": {
+    "archive": "/Users/valerii.kropotin/Папа-работа/1c-preprocess/output/20260923_delta_from_20260920/fitbase_client_photos_20260923_delta_75.zip",
+    "missing_photos_csv": "/Users/valerii.kropotin/Папа-работа/1c-preprocess/output/20260923_delta_from_20260920/reports/photos/missing_photos.csv",
+    "report_json": "/Users/valerii.kropotin/Папа-работа/1c-preprocess/output/20260923_delta_from_20260920/reports/photos/photo_archive_report.json",
+    "report_markdown": "/Users/valerii.kropotin/Папа-работа/1c-preprocess/output/20260923_delta_from_20260920/reports/photos/photo_archive_report.md",
+    "log": "/Users/valerii.kropotin/Папа-работа/1c-preprocess/output/20260923_delta_from_20260920/logs/photo_export_20260923.log"
+  },
+  "input_sha256": {
+    "output/20260923_delta_from_20260920/reports/imports/new_leads_manifest.csv": "d7e45304f0f0a8663a6746fdc4412e5b456e9d678c399a4a4a9f36ae285c6ffc",
+    "output/20260923_delta_from_20260920/reports/imports/membership_import_manifest.csv": "3391ba0c9b7ca86ad88e868bb23cb23267edffb9929a485f5427069780f3830c",
+    "output/20260923_delta_from_20260920/fitbase_delta_import_abonementy_clientov_20260923.xlsx": "87c9574bcda8d6f1959ac13146ee7d5c56b6c0a83582767c8f33c129eef738a6",
+    "scripts/build_20260923_delta_photos.py": "fd7e228e45e2f1cd6849e9ec0fcd69ef27d4794e1613fdef6220664f118374c3"
+  }
+}

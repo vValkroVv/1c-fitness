@@ -1,0 +1,19 @@
+sql_file=/Users/valerii.kropotin/Папа-работа/1c-preprocess/output/20260923_delta_from_20260920/reports/imports/extra_services_staging.sql
+database=FitnessRestored_20260923_macos
+batches=1
+
+[batch 1/1]
+result_set=1
+table_name	rows_count	service_names_with_rows	distinct_sale_clients	active_rows	active_service_names
+services_import_facts	21	9	21	0	0
+result_set=2
+service_order	service_name	rows_count	distinct_clients	active_rows	last_sale_datetime
+52	Биоимпедансометрия (анализ состава тела)	11	11	0	2026-09-23 21:40:33
+53	Гостевой визит	3	3	0	2026-09-23 17:52:32
+54	Аренда шкафа 1 месяц	1	1	0	2026-09-21 17:59:30
+55	Аренда шкафа 6 месяцев	1	1	0	2026-09-21 09:38:07
+56	Аренда шкафа 12 месяцев	1	1	0	2026-09-21 15:00:28
+57	Аренда рекламного места сроком на 2 месяца	1	1	0	2026-09-21 11:10:44
+58	Заморозка абонемента 3 месяца	1	1	0	2026-09-23 09:21:32
+59	Переоформление платное	1	1	0	2026-09-23 18:29:30
+60	График посещений	1	1	0	2026-09-22 20:11:05

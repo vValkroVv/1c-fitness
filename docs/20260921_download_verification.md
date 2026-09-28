@@ -37,3 +37,6 @@ Evidence:
 - `logs/20260921_download_remote_sha256.json`
 - `logs/20260921_download_verification.json`
 - `data/Fitnes-20-09-26.fast.bak.verified.json`
+
+Примечание от 24.09.2026: квитанция и пустой каталог временных блоков удалены
+при [уборке `data/`](20260924_data_cleanup.md). Проверенный SHA-256 сохранён выше.
